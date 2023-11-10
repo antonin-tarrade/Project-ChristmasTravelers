@@ -10,13 +10,17 @@ using UnityEngine.InputSystem;
 public class MovementInput : MonoBehaviour, IRecordable<MoveBoardCommand>
 {
     public event Action<MoveBoardCommand> OnCommandRequest;
-
+    private Vector2 movement;
 
 
     [SerializeField] private float speed;
 
     public void Move(InputAction.CallbackContext context){
-        Vector2 movement = context.ReadValue<Vector2>();
+        movement = context.ReadValue<Vector2>();
+    }
+
+    private void Update() {
         if (movement.magnitude > 0) OnCommandRequest?.Invoke(new MoveBoardCommand(gameObject, speed * movement));
+        
     }
 }
