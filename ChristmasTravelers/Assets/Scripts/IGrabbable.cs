@@ -4,5 +4,7 @@ using UnityEngine;
 
 public interface IGrabbable 
 {
-    void Collect();
+
+    // A remplacer par le type character !!!
+    void AcceptCollect(GameObject character);
 }

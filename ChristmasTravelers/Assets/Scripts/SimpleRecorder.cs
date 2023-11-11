@@ -31,6 +31,7 @@ public class SimpleRecorder : MonoBehaviour, IRecorder
 
     public virtual void BeginRecord()
     {
+        isRecording = true;
         commandList = new List<TimedBoardCommand>();
         isRecording = true;
         beginTime = Time.time;

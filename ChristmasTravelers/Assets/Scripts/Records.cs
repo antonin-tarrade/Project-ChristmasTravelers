@@ -10,7 +10,7 @@ namespace Records
     /// <summary>
     /// Holds all of the necessary data to record
     /// </summary>
-    [CreateAssetMenu(fileName = "RecordData", menuName = "Scriptables/RecordData", order = 0)]
+    [CreateAssetMenu(fileName = "RecordData", menuName = "Scriptables/RecordData")]
     public class RecordData : ScriptableObject
     {
         public double recordFrequency;

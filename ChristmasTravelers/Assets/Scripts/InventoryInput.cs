@@ -4,16 +4,20 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Items;
+using System.Linq;
+using static UnityEngine.InputSystem.InputAction;
 
-public class InventoryInput : MonoBehaviour, IRecordable
+public class InventoryInput : SimpleInput
 {
-    [SerializeField] private string characterName;
+    private Inventory inventory;
+
+
+    // TO DO : A mettre dans le character
     public float grabRadius;
 
-    public event Action<IBoardCommand> OnCommandRequest;
-
-    public void GrabNearbyObjects()
+    public void Grab(CallbackContext context)
     {
-        
+        if (context.started) RequestCommand(new GrabCommand(gameObject));
     }
 }
