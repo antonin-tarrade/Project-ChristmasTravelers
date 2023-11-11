@@ -32,6 +32,7 @@ public class ItemManager : MonoBehaviour
 
     private void RestoreInitialState(IMapItem item, MapItemInitialData data)
     {
+        item.Initialise();
         if (data.initialState == IMapItem.MapItemState.Free)
         {
             if (item.mapState == IMapItem.MapItemState.Grabbed) item.Drop();

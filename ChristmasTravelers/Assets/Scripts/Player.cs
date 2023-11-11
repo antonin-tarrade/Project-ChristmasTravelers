@@ -9,6 +9,7 @@ public class Player {
 	public Transform spawn;
 
 	public string name; // debug
+	public Color color;
 
 	public int score;
 
@@ -24,6 +25,7 @@ public class Player {
 	public void AddCharacter(Character character)
 	{
 		characters.Add(character);
+		character.GetComponent<SpriteRenderer>().color = color;
 	}
 
 

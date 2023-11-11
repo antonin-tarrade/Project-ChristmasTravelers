@@ -188,9 +188,11 @@ MonoBehaviour:
   <players>k__BackingField:
   - spawn: {fileID: 1859439584}
     name: Martial
+    color: {r: 1, g: 0, b: 0, a: 1}
     score: 0
   - spawn: {fileID: 601937628}
     name: Marc
+    color: {r: 0, g: 0.016897678, b: 1, a: 1}
     score: 0
 --- !u!114 &367471125
 MonoBehaviour:

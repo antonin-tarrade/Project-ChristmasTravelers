@@ -1,6 +1,7 @@
 using Items;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Flag : MonoBehaviour, IGrabbable, IMapItem
@@ -16,9 +17,12 @@ public class Flag : MonoBehaviour, IGrabbable, IMapItem
 
     private BoxCollider2D hitbox;
 
+    private bool isCaptured;
+
 
     private void Start()
     {
+        isCaptured = false;
         mapState = IMapItem.MapItemState.Free;
         hitbox = GetComponent<BoxCollider2D>();
         MapItemInitialData initialData = new MapItemInitialData()
@@ -29,9 +33,17 @@ public class Flag : MonoBehaviour, IGrabbable, IMapItem
         ItemManager.instance.Register(this, initialData);
     }
 
+    private void LateUpdate()
+    {
+        if (mapState == IMapItem.MapItemState.Grabbed)
+        {
+            transform.position = characterHoldingThis.transform.position + new Vector3(0, 1);
+        }
+    }
+
     public void AcceptCollect(Character character)
     {
-        if (mapState == IMapItem.MapItemState.Grabbed) return;
+        if (isCaptured || mapState == IMapItem.MapItemState.Grabbed) return;
         character.GetComponent<Inventory>().Add(this);
         characterHoldingThis = character;
         mapState = IMapItem.MapItemState.Grabbed;
@@ -50,12 +62,21 @@ public class Flag : MonoBehaviour, IGrabbable, IMapItem
         characterHoldingThis = null;
     }
 
-
-    private void LateUpdate()
+    public void Initialise()
     {
-        if (mapState == IMapItem.MapItemState.Grabbed)
-        {
-            transform.position = characterHoldingThis.transform.position + new Vector3(0, 1);
-        }
+        isCaptured = false;
+        GetComponent<SpriteRenderer>().color = Color.white;
+    }
+
+    public void OnCapture()
+    {
+        OnCapture(characterHoldingThis.player);
+    }
+
+    public void OnCapture(Player player)
+    {
+        Drop();
+        isCaptured = true;
+        GetComponent<SpriteRenderer>().color = player.color;
     }
 }

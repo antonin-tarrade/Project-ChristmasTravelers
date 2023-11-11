@@ -33,6 +33,8 @@ namespace Items
         GameObject gameObject { get; }
 
         void Drop();
+
+        void Initialise();
     }
 
     public struct MapItemInitialData

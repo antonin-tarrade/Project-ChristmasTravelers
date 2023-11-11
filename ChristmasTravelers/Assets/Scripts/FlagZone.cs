@@ -11,20 +11,18 @@ public class FlagZone : MonoBehaviour
     private void Start()
     {
         player = GameManager.instance.players[playerIndex];
+        GetComponent<SpriteRenderer>().color = player.color;
     }
 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("TRIGGER");
         if (collision.gameObject.TryGetComponent<Flag>(out Flag flag))
         {
-            Debug.Log("FLAG");
             if (flag.characterHoldingThis.player == player)
             {
-                Debug.Log("PLAYER");
                 player.score += flag.scorePoints;
-                flag.Drop();
+                flag.OnCapture();
             }
         }
     }
