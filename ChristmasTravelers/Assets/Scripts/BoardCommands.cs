@@ -20,7 +20,7 @@ namespace BoardCommands
         public virtual void Execute(GrabCommand command)
         {
             // TO DO : Passer par Character partout
-            float grabRadius = command.character.GetComponent<InventoryInput>().grabRadius;
+            float grabRadius = command.character.grabRadius;
             Collider2D[] nearbyObjects = Physics2D.OverlapCircleAll(command.character.transform.position, grabRadius);
             IGrabbable closestItem = null;
             float smallestDistance = float.MaxValue;
@@ -69,9 +69,9 @@ namespace BoardCommands
     // TO DO : Remplacer le gameobject par le character
     public class GrabCommand : IBoardCommand
     {
-        public GameObject character;
+        public Character character;
 
-        public GrabCommand(GameObject character)
+        public GrabCommand(Character character)
         {
             this.character = character;
         }

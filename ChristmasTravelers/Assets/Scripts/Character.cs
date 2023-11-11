@@ -6,7 +6,11 @@ public class Character : MonoBehaviour {
 	public Replay replay { get; private set; }
 	public IRecorder[] recorders { get; private set; }
 
-	private void Awake () {
+
+	[Header("Gameplay parameters")]
+    public float grabRadius;
+
+    private void Awake () {
 		replay = GetComponent<Replay> ();
 		recorders = GetComponents<IRecorder> ();
 	}

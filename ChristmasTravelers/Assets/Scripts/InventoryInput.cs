@@ -10,14 +10,17 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class InventoryInput : SimpleInput
 {
-    private Inventory inventory;
+
+    private Character character;
 
 
-    // TO DO : A mettre dans le character
-    public float grabRadius;
+    private void Start()
+    {
+        character = GetComponent<Character>();
+    }
 
     public void Grab(CallbackContext context)
     {
-        if (context.started) RequestCommand(new GrabCommand(gameObject));
+        if (context.started) RequestCommand(new GrabCommand(character));
     }
 }

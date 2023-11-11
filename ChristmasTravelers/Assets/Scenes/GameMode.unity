@@ -716,8 +716,9 @@ GameObject:
   - component: {fileID: 1855949064}
   - component: {fileID: 1855949063}
   - component: {fileID: 1855949062}
-  - component: {fileID: 1855949070}
   - component: {fileID: 1855949069}
+  - component: {fileID: 1855949071}
+  - component: {fileID: 1855949072}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -921,8 +922,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1a4f671f4fb200418af1b95c5602a39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grabRadius: 1
---- !u!114 &1855949070
+--- !u!114 &1855949071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1855949061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aabf16d3400d3c841933055370ad3dca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player:
+    spawn: {fileID: 0}
+    name: 
+    flagsWon: []
+  grabRadius: 3
+--- !u!114 &1855949072
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

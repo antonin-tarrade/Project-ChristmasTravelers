@@ -3,33 +3,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Flag : MonoBehaviour, IGrabbable, IItem
+public class Flag : MonoBehaviour, IGrabbable, IMapItem
 {
-    public enum State { Free, Grabbed }
-    public State state { get; private set; }
 
-    // GameObject -> character
-    private GameObject characterHoldingThis;
+    [field : SerializeField] public int scorePoints { get; private set; }
+
+    public ItemType type { get; private set; } = ItemType.Flag;
+
+    public IMapItem.MapItemState mapState { get; private set; }
+
+    public Character characterHoldingThis { get; private set; }
 
     private BoxCollider2D hitbox;
-
-    private List<GameObject> charactersInRange;
-
 
 
     private void Start()
     {
-        state = State.Free;
+        mapState = IMapItem.MapItemState.Free;
         hitbox = GetComponent<BoxCollider2D>();
+        MapItemInitialData initialData = new MapItemInitialData()
+        {
+            initialPosition = transform.position,
+            initialState = mapState
+        };
+        ItemManager.instance.Register(this, initialData);
     }
 
-    public void AcceptCollect(GameObject character)
+    public void AcceptCollect(Character character)
     {
-        if (state == State.Grabbed) return;
+        if (mapState == IMapItem.MapItemState.Grabbed) return;
         character.GetComponent<Inventory>().Add(this);
         characterHoldingThis = character;
-        state = State.Grabbed;
-        hitbox.enabled = false;
+        mapState = IMapItem.MapItemState.Grabbed;
     }
 
     public void Use(Inventory inventory)
@@ -40,34 +45,17 @@ public class Flag : MonoBehaviour, IGrabbable, IItem
     public void Drop()
     {
         transform.position = characterHoldingThis.transform.position;  
-        characterHoldingThis = null;
         characterHoldingThis.GetComponent<Inventory>().Remove(this);
-        state = State.Free;
-        hitbox.enabled = true;
+        mapState = IMapItem.MapItemState.Free;
+        characterHoldingThis = null;
     }
 
 
     private void LateUpdate()
     {
-        if (state == State.Grabbed)
+        if (mapState == IMapItem.MapItemState.Grabbed)
         {
             transform.position = characterHoldingThis.transform.position + new Vector3(0, 1);
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.TryGetComponent<Inventory>(out Inventory inventory))
-        {
-            charactersInRange.Add(collision.gameObject);
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.TryGetComponent<Inventory>(out Inventory inventory))
-        {
-            charactersInRange.Remove(collision.gameObject);
         }
     }
 }

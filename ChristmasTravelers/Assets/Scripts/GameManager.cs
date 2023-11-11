@@ -11,4 +11,22 @@ public class GameManager : MonoBehaviour {
 	private void Awake () {
 		instance = this;
 	}
+
+    private void Start()
+    {
+        foreach (Player p in players)
+        {
+            p.Init();
+        }
+        RoundManager.instance.OnTurnStart += OnTurnStart;
+    }
+
+    private void OnTurnStart()
+    {
+        foreach (Player p in players)
+        {
+            p.score = 0;
+        }
+    }
+
 }

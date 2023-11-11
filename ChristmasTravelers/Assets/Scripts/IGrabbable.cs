@@ -6,5 +6,5 @@ public interface IGrabbable
 {
 
     // A remplacer par le type character !!!
-    void AcceptCollect(GameObject character);
+    void AcceptCollect(Character character);
 }

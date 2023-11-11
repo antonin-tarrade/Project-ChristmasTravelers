@@ -7,6 +7,9 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
 
+    public event Action<IItem> OnItemAdded;
+    public event Action<IItem> OnItemRemoved;
+
     private List<IItem> items;
 
     private void Awake()
@@ -17,10 +20,12 @@ public class Inventory : MonoBehaviour
     public void Add(IItem item)
     {
         items.Add(item);
+        OnItemAdded?.Invoke(item);
     }
 
     public void Remove(IItem item)
     {
         items.Remove(item);
+        OnItemRemoved?.Invoke(item);
     }
 }

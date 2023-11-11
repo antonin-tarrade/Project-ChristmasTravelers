@@ -1,16 +1,27 @@
 using Records;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class RoundManager : MonoBehaviour {
+
+	public static RoundManager instance;
+
+	public event Action OnTurnStart;
+	public event Action OnTurnEnd;
 	
 	[SerializeField] private GameObject characterPrefab;
 
 	private IEnumerator<Player> players;						// Enumerator of playing players
 	private Character currentCharacter;							// Currently inputed character
-	private List<Character> ghosts = new List<Character> ();	// All previous characters
+	private List<Character> ghosts = new List<Character> ();    // All previous characters
 
-	private void Start () {
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    private void Start () {
 		players = GameManager.instance.players.GetEnumerator ();
 	}
 
@@ -18,6 +29,7 @@ public class RoundManager : MonoBehaviour {
 	/// Starts next player turn
 	/// </summary>
 	public void StartNextTurn () {
+		OnTurnStart?.Invoke();
 		if (currentCharacter != null) {
 			Debug.LogWarning ("Previous turn was not ended");
 			return;
@@ -57,6 +69,7 @@ public class RoundManager : MonoBehaviour {
 	/// Ends the current turn
 	/// </summary>
 	public void EndTurn () {
+		OnTurnEnd?.Invoke();
 		if (currentCharacter == null) {
 			Debug.LogWarning ("No turn to be ended");
 			return;
@@ -83,7 +96,7 @@ public class RoundManager : MonoBehaviour {
 		Character spawnCharacter = Instantiate (characterPrefab, player.spawn.position, player.spawn.rotation).GetComponent<Character> ();
 		spawnCharacter.player = player;
 		spawnCharacter.name = "Character - " + player.name;
-
+		player.AddCharacter(spawnCharacter);
 		return spawnCharacter;
 	}
 }

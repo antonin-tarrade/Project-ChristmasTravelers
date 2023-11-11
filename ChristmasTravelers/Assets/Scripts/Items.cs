@@ -20,7 +20,24 @@ namespace Items
 
     public interface IItem
     {
-        public void Use(Inventory inventory);
-        public void Drop();
+        ItemType type { get; }
+        void Use(Inventory inventory);
+    }
+
+    public interface IMapItem : IItem
+    {
+        enum MapItemState { Free, Grabbed };
+
+        MapItemState mapState { get; }
+
+        GameObject gameObject { get; }
+
+        void Drop();
+    }
+
+    public struct MapItemInitialData
+    {
+        public IMapItem.MapItemState initialState;
+        public Vector2 initialPosition;
     }
 }
