@@ -34,6 +34,11 @@ public class RoundManager : MonoBehaviour {
 	/// Starts a given player turn
 	/// </summary>
 	private void StartTurn (Player player) {
+		// All ghosts returns to their start positions
+		foreach (Character ghost in ghosts) {
+			ghost.transform.position = ghost.player.spawn.position;
+		}
+
 		// Spawns new character under the current player
 		currentCharacter = SpawnCharacter (player);
 
@@ -44,7 +49,6 @@ public class RoundManager : MonoBehaviour {
 
 		// Starts replays of ghost characters
 		foreach (Character ghost in ghosts) {
-			ghost.gameObject.SetActive (true);
 			ghost.replay.BeginReplay ();
 		}
 	}
@@ -70,12 +74,6 @@ public class RoundManager : MonoBehaviour {
 			((MonoBehaviour)recorder).enabled = false;
 		}
 		currentCharacter = null;
-
-		// All ghosts returns to their start positions
-		foreach (Character ghost in ghosts) {
-			ghost.transform.position = ghost.player.spawn.position;
-			ghost.gameObject.SetActive (false);
-		}
 	}
 
 	/// <summary>
