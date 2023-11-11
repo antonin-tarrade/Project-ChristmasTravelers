@@ -7,9 +7,8 @@ using System;
 using UnityEngine.InputSystem;
 
 
-public class MovementInput : MonoBehaviour, IRecordable<MoveBoardCommand>
+public class MovementInput : SimpleInput
 {
-    public event Action<MoveBoardCommand> OnCommandRequest;
     private Vector2 movement;
 
 
@@ -20,7 +19,6 @@ public class MovementInput : MonoBehaviour, IRecordable<MoveBoardCommand>
     }
 
     private void Update() {
-        if (movement.magnitude > 0) OnCommandRequest?.Invoke(new MoveBoardCommand(gameObject, speed * movement));
-        
+        if (movement.magnitude > 0) RequestCommand((new MoveBoardCommand(gameObject, speed * movement))); 
     }
 }

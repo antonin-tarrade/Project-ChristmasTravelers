@@ -5,68 +5,41 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Profiling;
 
-public class MovementRecorder : MonoBehaviour, IRecorder<MoveBoardCommand>
+public class MovementRecorder : SimpleRecorder
 {
     private double lastUpdateTime;
-    private double time;
-    private double beginTime;
-    private bool isRecording;
 
-
-    [SerializeField] private RecordData recordData;
     /// <summary>
     /// The recordable object to record
     /// </summary>
-    private IRecordable<MoveBoardCommand> recordable;
-    private List<TimedBoardCommand> commandList;
+    [SerializeField] private MovementInput recordable;
 
-    private void Awake()
+    private new void Start()
     {
-        commandList = new List<TimedBoardCommand>();
-        isRecording = false;
-    }
-
-    private void Start()
-    {
-        recordable = GetComponent<IRecordable<MoveBoardCommand>>();
         recordable.OnCommandRequest += OnRecord;
     }
 
-    public void BeginRecord()
+    public override void BeginRecord()
     {
-        commandList = new List<TimedBoardCommand>();
-        isRecording = true;
-        beginTime = Time.time;
-        time = 0;
+        base.BeginRecord();
         lastUpdateTime = 0;
-    }
-    public void EndRecord()
-    {
-        isRecording = false;
-    }
-
-    public void SaveRecord(Replay replay)
-    {
-        foreach (TimedBoardCommand command in commandList)
-        {
-            replay.Add(command);
-        }
     }
 
     /// <summary>
     /// Called to record the current command
     /// </summary>
-    public void OnRecord(MoveBoardCommand command)
+    protected override void OnRecord(IBoardCommand command)
     {
+        MoveBoardCommand moveCommand = (MoveBoardCommand) command;
         if (!isRecording) return;
 
         time = Time.time - beginTime;
 
         if ((time - lastUpdateTime) > recordData.recordFrequency)
         {
-            command.movement = ((float)recordData.recordFrequency) * command.movement;
-            commandList.Add(new TimedBoardCommand(time, command));
-            BoardManager.instance.Execute(command);
+            moveCommand.movement = ((float)recordData.recordFrequency) * moveCommand.movement;
+            commandList.Add(new TimedBoardCommand(time, moveCommand));
+            BoardManager.instance.Execute(moveCommand);
             lastUpdateTime = time;
         }
     }
