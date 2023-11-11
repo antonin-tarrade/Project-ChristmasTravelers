@@ -130,6 +130,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recordData: {fileID: 11400000, guid: 2315e89d634bc0447a1bb9c183f07ff9, type: 2}
+  recordables: []
+  recordable: {fileID: 3451438070945045697}
 --- !u!114 &7883276308349016369
 MonoBehaviour:
   m_ObjectHideFlags: 0

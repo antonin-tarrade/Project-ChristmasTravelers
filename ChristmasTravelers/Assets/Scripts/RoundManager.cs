@@ -1,44 +1,50 @@
-using BoardCommands;
 using Records;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class RoundManager : MonoBehaviour {
-	[SerializeField] private GameObject playerPrefab;
+	
+	[SerializeField] private GameObject characterPrefab;
 
-	// Currently inputed character
-	private Character currentCharacter;
+	private IEnumerator<Player> players;						// Enumerator of playing players
+	private Character currentCharacter;							// Currently inputed character
+	private List<Character> ghosts = new List<Character> ();	// All previous characters
 
-	private Player currentPlayer;
+	private void Start () {
+		players = GameManager.instance.players.GetEnumerator ();
+	}
 
-	private List<Character> ghosts = new List<Character> ();
-
+	/// <summary>
+	/// Starts next player turn
+	/// </summary>
 	public void StartNextTurn () {
-		if (currentPlayer == GameManager.instance.players[0]) {
-			StartTurn (GameManager.instance.players[1]);
-		} else {
-			StartTurn (GameManager.instance.players[0]);
+		if (currentCharacter != null) {
+			Debug.LogWarning ("Previous turn was not ended");
+			return;
 		}
+
+		if (!players.MoveNext ()) {
+			players.Reset ();
+			players.MoveNext ();
+		}
+		StartTurn (players.Current);
 	}
 
 	/// <summary>
 	/// Starts a given player turn
 	/// </summary>
-	public void StartTurn (Player player) {
-		currentPlayer = player;
-
+	private void StartTurn (Player player) {
 		// Spawns new character under the current player
-		currentCharacter = SpawnCharacter (currentPlayer);
+		currentCharacter = SpawnCharacter (player);
 
 		// Starts recordings
-		foreach (IRecorder<IBoardCommand> recorder in currentCharacter.recorders) {
+		foreach (IRecorder recorder in currentCharacter.recorders) {
 			recorder.BeginRecord ();
 		}
 
 		// Starts replays of ghost characters
 		foreach (Character ghost in ghosts) {
+			ghost.gameObject.SetActive (true);
 			ghost.replay.BeginReplay ();
 		}
 	}
@@ -47,36 +53,36 @@ public class RoundManager : MonoBehaviour {
 	/// Ends the current turn
 	/// </summary>
 	public void EndTurn () {
-		if (currentCharacter != null) {
+		if (currentCharacter == null) {
+			Debug.LogWarning ("No turn to be ended");
 			return;
 		}
 
 		// Stops and saves recordings
-		foreach (IRecorder<IBoardCommand> recorder in currentCharacter.recorders) {
+		foreach (IRecorder recorder in currentCharacter.recorders) {
 			recorder.EndRecord ();
 			recorder.SaveRecord (currentCharacter.replay);
 		}
 
-		// Current character is now a ghost and loses its recorders
+		// Current character is now a ghost
 		ghosts.Add (currentCharacter);
-		foreach (IRecorder<IBoardCommand> recorder in currentCharacter.recorders) {
-			// TODO désactiver les composants
+		foreach (IRecorder recorder in currentCharacter.recorders) {
+			((MonoBehaviour)recorder).enabled = false;
 		}
+		currentCharacter = null;
 
 		// All ghosts returns to their start positions
 		foreach (Character ghost in ghosts) {
 			ghost.transform.position = ghost.player.spawn.position;
+			ghost.gameObject.SetActive (false);
 		}
-
-		// No more current character
-		currentCharacter = null;
 	}
 
 	/// <summary>
 	/// Spawns a character under given player control
 	/// </summary>
 	private Character SpawnCharacter (Player player) {
-		Character spawnCharacter = Instantiate (playerPrefab, player.spawn.position, player.spawn.rotation).GetComponent<Character> ();
+		Character spawnCharacter = Instantiate (characterPrefab, player.spawn.position, player.spawn.rotation).GetComponent<Character> ();
 		spawnCharacter.player = player;
 		spawnCharacter.name = "Character - " + player.name;
 
