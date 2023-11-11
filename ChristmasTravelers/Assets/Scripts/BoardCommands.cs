@@ -41,6 +41,14 @@ namespace BoardCommands
         }
     }
 
+    public class GrabCommand : IBoardCommand
+    {
+        public void ExecuteOn(BoardCommandHandler board)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     /// <summary>
     /// Represents a command that was executed at a specific time
     /// </summary>
