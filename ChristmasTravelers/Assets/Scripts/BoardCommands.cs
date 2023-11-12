@@ -1,7 +1,9 @@
+using Items;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 namespace BoardCommands
 {
@@ -13,6 +15,28 @@ namespace BoardCommands
         public virtual void Execute(MoveBoardCommand command)
         {
             command.obj.transform.position += command.movement;
+        }
+
+        public virtual void Execute(GrabCommand command)
+        {
+            // TO DO : Passer par Character partout
+            float grabRadius = command.character.grabRadius;
+            Collider2D[] nearbyObjects = Physics2D.OverlapCircleAll(command.character.transform.position, grabRadius);
+            IGrabbable closestItem = null;
+            float smallestDistance = float.MaxValue;
+            float distance;
+            foreach (Collider2D collider in nearbyObjects)
+            {
+                if (collider.gameObject.TryGetComponent<IGrabbable>(out IGrabbable item))
+                {
+                    if ((distance = Vector3.Distance(command.character.gameObject.transform.position, collider.gameObject.transform.position)) < smallestDistance)
+                    {
+                        smallestDistance = distance;
+                        closestItem = item;
+                    }
+                }
+            }
+            closestItem?.AcceptCollect(command.character);
         }
     }
 
@@ -33,6 +57,23 @@ namespace BoardCommands
         {
             this.obj = obj;
             this.movement = movement;
+        }
+
+        public void ExecuteOn(BoardCommandHandler board)
+        {
+            board.Execute(this);
+        }
+    }
+
+
+    // TO DO : Remplacer le gameobject par le character
+    public class GrabCommand : IBoardCommand
+    {
+        public Character character;
+
+        public GrabCommand(Character character)
+        {
+            this.character = character;
         }
 
         public void ExecuteOn(BoardCommandHandler board)

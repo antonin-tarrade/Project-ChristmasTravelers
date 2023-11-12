@@ -10,7 +10,7 @@ namespace Records
     /// <summary>
     /// Holds all of the necessary data to record
     /// </summary>
-    [CreateAssetMenu(fileName = "RecordData", menuName = "Scriptables/RecordData", order = 0)]
+    [CreateAssetMenu(fileName = "RecordData", menuName = "Scriptables/RecordData")]
     public class RecordData : ScriptableObject
     {
         public double recordFrequency;
@@ -21,12 +21,12 @@ namespace Records
     /// Object from which we can records commands
     /// </summary>
     /// <typeparam name="BoardCommandType"></typeparam>
-    public interface IRecordable<BoardCommandType> where BoardCommandType : IBoardCommand
+    public interface IRecordable
     {
         /// <summary>
         /// Called when a command is requested
         /// </summary>
-        public event Action<BoardCommandType> OnCommandRequest;
+        public event Action<IBoardCommand> OnCommandRequest;
     }
 
 
@@ -34,7 +34,7 @@ namespace Records
     /// Object that can listen to a recordable, execute and store all of its commands
     /// </summary>
     /// <typeparam name="BoardCommandType"></typeparam>
-    public interface IRecorder<BoardCommandType> where BoardCommandType : IBoardCommand
+    public interface IRecorder
     {
         void BeginRecord();
         void EndRecord();

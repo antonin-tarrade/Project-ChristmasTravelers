@@ -7,20 +7,30 @@ using System;
 using UnityEngine.InputSystem;
 
 
-public class MovementInput : MonoBehaviour, IRecordable<MoveBoardCommand>
+public class MovementInput : SimpleInput
 {
-    public event Action<MoveBoardCommand> OnCommandRequest;
     private Vector2 movement;
-
-
     [SerializeField] private float speed;
+    private InputAction input;
+    private bool move;
 
     public void Move(InputAction.CallbackContext context){
-        movement = context.ReadValue<Vector2>();
+        if (context.started || context.performed)
+        {
+            input = context.action;
+            move = true;
+        }
+        if (context.canceled)
+        {
+            movement = Vector2.zero;
+            move = false;
+        }
     }
 
-    private void FixedUpdate() {
-        if (movement.magnitude > 0) OnCommandRequest?.Invoke(new MoveBoardCommand(gameObject, speed * movement));
-        
+
+
+    private void Update() {
+        if (move) movement = input.ReadValue<Vector2>();
+        if (movement.magnitude > 0) RequestCommand((new MoveBoardCommand(gameObject, speed * movement))); 
     }
 }
