@@ -19,7 +19,7 @@ public class MovementInput : MonoBehaviour, IRecordable<MoveBoardCommand>
         movement = context.ReadValue<Vector2>();
     }
 
-    private void Update() {
+    private void FixedUpdate() {
         if (movement.magnitude > 0) OnCommandRequest?.Invoke(new MoveBoardCommand(gameObject, speed * movement));
         
     }
