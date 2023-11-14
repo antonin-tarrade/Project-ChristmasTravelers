@@ -38,6 +38,11 @@ namespace BoardCommands
             }
             closestItem?.AcceptCollect(command.character);
         }
+    
+        public virtual void Execute(ShootCommand command)
+        {
+            command.attack.Shoot(command.direction);
+        }
     }
 
     /// <summary>
@@ -65,8 +70,6 @@ namespace BoardCommands
         }
     }
 
-
-    // TO DO : Remplacer le gameobject par le character
     public class GrabCommand : IBoardCommand
     {
         public Character character;
@@ -81,6 +84,24 @@ namespace BoardCommands
             board.Execute(this);
         }
     }
+
+    public class ShootCommand : IBoardCommand
+    {
+        public CharacterAttack attack;
+        public Vector3 direction;
+
+        public ShootCommand(CharacterAttack attack, Vector3 direction)
+        {
+            this.attack = attack;
+            this.direction = direction;
+        }
+
+        public void ExecuteOn(BoardCommandHandler board)
+        {
+            board.Execute(this);
+        }
+    }
+
 
     /// <summary>
     /// Represents a command that was executed at a specific time

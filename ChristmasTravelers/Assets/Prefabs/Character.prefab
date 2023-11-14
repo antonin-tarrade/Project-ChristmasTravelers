@@ -16,8 +16,8 @@ GameObject:
   - component: {fileID: 7883276308349016369}
   - component: {fileID: 5081516032494860440}
   - component: {fileID: 96745557990872990}
-  - component: {fileID: 8142559735669596891}
   - component: {fileID: 6208526159675140355}
+  - component: {fileID: 6974135624404325307}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -107,7 +107,8 @@ MonoBehaviour:
   player:
     spawn: {fileID: 0}
     name: 
-    flagsWon: []
+    color: {r: 0, g: 0, b: 0, a: 0}
+    score: 0
   grabRadius: 3
 --- !u!114 &3451438070945045697
 MonoBehaviour:
@@ -180,8 +181,8 @@ MonoBehaviour:
     m_ActionName: Player1/Movement[/Keyboard/z,/Keyboard/s,/Keyboard/q,/Keyboard/d]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8142559735669596891}
-        m_TargetAssemblyTypeName: InventoryInput, Assembly-CSharp
+      - m_Target: {fileID: 6974135624404325307}
+        m_TargetAssemblyTypeName: CharacterInput, Assembly-CSharp
         m_MethodName: Grab
         m_Mode: 0
         m_Arguments:
@@ -194,6 +195,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 59e267b1-b80d-4bea-9e0f-fa2feca923cd
     m_ActionName: Player1/Grab[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6974135624404325307}
+        m_TargetAssemblyTypeName: CharacterInput, Assembly-CSharp
+        m_MethodName: Shoot
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: dee79333-1a8d-4c32-a6e6-7745dcb2a933
+    m_ActionName: Player1/Shoot[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player1
@@ -225,19 +242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recordData: {fileID: 11400000, guid: 2315e89d634bc0447a1bb9c183f07ff9, type: 2}
   recordables:
-  - {fileID: 8142559735669596891}
---- !u!114 &8142559735669596891
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3055416447674701499}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1a4f671f4fb200418af1b95c5602a39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  - {fileID: 6974135624404325307}
 --- !u!114 &6208526159675140355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,5 +253,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 753b7f8c5c79fce4984ccdbca7835224, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6974135624404325307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3055416447674701499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37ddf01586f8da549b21f09a91a322c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
