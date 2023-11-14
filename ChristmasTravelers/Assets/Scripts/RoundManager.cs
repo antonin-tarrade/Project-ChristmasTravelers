@@ -6,7 +6,6 @@ using UnityEngine;
 public class RoundManager : MonoBehaviour {
 
 	public static RoundManager instance;
-
 	public event Action OnTurnStart;
 	public event Action OnTurnEnd;
 	
@@ -15,6 +14,7 @@ public class RoundManager : MonoBehaviour {
 	private IEnumerator<Player> players;						// Enumerator of playing players
 	private Character currentCharacter;							// Currently inputed character
 	private List<Character> ghosts = new List<Character> ();    // All previous characters
+	private Cinemachine.CinemachineVirtualCamera virtualCamera;
 
     private void Awake()
     {
@@ -23,6 +23,7 @@ public class RoundManager : MonoBehaviour {
 
     private void Start () {
 		players = GameManager.instance.players.GetEnumerator ();
+		virtualCamera = GameObject.Find("Virtual Camera").GetComponent<Cinemachine.CinemachineVirtualCamera>();
 	}
 
 	/// <summary>
@@ -97,6 +98,7 @@ public class RoundManager : MonoBehaviour {
 		spawnCharacter.player = player;
 		spawnCharacter.name = "Character - " + player.name;
 		player.AddCharacter(spawnCharacter);
+		virtualCamera.Follow = spawnCharacter.transform;
 		return spawnCharacter;
 	}
 }
