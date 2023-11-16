@@ -6,14 +6,19 @@ using UnityEngine.Events;
 
 public class CharacterHealth : MonoBehaviour, IDamageable
 {
-    public event Action OnDeath;
 
     [field : SerializeField] public float baseHealth { get; private set; }
     public float health { get; private set; }
 
     private void Awake()
     {
-        health = baseHealth;
+
+    }
+
+    private void Start()
+    {
+        Init();
+        RoundManager.instance.OnTurnStart += Init;
     }
 
     public void Damage(float dmg)
@@ -22,14 +27,16 @@ public class CharacterHealth : MonoBehaviour, IDamageable
         if (health <= 0) Death();
     }
 
+    private void Init()
+    {
+        gameObject.layer = LayerMask.NameToLayer("Alive");
+        GetComponent<SpriteRenderer>().material = GameManager.instance.gameData.LivingMaterial;
+        health = baseHealth;
+    }
+
     private void Death()
     {
-        OnDeath?.Invoke();
-
-
-
-        // Attention, tuer ne doit pas détruire mais juste "retirer" le personnage du jeu
-        Destroy(gameObject);
-        Debug.LogWarning("Careful, you should not destroy objects");
+        gameObject.layer = LayerMask.NameToLayer("Dead");
+        GetComponent<SpriteRenderer>().material = GameManager.instance.gameData.DeadMaterial;
     }
 }

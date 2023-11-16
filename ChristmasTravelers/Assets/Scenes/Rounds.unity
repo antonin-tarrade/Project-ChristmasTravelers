@@ -185,13 +185,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ea05b05a85d8344d864ee605c953bea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <gameData>k__BackingField: {fileID: 11400000, guid: a14dff6fa6dde13459d9220f7b741331, type: 2}
   <players>k__BackingField:
   - spawn: {fileID: 1859439584}
     name: Martial
+    layer: Player1
     color: {r: 1, g: 0, b: 0, a: 1}
     score: 0
   - spawn: {fileID: 601937628}
     name: Marc
+    layer: Player2
     color: {r: 0, g: 0.016897678, b: 1, a: 1}
     score: 0
 --- !u!114 &367471125

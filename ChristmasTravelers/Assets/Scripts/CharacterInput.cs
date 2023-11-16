@@ -2,6 +2,7 @@ using BoardCommands;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
 
 public class CharacterInput : SimpleInput
@@ -22,6 +23,9 @@ public class CharacterInput : SimpleInput
 
     public void Shoot(CallbackContext context)
     {
-        if (context.started) RequestCommand(new ShootCommand(attack, Vector3.right));
+        InputAction directionAction = context.action.actionMap.FindAction("ShootDirection");
+        Vector2 shootDirection = directionAction.ReadValue<Vector2>();
+        if (shootDirection.sqrMagnitude == 0) return;
+        if (context.started) RequestCommand(new ShootCommand(attack, shootDirection));
     }
 }

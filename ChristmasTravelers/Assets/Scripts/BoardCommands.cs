@@ -19,6 +19,7 @@ namespace BoardCommands
 
         public virtual void Execute(GrabCommand command)
         {
+            if (command.character.gameObject.layer == LayerMask.NameToLayer("Dead")) return;
             // TO DO : Passer par Character partout
             float grabRadius = command.character.grabRadius;
             Collider2D[] nearbyObjects = Physics2D.OverlapCircleAll(command.character.transform.position, grabRadius);
@@ -87,10 +88,10 @@ namespace BoardCommands
 
     public class ShootCommand : IBoardCommand
     {
-        public CharacterAttack attack;
+        public IAttack attack;
         public Vector3 direction;
 
-        public ShootCommand(CharacterAttack attack, Vector3 direction)
+        public ShootCommand(IAttack attack, Vector3 direction)
         {
             this.attack = attack;
             this.direction = direction;

@@ -7,7 +7,6 @@ public class Projectile : MonoBehaviour
 {
     public event Action<GameObject> OnHit;
 
-
     private Vector3 direction;
     private float speed;
     private float lifeLength;
@@ -38,7 +37,6 @@ public class Projectile : MonoBehaviour
             if (time > lifeLength) OnEnd();
         }
     }
-
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
