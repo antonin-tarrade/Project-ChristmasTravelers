@@ -28,7 +28,6 @@ public class MovementInput : SimpleInput
     }
 
 
-
     private void Update() {
         if (move) movement = input.ReadValue<Vector2>();
         if (movement.magnitude > 0) RequestCommand((new MoveBoardCommand(gameObject, speed * movement))); 

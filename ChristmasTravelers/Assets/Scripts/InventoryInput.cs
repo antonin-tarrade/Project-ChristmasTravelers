@@ -23,4 +23,9 @@ public class InventoryInput : SimpleInput
     {
         if (context.started) RequestCommand(new GrabCommand(character));
     }
+
+    public void UseItem(CallbackContext context)
+    {
+        if (context.started) RequestCommand(new UseItemCommand(character,new DashItem()));
+    }
 }

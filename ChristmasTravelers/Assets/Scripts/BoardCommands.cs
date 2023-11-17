@@ -38,6 +38,11 @@ namespace BoardCommands
             }
             closestItem?.AcceptCollect(command.character);
         }
+
+        public virtual void Execute(UseItemCommand command)
+        {
+            command.item.Use(command.character.GetComponent<Inventory>());
+        }
     }
 
     /// <summary>
@@ -82,6 +87,24 @@ namespace BoardCommands
         }
     }
 
+
+    public class UseItemCommand : IBoardCommand
+    {
+        public Character character;
+        public IItem item;
+
+        public UseItemCommand(Character character, IItem item)
+        {
+            this.character = character;
+            this.item = item;
+        }
+
+        public void ExecuteOn(BoardCommandHandler board)
+        {
+            board.Execute(this);
+        }
+    }
+
     /// <summary>
     /// Represents a command that was executed at a specific time
     /// </summary>
@@ -109,5 +132,6 @@ namespace BoardCommands
             else return 0;
         }
     }
+
 
 }
