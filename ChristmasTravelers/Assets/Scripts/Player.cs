@@ -13,7 +13,7 @@ public class Player {
 
 	public int score;
 
-	private List<Character> characters;
+	public List<Character> characters { get; private set; }
 
 	public void Init()
 	{

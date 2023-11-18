@@ -19,6 +19,7 @@ namespace BoardCommands
 
         public virtual void Execute(GrabCommand command)
         {
+            if (command.character.gameObject.layer == LayerMask.NameToLayer("Dead")) return;
             // TO DO : Passer par Character partout
             float grabRadius = command.character.grabRadius;
             Collider2D[] nearbyObjects = Physics2D.OverlapCircleAll(command.character.transform.position, grabRadius);
@@ -37,6 +38,11 @@ namespace BoardCommands
                 }
             }
             closestItem?.AcceptCollect(command.character);
+        }
+    
+        public virtual void Execute(ShootCommand command)
+        {
+            command.attack.Shoot(command.direction);
         }
     }
 
@@ -65,8 +71,6 @@ namespace BoardCommands
         }
     }
 
-
-    // TO DO : Remplacer le gameobject par le character
     public class GrabCommand : IBoardCommand
     {
         public Character character;
@@ -81,6 +85,24 @@ namespace BoardCommands
             board.Execute(this);
         }
     }
+
+    public class ShootCommand : IBoardCommand
+    {
+        public IAttack attack;
+        public Vector3 direction;
+
+        public ShootCommand(IAttack attack, Vector3 direction)
+        {
+            this.attack = attack;
+            this.direction = direction;
+        }
+
+        public void ExecuteOn(BoardCommandHandler board)
+        {
+            board.Execute(this);
+        }
+    }
+
 
     /// <summary>
     /// Represents a command that was executed at a specific time
