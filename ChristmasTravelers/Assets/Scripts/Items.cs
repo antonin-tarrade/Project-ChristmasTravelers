@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 
 namespace Items
 {
-
 
     /// <summary>
     /// Can be used to display items in UI
@@ -16,7 +16,7 @@ namespace Items
         
     }
 
-    public interface IItem
+    public interface IItem 
     {
         void Use(Inventory inventory);
     }
@@ -26,7 +26,9 @@ namespace Items
         public Vector2 initialPosition;
     }
 
-    public abstract class IMapItem : MonoBehaviour, IItem
+
+
+    public abstract class IMapItem :  MonoBehaviour,IItem
     {
 
         public enum MapItemState { Free, Grabbed };
@@ -49,12 +51,11 @@ namespace Items
 
         public abstract void Initialise();
     }
-
-
-    public abstract class ItemConsumable : IItem {
+    public abstract class ItemConsumable : IItem{
 
         public void Use(Inventory inventory)
         {
+            
             inventory.Remove(this);
             OnUse(inventory.GetComponent<Character>());
         }
@@ -62,15 +63,7 @@ namespace Items
         protected abstract void OnUse(Character character);
     }
 
-    public class DashItem : ItemConsumable {
 
-        private string name;
-        private ItemData data;
-
-        override protected void OnUse(Character character){
-            character.StartCoroutine(character.GetComponent<Dash>().ApplyDash(character));
-        }
-
-    }
+    
 
 }

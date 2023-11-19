@@ -12,11 +12,13 @@ public class InventoryInput : SimpleInput
 {
 
     private Character character;
+    private Inventory inventory;
 
 
     private void Start()
     {
         character = GetComponent<Character>();
+        inventory = GetComponent<Inventory>();
     }
 
     public void Grab(CallbackContext context)
@@ -26,6 +28,16 @@ public class InventoryInput : SimpleInput
 
     public void UseItem(CallbackContext context)
     {
-        if (context.started) RequestCommand(new UseItemCommand(character,new DashItem()));
+        if (context.started) RequestCommand(new UseItemCommand(character, inventory.currentItem));
+    }
+
+    public void NextItem(CallbackContext context)
+    {
+        if (context.started) inventory.NextItem();
+    }
+
+    public void PreviousItem(CallbackContext context)
+    {
+        if (context.started) inventory.PreviousItem();
     }
 }
