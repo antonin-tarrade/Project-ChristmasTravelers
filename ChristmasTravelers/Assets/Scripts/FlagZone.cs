@@ -17,13 +17,6 @@ public class FlagZone : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.TryGetComponent<Flag>(out Flag flag))
-        {
-            if (flag.characterHoldingThis.player == player)
-            {
-                player.score += flag.scorePoints;
-                flag.OnCapture();
-            }
-        }
+        
     }
 }

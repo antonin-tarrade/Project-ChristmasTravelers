@@ -28,7 +28,10 @@ public class InventoryInput : SimpleInput
 
     public void UseItem(CallbackContext context)
     {
-        if (context.started) RequestCommand(new UseItemCommand(character, inventory.currentItem));
+        if (context.started) {
+            IItem item = inventory.GetCurrentItem();
+            if (item != null) RequestCommand(new UseItemCommand(character, item));
+        }
     }
 
     public void NextItem(CallbackContext context)

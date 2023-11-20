@@ -9,8 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a396a49c873b44b88d565394bf175f3, type: 3}
-  m_Name: Dash
+  m_Script: {fileID: 11500000, guid: 37d6944f655cf420794fc9d493add10b, type: 3}
+  m_Name: FlagItem
   m_EditorClassIdentifier: 
-  dashSpeed: 100
-  dashTime: 0.01

@@ -3,21 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using Items;
 
-
-[CreateAssetMenu(fileName = "Dash", menuName = "Items/Dash")]
-public class DashComponent : ItemComponent
+public class DashComponent : MonoBehaviour
 {
-    [Header("Dash Settings")]
 
-    [SerializeField] float dashSpeed;
-    [SerializeField] float dashTime;
 
-    public DashItem dashItem { get => (DashItem) Item; set => Item = value; }
-
-    public override IItem CreateItem()
-    {
-        return new DashItem(dashSpeed, dashTime);
+    public void Dash(float dashSpeed, float distance){
+        StartCoroutine(ApplyDash(dashSpeed, distance));
     }
+
+
+    public IEnumerator ApplyDash(float dashSpeed, float distance) {
+        Vector3 finalPosition = transform.position + transform.right * distance;
+        transform.position = finalPosition;
+        yield return null;
+    }
+
+    
 }
 
 
