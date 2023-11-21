@@ -9,6 +9,7 @@ public class Player {
 	public Transform spawn;
 
 	public string name; // debug
+
 	public Color color;
 
 	public int score;

@@ -1,4 +1,5 @@
 using Items;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,15 +8,14 @@ public class ItemManager : MonoBehaviour
 {
     public static ItemManager instance;
 
-    private List<IItem> items;
-
-    private Dictionary<IMapItem, MapItemInitialData> initialStates;
+    private List<IItemInitialData> initialData;
+    private List<Inventory> inventories;
 
     public void Awake()
     {
         instance = this;
-        items = new List<IItem>();
-        initialStates = new Dictionary<IMapItem, MapItemInitialData>();
+        initialData = new List<IItemInitialData>();
+        inventories = new List<Inventory>();
     }
 
     private void Start()
@@ -24,29 +24,43 @@ public class ItemManager : MonoBehaviour
         RoundManager.instance.OnTurnEnd += OnTurnEnd;
     }
 
-    public void Register(IMapItem item, MapItemInitialData data)
+    public void Register(IItemInitialData data)
     {
-        initialStates.Add(item, data);
+        initialData.Add(data);
+    }
+
+    public void Register(Inventory inventory)
+    {
+        inventories.Add(inventory);
     }
 
 
-    private void RestoreInitialState(IMapItem item, MapItemInitialData data)
+    public void RestoreInitialState(InventoryItemInitialData data){
+        data.inventory.Add(data.item);
+    }
+
+    internal void RestoreInitialState(GrabbableItemInitialData data)
     {
-        item.Initialise();
-        if (data.initialState == IMapItem.MapItemState.Free)
-        {
-            if (item.mapState == IMapItem.MapItemState.Grabbed) item.Drop();
-            item.gameObject.transform.position = data.initialPosition;
+        data.grabbable.gameObject.SetActive(true);
+        data.grabbable.transform.position = data.initialPosition;
+        data.grabbable.Set(data.item);
+    }
+
+
+    private void RestoreInitialState()
+    {
+        foreach (Inventory inventory in inventories) {
+            inventory.Clear();
+        }
+        foreach (IItemInitialData data in initialData) {
+            data.RestoreInitialState(this);
         }
     }
 
 
     private void OnTurnStart()
     {
-        foreach (KeyValuePair<IMapItem, MapItemInitialData> kvp in initialStates)
-        {
-            RestoreInitialState(kvp.Key, kvp.Value);
-        }
+        RestoreInitialState();
     }
 
     private void OnTurnEnd()
@@ -54,4 +68,5 @@ public class ItemManager : MonoBehaviour
 
     }
 
+    
 }

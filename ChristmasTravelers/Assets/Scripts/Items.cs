@@ -1,45 +1,98 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 
 namespace Items
 {
 
-    public enum ItemType { Flag }
-
-
-    /// <summary>
-    /// Can be used to display items in UI
-    /// </summary>
-    [CreateAssetMenu(fileName = "ItemData", menuName = "Scriptables/ItemData")]
-    public class ItemData : ScriptableObject
+    public interface IGrabbable 
     {
-
+        void AcceptCollect(Character character);
     }
 
-    public interface IItem
+    public interface IItem 
     {
-        ItemType type { get; }
+        string GetName();
         void Use(Inventory inventory);
+
+        void RegisterInitialState(ItemManager itemManager, Inventory inventory);
+        void RegisterInitialState(ItemManager itemManager, GrabbableItem grabbable);
     }
 
-    public interface IMapItem : IItem
+    public abstract class Item : IItem
     {
-        enum MapItemState { Free, Grabbed };
+        protected ScriptableItemData data;
+        public abstract string GetName();
+        public void Use(Inventory inventory)
+        {
+            if (inventory.Contains(this)) OnUse(inventory);
+        }
 
-        MapItemState mapState { get; }
+        public abstract void OnUse(Inventory inventory);
 
-        GameObject gameObject { get; }
+        public void Drop(Inventory inventory) { }
 
-        void Drop();
+        public void RegisterInitialState(ItemManager itemManager, GrabbableItem grabbable)
+        {
+            itemManager.Register(new GrabbableItemInitialData(grabbable, this, grabbable.transform.position));
+        }
 
-        void Initialise();
+        public void RegisterInitialState(ItemManager itemManager, Inventory inventory)
+        {
+            itemManager.Register(new InventoryItemInitialData(inventory, this));
+        }
+
+        public Item(ScriptableItemData data)
+        {
+            this.data = data;
+        }
+
     }
 
-    public struct MapItemInitialData
+    public abstract class ScriptableItemData : ScriptableObject
     {
-        public IMapItem.MapItemState initialState;
-        public Vector2 initialPosition;
+        public abstract IItem GetInstance();
     }
+
+    public interface IItemInitialData
+    {
+        public void RestoreInitialState(ItemManager itemManager);
+    }
+
+    public struct InventoryItemInitialData : IItemInitialData
+    {
+        public Inventory inventory;
+        public IItem item;
+
+        public InventoryItemInitialData(Inventory inventory, Item item)
+        {
+            this.inventory = inventory;
+            this.item = item;
+        }
+
+        public void RestoreInitialState(ItemManager itemManager)
+        {
+            itemManager.RestoreInitialState(this);
+        }
+    }
+
+    public struct GrabbableItemInitialData : IItemInitialData {
+        public GrabbableItem grabbable;
+        public IItem item;
+        public Vector3 initialPosition;
+
+        public GrabbableItemInitialData(GrabbableItem grabbable, IItem item, Vector3 initialPosition){
+            this.grabbable = grabbable;
+            this.item = item;
+            this.initialPosition = initialPosition;
+        }
+
+        public void RestoreInitialState(ItemManager itemManager) {
+            itemManager.RestoreInitialState(this);
+        }
+    }
+    
+
 }

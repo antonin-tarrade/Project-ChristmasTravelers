@@ -16,13 +16,14 @@ GameObject:
   - component: {fileID: 7883276308349016369}
   - component: {fileID: 5081516032494860440}
   - component: {fileID: 96745557990872990}
+  - component: {fileID: 8142559735669596891}
+  - component: {fileID: -5915344857319613970}
   - component: {fileID: 6208526159675140355}
-  - component: {fileID: 6974135624404325307}
-  - component: {fileID: -1448216087211673591}
-  - component: {fileID: 7023744199319898029}
-  - component: {fileID: 3088008994050532119}
-  m_Layer: 10
-  m_Name: Character
+  - component: {fileID: 6824296113648132383}
+  - component: {fileID: 1934776862980312930}
+  - component: {fileID: 2038903105383702377}
+  m_Layer: 0
+  m_Name: DashCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,7 +111,6 @@ MonoBehaviour:
   player:
     spawn: {fileID: 0}
     name: 
-    layer: 
     color: {r: 0, g: 0, b: 0, a: 0}
     score: 0
   grabRadius: 3
@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f26b2ebe0153f745aa29e910738a9dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 20
 --- !u!114 &6020620316253342707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,8 +185,8 @@ MonoBehaviour:
     m_ActionName: Player1/Movement[/Keyboard/z,/Keyboard/s,/Keyboard/q,/Keyboard/d]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6974135624404325307}
-        m_TargetAssemblyTypeName: CharacterInput, Assembly-CSharp
+      - m_Target: {fileID: 8142559735669596891}
+        m_TargetAssemblyTypeName: InventoryInput, Assembly-CSharp
         m_MethodName: Grab
         m_Mode: 0
         m_Arguments:
@@ -201,7 +201,55 @@ MonoBehaviour:
     m_ActionName: Player1/Grab[/Keyboard/e]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6974135624404325307}
+      - m_Target: {fileID: 8142559735669596891}
+        m_TargetAssemblyTypeName: InventoryInput, Assembly-CSharp
+        m_MethodName: UseItem
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f227c6ed-ab67-4e17-ae46-2f655ffb53ef
+    m_ActionName: Player1/Dash[/Keyboard/k]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8142559735669596891}
+        m_TargetAssemblyTypeName: InventoryInput, Assembly-CSharp
+        m_MethodName: PreviousItem
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 79ad8d02-5178-4b94-9d98-0c6d0a8ca5a7
+    m_ActionName: Player1/Previous Item[/Keyboard/j]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8142559735669596891}
+        m_TargetAssemblyTypeName: InventoryInput, Assembly-CSharp
+        m_MethodName: NextItem
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 36d9e607-9313-472c-8a0f-754e018cfb35
+    m_ActionName: Player1/Next Item[/Keyboard/l]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -5915344857319613970}
         m_TargetAssemblyTypeName: CharacterInput, Assembly-CSharp
         m_MethodName: Shoot
         m_Mode: 0
@@ -214,23 +262,11 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: dee79333-1a8d-4c32-a6e6-7745dcb2a933
-    m_ActionName: Player1/Shoot[/Mouse/leftButton]
+    m_ActionName: Player1/Shoot[/Keyboard/space]
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 8bee7192-8eae-44f3-9489-5a059ba89901
     m_ActionName: Player1/ShootDirection[/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: f227c6ed-ab67-4e17-ae46-2f655ffb53ef
-    m_ActionName: Player1/Dash[/Keyboard/k]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 79ad8d02-5178-4b94-9d98-0c6d0a8ca5a7
-    m_ActionName: Player1/Previous Item[/Keyboard/j]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 36d9e607-9313-472c-8a0f-754e018cfb35
-    m_ActionName: Player1/Next Item[/Keyboard/l]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player1
@@ -262,7 +298,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recordData: {fileID: 11400000, guid: 2315e89d634bc0447a1bb9c183f07ff9, type: 2}
   recordables:
-  - {fileID: 6974135624404325307}
+  - {fileID: 8142559735669596891}
+  - {fileID: -5915344857319613970}
+--- !u!114 &8142559735669596891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3055416447674701499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1a4f671f4fb200418af1b95c5602a39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-5915344857319613970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3055416447674701499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37ddf01586f8da549b21f09a91a322c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6208526159675140355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,7 +336,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 753b7f8c5c79fce4984ccdbca7835224, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6974135624404325307
+  itemsData:
+  - {fileID: 11400000, guid: 8f87a3ab0aea142e1b14bf64c9308c51, type: 2}
+  - {fileID: 11400000, guid: 8f87a3ab0aea142e1b14bf64c9308c51, type: 2}
+  itemsNames: []
+  itemSelected: 
+--- !u!114 &6824296113648132383
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -284,10 +350,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 3055416447674701499}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37ddf01586f8da549b21f09a91a322c1, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a396a49c873b44b88d565394bf175f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!58 &-1448216087211673591
+--- !u!114 &1934776862980312930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3055416447674701499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eb453bf5a353b0479f4a8ce5e9d764e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  atk: 1
+  spd: 10
+  lifeLength: 1
+  projectile: {fileID: 1775989977048839268, guid: 9d68bcea2a01c8c46b9f6b0b6d9130c8, type: 3}
+--- !u!58 &2038903105383702377
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -306,49 +388,19 @@ CircleCollider2D:
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 4294967295
   m_ForceReceiveLayers:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 4294967295
   m_ContactCaptureLayers:
     serializedVersion: 2
     m_Bits: 4294967295
   m_CallbackLayers:
     serializedVersion: 2
-    m_Bits: 2103
+    m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &7023744199319898029
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3055416447674701499}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9eb453bf5a353b0479f4a8ce5e9d764e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  atk: 1
-  spd: 10
-  lifeLength: 3
-  projectile: {fileID: 1775989977048839268, guid: 9d68bcea2a01c8c46b9f6b0b6d9130c8, type: 3}
---- !u!114 &3088008994050532119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3055416447674701499}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1af38375d3723e94e8f811987695c36e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <baseHealth>k__BackingField: 1
-  itemsData: []
