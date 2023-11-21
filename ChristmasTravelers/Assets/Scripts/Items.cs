@@ -12,103 +12,85 @@ namespace Items
         void AcceptCollect(Character character);
     }
 
-    /// <summary>
-    /// Can be used to display items in UI
-    /// </summary>
-    [CreateAssetMenu(fileName = "ItemData", menuName = "Scriptables/ItemData")]
-    public class ItemData : ScriptableObject
-    {
-        
-    }
-
     public interface IItem 
     {
+        string GetName();
         void Use(Inventory inventory);
 
-        void RegisterInitialState(Inventory inventory);
+        void RegisterInitialState(ItemManager itemManager, Inventory inventory);
+        void RegisterInitialState(ItemManager itemManager, GrabbableItem grabbable);
     }
-    
 
-
-    public abstract class ScriptableItem : ScriptableObject, IItem
+    public abstract class Item : IItem
     {
-        public abstract void Use(Inventory inventory);
-
-        public virtual void RegisterInitialState(Inventory inventory)
+        protected ScriptableItemData data;
+        public abstract string GetName();
+        public void Use(Inventory inventory)
         {
-            ItemManager.instance.Register(new ScriptableItemInitialData(this, inventory));
-        }
-    }
-
-
-    public abstract class ConsumableItem : ScriptableItem{
-
-        public override void Use(Inventory inventory)
-        {
-            inventory.Remove(this);
-            OnUse(inventory);
+            if (inventory.Contains(this)) OnUse(inventory);
         }
 
-        protected abstract void OnUse(Inventory inventory);
-    }
+        public abstract void OnUse(Inventory inventory);
 
+        public void Drop(Inventory inventory) { }
 
-    public abstract class DroppableItem : ConsumableItem{
-
-
-        protected void Drop(Vector3 position)
+        public void RegisterInitialState(ItemManager itemManager, GrabbableItem grabbable)
         {
-            GameObject container = new GameObject();
-            container.transform.position = position;
-            GrabbableItem grabbableItem = container.AddComponent<GrabbableItem>();
-            grabbableItem.Set(this);
+            itemManager.Register(new GrabbableItemInitialData(grabbable, this, grabbable.transform.position));
         }
 
-        public void RegisterInitialState(GrabbableItem grabbable)
+        public void RegisterInitialState(ItemManager itemManager, Inventory inventory)
         {
-            ItemManager.instance.Register(new DroppableItemInitialData(grabbable, null, this, grabbable.transform.position));
+            itemManager.Register(new InventoryItemInitialData(inventory, this));
         }
 
-        public override void RegisterInitialState(Inventory inventory)
+        public Item(ScriptableItemData data)
         {
-            ItemManager.instance.Register(new DroppableItemInitialData(null, inventory, this, Vector3.zero));
+            this.data = data;
         }
 
     }
 
-    public interface IItemInitialData {
-        void RestoreInitialState();
+    public abstract class ScriptableItemData : ScriptableObject
+    {
+        public abstract IItem GetInstance();
     }
 
-    public struct ScriptableItemInitialData : IItemInitialData {
-        public ScriptableItem item;
+    public interface IItemInitialData
+    {
+        public void RestoreInitialState(ItemManager itemManager);
+    }
+
+    public struct InventoryItemInitialData : IItemInitialData
+    {
         public Inventory inventory;
+        public IItem item;
 
-        public ScriptableItemInitialData(ScriptableItem item, Inventory inventory){
-            this.item = item;
+        public InventoryItemInitialData(Inventory inventory, Item item)
+        {
             this.inventory = inventory;
+            this.item = item;
         }
 
-        public void RestoreInitialState(){
-            ItemManager.instance.RestoreInitialState(this);
+        public void RestoreInitialState(ItemManager itemManager)
+        {
+            itemManager.RestoreInitialState(this);
         }
     }
 
-    public struct DroppableItemInitialData : IItemInitialData{
+    public struct GrabbableItemInitialData : IItemInitialData {
         public GrabbableItem grabbable;
-        public Inventory inventory;
-        public DroppableItem item;
+        public IItem item;
         public Vector3 initialPosition;
 
-        public DroppableItemInitialData(GrabbableItem grabbable, Inventory inventory, DroppableItem item, Vector3 initialPosition){
+        public GrabbableItemInitialData(GrabbableItem grabbable, IItem item, Vector3 initialPosition){
             this.grabbable = grabbable;
-            this.inventory = inventory;
             this.item = item;
             this.initialPosition = initialPosition;
         }
 
-        public void RestoreInitialState() {
-            ItemManager.instance.RestoreInitialState(this);
+        public void RestoreInitialState(ItemManager itemManager) {
+            itemManager.RestoreInitialState(this);
         }
     }
     

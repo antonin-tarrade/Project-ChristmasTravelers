@@ -1,4 +1,5 @@
 using Items;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,18 +35,15 @@ public class ItemManager : MonoBehaviour
     }
 
 
-    public void RestoreInitialState(ScriptableItemInitialData data){
+    public void RestoreInitialState(InventoryItemInitialData data){
         data.inventory.Add(data.item);
     }
 
-    public void RestoreInitialState(DroppableItemInitialData data){
-        if (data.inventory == null) {
-            data.grabbable.gameObject.SetActive(true);
-            data.grabbable.transform.position = data.initialPosition;
-        }
-        else {
-            data.inventory.Add(data.item);
-        }
+    internal void RestoreInitialState(GrabbableItemInitialData data)
+    {
+        data.grabbable.gameObject.SetActive(true);
+        data.grabbable.transform.position = data.initialPosition;
+        data.grabbable.Set(data.item);
     }
 
 
@@ -55,7 +53,7 @@ public class ItemManager : MonoBehaviour
             inventory.Clear();
         }
         foreach (IItemInitialData data in initialData) {
-            data.RestoreInitialState();
+            data.RestoreInitialState(this);
         }
     }
 
@@ -70,4 +68,5 @@ public class ItemManager : MonoBehaviour
 
     }
 
+    
 }

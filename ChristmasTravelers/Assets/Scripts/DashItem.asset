@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fdcecf60bb5e43dcbfde2cbaaebb170, type: 3}
   m_Name: DashItem
   m_EditorClassIdentifier: 
-  dashSpeed: 1000
-  dashTime: 3
+  dashSpeed: 1
+  dashDistance: 3

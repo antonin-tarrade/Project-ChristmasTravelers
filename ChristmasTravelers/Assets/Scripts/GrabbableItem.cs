@@ -3,26 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using Items;
 
-  public class GrabbableItem : MonoBehaviour, IGrabbable {
+public class GrabbableItem : MonoBehaviour, IGrabbable {
 
-       [SerializeField] private DroppableItem item;
-       private Vector3 initialPoisiton;
+    [SerializeField] private ScriptableItemData itemData;
+    private IItem item;
+    private Vector3 initialPoisiton;
 
-       private void Start() {
-            initialPoisiton = transform.position;
-            item.RegisterInitialState(this);
-       }
+    private void Start() {
+        initialPoisiton = transform.position;
+        item = itemData.GetInstance();
+        item.RegisterInitialState(ItemManager.instance, this);
+    }
 
 
-       public void Set(DroppableItem item){
-           this.item = item;
-       }
+    public void Set(IItem item){
+        this.item = item;
+    }
 
-        public void AcceptCollect(Character character)
-        {
-            character.GetComponent<Inventory>().Add(item);
-            gameObject.SetActive(false);
-        }
+    public void AcceptCollect(Character character)
+    {
+        character.GetComponent<Inventory>().Add(item);
+        gameObject.SetActive(false);
+    }
         
 
-    }
+}

@@ -18,7 +18,6 @@ GameObject:
   - component: {fileID: 96745557990872990}
   - component: {fileID: 8142559735669596891}
   - component: {fileID: 6208526159675140355}
-  - component: {fileID: 6530138211753436795}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -200,6 +199,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: f227c6ed-ab67-4e17-ae46-2f655ffb53ef
     m_ActionName: Player1/Dash[/Keyboard/k]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 79ad8d02-5178-4b94-9d98-0c6d0a8ca5a7
+    m_ActionName: Player1/Previous Item[/Keyboard/j]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 36d9e607-9313-472c-8a0f-754e018cfb35
+    m_ActionName: Player1/Next Item[/Keyboard/l]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player1
@@ -256,18 +263,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 753b7f8c5c79fce4984ccdbca7835224, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items:
-  - {fileID: 0}
---- !u!114 &6530138211753436795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3055416447674701499}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ee7513b08ef18a4e99463901f7cb6ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <scorePoints>k__BackingField: 0
+  itemsData: []

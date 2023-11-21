@@ -300,9 +300,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 753b7f8c5c79fce4984ccdbca7835224, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items:
+  itemsData:
   - {fileID: 11400000, guid: 8f87a3ab0aea142e1b14bf64c9308c51, type: 2}
   - {fileID: 11400000, guid: 8f87a3ab0aea142e1b14bf64c9308c51, type: 2}
+  itemsNames: []
 --- !u!114 &6824296113648132383
 MonoBehaviour:
   m_ObjectHideFlags: 0
