@@ -5,6 +5,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 	public static GameManager instance;
 
+    [field : SerializeField] public GameData gameData {  get; private set; }
+
 	// Playing players
 	[field: SerializeField] public List<Player> players { get; private set; }
 
@@ -19,6 +21,7 @@ public class GameManager : MonoBehaviour {
             p.Init();
         }
         RoundManager.instance.OnTurnStart += OnTurnStart;
+
     }
 
     private void OnTurnStart()

@@ -30,7 +30,7 @@ public class RoundManager : MonoBehaviour {
 	/// Starts next player turn
 	/// </summary>
 	public void StartNextTurn () {
-		OnTurnStart?.Invoke();
+		
 		if (currentCharacter != null) {
 			Debug.LogWarning ("Previous turn was not ended");
 			return;
@@ -47,8 +47,9 @@ public class RoundManager : MonoBehaviour {
 	/// Starts a given player turn
 	/// </summary>
 	private void StartTurn (Player player) {
-		// All ghosts returns to their start positions
-		foreach (Character ghost in ghosts) {
+        OnTurnStart?.Invoke();
+        // All ghosts returns to their start positions
+        foreach (Character ghost in ghosts) {
 			ghost.transform.position = ghost.player.spawn.position;
 		}
 
