@@ -8,7 +8,7 @@ public class GreyBoxManager : MonoBehaviour
     private GameManager gameManager;
     private RoundManager roundManager;
     private Button changePlayerButton;
-    private bool isBlueTurn = true;
+    private bool isBlueSelected = true;
     private bool curentPlayerIsBlue = true;
     private bool isFirstTurn = true;
 
@@ -33,21 +33,14 @@ public class GreyBoxManager : MonoBehaviour
 
     public void ChangePlayer()
     {
-        isBlueTurn = !isBlueTurn;
-        if (isBlueTurn)
-        {
-            changePlayerButton.GetComponentInChildren<Image>().color = colorBlue;
-        }
-        else
-        {
-            changePlayerButton.GetComponentInChildren<Image>().color = colorRed;
-        }
+        changePlayerButton.GetComponentInChildren<Image>().color = (isBlueSelected) ? colorRed : colorBlue;
+        isBlueSelected = !isBlueSelected;
     }
 
 
     public void StartNextTurn()
     {
-        if (isBlueTurn != curentPlayerIsBlue || isFirstTurn){
+        if (isBlueSelected!= curentPlayerIsBlue || isFirstTurn){
             roundManager.StartNextTurn();
             
             if (isFirstTurn) {
