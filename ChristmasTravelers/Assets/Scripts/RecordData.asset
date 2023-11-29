@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c40953cbd24d4144b877140d905d892a, type: 3}
   m_Name: RecordData
   m_EditorClassIdentifier: 
-  recordFrequency: 0.01
+  recordFrequency: 0.0333333333333333

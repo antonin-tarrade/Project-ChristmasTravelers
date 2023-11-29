@@ -47,7 +47,7 @@ namespace BoardCommands
 
         public virtual void Execute(UseItemCommand command)
         {
-            command.item.Use(command.character.GetComponent<Inventory>());
+            command.item.Use(command.character.GetComponent<Inventory>(), command.parameters);
         }
     }
 
@@ -114,11 +114,13 @@ namespace BoardCommands
     {
         public Character character;
         public IItem item;
+        public IItemParameters parameters;
 
-        public UseItemCommand(Character character, IItem item)
+        public UseItemCommand(Character character, IItem item, IItemParameters parameters)
         {
             this.character = character;
             this.item = item;
+            this.parameters = parameters;
         }
 
         public void ExecuteOn(BoardCommandHandler board)

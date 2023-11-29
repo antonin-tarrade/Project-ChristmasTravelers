@@ -30,7 +30,7 @@ public class InventoryInput : SimpleInput
     {
         if (context.started) {
             IItem item = inventory.GetCurrentItem();
-            if (item != null) RequestCommand(new UseItemCommand(character, item));
+            if (item != null) RequestCommand(item.GenerateCommand(character));
         }
     }
 

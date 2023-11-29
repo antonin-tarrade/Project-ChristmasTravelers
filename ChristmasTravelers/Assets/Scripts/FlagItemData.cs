@@ -1,3 +1,4 @@
+using BoardCommands;
 using Items;
 using UnityEngine;
 
@@ -9,9 +10,14 @@ public class FlagItem : Item
     {
         return "Flag";
     }
-    public override void OnUse(Inventory inventory)
+    public override void OnUse(Inventory inventory, IItemParameters parameters)
     {
         Debug.Log("USE FLAG");
+    }
+
+    public override UseItemCommand GenerateCommand(Character character)
+    {
+        return new UseItemCommand(character, this, null);
     }
 
     public FlagItem(FlagItemData data) : base(data)

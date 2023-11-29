@@ -27,6 +27,11 @@ public class MovementInput : SimpleInput
         }
     }
 
+    public Vector3 GetMovementDirection()
+    {
+        return movement.normalized;
+    }
+
 
     private void Update() {
         if (move) movement = input.ReadValue<Vector2>();

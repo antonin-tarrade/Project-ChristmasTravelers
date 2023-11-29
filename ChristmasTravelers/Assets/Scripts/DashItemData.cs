@@ -3,16 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using Items;
 using System;
+using BoardCommands;
 
 
 public class DashItem : Item
 {
     protected new DashItemData data;
-    public override void OnUse(Inventory inventory)
+    public override void OnUse(Inventory inventory, IItemParameters parameters)
     {
         Character character = inventory.GetComponent<Character>();
-        character.GetComponent<DashComponent>().Dash(data.dashSpeed, data.dashDistance);
-        inventory.Remove(this);
+        Vector3 direction = ((DashItemParameters)parameters).direction;
+        character.GetComponent<DashComponent>().Dash(data.dashSpeed, data.dashDistance, direction);
+    }
+
+    public override UseItemCommand GenerateCommand(Character character)
+    {
+        Vector3 direction = character.GetComponent<MovementInput>().GetMovementDirection();
+        return new UseItemCommand(character, this, new DashItemParameters(direction));
     }
 
     public override string GetName()
