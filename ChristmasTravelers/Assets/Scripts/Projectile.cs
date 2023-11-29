@@ -23,6 +23,7 @@ public class Projectile : MonoBehaviour
     {
         if (isActive) return;
         isActive = true;
+        transform.up = d;
         direction = d;
         speed = s;
         lifeLength = ll;

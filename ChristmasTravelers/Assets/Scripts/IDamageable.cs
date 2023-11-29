@@ -6,6 +6,7 @@ using UnityEngine;
 public interface IAttack
 {
     void Shoot(Vector3 direction);
+    bool IsCooldownReady();
 }
 
 public interface IDamageable

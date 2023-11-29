@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-
+using BoardCommands;
+using UnityEngine.TextCore.Text;
 
 namespace Items
 {
@@ -15,8 +16,8 @@ namespace Items
     public interface IItem 
     {
         string GetName();
-        void Use(Inventory inventory);
-
+        void Use(Inventory inventory, IItemParameters parameters);
+        UseItemCommand GenerateCommand(Character character);
         void RegisterInitialState(ItemManager itemManager, Inventory inventory);
         void RegisterInitialState(ItemManager itemManager, GrabbableItem grabbable);
     }
@@ -25,12 +26,18 @@ namespace Items
     {
         protected ScriptableItemData data;
         public abstract string GetName();
-        public void Use(Inventory inventory)
+        public void Use(Inventory inventory, IItemParameters parameters)
         {
-            if (inventory.Contains(this)) OnUse(inventory);
+            if (inventory.Contains(this))
+            {
+                if (data.consumeOnUse) inventory.Remove(this);
+                OnUse(inventory, parameters);
+            }
         }
 
-        public abstract void OnUse(Inventory inventory);
+        public abstract void OnUse(Inventory inventory, IItemParameters parameters);
+
+        public abstract UseItemCommand GenerateCommand(Character character);
 
         public void Drop(Inventory inventory) { }
 
@@ -54,6 +61,7 @@ namespace Items
     public abstract class ScriptableItemData : ScriptableObject
     {
         public abstract IItem GetInstance();
+        public bool consumeOnUse;
     }
 
     public interface IItemInitialData
@@ -93,6 +101,21 @@ namespace Items
             itemManager.RestoreInitialState(this);
         }
     }
-    
 
+    public interface IItemParameters
+    {
+
+
+    }
+
+    public struct DashItemParameters : IItemParameters
+    {
+        public Vector3 direction;
+
+        public DashItemParameters(Vector3 direction)
+        {
+            this.direction = direction;
+        } 
+    }
+   
 }

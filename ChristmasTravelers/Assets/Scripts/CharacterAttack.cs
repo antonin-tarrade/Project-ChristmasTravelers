@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class CharacterAttack : MonoBehaviour, IAttack
 {
-    public float atk;
-    public float spd;
-    public float lifeLength;
-    public Projectile projectile;
+    [field: SerializeField] public float atk { get; private set; }
+    [field: SerializeField] public float spd { get; private set; }
+    [field: SerializeField] public float lifeLength { get; private set; }
+    [SerializeField] private Projectile projectile;
+    [SerializeField] private float cooldown;
+    private float lastTimeShoot;
+    private Vector3 shootDirection;
+    
 
     public void Shoot(Vector3 direction)
     {
+        lastTimeShoot = Time.time;
         Projectile proj = Instantiate(projectile, transform.position, Quaternion.identity);
-        // TO DO : Système de layers pour chaque joueur histoire d'éviter le tir allié
         proj.transform.position += direction.normalized;
         proj.OnHit += OnHit;
         proj.gameObject.layer = gameObject.layer;
@@ -30,5 +34,11 @@ public class CharacterAttack : MonoBehaviour, IAttack
         {
             damageable.Damage(atk);
         }
+    }
+
+
+    public bool IsCooldownReady()
+    {
+        return (Time.time - lastTimeShoot) > cooldown;
     }
 }
