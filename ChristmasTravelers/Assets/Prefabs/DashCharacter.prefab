@@ -21,8 +21,8 @@ GameObject:
   - component: {fileID: 6208526159675140355}
   - component: {fileID: 6824296113648132383}
   - component: {fileID: 2038903105383702377}
-  - component: {fileID: 6476934847602779350}
   - component: {fileID: 4337684085674946287}
+  - component: {fileID: 1037759126764217511}
   m_Layer: 0
   m_Name: DashCharacter
   m_TagString: Untagged
@@ -389,26 +389,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &6476934847602779350
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3055416447674701499}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec5821393bc6ca34684839ecfd053857, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <atk>k__BackingField: 5
-  <spd>k__BackingField: 10
-  <lifeLength>k__BackingField: 10
-  projectile: {fileID: 1775989977048839268, guid: 9d68bcea2a01c8c46b9f6b0b6d9130c8, type: 3}
-  cooldown: 1
-  directDamage: 1
-  indirectDamage: 0.5
-  explosionRadius: 3
 --- !u!114 &4337684085674946287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -422,3 +402,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <baseHealth>k__BackingField: 10
+--- !u!114 &1037759126764217511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3055416447674701499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec5821393bc6ca34684839ecfd053857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <atk>k__BackingField: 3
+  <spd>k__BackingField: 5
+  <lifeLength>k__BackingField: 5
+  projectile: {fileID: 1775989977048839268, guid: 9d68bcea2a01c8c46b9f6b0b6d9130c8, type: 3}
+  cooldown: 1
+  directDamage: 1
+  indirectDamage: 0.5
+  explosionRadius: 5
+  explosionEffect: {fileID: 1726331220376474949, guid: e818a18306716f04f850374d3c953f28, type: 3}
+  color: {r: 0, g: 0, b: 0, a: 1}
+  time: 0.5
