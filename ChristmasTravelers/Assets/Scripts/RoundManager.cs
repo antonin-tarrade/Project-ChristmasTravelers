@@ -43,6 +43,20 @@ public class RoundManager : MonoBehaviour {
 		StartTurn (players.Current);
 	}
 
+
+
+	/// <summary>
+	/// Start the next turn of the same player
+	/// </summary>
+	public void StartSameTurn () {
+		if (currentCharacter != null) {
+			Debug.LogWarning ("Previous turn was not ended");
+			return;
+		}
+		StartTurn (players.Current);
+	}
+
+
 	/// <summary>
 	/// Starts a given player turn
 	/// </summary>
