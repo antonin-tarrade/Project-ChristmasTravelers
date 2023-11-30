@@ -25,6 +25,7 @@ public class CharacterHealth : MonoBehaviour, IDamageable
     {
         health -= dmg;
         if (health <= 0) Death();
+        else StartCoroutine(DamageFeedBack());
     }
 
     private void Init()
@@ -38,5 +39,17 @@ public class CharacterHealth : MonoBehaviour, IDamageable
     {
         gameObject.layer = LayerMask.NameToLayer("Dead");
         GetComponent<SpriteRenderer>().material = GameManager.instance.gameData.DeadMaterial;
+    }
+
+
+    [Header("Damage feedback")]
+    [SerializeField] private Color color;
+    [SerializeField] private float time;
+    private IEnumerator DamageFeedBack()
+    {
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        sr.color = color;
+        yield return new WaitForSeconds(time);
+        sr.color = GetComponent<Character>().player.color;
     }
 }

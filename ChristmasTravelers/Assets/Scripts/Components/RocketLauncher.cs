@@ -41,30 +41,16 @@ public class Roquette : BasicAttack
         {
             if (c.gameObject.layer == proj.gameObject.layer && c.TryGetComponent<IDamageable>(out IDamageable damageable))
             {
-                StartCoroutine(DamageFeedBack(c.GetComponent<SpriteRenderer>()));
                 damageable.Damage(atk * indirectDamage);
             }
         }
         Destroy(effect, 3);
-
-        //DEBUG
-        Debug.DrawCircle(proj.transform.position, explosionRadius, 20, Color.green);
-        //END DEBUG
     }
 
 
 
 
-    [Header("Damage feedback")]
-    [SerializeField] private Color color;
-    [SerializeField] private float time;
-    private IEnumerator DamageFeedBack(SpriteRenderer sr)
-    {
-        Color colorRef = sr.color;
-        sr.color = color;
-        yield return new WaitForSeconds(time);
-        sr.color = colorRef;
-    }
+    
 
 
 }
