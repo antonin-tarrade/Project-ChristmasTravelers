@@ -6,6 +6,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public event Action<GameObject> OnHit;
+    public event Action<Projectile> OnEnd;
 
     private Vector3 direction;
     private float speed;
@@ -35,18 +36,19 @@ public class Projectile : MonoBehaviour
         {
             transform.position += Time.deltaTime * speed * direction;
             time += Time.deltaTime;
-            if (time > lifeLength) OnEnd();
+            if (time > lifeLength) End();
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         OnHit?.Invoke(collision.gameObject);
-        OnEnd();
+        End();
     }
 
-    private void OnEnd()
+    private void End()
     {
+        OnEnd?.Invoke(this);
         Destroy(gameObject);
     }
 }

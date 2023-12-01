@@ -11,7 +11,7 @@ public class CharacterInput : SimpleInput
 {
     private InputAction action;
     private Character character;
-    private CharacterAttack attack;
+    private IAttack attack;
     private Inventory inventory;
 
     private void Awake()
@@ -23,7 +23,7 @@ public class CharacterInput : SimpleInput
     {
         character = GetComponent<Character>();
         inventory = GetComponent<Inventory>();
-        attack = GetComponent<CharacterAttack>();
+        attack = GetComponent<IAttack>();
     }
 
     public void Grab(CallbackContext context)
@@ -48,7 +48,7 @@ public class CharacterInput : SimpleInput
         Vector2 shootDirectionInput = directionAction.ReadValue<Vector2>();
         if (shootDirectionInput.sqrMagnitude != 0) shootDirection = shootDirectionInput;
         if (shootDirection.sqrMagnitude == 0) return;
-        RequestCommand(new ShootCommand(attack, shootDirection));
+        RequestCommand(attack.GenerateCommand(shootDirection));
     }
 
 
