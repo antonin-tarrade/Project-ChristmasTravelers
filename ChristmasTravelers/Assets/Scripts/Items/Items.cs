@@ -107,15 +107,5 @@ namespace Items
 
 
     }
-
-    public struct DashItemParameters : IItemParameters
-    {
-        public Vector3 direction;
-
-        public DashItemParameters(Vector3 direction)
-        {
-            this.direction = direction;
-        } 
-    }
    
 }

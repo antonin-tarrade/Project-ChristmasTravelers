@@ -16,7 +16,7 @@ public class CharacterInput : SimpleInput
 
     private void Awake()
     {
-        shootDirection = Vector3.zero;
+        rightStickDirection = Vector3.up;
     }
 
     private void Start()
@@ -33,7 +33,7 @@ public class CharacterInput : SimpleInput
 
 
     private bool shoot;
-    private Vector3 shootDirection;
+    public Vector3 rightStickDirection { get; private set; }
     public void Shoot(CallbackContext context)
     {
         action = context.action;
@@ -41,20 +41,16 @@ public class CharacterInput : SimpleInput
         else shoot = false;
     }
 
+
     public void Shoot()
     {
-        if (!attack.IsCooldownReady()) return;
-        InputAction directionAction = action.actionMap.FindAction("ShootDirection");
-        Vector2 shootDirectionInput = directionAction.ReadValue<Vector2>();
-        if (shootDirectionInput.sqrMagnitude != 0) shootDirection = shootDirectionInput;
-        if (shootDirection.sqrMagnitude == 0) return;
-        RequestCommand(attack.GenerateCommand(shootDirection));
+        RequestCommand(attack.GenerateShootCommand());
     }
 
-
-    private void Update()
+    public void UpdateShootDirection(Vector3 direction)
     {
-        if (shoot) Shoot();
+        //rightStickDirection = (direction.sqrMagnitude == 0) ? rightStickDirection : direction;
+        if (direction.sqrMagnitude > 0) RequestCommand(attack.GenerateAimCommand(direction));
     }
 
 
@@ -70,5 +66,16 @@ public class CharacterInput : SimpleInput
     public void NextItem(CallbackContext context)
     {
         if (context.started) inventory.NextItem();
+    }
+
+
+
+    private void Update()
+    {
+        if (action != null)
+        {
+            UpdateShootDirection(action.actionMap.FindAction("ShootDirection").ReadValue<Vector2>());
+        }
+        if (shoot) Shoot();
     }
 }

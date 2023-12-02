@@ -9,10 +9,6 @@ public class Roquette : BasicAttack
     [SerializeField, Range(0, 1)] float indirectDamage;
     [SerializeField] private float explosionRadius;
     [SerializeField] ParticleSystem explosionEffect;
-    public override ShootCommand GenerateCommand(Vector3 direction)
-    {
-        return new ShootCommand(this, direction);
-    }
 
     public override Projectile InitProj(Vector3 direction)
     {

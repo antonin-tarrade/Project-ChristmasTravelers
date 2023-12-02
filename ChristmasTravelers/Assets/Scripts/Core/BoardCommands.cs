@@ -42,12 +42,17 @@ namespace BoardCommands
     
         public virtual void Execute(ShootCommand command)
         {
-            command.attack.Shoot(command.direction);
+            command.attack.Shoot();
         }
 
         public virtual void Execute(UseItemCommand command)
         {
             command.item.Use(command.character.GetComponent<Inventory>(), command.parameters);
+        }
+
+        public virtual void Execute(AimCommand command)
+        {
+            command.attack.shootDirection = command.direction;
         }
     }
 
@@ -94,9 +99,24 @@ namespace BoardCommands
     public class ShootCommand : IBoardCommand
     {
         public IAttack attack;
-        public Vector3 direction;
 
         public ShootCommand(IAttack attack, Vector3 direction)
+        {
+            this.attack = attack;
+        }
+
+        public void ExecuteOn(BoardCommandHandler board)
+        {
+            board.Execute(this);
+        }
+    }
+
+    public class AimCommand : IBoardCommand
+    {
+        public IAttack attack;
+        public Vector3 direction;
+
+        public AimCommand(IAttack attack, Vector3 direction)
         {
             this.attack = attack;
             this.direction = direction;

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Items;
 using System.Runtime.CompilerServices;
+using System;
+using UnityEngine.Events;
 
 public class DashComponent : MonoBehaviour
 {
@@ -19,7 +21,7 @@ public class DashComponent : MonoBehaviour
         StartCoroutine(ApplyDash(dashSpeed, distance, direction));
     }
 
-
+    
     public IEnumerator ApplyDash(float acceleration, float distance, Vector3 direction) {
         particles.enableEmission = true;
         float dist = 0;

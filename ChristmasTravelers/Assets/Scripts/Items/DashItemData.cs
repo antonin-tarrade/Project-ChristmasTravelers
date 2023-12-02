@@ -45,3 +45,13 @@ public class DashItemData : ScriptableItemData
     }
 }
 
+public struct DashItemParameters : IItemParameters
+{
+    public Vector3 direction;
+
+    public DashItemParameters(Vector3 direction)
+    {
+        this.direction = direction;
+    }
+}
+
