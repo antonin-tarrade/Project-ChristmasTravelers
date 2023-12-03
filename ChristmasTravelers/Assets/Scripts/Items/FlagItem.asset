@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d6944f655cf420794fc9d493add10b, type: 3}
   m_Name: FlagItem
   m_EditorClassIdentifier: 
+  consumeOnUse: 1

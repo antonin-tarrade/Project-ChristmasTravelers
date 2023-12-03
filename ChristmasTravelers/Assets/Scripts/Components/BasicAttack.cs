@@ -11,7 +11,9 @@ public class BasicAttack : MonoBehaviour, IAttack
     [SerializeField] protected Projectile projectile;
     [SerializeField] protected float cooldown;
     protected float lastTimeShoot;
-    public Vector2 shootDirection {  get; set; }
+    public Vector2 shootDirection { get; set; } = Vector3.up;
+    // The necessary angle difference to update aim direction
+    [SerializeField] private float aimTriggerTreshold;
 
 
     public virtual void Shoot()
@@ -54,13 +56,22 @@ public class BasicAttack : MonoBehaviour, IAttack
     }
 
 
-    public virtual ShootCommand GenerateShootCommand()
+    public virtual bool CanShoot()
     {
-        if (IsCooldownReady() && shootDirection.sqrMagnitude > 0) return new ShootCommand(this, shootDirection);
+        return IsCooldownReady() && shootDirection.sqrMagnitude > 0;
+    }
+    public virtual IBoardCommand GenerateShootCommand()
+    {
+        if (CanShoot()) return new ShootCommand(this);
         else return null;
     }
-    public virtual AimCommand GenerateAimCommand(Vector3 direction)
+    public virtual bool CanAim()
     {
-        return new AimCommand(this, direction);
+        return true;
+    }
+    public virtual IBoardCommand GenerateAimCommand(Vector3 direction)
+    {
+        if (direction.sqrMagnitude > 0 && Vector2.Angle(direction, shootDirection) > aimTriggerTreshold && CanAim()) return new AimCommand(this, direction);
+        else return null;
     }
 }

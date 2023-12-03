@@ -109,8 +109,10 @@ public class RoundManager : MonoBehaviour {
 	/// Spawns a character under given player control
 	/// </summary>
 	private Character SpawnCharacter (Player player) {
-		Character spawnCharacter = Instantiate (characterPrefab, player.spawn.position, player.spawn.rotation).GetComponent<Character> ();
-		spawnCharacter.player = player;
+        //Character spawnCharacter = Instantiate (characterPrefab, player.spawn.position, player.spawn.rotation).GetComponent<Character> ();
+        Character spawnCharacter = Instantiate(characterPrefab, player.spawn.position, Quaternion.identity).GetComponent<Character>();
+
+        spawnCharacter.player = player;
 		spawnCharacter.name = "Character - " + player.name;
 		player.AddCharacter(spawnCharacter);
 		virtualCamera.Follow = spawnCharacter.transform;

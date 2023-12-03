@@ -9,18 +9,17 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class CharacterInput : SimpleInput
 {
-    private InputAction action;
+    private InputAction shootAction;
+    private InputAction aimAction;
+    private PlayerInput playerInput;
     private Character character;
     private IAttack attack;
     private Inventory inventory;
 
     private void Awake()
     {
-        rightStickDirection = Vector3.up;
-    }
-
-    private void Start()
-    {
+        shootAction = GetComponent<PlayerInput>().actions["Shoot"];
+        aimAction = GetComponent<PlayerInput>().actions["ShootDirection"];
         character = GetComponent<Character>();
         inventory = GetComponent<Inventory>();
         attack = GetComponent<IAttack>();
@@ -33,10 +32,8 @@ public class CharacterInput : SimpleInput
 
 
     private bool shoot;
-    public Vector3 rightStickDirection { get; private set; }
     public void Shoot(CallbackContext context)
     {
-        action = context.action;
         if (context.started || context.performed) shoot = true;
         else shoot = false;
     }
@@ -49,8 +46,7 @@ public class CharacterInput : SimpleInput
 
     public void UpdateShootDirection(Vector3 direction)
     {
-        //rightStickDirection = (direction.sqrMagnitude == 0) ? rightStickDirection : direction;
-        if (direction.sqrMagnitude > 0) RequestCommand(attack.GenerateAimCommand(direction));
+        RequestCommand(attack.GenerateAimCommand(direction));
     }
 
 
@@ -72,10 +68,7 @@ public class CharacterInput : SimpleInput
 
     private void Update()
     {
-        if (action != null)
-        {
-            UpdateShootDirection(action.actionMap.FindAction("ShootDirection").ReadValue<Vector2>());
-        }
+        UpdateShootDirection(aimAction.ReadValue<Vector2>());
         if (shoot) Shoot();
     }
 }

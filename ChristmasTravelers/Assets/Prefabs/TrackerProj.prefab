@@ -275,5 +275,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f57aa80af4965cd429e0b5dc2a3612b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lerpingFactor: 0.01
+  lerpingFactor: 0.1
   radiusDetection: 5

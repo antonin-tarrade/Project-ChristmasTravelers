@@ -15,11 +15,14 @@ public class SprayAttack : BasicAttack
     [SerializeField] private float accuracy;
 
 
-    public override ShootCommand GenerateShootCommand()
+    public override void Shoot()
     {
         float precision = amplitude * Helper.Gaussian(sigma, mu, Random.value * accuracy) + offset;
         float angle = Random.Range(-0.5f, 0.5f) * sprayAngle * precision;
         Vector3 dir = Helper.Rotate(shootDirection.normalized, angle * Mathf.Deg2Rad);
-        return new ShootCommand(this, dir);
+        Vector3 temp = shootDirection;
+        shootDirection = dir;
+        base.Shoot();
+        shootDirection = temp;
     }
 }
