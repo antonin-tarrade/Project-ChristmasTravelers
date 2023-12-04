@@ -12,6 +12,6 @@ public abstract class SimpleInput : MonoBehaviour, IRecordable
 
     protected void RequestCommand(IBoardCommand command)
     {
-        OnCommandRequest?.Invoke(command);
+        if (command != null) OnCommandRequest?.Invoke(command);
     }
 }
