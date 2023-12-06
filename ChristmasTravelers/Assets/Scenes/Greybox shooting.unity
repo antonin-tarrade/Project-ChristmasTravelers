@@ -4368,6 +4368,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SniperChar
       objectReference: {fileID: 0}
+    - target: {fileID: 3055416447674701499, guid: 222b6f40c813b8d4c9f0e4e3fb96bb78, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4162907942871927962, guid: 222b6f40c813b8d4c9f0e4e3fb96bb78, type: 3}
       propertyPath: particles
       value: 

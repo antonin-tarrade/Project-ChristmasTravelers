@@ -16,8 +16,9 @@ public class SniperAttack : BasicAttack
     [SerializeField] private float range;
     private bool isCharging;
 
-    private void Awake()
+    protected new void Awake()
     {
+        base.Awake();
         SetLaserColor(chargeColorGradient.Evaluate(1));
     }
 
@@ -72,7 +73,6 @@ public class SniperAttack : BasicAttack
     {
         Vector3 offset = shootDirection.normalized;
         RaycastHit2D hit = Physics2D.Raycast(transform.position + offset, shootDirection * range);
-        Debug.DrawRay(transform.position + offset, shootDirection * range);
         if (hit.collider != null)
         {
             Vector3 temp = hit.point;
@@ -86,8 +86,9 @@ public class SniperAttack : BasicAttack
     }
 
 
-    private void Update()
+    private new void Update()
     {
+        base.Update();
         PreviewShot();
     }
 
