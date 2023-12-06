@@ -46,12 +46,11 @@ public class ChooseCharacterManager : MonoBehaviour
 
         playersPool = new Dictionary<Player,GameObject>();
 
-        nbOfPlayers = InputSystem.devices.OfType<XInputController>().Count();
-        
+        nbOfPlayers = (InputSystem.devices.OfType<XInputController>().Count() > 0) ? InputSystem.devices.OfType<XInputController>().Count() : 2 ;
+
         Debug.Log(nbOfPlayers);
 
         gameManager = GameManager.instance;
-
 
         for (int i = 0; i < nbOfPlayers; i++){
             Player newPlayer = new Player
@@ -91,6 +90,7 @@ public class ChooseCharacterManager : MonoBehaviour
 
     }
 
+
     private void SelectCharacter(GameObject character,Player player){
 
         GameObject pool; 
@@ -100,14 +100,11 @@ public class ChooseCharacterManager : MonoBehaviour
         characterUi.transform.SetParent(pool.transform);
     }
 
-
     private void InitPlayerPool(Player player){
         GameObject pool = Instantiate(playerPool,allPlayersPool.transform);
         pool.transform.SetParent(allPlayersPool);
         playersPool.Add(player,pool);
     }
-
-
 
 
 }
