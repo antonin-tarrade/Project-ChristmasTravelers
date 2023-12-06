@@ -26,10 +26,9 @@ public class ChooseCharacterManager : MonoBehaviour
     private Transform allCharactersPool;
     private Transform allPlayersPool;
 
-    private List<GameObject> playersPool;
+    private Dictionary<Player,GameObject> playersPool;
 
     private int nbOfPlayers;
-
 
     private void Awake()
     {
@@ -45,22 +44,28 @@ public class ChooseCharacterManager : MonoBehaviour
     void Start()
     {
 
+        playersPool = new Dictionary<Player,GameObject>();
+
         nbOfPlayers = InputSystem.devices.OfType<XInputController>().Count();
+        
+        Debug.Log(nbOfPlayers);
 
         gameManager = GameManager.instance;
 
-        for (int i = 1; i < nbOfPlayers; i++){
+
+        for (int i = 0; i < nbOfPlayers; i++){
             Player newPlayer = new Player
             {
-                name = "Player" + i
+                name = "Player" + i + 1
             };
             gameManager.players.Add(newPlayer);
+
+            InitPlayerPool(newPlayer);
         }
 
         allCharacters = Resources.LoadAll<GameObject>("Characters");
         allCharactersPool = canvas.Find("AllCharactersPool");
         allPlayersPool = canvas.Find("AllPlayersPool");
-        playersPool = new List<GameObject>();
         InitCharacterPool();
     }
 
@@ -76,25 +81,28 @@ public class ChooseCharacterManager : MonoBehaviour
             GameObject characterUi = Instantiate(characterUiMini,allCharactersPool.transform);
             characterUi.GetComponentInChildren<TextMeshProUGUI>().text = ch.name;
             characterUi.transform.SetParent(allCharactersPool);
-            characterUi.GetComponent<Button>().onClick.AddListener(() => SelectCharacter(ch,1));
+
+            foreach(Player p in gameManager.players){
+                characterUi.GetComponent<Button>().onClick.AddListener(() => SelectCharacter(ch,p));
+            }
         }
 
     }
 
-    private void SelectCharacter(GameObject character,int playerNb){
+    private void SelectCharacter(GameObject character,Player player){
 
-        GameObject pool;
-        
-        if (playersPool.Count < playerNb){
-            pool = Instantiate(playerPool,allPlayersPool.transform);
-            pool.transform.SetParent(allPlayersPool);
-            playersPool.Add(pool);
-        } else {
-            pool = playersPool[playerNb-1];
-        }
+        GameObject pool; 
+        playersPool.TryGetValue(player,out pool);
         GameObject characterUi = Instantiate(characterUiBig,pool.transform);
         characterUi.GetComponentInChildren<TextMeshProUGUI>().text = character.name;
         characterUi.transform.SetParent(pool.transform);
+    }
+
+
+    private void InitPlayerPool(Player player){
+        GameObject pool = Instantiate(playerPool,allPlayersPool.transform);
+        pool.transform.SetParent(allPlayersPool);
+        playersPool.Add(player,pool);
     }
 
 
