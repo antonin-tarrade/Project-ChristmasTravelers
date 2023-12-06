@@ -87,6 +87,8 @@ public class ChooseCharacterManager : MonoBehaviour
             }
         }
 
+        allCharactersPool.transform.GetChild(0).GetComponent<Button>().Select();
+
     }
 
     private void SelectCharacter(GameObject character,Player player){
