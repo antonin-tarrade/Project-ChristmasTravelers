@@ -10,14 +10,19 @@ public class SniperAttack : BasicAttack
     [SerializeField] LineRenderer laser;
     [SerializeField] Gradient chargeColorGradient;
 
+    [Header("Shoot feedback")]
+    [SerializeField] private ParticleSystem smokeParticlesPrefab;
+    [SerializeField] private ParticleSystem impactParticlesPrefab;
+
 
     [Header("Attack parameters")]
     [SerializeField] private float chargeTime;
     [SerializeField] private float range;
     private bool isCharging;
 
-    private void Awake()
+    protected new void Awake()
     {
+        base.Awake();
         SetLaserColor(chargeColorGradient.Evaluate(1));
     }
 
@@ -30,11 +35,20 @@ public class SniperAttack : BasicAttack
 
     public override void Shoot()
     {
+        Transform prefabBin = GameObject.Find("PrefabTrashBin").transform;
+
+        ParticleSystem smokeParticles = Instantiate(smokeParticlesPrefab, transform.position + new Vector3(shootDirection.x, shootDirection.y).normalized, Quaternion.identity);
+        smokeParticles.transform.SetParent(prefabBin);
+        smokeParticles.transform.forward = shootDirection;
+        Destroy(smokeParticles.gameObject, 5);
         Vector3 offset = shootDirection.normalized;
         RaycastHit2D hit = Physics2D.Raycast(transform.position + offset, shootDirection * range);
-        if (hit.collider.TryGetComponent<IDamageable>(out IDamageable damageable))
+        if (hit.collider.TryGetComponent<IDamageable>(out IDamageable damageable) && damageable.gameObject.layer == LayerMask.NameToLayer("Alive"))
         {
             damageable.Damage(atk);
+            ParticleSystem hitParticules = Instantiate(impactParticlesPrefab, damageable.gameObject.transform.position, Quaternion.identity);
+            hitParticules.transform.SetParent(prefabBin);
+            Destroy(hitParticules.gameObject, 5);
         }
         Charge();   
     }
@@ -72,7 +86,6 @@ public class SniperAttack : BasicAttack
     {
         Vector3 offset = shootDirection.normalized;
         RaycastHit2D hit = Physics2D.Raycast(transform.position + offset, shootDirection * range);
-        Debug.DrawRay(transform.position + offset, shootDirection * range);
         if (hit.collider != null)
         {
             Vector3 temp = hit.point;
@@ -86,8 +99,9 @@ public class SniperAttack : BasicAttack
     }
 
 
-    private void Update()
+    private new void Update()
     {
+        base.Update();
         PreviewShot();
     }
 

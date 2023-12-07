@@ -426,6 +426,11 @@ MonoBehaviour:
   projectile: {fileID: 1775989977048839268, guid: 9d68bcea2a01c8c46b9f6b0b6d9130c8, type: 3}
   cooldown: 1
   aimTriggerTreshold: 0.5
+  aimAssist:
+    useAimAssist: 1
+    aimAssistAngle: 20
+    aimAssistDamping: 0.7
+    aimAssistRange: 15
   laser: {fileID: 2933664434690471811}
   chargeColorGradient:
     serializedVersion: 2
@@ -457,6 +462,9 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
+  smokeParticlesPrefab: {fileID: 6870004742430601884, guid: 441c989ad547a5c4f82a8d2b5b302d3a, type: 3}
+  impactParticlesPrefab: {fileID: 5003103186926527660, guid: ea4bfaca978e26c47b9e409bf4d06ec2, type: 3}
+  shootParticlesPrefab: {fileID: 180777653512227604, guid: b89b0de208c64e1459d8cc8a960fadcc, type: 3}
   chargeTime: 2
   range: 5
 --- !u!1 &3791680575169544567

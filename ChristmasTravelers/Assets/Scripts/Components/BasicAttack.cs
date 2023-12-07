@@ -2,6 +2,7 @@ using BoardCommands;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal.Internal;
 
 public class BasicAttack : MonoBehaviour, IAttack
 {
@@ -14,6 +15,12 @@ public class BasicAttack : MonoBehaviour, IAttack
     public Vector2 shootDirection { get; set; } = Vector3.up;
     // The necessary angle difference to update aim direction
     [SerializeField] private float aimTriggerTreshold;
+    [SerializeField] private AimAssist aimAssist;
+
+    protected void Awake()
+    {
+        aimAssist.Set(GetComponent<Character>());
+    }
 
 
     public virtual void Shoot()
@@ -71,7 +78,15 @@ public class BasicAttack : MonoBehaviour, IAttack
     }
     public virtual IBoardCommand GenerateAimCommand(Vector3 direction)
     {
-        if (direction.sqrMagnitude > 0 && Vector2.Angle(direction, shootDirection) > aimTriggerTreshold && CanAim()) return new AimCommand(this, direction);
+        if (direction.sqrMagnitude > 0 && Vector2.Angle(direction, shootDirection) > aimTriggerTreshold && CanAim())
+        {
+            return new AimCommand(this, aimAssist.Assist(direction));
+        }
         else return null;
+    }
+
+    protected void Update()
+    {
+        //shootDirection = aimAssist.Assist(shootDirection);
     }
 }
