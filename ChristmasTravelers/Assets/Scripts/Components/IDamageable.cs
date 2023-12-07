@@ -16,5 +16,6 @@ public interface IAttack
 public interface IDamageable
 {
     void Damage(float dmg);
+    GameObject gameObject { get; }
 }
 
