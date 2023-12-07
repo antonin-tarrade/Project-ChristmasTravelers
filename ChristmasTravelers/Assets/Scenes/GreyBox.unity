@@ -1060,8 +1060,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1986719881}
-        m_TargetAssemblyTypeName: RoundManager, Assembly-CSharp
+      - m_Target: {fileID: 1986719880}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: EndTurn
         m_Mode: 1
         m_Arguments:
@@ -4232,9 +4232,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1986719883}
-        m_TargetAssemblyTypeName: GreyBoxManager, Assembly-CSharp
-        m_MethodName: StartNextTurn
+      - m_Target: {fileID: 1986719880}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: StartTurn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4291,7 +4291,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1986719882}
-  - component: {fileID: 1986719881}
   - component: {fileID: 1986719880}
   - component: {fileID: 1986719879}
   - component: {fileID: 1986719883}
@@ -4326,29 +4325,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ea05b05a85d8344d864ee605c953bea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DEBUG: []
+  virtualCamera: {fileID: 445016704}
+  prefab: {fileID: 7858320245909833396, guid: 749cc70fcbf1a4a6caaf2faead45d388, type: 3}
   <gameData>k__BackingField: {fileID: 11400000, guid: a14dff6fa6dde13459d9220f7b741331, type: 2}
   <players>k__BackingField:
   - spawn: {fileID: 1409588422}
     name: Cregut
     color: {r: 0, g: 0.9505658, b: 1, a: 1}
     score: 0
+    charPrefabSystem: {fileID: 7858320245909833396, guid: 749cc70fcbf1a4a6caaf2faead45d388, type: 3}
   - spawn: {fileID: 472426439}
     name: PDL
     color: {r: 0.9607843, g: 0.13333334, b: 0.28627452, a: 1}
     score: 0
---- !u!114 &1986719881
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1986719878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e908eef6ba0e7b40b09de5e424bae23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterPrefab: {fileID: 3055416447674701499, guid: 749cc70fcbf1a4a6caaf2faead45d388, type: 3}
+    charPrefabSystem: {fileID: 7858320245909833396, guid: 749cc70fcbf1a4a6caaf2faead45d388, type: 3}
 --- !u!4 &1986719882
 Transform:
   m_ObjectHideFlags: 0

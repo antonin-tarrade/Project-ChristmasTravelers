@@ -20,8 +20,8 @@ public class ItemManager : MonoBehaviour
 
     private void Start()
     {
-        RoundManager.instance.OnTurnStart += OnTurnStart;
-        RoundManager.instance.OnTurnEnd += OnTurnEnd;
+        GameManager.instance.OnTurnStart += OnTurnStart;
+        GameManager.instance.OnTurnEnd += OnTurnEnd;
     }
 
     public void Register(IItemInitialData data)

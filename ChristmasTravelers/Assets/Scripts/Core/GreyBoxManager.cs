@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class GreyBoxManager : MonoBehaviour
 {
     private GameManager gameManager;
-    private RoundManager roundManager;
     private Button changePlayerButton;
     private bool isBlueSelected = true;
     private bool curentPlayerIsBlue = true;
@@ -20,7 +19,6 @@ public class GreyBoxManager : MonoBehaviour
     void Start()
     {
         gameManager = GameManager.instance;
-        roundManager = RoundManager.instance;
         changePlayerButton = GameObject.Find("ChangePlayerButton").GetComponent<Button>();
         changePlayerButton.GetComponentInChildren<Image>().color = colorBlue;
     }
@@ -41,7 +39,7 @@ public class GreyBoxManager : MonoBehaviour
     public void StartNextTurn()
     {
         if (isBlueSelected!= curentPlayerIsBlue || isFirstTurn){
-            roundManager.StartNextTurn();
+            gameManager.StartTurn();
             
             if (isFirstTurn) {
                 isFirstTurn = false;
@@ -49,7 +47,7 @@ public class GreyBoxManager : MonoBehaviour
                 curentPlayerIsBlue = !curentPlayerIsBlue;
             }
         } else {
-            roundManager.StartSameTurn();
+            gameManager.StartTurn();
         }
 
         

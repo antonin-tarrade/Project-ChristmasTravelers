@@ -18,7 +18,7 @@ public class CharacterHealth : MonoBehaviour, IDamageable
     private void Start()
     {
         Init();
-        RoundManager.instance.OnTurnStart += Init;
+        GameManager.instance.OnTurnStart += Init;
     }
 
     public void Damage(float dmg)
