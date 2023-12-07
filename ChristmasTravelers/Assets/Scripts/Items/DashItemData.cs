@@ -19,7 +19,8 @@ public class DashItem : Item
     public override UseItemCommand GenerateCommand(Character character)
     {
         Vector3 direction = character.GetComponent<MovementInput>().GetMovementDirection();
-        return new UseItemCommand(character, this, new DashItemParameters(direction));
+        if (direction.sqrMagnitude > 0) return new UseItemCommand(character, this, new DashItemParameters(direction));
+        else return null;
     }
 
     public override string GetName()
@@ -42,6 +43,16 @@ public class DashItemData : ScriptableItemData
     public override IItem GetInstance()
     {
         return new DashItem(this);
+    }
+}
+
+public struct DashItemParameters : IItemParameters
+{
+    public Vector3 direction;
+
+    public DashItemParameters(Vector3 direction)
+    {
+        this.direction = direction;
     }
 }
 

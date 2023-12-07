@@ -9,10 +9,6 @@ public class Roquette : BasicAttack
     [SerializeField, Range(0, 1)] float indirectDamage;
     [SerializeField] private float explosionRadius;
     [SerializeField] ParticleSystem explosionEffect;
-    public override ShootCommand GenerateCommand(Vector3 direction)
-    {
-        return new ShootCommand(this, direction);
-    }
 
     public override Projectile InitProj(Vector3 direction)
     {
@@ -34,6 +30,7 @@ public class Roquette : BasicAttack
         if (proj.gameObject.layer == LayerMask.NameToLayer("Dead")) return;
 
         ParticleSystem effect = GameObject.Instantiate(explosionEffect);
+        effect.transform.SetParent(GameObject.Find("PrefabTrashBin").transform);
         effect.transform.position = proj.transform.position;
 
         Collider2D[] casualties = Physics2D.OverlapCircleAll(proj.transform.position, explosionRadius);
@@ -44,7 +41,7 @@ public class Roquette : BasicAttack
                 damageable.Damage(atk * indirectDamage);
             }
         }
-        Destroy(effect, 3);
+        Destroy(effect.gameObject, 1);
     }
 
 

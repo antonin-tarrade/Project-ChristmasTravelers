@@ -5,14 +5,17 @@ using UnityEngine;
 
 
 public interface IAttack
-{
-    void Shoot(Vector3 direction);
+{ 
+    void Shoot();
+    Vector2 shootDirection { get; set; }    
     bool IsCooldownReady();
-    ShootCommand GenerateCommand(Vector3 direction);
+    IBoardCommand GenerateShootCommand();
+    IBoardCommand GenerateAimCommand(Vector3 direction);
 }
 
 public interface IDamageable
 {
     void Damage(float dmg);
+    GameObject gameObject { get; }
 }
 
