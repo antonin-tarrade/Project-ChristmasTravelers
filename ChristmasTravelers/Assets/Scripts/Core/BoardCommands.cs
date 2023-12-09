@@ -7,13 +7,123 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 
 namespace BoardCommands
 {
+    /// <summary>
+    /// Class that manages any possible command 
+    /// </summary>
+    public class BoardCommandHandler
+    {
+        public virtual void Execute(MoveBoardCommand command)
+        {
+            command.obj.transform.position += command.movement;
+        }
+
+        public virtual void Execute(GrabCommand command)
+        {
+            if (command.character.gameObject.layer == LayerMask.NameToLayer("Dead")) return;
+            // TO DO : Passer par Character partout
+            float grabRadius = command.character.grabRadius;
+            Collider2D[] nearbyObjects = Physics2D.OverlapCircleAll(command.character.transform.position, grabRadius);
+            IGrabbable closestItem = null;
+            float smallestDistance = float.MaxValue;
+            float distance;
+            foreach (Collider2D collider in nearbyObjects)
+            {
+                if (collider.gameObject.TryGetComponent<IGrabbable>(out IGrabbable item))
+                {
+                    if ((distance = Vector3.Distance(command.character.gameObject.transform.position, collider.gameObject.transform.position)) < smallestDistance)
+                    {
+                        smallestDistance = distance;
+                        closestItem = item;
+                    }
+                }
+            }
+            closestItem?.AcceptCollect(command.character);
+        }
+    
+        public virtual void Execute(ShootCommand command)
+        {
+            command.attack.Shoot();
+        }
+
+        public virtual void Execute(UseItemCommand command)
+        {
+            command.item.Use(command.character.GetComponent<Inventory>(), command.parameters);
+        }
+
+        public virtual void Execute(AimCommand command)
+        {
+            command.attack.shootDirection = command.direction;
+        }
+
+        public virtual void Execute(ScheduledCommand command)
+        {
+            CommandScheduler.instance.Schedule(command);
+        }
+
+        public virtual void Execute(MultipleCommand command)
+        {
+            foreach (IBoardCommand recursiveCommand in command.commands)
+            {
+                recursiveCommand.ExecuteOn(this);
+            }
+        }
+    }
 
     /// <summary>
     /// Represents a command to execute
     /// </summary>
     public interface IBoardCommand
     {
-        void Execute();
+        void ExecuteOn(BoardCommandHandler board);
+    }
+
+    public class ScheduledCommand : IBoardCommand
+    {
+        public IBoardCommand command;
+        public float time;
+
+        public ScheduledCommand(IBoardCommand command, float time)
+        {
+            this.command = command;
+            this.time = time;
+        }
+
+        public void ExecuteOn(BoardCommandHandler board)
+        {
+            board.Execute(this);
+        }
+    }
+
+    public class MultipleCommand : IBoardCommand
+    {
+        public IBoardCommand[] commands;
+
+        public MultipleCommand(IBoardCommand[] commands)
+        {
+            this.commands = commands;
+        }
+
+        public void ExecuteOn(BoardCommandHandler board)
+        {
+            board.Execute(this);
+        }
+    }
+
+    public class DelegateCommand : IBoardCommand
+    {
+        private event Action action;
+
+        public DelegateCommand(Action action)
+        {
+            this.action = action;
+        }
+
+        public void ExecuteOn(BoardCommandHandler board)
+        {
+            //board.Execute(this);
+            // Seule la classe peut utiliser son propre event
+            action();
+        } 
     }
 
     public class MoveBoardCommand : IBoardCommand
@@ -27,9 +137,9 @@ namespace BoardCommands
             this.movement = movement;
         }
 
-        public void Execute()
+        public void ExecuteOn(BoardCommandHandler board)
         {
-            obj.transform.position += movement;
+            board.Execute(this);
         }
     }
 
@@ -42,27 +152,9 @@ namespace BoardCommands
             this.character = character;
         }
 
-        public void Execute()
+        public void ExecuteOn(BoardCommandHandler board)
         {
-            if (character.gameObject.layer == LayerMask.NameToLayer("Dead")) return;
-            // TO DO : Passer par Character partout
-            float grabRadius = character.grabRadius;
-            Collider2D[] nearbyObjects = Physics2D.OverlapCircleAll(character.transform.position, grabRadius);
-            IGrabbable closestItem = null;
-            float smallestDistance = float.MaxValue;
-            float distance;
-            foreach (Collider2D collider in nearbyObjects)
-            {
-                if (collider.gameObject.TryGetComponent<IGrabbable>(out IGrabbable item))
-                {
-                    if ((distance = Vector3.Distance(character.gameObject.transform.position, collider.gameObject.transform.position)) < smallestDistance)
-                    {
-                        smallestDistance = distance;
-                        closestItem = item;
-                    }
-                }
-            }
-            closestItem?.AcceptCollect(character);
+            board.Execute(this);
         }
     }
 
@@ -75,9 +167,9 @@ namespace BoardCommands
             this.attack = attack;
         }
 
-        public void Execute()
+        public void ExecuteOn(BoardCommandHandler board)
         {
-            attack.Shoot();
+            board.Execute(this);
         }
     }
 
@@ -92,9 +184,9 @@ namespace BoardCommands
             this.direction = direction;
         }
 
-        public void Execute()
+        public void ExecuteOn(BoardCommandHandler board)
         {
-            attack.shootDirection = direction;
+            board.Execute(this);
         }
     }
 
@@ -113,9 +205,9 @@ namespace BoardCommands
             this.parameters = parameters;
         }
 
-        public void Execute()
+        public void ExecuteOn(BoardCommandHandler board)
         {
-            item.Use(character.GetComponent<Inventory>(), parameters);
+            board.Execute(this);
         }
     }
 

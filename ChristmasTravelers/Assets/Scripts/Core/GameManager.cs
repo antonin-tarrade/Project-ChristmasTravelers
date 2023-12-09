@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviour {
     public RoundHandler roundHandler;
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
 
-    public Character prefab;
 
     [field : SerializeField] public GameData gameData {  get; private set; }
 
@@ -26,15 +25,10 @@ public class GameManager : MonoBehaviour {
     private int currentPlayerIndex;
     private Player currentPlayer;
 
-
-    private List<IPreparable> preparables;
-
-
-    private List<IPreparable> preparables;
-
 	private void Awake () {
 		instance = this;
-        preparables = new();
+        roundHandler = new RoundHandler(virtualCamera);
+        currentPlayerIndex = 0;
 	}
 
     private void Start()
@@ -43,16 +37,32 @@ public class GameManager : MonoBehaviour {
         {
             p.Init();
         }
-        RoundManager.instance.OnTurnStart += OnTurnStart;
 
     }
 
-    private void OnTurnStart()
+    private void Update() {
+        DEBUG = roundHandler.inactiveCharacters.ToArray<Character>();
+    }
+
+    public void SwitchTo(int i) {
+        currentPlayer = players[i];
+    }
+
+    public Character SpawnCharacter(Player p) {
+        Character c = Instantiate(p.ChooseCharacter());
+        p.AddCharacter(c);
+        roundHandler.Add(c);
+        return c;
+    }
+
+    public void StartTurn()
     {
-        foreach (IPreparable p in preparables)
-        {
-            p.Prepare();
-        }
+        currentPlayerIndex = (currentPlayerIndex + 1) % players.Count;
+        SwitchTo(currentPlayerIndex);
+        Character c = SpawnCharacter(currentPlayer);
+        roundHandler.SwitchTo(c);
+
+        OnTurnStart?.Invoke();
         foreach (Player p in players)
         {
             p.score = 0;
@@ -63,16 +73,6 @@ public class GameManager : MonoBehaviour {
     public void EndTurn() {
         OnTurnEnd?.Invoke();
         roundHandler.EndTurn();
-    }
-
-    public void Register(IPreparable preparable)
-    {
-        preparables.Add(preparable);
-    }
-
-    public void Register(IPreparable preparable)
-    {
-        preparables.Add(preparable);
     }
 
 }

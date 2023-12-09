@@ -56,7 +56,7 @@ public class SimpleRecorder : MonoBehaviour, IRecorder
         if (!isRecording) return;
         time = Time.time - beginTime;
         commandList.Add(new TimedBoardCommand(time, command));
-        command.Execute();
+        BoardManager.instance.Execute(command);
     }
 
     
