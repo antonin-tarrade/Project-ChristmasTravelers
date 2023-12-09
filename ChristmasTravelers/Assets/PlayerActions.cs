@@ -324,9 +324,60 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""CharacterSelector"",
+            ""id"": ""51429c8a-26e2-4999-be3b-62785d964e33"",
+            ""actions"": [
+                {
+                    ""name"": ""New action"",
+                    ""type"": ""Button"",
+                    ""id"": ""0f334947-6e12-4b95-92e4-84e6ba4e4726"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""862ccd7a-0511-42c4-83f4-49988033f80c"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller;Keyboard"",
+                    ""action"": ""New action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
-    ""controlSchemes"": []
+    ""controlSchemes"": [
+        {
+            ""name"": ""Controller"",
+            ""bindingGroup"": ""Controller"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Keyboard"",
+            ""bindingGroup"": ""Keyboard"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        }
+    ]
 }");
         // Player1
         m_Player1 = asset.FindActionMap("Player1", throwIfNotFound: true);
@@ -337,6 +388,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         m_Player1_UseItem = m_Player1.FindAction("UseItem", throwIfNotFound: true);
         m_Player1_PreviousItem = m_Player1.FindAction("Previous Item", throwIfNotFound: true);
         m_Player1_NextItem = m_Player1.FindAction("Next Item", throwIfNotFound: true);
+        // CharacterSelector
+        m_CharacterSelector = asset.FindActionMap("CharacterSelector", throwIfNotFound: true);
+        m_CharacterSelector_Newaction = m_CharacterSelector.FindAction("New action", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -488,6 +542,70 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         }
     }
     public Player1Actions @Player1 => new Player1Actions(this);
+
+    // CharacterSelector
+    private readonly InputActionMap m_CharacterSelector;
+    private List<ICharacterSelectorActions> m_CharacterSelectorActionsCallbackInterfaces = new List<ICharacterSelectorActions>();
+    private readonly InputAction m_CharacterSelector_Newaction;
+    public struct CharacterSelectorActions
+    {
+        private @PlayerActions m_Wrapper;
+        public CharacterSelectorActions(@PlayerActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Newaction => m_Wrapper.m_CharacterSelector_Newaction;
+        public InputActionMap Get() { return m_Wrapper.m_CharacterSelector; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CharacterSelectorActions set) { return set.Get(); }
+        public void AddCallbacks(ICharacterSelectorActions instance)
+        {
+            if (instance == null || m_Wrapper.m_CharacterSelectorActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_CharacterSelectorActionsCallbackInterfaces.Add(instance);
+            @Newaction.started += instance.OnNewaction;
+            @Newaction.performed += instance.OnNewaction;
+            @Newaction.canceled += instance.OnNewaction;
+        }
+
+        private void UnregisterCallbacks(ICharacterSelectorActions instance)
+        {
+            @Newaction.started -= instance.OnNewaction;
+            @Newaction.performed -= instance.OnNewaction;
+            @Newaction.canceled -= instance.OnNewaction;
+        }
+
+        public void RemoveCallbacks(ICharacterSelectorActions instance)
+        {
+            if (m_Wrapper.m_CharacterSelectorActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ICharacterSelectorActions instance)
+        {
+            foreach (var item in m_Wrapper.m_CharacterSelectorActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_CharacterSelectorActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public CharacterSelectorActions @CharacterSelector => new CharacterSelectorActions(this);
+    private int m_ControllerSchemeIndex = -1;
+    public InputControlScheme ControllerScheme
+    {
+        get
+        {
+            if (m_ControllerSchemeIndex == -1) m_ControllerSchemeIndex = asset.FindControlSchemeIndex("Controller");
+            return asset.controlSchemes[m_ControllerSchemeIndex];
+        }
+    }
+    private int m_KeyboardSchemeIndex = -1;
+    public InputControlScheme KeyboardScheme
+    {
+        get
+        {
+            if (m_KeyboardSchemeIndex == -1) m_KeyboardSchemeIndex = asset.FindControlSchemeIndex("Keyboard");
+            return asset.controlSchemes[m_KeyboardSchemeIndex];
+        }
+    }
     public interface IPlayer1Actions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -497,5 +615,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         void OnUseItem(InputAction.CallbackContext context);
         void OnPreviousItem(InputAction.CallbackContext context);
         void OnNextItem(InputAction.CallbackContext context);
+    }
+    public interface ICharacterSelectorActions
+    {
+        void OnNewaction(InputAction.CallbackContext context);
     }
 }

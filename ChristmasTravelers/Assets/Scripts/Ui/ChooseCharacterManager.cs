@@ -18,23 +18,19 @@ public class ChooseCharacterManager : MonoBehaviour
     private GameManager gameManager;
 
 
-    [SerializeField] Transform canvas;
-    [SerializeField] GameObject characterUiMini;
-    [SerializeField] GameObject characterUiBig;
-    [SerializeField] GameObject playerPool;
+    [SerializeField] private Transform canvas;
+    [SerializeField] private GameObject characterUiMini;
+    [SerializeField] private GameObject characterUiBig;
+    [SerializeField] private GameObject playerPool;
 
     private Transform allCharactersPool;
     private Transform allPlayersPool;
 
     private Dictionary<Player,GameObject> playersPool;
 
-    [Header("Debug")]
-    [SerializeField] private bool isController;
-    [SerializeField] private int customNbOfPlayer;
+    private PlayerInputManager playerInputManager;
 
-
-    private int nbOfPlayers;
-    
+    [SerializeField] private int nbOfPlayers;
     
     private void Awake()
     {
@@ -42,6 +38,8 @@ public class ChooseCharacterManager : MonoBehaviour
         {
             instance = this;
         }
+
+        playerInputManager = GetComponent<PlayerInputManager>();
         
     }
 
@@ -56,26 +54,9 @@ public class ChooseCharacterManager : MonoBehaviour
         allCharactersPool = canvas.Find("AllCharactersPool");
         allPlayersPool = canvas.Find("AllPlayersPool");
 
-
-        if (isController) {
-            nbOfPlayers = InputSystem.devices.OfType<XInputController>().Count();
-        } else {
-            nbOfPlayers = customNbOfPlayer;
-        }
-
+        InitPlayerPool();
 
         gameManager = GameManager.instance;
-
-        for (int i = 0; i < nbOfPlayers; i++){
-            Player newPlayer = new Player
-            {
-                name = "Player" + i + 1
-            };
-            gameManager.players.Add(newPlayer);
-
-            InitPlayerPool(newPlayer);
-        }
-
 
         InitCharacterPool();
     }
@@ -93,9 +74,7 @@ public class ChooseCharacterManager : MonoBehaviour
             characterUi.GetComponentInChildren<TextMeshProUGUI>().text = ch.name;
             characterUi.transform.SetParent(allCharactersPool);
 
-            foreach(Player p in gameManager.players){
-                characterUi.GetComponent<Button>().onClick.AddListener(() => SelectCharacter(ch,p));
-            }
+            characterUi.GetComponent<Button>().onClick.AddListener(()=> Debug.Log(playerInputManager.maxPlayerCount));
         }
 
         allCharactersPool.transform.GetChild(0).GetComponent<Button>().Select();
@@ -105,17 +84,39 @@ public class ChooseCharacterManager : MonoBehaviour
 
     private void SelectCharacter(GameObject character,Player player){
 
-        GameObject pool; 
-        playersPool.TryGetValue(player,out pool);
+        playersPool.TryGetValue(player, out GameObject pool);
         GameObject characterUi = Instantiate(characterUiBig,pool.transform);
         characterUi.GetComponentInChildren<TextMeshProUGUI>().text = character.name;
         characterUi.transform.SetParent(pool.transform);
     }
 
-    private void InitPlayerPool(Player player){
-        GameObject pool = Instantiate(playerPool,allPlayersPool.transform);
-        pool.transform.SetParent(allPlayersPool);
-        playersPool.Add(player,pool);
+    private void InitPlayerPool(){
+        for (int i = 0; i< nbOfPlayers; i++){
+            GameObject pool = Instantiate(playerPool,allPlayersPool.transform);
+            pool.name = "UnsetPool";
+            pool.transform.SetParent(allPlayersPool);
+        }
+    }
+
+
+
+
+    public void OnPlayerJoined (){
+
+        Player newPlayer = new Player
+        {
+            name = "Player" + gameManager.players.Count
+        };
+        gameManager.players.Add(newPlayer);
+        
+        Transform pool = allPlayersPool.Find("UnsetPool");
+        GameObject poolGO = pool.gameObject;
+        poolGO.name = newPlayer.name + "Pool";
+        poolGO.GetComponent<TextMeshProUGUI>().text = newPlayer.name;
+        playersPool.Add(newPlayer,poolGO);
+
+        GameObject playerSelector = GameObject.Find("PlayerSelector(Clone)");
+        playerSelector.name = newPlayer.name + "Selector";
     }
 
 

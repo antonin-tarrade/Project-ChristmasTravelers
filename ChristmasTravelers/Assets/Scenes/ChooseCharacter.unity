@@ -480,8 +480,8 @@ MonoBehaviour:
   characterUiMini: {fileID: 4824116127081112100, guid: 8152e5758144b46d8b1f988ae4836012, type: 3}
   characterUiBig: {fileID: 7234250020812408566, guid: d1e59564625224543bc73dd556a73b1a, type: 3}
   playerPool: {fileID: 1721033871290738214, guid: c047a9fc0c38d45668119dce888e8994, type: 3}
-  isController: 0
-  customNbOfPlayer: 2
+  playerInput: {fileID: -3298763487077583756, guid: de57beb81012845c785a11e4e385e1b6, type: 3}
+  nbOfPlayers: 2
 --- !u!4 &745030573
 Transform:
   m_ObjectHideFlags: 0
@@ -515,7 +515,19 @@ MonoBehaviour:
   m_JoinBehavior: 0
   m_PlayerJoinedEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 745030572}
+        m_TargetAssemblyTypeName: ChooseCharacterManager, Assembly-CSharp
+        m_MethodName: OnPlayerJoined
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_PlayerLeftEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -531,7 +543,7 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 0}
-  m_PlayerPrefab: {fileID: 0}
+  m_PlayerPrefab: {fileID: 1664393774856058001, guid: de57beb81012845c785a11e4e385e1b6, type: 3}
   m_SplitScreen: 0
   m_MaintainAspectRatioInSplitScreen: 0
   m_FixedNumberOfSplitScreens: -1

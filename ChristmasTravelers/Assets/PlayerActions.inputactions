@@ -302,7 +302,58 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "CharacterSelector",
+            "id": "51429c8a-26e2-4999-be3b-62785d964e33",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "0f334947-6e12-4b95-92e4-84e6ba4e4726",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "862ccd7a-0511-42c4-83f4-49988033f80c",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller;Keyboard",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
-    "controlSchemes": []
+    "controlSchemes": [
+        {
+            "name": "Controller",
+            "bindingGroup": "Controller",
+            "devices": [
+                {
+                    "devicePath": "<Gamepad>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Keyboard",
+            "bindingGroup": "Keyboard",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
 }

@@ -5,13 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Greybox shooting.unity
     guid: 7bd1ce2371575e14e8f646e6c70b84d6
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/GreyBox.unity
     guid: c3783180b695440b1a8bcc68ce431d9d
+  - enabled: 1
+    path: Assets/Scenes/ChooseCharacter.unity
+    guid: 20c584e201c9f46e7a62e8cf50943dd0
   m_configObjects: {}
