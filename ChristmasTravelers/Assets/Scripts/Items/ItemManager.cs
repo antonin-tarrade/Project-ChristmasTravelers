@@ -35,26 +35,14 @@ public class ItemManager : MonoBehaviour
     }
 
 
-    public void RestoreInitialState(InventoryItemInitialData data){
-        data.inventory.Add(data.item);
-    }
-
-    internal void RestoreInitialState(GrabbableItemInitialData data)
-    {
-        data.grabbable.gameObject.SetActive(true);
-        data.grabbable.transform.position = data.initialPosition;
-        data.grabbable.Set(data.item);
-    }
-
-
     private void RestoreInitialState()
     {
-        foreach (Inventory inventory in inventories) {
-            inventory.Clear();
-        }
-        foreach (IItemInitialData data in initialData) {
-            data.RestoreInitialState(this);
-        }
+        //foreach (Inventory inventory in inventories) {
+        //    inventory.Clear();
+        //}
+        //foreach (IItemInitialData data in initialData) {
+        //    data.RestoreInitialState();
+        //}
     }
 
 
