@@ -26,7 +26,7 @@ public class ChooseCharacterManager : MonoBehaviour
     private Transform allCharactersPool;
     private Transform allPlayersPool;
 
-    private Dictionary<Player,GameObject> playersPool;
+    private Dictionary<PlayerSelector,GameObject> playersPool;
 
     private PlayerInputManager playerInputManager;
 
@@ -48,7 +48,7 @@ public class ChooseCharacterManager : MonoBehaviour
     void Start()
     {
 
-        playersPool = new Dictionary<Player,GameObject>();
+        playersPool = new Dictionary<PlayerSelector,GameObject>();
 
         allCharacters = Resources.LoadAll<GameObject>("Characters");
         allCharactersPool = canvas.Find("AllCharactersPool");
@@ -73,8 +73,6 @@ public class ChooseCharacterManager : MonoBehaviour
             GameObject characterUi = Instantiate(characterUiMini,allCharactersPool.transform);
             characterUi.GetComponentInChildren<TextMeshProUGUI>().text = ch.name;
             characterUi.transform.SetParent(allCharactersPool);
-
-            characterUi.GetComponent<Button>().onClick.AddListener(()=> Debug.Log(playerInputManager.maxPlayerCount));
         }
 
         allCharactersPool.transform.GetChild(0).GetComponent<Button>().Select();
@@ -82,9 +80,9 @@ public class ChooseCharacterManager : MonoBehaviour
     }
 
 
-    private void SelectCharacter(GameObject character,Player player){
+    private void SelectCharacter(GameObject character,PlayerSelector playerSelector){
 
-        playersPool.TryGetValue(player, out GameObject pool);
+        playersPool.TryGetValue(playerSelector, out GameObject pool);
         GameObject characterUi = Instantiate(characterUiBig,pool.transform);
         characterUi.GetComponentInChildren<TextMeshProUGUI>().text = character.name;
         characterUi.transform.SetParent(pool.transform);
@@ -113,10 +111,16 @@ public class ChooseCharacterManager : MonoBehaviour
         GameObject poolGO = pool.gameObject;
         poolGO.name = newPlayer.name + "Pool";
         poolGO.GetComponent<TextMeshProUGUI>().text = newPlayer.name;
-        playersPool.Add(newPlayer,poolGO);
 
         GameObject playerSelector = GameObject.Find("PlayerSelector(Clone)");
         playerSelector.name = newPlayer.name + "Selector";
+        PlayerSelector ps = playerSelector.GetComponent<PlayerSelector>();
+        ps.player = newPlayer;
+        playersPool.Add(ps,poolGO);
+
+        foreach (Transform button in allCharactersPool.transform){
+            button.GetComponent<Button>().onClick.AddListener(()=> ps.OnCharacterButtonClicked());
+        }
     }
 
 
