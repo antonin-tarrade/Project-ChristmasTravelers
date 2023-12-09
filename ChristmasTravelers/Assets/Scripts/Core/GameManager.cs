@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour {
     public RoundHandler roundHandler;
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
 
+    public Character prefab;
 
     [field : SerializeField] public GameData gameData {  get; private set; }
 

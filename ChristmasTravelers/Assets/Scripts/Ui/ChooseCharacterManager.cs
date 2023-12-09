@@ -28,14 +28,8 @@ public class ChooseCharacterManager : MonoBehaviour
 
     private Dictionary<Player,GameObject> playersPool;
 
-    [Header("Debug")]
-    [SerializeField] private bool isController;
-    [SerializeField] private int customNbOfPlayer;
-
-
     private int nbOfPlayers;
-    
-    
+
     private void Awake()
     {
         if (instance == null)
@@ -52,17 +46,9 @@ public class ChooseCharacterManager : MonoBehaviour
 
         playersPool = new Dictionary<Player,GameObject>();
 
-        allCharacters = Resources.LoadAll<GameObject>("Characters");
-        allCharactersPool = canvas.Find("AllCharactersPool");
-        allPlayersPool = canvas.Find("AllPlayersPool");
+        nbOfPlayers = (InputSystem.devices.OfType<XInputController>().Count() > 0) ? InputSystem.devices.OfType<XInputController>().Count() : 2 ;
 
-
-        if (isController) {
-            nbOfPlayers = InputSystem.devices.OfType<XInputController>().Count();
-        } else {
-            nbOfPlayers = customNbOfPlayer;
-        }
-
+        Debug.Log(nbOfPlayers);
 
         gameManager = GameManager.instance;
 
@@ -76,7 +62,9 @@ public class ChooseCharacterManager : MonoBehaviour
             InitPlayerPool(newPlayer);
         }
 
-
+        allCharacters = Resources.LoadAll<GameObject>("Characters");
+        allCharactersPool = canvas.Find("AllCharactersPool");
+        allPlayersPool = canvas.Find("AllPlayersPool");
         InitCharacterPool();
     }
 
