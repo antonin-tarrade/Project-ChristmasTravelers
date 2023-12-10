@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour, IPreparable
+public class Inventory : MonoBehaviour
 {
 
     // public event Action<ScriptableItem> OnItemAdded;
@@ -14,7 +14,6 @@ public class Inventory : MonoBehaviour, IPreparable
 
     [SerializeField] List<ScriptableItemData> itemsData;
     private List<IItem> items;
-    private List<IItemInitialData> initialData;
     //DEBUG
     public List<string> itemsNames;
     public string itemSelected;
@@ -28,7 +27,6 @@ public class Inventory : MonoBehaviour, IPreparable
         currentItemIndex = 0;
         items = new List<IItem>();
         itemsNames = new List<string>();
-        initialData = new List<IItemInitialData>();
         foreach (ScriptableItemData data in  itemsData)
         {
             items.Add(data.GetInstance());
@@ -36,10 +34,9 @@ public class Inventory : MonoBehaviour, IPreparable
     }
 
     private void Start() {
-        GameManager.instance.Register(this);
+        ItemManager.instance.Register(this);
         foreach (IItem item in items) {
-            //item.RegisterInitialState(ItemManager.instance, this);
-            initialData.Add(new InventoryItemInitialData(this, item));
+            item.RegisterInitialState(ItemManager.instance, this);
         }
     }
 
@@ -56,15 +53,6 @@ public class Inventory : MonoBehaviour, IPreparable
             }
         }
         // FIN
-    }
-
-    public void Prepare()
-    {
-        Clear();
-        foreach (IItemInitialData data in initialData)
-        {
-            data.Prepare();
-        }
     }
 
     public IItem GetCurrentItem() {

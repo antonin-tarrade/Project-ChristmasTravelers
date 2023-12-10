@@ -14,4 +14,8 @@ public class Character : MonoBehaviour {
 		replay = GetComponent<Replay> ();
 		recorders = GetComponents<IRecorder> ();
 	}
+
+	public void Prepare(){
+		transform.position = player.spawn.transform.position;
+	}
 }

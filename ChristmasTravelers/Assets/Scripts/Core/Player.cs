@@ -16,6 +16,8 @@ public class Player {
 
 	public List<Character> characters { get; private set; }
 
+	public Character charPrefabSystem;
+
 	public void Init()
 	{
 		characters = new List<Character>();
@@ -26,7 +28,12 @@ public class Player {
 	public void AddCharacter(Character character)
 	{
 		characters.Add(character);
-		character.GetComponent<SpriteRenderer>().color = color;
+		character.GetComponent<SpriteRenderer>().color = this.color;
+		character.player = this;
+	}
+
+	public Character ChooseCharacter() {
+		return charPrefabSystem;
 	}
 
 

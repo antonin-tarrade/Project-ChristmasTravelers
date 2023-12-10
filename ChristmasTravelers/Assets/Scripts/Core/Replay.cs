@@ -58,7 +58,7 @@ public class Replay : MonoBehaviour
             timedCommand = replay.Current;
             if (time >= timedCommand.time)
             {
-                timedCommand.command.Execute();
+                BoardManager.instance.Execute(timedCommand.command);
                 isPlaying = replay.MoveNext();
             }
             time += Time.deltaTime;
