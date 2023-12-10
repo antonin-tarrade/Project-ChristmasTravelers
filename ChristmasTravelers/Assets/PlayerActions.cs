@@ -330,7 +330,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             ""id"": ""51429c8a-26e2-4999-be3b-62785d964e33"",
             ""actions"": [
                 {
-                    ""name"": ""New action"",
+                    ""name"": ""JoinGame"",
                     ""type"": ""Button"",
                     ""id"": ""0f334947-6e12-4b95-92e4-84e6ba4e4726"",
                     ""expectedControlType"": ""Button"",
@@ -346,8 +346,8 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""path"": """",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Controller;Keyboard"",
-                    ""action"": ""New action"",
+                    ""groups"": ""Controller"",
+                    ""action"": ""JoinGame"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -361,17 +361,6 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             ""devices"": [
                 {
                     ""devicePath"": ""<Gamepad>"",
-                    ""isOptional"": false,
-                    ""isOR"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""Keyboard"",
-            ""bindingGroup"": ""Keyboard"",
-            ""devices"": [
-                {
-                    ""devicePath"": ""<Keyboard>"",
                     ""isOptional"": false,
                     ""isOR"": false
                 }
@@ -390,7 +379,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         m_Player1_NextItem = m_Player1.FindAction("Next Item", throwIfNotFound: true);
         // CharacterSelector
         m_CharacterSelector = asset.FindActionMap("CharacterSelector", throwIfNotFound: true);
-        m_CharacterSelector_Newaction = m_CharacterSelector.FindAction("New action", throwIfNotFound: true);
+        m_CharacterSelector_JoinGame = m_CharacterSelector.FindAction("JoinGame", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -546,12 +535,12 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     // CharacterSelector
     private readonly InputActionMap m_CharacterSelector;
     private List<ICharacterSelectorActions> m_CharacterSelectorActionsCallbackInterfaces = new List<ICharacterSelectorActions>();
-    private readonly InputAction m_CharacterSelector_Newaction;
+    private readonly InputAction m_CharacterSelector_JoinGame;
     public struct CharacterSelectorActions
     {
         private @PlayerActions m_Wrapper;
         public CharacterSelectorActions(@PlayerActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Newaction => m_Wrapper.m_CharacterSelector_Newaction;
+        public InputAction @JoinGame => m_Wrapper.m_CharacterSelector_JoinGame;
         public InputActionMap Get() { return m_Wrapper.m_CharacterSelector; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -561,16 +550,16 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_CharacterSelectorActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_CharacterSelectorActionsCallbackInterfaces.Add(instance);
-            @Newaction.started += instance.OnNewaction;
-            @Newaction.performed += instance.OnNewaction;
-            @Newaction.canceled += instance.OnNewaction;
+            @JoinGame.started += instance.OnJoinGame;
+            @JoinGame.performed += instance.OnJoinGame;
+            @JoinGame.canceled += instance.OnJoinGame;
         }
 
         private void UnregisterCallbacks(ICharacterSelectorActions instance)
         {
-            @Newaction.started -= instance.OnNewaction;
-            @Newaction.performed -= instance.OnNewaction;
-            @Newaction.canceled -= instance.OnNewaction;
+            @JoinGame.started -= instance.OnJoinGame;
+            @JoinGame.performed -= instance.OnJoinGame;
+            @JoinGame.canceled -= instance.OnJoinGame;
         }
 
         public void RemoveCallbacks(ICharacterSelectorActions instance)
@@ -597,15 +586,6 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             return asset.controlSchemes[m_ControllerSchemeIndex];
         }
     }
-    private int m_KeyboardSchemeIndex = -1;
-    public InputControlScheme KeyboardScheme
-    {
-        get
-        {
-            if (m_KeyboardSchemeIndex == -1) m_KeyboardSchemeIndex = asset.FindControlSchemeIndex("Keyboard");
-            return asset.controlSchemes[m_KeyboardSchemeIndex];
-        }
-    }
     public interface IPlayer1Actions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -618,6 +598,6 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     }
     public interface ICharacterSelectorActions
     {
-        void OnNewaction(InputAction.CallbackContext context);
+        void OnJoinGame(InputAction.CallbackContext context);
     }
 }

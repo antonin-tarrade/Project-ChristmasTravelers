@@ -308,7 +308,7 @@
             "id": "51429c8a-26e2-4999-be3b-62785d964e33",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "JoinGame",
                     "type": "Button",
                     "id": "0f334947-6e12-4b95-92e4-84e6ba4e4726",
                     "expectedControlType": "Button",
@@ -324,8 +324,8 @@
                     "path": "",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Controller;Keyboard",
-                    "action": "New action",
+                    "groups": "Controller",
+                    "action": "JoinGame",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -339,17 +339,6 @@
             "devices": [
                 {
                     "devicePath": "<Gamepad>",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
-        },
-        {
-            "name": "Keyboard",
-            "bindingGroup": "Keyboard",
-            "devices": [
-                {
-                    "devicePath": "<Keyboard>",
                     "isOptional": false,
                     "isOR": false
                 }

@@ -26,7 +26,7 @@ public class ChooseCharacterManager : MonoBehaviour
     private Transform allCharactersPool;
     private Transform allPlayersPool;
 
-    private Dictionary<PlayerSelector,GameObject> playersPool;
+    private Dictionary<Player,GameObject> playersPool;
 
     private PlayerInputManager playerInputManager;
 
@@ -48,7 +48,7 @@ public class ChooseCharacterManager : MonoBehaviour
     void Start()
     {
 
-        playersPool = new Dictionary<PlayerSelector,GameObject>();
+        playersPool = new Dictionary<Player,GameObject>();
 
         allCharacters = Resources.LoadAll<GameObject>("Characters");
         allCharactersPool = canvas.Find("AllCharactersPool");
@@ -80,9 +80,9 @@ public class ChooseCharacterManager : MonoBehaviour
     }
 
 
-    private void SelectCharacter(GameObject character,PlayerSelector playerSelector){
+    private void SelectCharacter(GameObject character,Player player){
 
-        playersPool.TryGetValue(playerSelector, out GameObject pool);
+        playersPool.TryGetValue(player, out GameObject pool);
         GameObject characterUi = Instantiate(characterUiBig,pool.transform);
         characterUi.GetComponentInChildren<TextMeshProUGUI>().text = character.name;
         characterUi.transform.SetParent(pool.transform);
@@ -112,15 +112,8 @@ public class ChooseCharacterManager : MonoBehaviour
         poolGO.name = newPlayer.name + "Pool";
         poolGO.GetComponent<TextMeshProUGUI>().text = newPlayer.name;
 
-        GameObject playerSelector = GameObject.Find("PlayerSelector(Clone)");
-        playerSelector.name = newPlayer.name + "Selector";
-        PlayerSelector ps = playerSelector.GetComponent<PlayerSelector>();
-        ps.player = newPlayer;
-        playersPool.Add(ps,poolGO);
+        playersPool.Add(newPlayer, poolGO);
 
-        foreach (Transform button in allCharactersPool.transform){
-            button.GetComponent<Button>().onClick.AddListener(()=> ps.OnCharacterButtonClicked());
-        }
     }
 
 
