@@ -308,9 +308,18 @@
             "id": "51429c8a-26e2-4999-be3b-62785d964e33",
             "actions": [
                 {
-                    "name": "JoinGame",
+                    "name": "SelectButtonRight",
                     "type": "Button",
                     "id": "0f334947-6e12-4b95-92e4-84e6ba4e4726",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ClickButton",
+                    "type": "Button",
+                    "id": "396c2f8f-b8f6-4560-9d3d-665a5cd62007",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -321,11 +330,22 @@
                 {
                     "name": "",
                     "id": "862ccd7a-0511-42c4-83f4-49988033f80c",
-                    "path": "",
+                    "path": "<Gamepad>/leftStick/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
-                    "action": "JoinGame",
+                    "action": "SelectButtonRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d8dec963-8cbe-4c7c-93e5-adc9c6db6c9a",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ClickButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

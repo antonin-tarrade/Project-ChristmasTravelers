@@ -330,9 +330,18 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             ""id"": ""51429c8a-26e2-4999-be3b-62785d964e33"",
             ""actions"": [
                 {
-                    ""name"": ""JoinGame"",
+                    ""name"": ""SelectButtonRight"",
                     ""type"": ""Button"",
                     ""id"": ""0f334947-6e12-4b95-92e4-84e6ba4e4726"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ClickButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""396c2f8f-b8f6-4560-9d3d-665a5cd62007"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -343,11 +352,22 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""862ccd7a-0511-42c4-83f4-49988033f80c"",
-                    ""path"": """",
+                    ""path"": ""<Gamepad>/leftStick/right"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
-                    ""action"": ""JoinGame"",
+                    ""action"": ""SelectButtonRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d8dec963-8cbe-4c7c-93e5-adc9c6db6c9a"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ClickButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -379,7 +399,8 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         m_Player1_NextItem = m_Player1.FindAction("Next Item", throwIfNotFound: true);
         // CharacterSelector
         m_CharacterSelector = asset.FindActionMap("CharacterSelector", throwIfNotFound: true);
-        m_CharacterSelector_JoinGame = m_CharacterSelector.FindAction("JoinGame", throwIfNotFound: true);
+        m_CharacterSelector_SelectButtonRight = m_CharacterSelector.FindAction("SelectButtonRight", throwIfNotFound: true);
+        m_CharacterSelector_ClickButton = m_CharacterSelector.FindAction("ClickButton", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -535,12 +556,14 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     // CharacterSelector
     private readonly InputActionMap m_CharacterSelector;
     private List<ICharacterSelectorActions> m_CharacterSelectorActionsCallbackInterfaces = new List<ICharacterSelectorActions>();
-    private readonly InputAction m_CharacterSelector_JoinGame;
+    private readonly InputAction m_CharacterSelector_SelectButtonRight;
+    private readonly InputAction m_CharacterSelector_ClickButton;
     public struct CharacterSelectorActions
     {
         private @PlayerActions m_Wrapper;
         public CharacterSelectorActions(@PlayerActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @JoinGame => m_Wrapper.m_CharacterSelector_JoinGame;
+        public InputAction @SelectButtonRight => m_Wrapper.m_CharacterSelector_SelectButtonRight;
+        public InputAction @ClickButton => m_Wrapper.m_CharacterSelector_ClickButton;
         public InputActionMap Get() { return m_Wrapper.m_CharacterSelector; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -550,16 +573,22 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_CharacterSelectorActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_CharacterSelectorActionsCallbackInterfaces.Add(instance);
-            @JoinGame.started += instance.OnJoinGame;
-            @JoinGame.performed += instance.OnJoinGame;
-            @JoinGame.canceled += instance.OnJoinGame;
+            @SelectButtonRight.started += instance.OnSelectButtonRight;
+            @SelectButtonRight.performed += instance.OnSelectButtonRight;
+            @SelectButtonRight.canceled += instance.OnSelectButtonRight;
+            @ClickButton.started += instance.OnClickButton;
+            @ClickButton.performed += instance.OnClickButton;
+            @ClickButton.canceled += instance.OnClickButton;
         }
 
         private void UnregisterCallbacks(ICharacterSelectorActions instance)
         {
-            @JoinGame.started -= instance.OnJoinGame;
-            @JoinGame.performed -= instance.OnJoinGame;
-            @JoinGame.canceled -= instance.OnJoinGame;
+            @SelectButtonRight.started -= instance.OnSelectButtonRight;
+            @SelectButtonRight.performed -= instance.OnSelectButtonRight;
+            @SelectButtonRight.canceled -= instance.OnSelectButtonRight;
+            @ClickButton.started -= instance.OnClickButton;
+            @ClickButton.performed -= instance.OnClickButton;
+            @ClickButton.canceled -= instance.OnClickButton;
         }
 
         public void RemoveCallbacks(ICharacterSelectorActions instance)
@@ -598,6 +627,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     }
     public interface ICharacterSelectorActions
     {
-        void OnJoinGame(InputAction.CallbackContext context);
+        void OnSelectButtonRight(InputAction.CallbackContext context);
+        void OnClickButton(InputAction.CallbackContext context);
     }
 }

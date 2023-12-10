@@ -6,6 +6,8 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Android;
+using UnityEngine.InputSystem.UI;
 using UnityEngine.InputSystem.XInput;
 using UnityEngine.UI;
 
@@ -26,9 +28,9 @@ public class ChooseCharacterManager : MonoBehaviour
     private Transform allCharactersPool;
     private Transform allPlayersPool;
 
-    private Dictionary<Player,GameObject> playersPool;
+    private Dictionary<Player, GameObject> playersPool;
 
-    private PlayerInputManager playerInputManager;
+
 
     [SerializeField] private int nbOfPlayers;
     
@@ -39,16 +41,15 @@ public class ChooseCharacterManager : MonoBehaviour
             instance = this;
         }
 
-        playerInputManager = GetComponent<PlayerInputManager>();
-        
+
     }
-
-
     // Start is called before the first frame update
     void Start()
     {
 
-        playersPool = new Dictionary<Player,GameObject>();
+        playersPool = new Dictionary<Player, GameObject>();
+
+
 
         allCharacters = Resources.LoadAll<GameObject>("Characters");
         allCharactersPool = canvas.Find("AllCharactersPool");
@@ -75,16 +76,15 @@ public class ChooseCharacterManager : MonoBehaviour
             characterUi.transform.SetParent(allCharactersPool);
         }
 
-        allCharactersPool.transform.GetChild(0).GetComponent<Button>().Select();
-
     }
 
 
-    private void SelectCharacter(GameObject character,Player player){
+    private void SelectCharacter(Player player){
 
         playersPool.TryGetValue(player, out GameObject pool);
+
         GameObject characterUi = Instantiate(characterUiBig,pool.transform);
-        characterUi.GetComponentInChildren<TextMeshProUGUI>().text = character.name;
+        /*characterUi.GetComponentInChildren<TextMeshProUGUI>().text = character.name;*/
         characterUi.transform.SetParent(pool.transform);
     }
 
@@ -101,6 +101,7 @@ public class ChooseCharacterManager : MonoBehaviour
 
     public void OnPlayerJoined (){
 
+
         Player newPlayer = new Player
         {
             name = "Player" + gameManager.players.Count
@@ -113,6 +114,14 @@ public class ChooseCharacterManager : MonoBehaviour
         poolGO.GetComponent<TextMeshProUGUI>().text = newPlayer.name;
 
         playersPool.Add(newPlayer, poolGO);
+
+
+        foreach (Transform t in allCharactersPool.transform)
+        {
+            t.GetComponent<Button>().onClick.AddListener(() => SelectCharacter(newPlayer));
+        }
+
+
 
     }
 
