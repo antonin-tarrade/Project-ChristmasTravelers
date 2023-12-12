@@ -119,6 +119,7 @@ MonoBehaviour:
     score: 0
     charPrefabSystem: {fileID: 0}
   grabRadius: 3
+  <FOV>k__BackingField: 20
 --- !u!114 &3451438070945045697
 MonoBehaviour:
   m_ObjectHideFlags: 0

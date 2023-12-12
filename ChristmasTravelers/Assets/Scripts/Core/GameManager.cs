@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour {
     public event Action OnTurnEnd;
 
     public RoundHandler roundHandler;
+    public static readonly int defaultFOV = 15;
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
 
 
@@ -74,7 +75,7 @@ public class GameManager : MonoBehaviour {
         SwitchTo(currentPlayerIndex);
         Character c = SpawnCharacter(currentPlayer);
         roundHandler.SwitchTo(c);
-
+        virtualCamera.m_Lens.OrthographicSize = c.FOV;
         OnTurnStart?.Invoke();
         foreach (Player p in players)
         {
