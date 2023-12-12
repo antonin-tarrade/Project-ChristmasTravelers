@@ -34,6 +34,8 @@ public class ChooseCharacterManager : MonoBehaviour
     [SerializeField] private int nbOfPlayers;
     [SerializeField] private int maxColumns;
 
+    private Color[] couleurs; //debug
+
     public static CharacterComponent[][] matrice{get; private set;}
     
     private void Awake()
@@ -48,7 +50,7 @@ public class ChooseCharacterManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        couleurs = new Color[]{ Color.blue, Color.red };
         playersPool = new Dictionary<Player, GameObject>();
 
 
@@ -117,7 +119,9 @@ public class ChooseCharacterManager : MonoBehaviour
 
         Player newPlayer = new Player
         {
-            name = "Player" + gameManager.players.Count
+            name = "Player" + gameManager.players.Count,
+            color = couleurs[gameManager.players.Count]
+            
         };
         gameManager.players.Add(newPlayer);
         

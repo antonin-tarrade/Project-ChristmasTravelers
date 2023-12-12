@@ -17,11 +17,10 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        allCharacters = GameObject.Find("AllCharactersPool").transform;
         selectedButton = allCharacters.GetChild(0).GetComponent<CharacterComponent>();
         selectedButton.OnSelect(player);
         positions = ChooseCharacterManager.matrice;
-
-        allCharacters = GameObject.Find("AllCharactersPool").transform;
     }
 
     // Update is called once per frame
