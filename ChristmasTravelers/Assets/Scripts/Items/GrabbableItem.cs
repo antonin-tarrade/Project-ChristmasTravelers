@@ -7,12 +7,12 @@ public class GrabbableItem : MonoBehaviour, IGrabbable {
 
     [SerializeField] private ScriptableItemData itemData;
     private IItem item;
-    private Vector3 initialPoisiton;
+    private Vector3 initialPosition;
 
     private void Start() {
-        initialPoisiton = transform.position;
+        initialPosition = transform.position;
         item = itemData.GetInstance();
-        item.RegisterInitialState(ItemManager.instance, this);
+        GameManager.instance.Register(new GrabbableItemInitialData(this, item, initialPosition));
     }
 
 
