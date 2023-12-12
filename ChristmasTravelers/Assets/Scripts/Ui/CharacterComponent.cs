@@ -10,10 +10,18 @@ public class CharacterComponent : MonoBehaviour
     public GameObject charPrefab{get; set;}
     public Tuple<int,int> position{get; set;}
 
+    public CharacterComponent right;
+    public CharacterComponent left;
+    public CharacterComponent up;
+    public CharacterComponent down;
+
     // Start is called before the first frame update
     void Start()
     {
-        charPrefab = new();
+        right = null;
+        left = null;
+        up = null;
+        down = null;
     }
 
     // Update is called once per frame

@@ -25,6 +25,7 @@ public class ChooseCharacterManager : MonoBehaviour
     [SerializeField] private GameObject characterUiMini;
     [SerializeField] private GameObject characterUiBig;
     [SerializeField] private GameObject playerPool;
+    [SerializeField] private Transform playerContainer;
 
     private Transform allCharactersPool;
     private Transform allPlayersPool;
@@ -34,7 +35,8 @@ public class ChooseCharacterManager : MonoBehaviour
     [SerializeField] private int nbOfPlayers;
     [SerializeField] private int maxColumns;
 
-    private Color[] couleurs; //debug
+    [Header("Debug")]
+    [SerializeField]private Color[] couleurs; //debug
 
     public static CharacterComponent[][] matrice{get; private set;}
     
@@ -50,7 +52,7 @@ public class ChooseCharacterManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        couleurs = new Color[]{ Color.blue, Color.red };
+        
         playersPool = new Dictionary<Player, GameObject>();
 
 
@@ -79,7 +81,7 @@ public class ChooseCharacterManager : MonoBehaviour
         grid.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
         grid.constraintCount = maxColumns;
 
-        int nbRow = allCharacters.Length / maxColumns;
+        int nbRow = (allCharacters.Length + maxColumns - 1) / maxColumns ;
 
         matrice = new CharacterComponent[nbRow][];
         for (int i = 0; i < nbRow ; i++){
@@ -90,16 +92,34 @@ public class ChooseCharacterManager : MonoBehaviour
         int currentRow = 0;
         foreach (GameObject ch in allCharacters) {
             GameObject characterUi = Instantiate(characterUiMini,allCharactersPool.transform);
-            CharacterComponent component = characterUi.GetComponent<CharacterComponent>();
+
+            characterUi.name = ch.name;
             characterUi.GetComponentInChildren<TextMeshProUGUI>().text = ch.name;
             characterUi.transform.SetParent(allCharactersPool);
-            if (currentCol > maxColumns){
+            if (currentCol >= maxColumns){
                 currentCol = 0;
                 currentRow ++;
             } 
+            CharacterComponent component = characterUi.GetComponent<CharacterComponent>();
+            matrice[currentRow][currentCol] = component;
             component.charPrefab = ch;
             component.position = new Tuple<int, int>(currentRow,currentCol);
-            matrice[currentRow][currentCol] = component;
+            currentCol++;
+
+
+        }
+
+        int total = 0;
+        for (int i = 0;i < nbRow ; i++)
+        {
+            for (int j = 0; j < maxColumns && total < allCharacters.Length; j++)
+            {  
+                matrice[i][j].right = (j + 1 == maxColumns) ? matrice[i][0] : matrice[i][j + 1];
+                matrice[i][j].left = (j == 0) ? matrice[i][maxColumns - 1] : matrice[i][j - 1];
+                matrice[i][j].up = (i == 0) ? matrice[nbRow - 1][j] : matrice[i - 1][j];
+                matrice[i][j].down = (i + 1 == nbRow) ? matrice[0][j] : matrice[i +1 ][j];
+                total++;
+            }
         }
 
     }
@@ -116,6 +136,7 @@ public class ChooseCharacterManager : MonoBehaviour
 
     public void OnPlayerJoined (){
 
+        PlayerController pc = GameObject.Find("PlayerController(Clone)").GetComponent<PlayerController>();
 
         Player newPlayer = new Player
         {
@@ -123,12 +144,17 @@ public class ChooseCharacterManager : MonoBehaviour
             color = couleurs[gameManager.players.Count]
             
         };
+
         gameManager.players.Add(newPlayer);
-        
         Transform pool = allPlayersPool.Find("UnsetPool");
         GameObject poolGO = pool.gameObject;
         poolGO.name = newPlayer.name + "Pool";
         poolGO.GetComponent<TextMeshProUGUI>().text = newPlayer.name;
+
+        pc.player = newPlayer;
+        pc. name = newPlayer.name;
+
+        pc.transform.parent = playerContainer;
 
         playersPool.Add(newPlayer, poolGO);
     }

@@ -480,8 +480,12 @@ MonoBehaviour:
   characterUiMini: {fileID: 4824116127081112100, guid: 8152e5758144b46d8b1f988ae4836012, type: 3}
   characterUiBig: {fileID: 7234250020812408566, guid: d1e59564625224543bc73dd556a73b1a, type: 3}
   playerPool: {fileID: 1721033871290738214, guid: c047a9fc0c38d45668119dce888e8994, type: 3}
+  playerContainer: {fileID: 1741537760}
   nbOfPlayers: 2
   maxColumns: 4
+  couleurs:
+  - {r: 0, g: 1, b: 0.8818593, a: 1}
+  - {r: 1, g: 0.16531092, b: 0, a: 0}
 --- !u!4 &745030573
 Transform:
   m_ObjectHideFlags: 0
@@ -543,7 +547,7 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 0}
-  m_PlayerPrefab: {fileID: 1689598209801418691, guid: b7f900431d96fcb478ee79f0c13687db, type: 3}
+  m_PlayerPrefab: {fileID: 920055529936148154, guid: 7a18f95617396fc44b2c5a42b3f4f813, type: 3}
   m_SplitScreen: 0
   m_MaintainAspectRatioInSplitScreen: 0
   m_FixedNumberOfSplitScreens: -1
@@ -685,6 +689,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1910700324}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1741537759
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1741537760}
+  m_Layer: 0
+  m_Name: PlayerContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1741537760
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1741537759}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -40.965626, y: -9.4369335, z: -0.666943}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1910700323
@@ -851,3 +886,4 @@ SceneRoots:
   - {fileID: 745030573}
   - {fileID: 46594264}
   - {fileID: 1709913477}
+  - {fileID: 1741537760}
