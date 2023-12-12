@@ -39,7 +39,7 @@ public class MovementRecorder : SimpleRecorder
         {
             moveCommand.movement = ((float)recordData.recordFrequency) * moveCommand.movement;
             commandList.Add(new TimedBoardCommand(time, moveCommand));
-            BoardManager.instance.Execute(moveCommand);
+            moveCommand.Execute();
             lastUpdateTime = time;
         }
     }

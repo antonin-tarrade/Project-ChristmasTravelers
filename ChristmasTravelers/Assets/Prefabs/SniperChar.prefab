@@ -117,6 +117,7 @@ MonoBehaviour:
     name: 
     color: {r: 0, g: 0, b: 0, a: 0}
     score: 0
+    charPrefabSystem: {fileID: 0}
   grabRadius: 3
 --- !u!114 &3451438070945045697
 MonoBehaviour:
@@ -464,7 +465,6 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   smokeParticlesPrefab: {fileID: 6870004742430601884, guid: 441c989ad547a5c4f82a8d2b5b302d3a, type: 3}
   impactParticlesPrefab: {fileID: 5003103186926527660, guid: ea4bfaca978e26c47b9e409bf4d06ec2, type: 3}
-  shootParticlesPrefab: {fileID: 180777653512227604, guid: b89b0de208c64e1459d8cc8a960fadcc, type: 3}
   chargeTime: 2
   range: 5
 --- !u!1 &3791680575169544567
