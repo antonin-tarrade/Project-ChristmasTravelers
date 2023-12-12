@@ -7,14 +7,21 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    public Player player{get; set;}
 
+    public Transform allCharacters;
 
-    private Button selectedButton;
+    private CharacterComponent[][] positions;
+
+    private CharacterComponent selectedButton;
     // Start is called before the first frame update
     void Start()
     {
-        selectedButton = GameObject.Find("AllCharactersPool").transform.GetChild(0).GetComponent<Button>();
-        GetComponent<MultiplayerEventSystem>().SetSelectedGameObject(selectedButton.gameObject);
+        selectedButton = allCharacters.GetChild(0).GetComponent<CharacterComponent>();
+        selectedButton.OnSelect(player);
+        positions = ChooseCharacterManager.matrice;
+
+        allCharacters = GameObject.Find("AllCharactersPool").transform;
     }
 
     // Update is called once per frame
@@ -24,13 +31,52 @@ public class PlayerController : MonoBehaviour
     }
 
     public void OnButtonClicked() {
-        selectedButton.onClick.Invoke();
+        player.AddCharacter(selectedButton.charPrefab.GetComponent<Character>());
     }
 
-    public void SwitchButtonRight()
+    private void SwitchButtonRight()
     {
-
-        selectedButton = selectedButton.transform.parent.GetChild(selectedButton.transform.GetSiblingIndex()).GetComponent<Button>();
+        selectedButton ??= positions[selectedButton.position.Item1][selectedButton.position.Item2+1];
     }
+
+    private void SwitchButtonLeft()
+    {
+        selectedButton ??= positions[selectedButton.position.Item1][selectedButton.position.Item2-1];
+    }
+
+    private void SwitchButtonUp(){
+        selectedButton ??= positions[selectedButton.position.Item1-1][selectedButton.position.Item2];
+    }
+
+    private void SwitchButtonDown(){
+        selectedButton ??= positions[selectedButton.position.Item1+1][selectedButton.position.Item2];
+    }
+
+
+    // Gauche = 1, Droite = 2, Haut = 3, Bas = 4
+    public void SwitchButton(int direction){
+        selectedButton.OnDeselect();
+
+        switch (direction) {
+            case 1 :
+                SwitchButtonLeft();
+                break;
+            case 2 : 
+                SwitchButtonRight();
+                break;
+            case 3 : 
+                SwitchButtonUp();
+                break;
+            case 4 : 
+                SwitchButtonDown();
+                break;
+        }
+
+        selectedButton.OnSelect(player);
+    }
+
+
+
+
  
 }

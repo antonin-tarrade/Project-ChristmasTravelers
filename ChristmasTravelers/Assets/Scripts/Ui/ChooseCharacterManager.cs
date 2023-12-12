@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,9 +31,10 @@ public class ChooseCharacterManager : MonoBehaviour
 
     private Dictionary<Player, GameObject> playersPool;
 
-
-
     [SerializeField] private int nbOfPlayers;
+    [SerializeField] private int maxColumns;
+
+    public static CharacterComponent[][] matrice{get; private set;}
     
     private void Awake()
     {
@@ -70,23 +72,36 @@ public class ChooseCharacterManager : MonoBehaviour
 
 
     private void InitCharacterPool(){
+
+        GridLayoutGroup grid = allCharactersPool.GetComponent<GridLayoutGroup>();
+        grid.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+        grid.constraintCount = maxColumns;
+
+        int nbRow = allCharacters.Length / maxColumns;
+
+        matrice = new CharacterComponent[nbRow][];
+        for (int i = 0; i < nbRow ; i++){
+            matrice[i] = new CharacterComponent[maxColumns];
+        }
+
+        int currentCol = 0;
+        int currentRow = 0;
         foreach (GameObject ch in allCharacters) {
             GameObject characterUi = Instantiate(characterUiMini,allCharactersPool.transform);
+            CharacterComponent component = characterUi.GetComponent<CharacterComponent>();
             characterUi.GetComponentInChildren<TextMeshProUGUI>().text = ch.name;
             characterUi.transform.SetParent(allCharactersPool);
+            if (currentCol > maxColumns){
+                currentCol = 0;
+                currentRow ++;
+            } 
+            component.charPrefab = ch;
+            component.position = new Tuple<int, int>(currentRow,currentCol);
+            matrice[currentRow][currentCol] = component;
         }
 
     }
 
-
-    private void SelectCharacter(Player player){
-
-        playersPool.TryGetValue(player, out GameObject pool);
-
-        GameObject characterUi = Instantiate(characterUiBig,pool.transform);
-        /*characterUi.GetComponentInChildren<TextMeshProUGUI>().text = character.name;*/
-        characterUi.transform.SetParent(pool.transform);
-    }
 
     private void InitPlayerPool(){
         for (int i = 0; i< nbOfPlayers; i++){
@@ -95,8 +110,6 @@ public class ChooseCharacterManager : MonoBehaviour
             pool.transform.SetParent(allPlayersPool);
         }
     }
-
-
 
 
     public void OnPlayerJoined (){
@@ -114,16 +127,6 @@ public class ChooseCharacterManager : MonoBehaviour
         poolGO.GetComponent<TextMeshProUGUI>().text = newPlayer.name;
 
         playersPool.Add(newPlayer, poolGO);
-
-
-        foreach (Transform t in allCharactersPool.transform)
-        {
-            t.GetComponent<Button>().onClick.AddListener(() => SelectCharacter(newPlayer));
-        }
-
-
-
     }
-
 
 }

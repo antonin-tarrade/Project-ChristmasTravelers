@@ -339,6 +339,33 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""SelectButtonLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""05dc7f9f-19a6-4279-9cf8-00249c9af09b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectButtonDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""45554166-8c9d-4fe3-8fea-c92ddbe346bd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectButtonUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""956c4fe8-5092-4600-b0b3-0362f3f4f5d4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""ClickButton"",
                     ""type"": ""Button"",
                     ""id"": ""396c2f8f-b8f6-4560-9d3d-665a5cd62007"",
@@ -368,6 +395,39 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ClickButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0b9e76bf-dd19-441c-94ef-7088b2e305c8"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""SelectButtonLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1dcbd155-dbe8-4d4e-b239-bdf5efecdf96"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""SelectButtonDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0c0d40d3-e62c-4bd9-b397-ffa19c574f08"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""SelectButtonUp"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -400,6 +460,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         // CharacterSelector
         m_CharacterSelector = asset.FindActionMap("CharacterSelector", throwIfNotFound: true);
         m_CharacterSelector_SelectButtonRight = m_CharacterSelector.FindAction("SelectButtonRight", throwIfNotFound: true);
+        m_CharacterSelector_SelectButtonLeft = m_CharacterSelector.FindAction("SelectButtonLeft", throwIfNotFound: true);
+        m_CharacterSelector_SelectButtonDown = m_CharacterSelector.FindAction("SelectButtonDown", throwIfNotFound: true);
+        m_CharacterSelector_SelectButtonUp = m_CharacterSelector.FindAction("SelectButtonUp", throwIfNotFound: true);
         m_CharacterSelector_ClickButton = m_CharacterSelector.FindAction("ClickButton", throwIfNotFound: true);
     }
 
@@ -557,12 +620,18 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_CharacterSelector;
     private List<ICharacterSelectorActions> m_CharacterSelectorActionsCallbackInterfaces = new List<ICharacterSelectorActions>();
     private readonly InputAction m_CharacterSelector_SelectButtonRight;
+    private readonly InputAction m_CharacterSelector_SelectButtonLeft;
+    private readonly InputAction m_CharacterSelector_SelectButtonDown;
+    private readonly InputAction m_CharacterSelector_SelectButtonUp;
     private readonly InputAction m_CharacterSelector_ClickButton;
     public struct CharacterSelectorActions
     {
         private @PlayerActions m_Wrapper;
         public CharacterSelectorActions(@PlayerActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @SelectButtonRight => m_Wrapper.m_CharacterSelector_SelectButtonRight;
+        public InputAction @SelectButtonLeft => m_Wrapper.m_CharacterSelector_SelectButtonLeft;
+        public InputAction @SelectButtonDown => m_Wrapper.m_CharacterSelector_SelectButtonDown;
+        public InputAction @SelectButtonUp => m_Wrapper.m_CharacterSelector_SelectButtonUp;
         public InputAction @ClickButton => m_Wrapper.m_CharacterSelector_ClickButton;
         public InputActionMap Get() { return m_Wrapper.m_CharacterSelector; }
         public void Enable() { Get().Enable(); }
@@ -576,6 +645,15 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @SelectButtonRight.started += instance.OnSelectButtonRight;
             @SelectButtonRight.performed += instance.OnSelectButtonRight;
             @SelectButtonRight.canceled += instance.OnSelectButtonRight;
+            @SelectButtonLeft.started += instance.OnSelectButtonLeft;
+            @SelectButtonLeft.performed += instance.OnSelectButtonLeft;
+            @SelectButtonLeft.canceled += instance.OnSelectButtonLeft;
+            @SelectButtonDown.started += instance.OnSelectButtonDown;
+            @SelectButtonDown.performed += instance.OnSelectButtonDown;
+            @SelectButtonDown.canceled += instance.OnSelectButtonDown;
+            @SelectButtonUp.started += instance.OnSelectButtonUp;
+            @SelectButtonUp.performed += instance.OnSelectButtonUp;
+            @SelectButtonUp.canceled += instance.OnSelectButtonUp;
             @ClickButton.started += instance.OnClickButton;
             @ClickButton.performed += instance.OnClickButton;
             @ClickButton.canceled += instance.OnClickButton;
@@ -586,6 +664,15 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @SelectButtonRight.started -= instance.OnSelectButtonRight;
             @SelectButtonRight.performed -= instance.OnSelectButtonRight;
             @SelectButtonRight.canceled -= instance.OnSelectButtonRight;
+            @SelectButtonLeft.started -= instance.OnSelectButtonLeft;
+            @SelectButtonLeft.performed -= instance.OnSelectButtonLeft;
+            @SelectButtonLeft.canceled -= instance.OnSelectButtonLeft;
+            @SelectButtonDown.started -= instance.OnSelectButtonDown;
+            @SelectButtonDown.performed -= instance.OnSelectButtonDown;
+            @SelectButtonDown.canceled -= instance.OnSelectButtonDown;
+            @SelectButtonUp.started -= instance.OnSelectButtonUp;
+            @SelectButtonUp.performed -= instance.OnSelectButtonUp;
+            @SelectButtonUp.canceled -= instance.OnSelectButtonUp;
             @ClickButton.started -= instance.OnClickButton;
             @ClickButton.performed -= instance.OnClickButton;
             @ClickButton.canceled -= instance.OnClickButton;
@@ -628,6 +715,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     public interface ICharacterSelectorActions
     {
         void OnSelectButtonRight(InputAction.CallbackContext context);
+        void OnSelectButtonLeft(InputAction.CallbackContext context);
+        void OnSelectButtonDown(InputAction.CallbackContext context);
+        void OnSelectButtonUp(InputAction.CallbackContext context);
         void OnClickButton(InputAction.CallbackContext context);
     }
 }

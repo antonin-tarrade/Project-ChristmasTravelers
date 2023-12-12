@@ -481,6 +481,7 @@ MonoBehaviour:
   characterUiBig: {fileID: 7234250020812408566, guid: d1e59564625224543bc73dd556a73b1a, type: 3}
   playerPool: {fileID: 1721033871290738214, guid: c047a9fc0c38d45668119dce888e8994, type: 3}
   nbOfPlayers: 2
+  maxColumns: 4
 --- !u!4 &745030573
 Transform:
   m_ObjectHideFlags: 0
