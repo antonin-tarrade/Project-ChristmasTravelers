@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class Player {
+public class Player : IPreparable
+{
 
 	public Transform spawn;
 
@@ -22,6 +23,16 @@ public class Player {
 	{
 		characters = new List<Character>();
 		score = 0;
+		GameManager.instance.Register(this);
+	}
+
+	public void Prepare()
+	{
+		score = 0;
+		foreach (Character character in characters)
+		{
+			character.Prepare();
+		}
 	}
 
 

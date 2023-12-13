@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour {
     public event Action OnTurnEnd;
 
     public RoundHandler roundHandler;
+    public static readonly int defaultFOV = 15;
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
 
 
@@ -25,10 +26,14 @@ public class GameManager : MonoBehaviour {
     private int currentPlayerIndex;
     private Player currentPlayer;
 
+
+    private List<IPreparable> preparables;
+
 	private void Awake () {
 		instance = this;
         roundHandler = new RoundHandler(virtualCamera);
         currentPlayerIndex = 0;
+        preparables = new List<IPreparable>();
 	}
 
     private void Start()
@@ -44,6 +49,11 @@ public class GameManager : MonoBehaviour {
         DEBUG = roundHandler.inactiveCharacters.ToArray<Character>();
     }
 
+    public void Register(IPreparable p)
+    {
+        preparables.Add(p);
+    }
+
     public void SwitchTo(int i) {
         currentPlayer = players[i];
     }
@@ -57,11 +67,15 @@ public class GameManager : MonoBehaviour {
 
     public void StartTurn()
     {
+        foreach (IPreparable p in preparables)
+        {
+            p.Prepare();
+        }
         currentPlayerIndex = (currentPlayerIndex + 1) % players.Count;
         SwitchTo(currentPlayerIndex);
         Character c = SpawnCharacter(currentPlayer);
         roundHandler.SwitchTo(c);
-
+        virtualCamera.m_Lens.OrthographicSize = c.FOV;
         OnTurnStart?.Invoke();
         foreach (Player p in players)
         {

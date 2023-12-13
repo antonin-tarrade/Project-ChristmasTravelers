@@ -13,13 +13,13 @@ namespace Items
         void AcceptCollect(Character character);
     }
 
+    public interface IItemParameters { }
+
     public interface IItem 
     {
         string GetName();
         void Use(Inventory inventory, IItemParameters parameters);
         UseItemCommand GenerateCommand(Character character);
-        void RegisterInitialState(ItemManager itemManager, Inventory inventory);
-        void RegisterInitialState(ItemManager itemManager, GrabbableItem grabbable);
     }
 
     public abstract class Item : IItem
@@ -41,16 +41,6 @@ namespace Items
 
         public void Drop(Inventory inventory) { }
 
-        public void RegisterInitialState(ItemManager itemManager, GrabbableItem grabbable)
-        {
-            itemManager.Register(new GrabbableItemInitialData(grabbable, this, grabbable.transform.position));
-        }
-
-        public void RegisterInitialState(ItemManager itemManager, Inventory inventory)
-        {
-            itemManager.Register(new InventoryItemInitialData(inventory, this));
-        }
-
         public Item(ScriptableItemData data)
         {
             this.data = data;
@@ -64,29 +54,24 @@ namespace Items
         public bool consumeOnUse;
     }
 
-    public interface IItemInitialData
-    {
-        public void RestoreInitialState(ItemManager itemManager);
-    }
-
-    public struct InventoryItemInitialData : IItemInitialData
+    public struct InventoryItemInitialData : IPreparable
     {
         public Inventory inventory;
         public IItem item;
 
-        public InventoryItemInitialData(Inventory inventory, Item item)
+        public InventoryItemInitialData(Inventory inventory, IItem item)
         {
             this.inventory = inventory;
             this.item = item;
         }
 
-        public void RestoreInitialState(ItemManager itemManager)
+        public void Prepare()
         {
-            itemManager.RestoreInitialState(this);
+            inventory.Add(item);
         }
     }
 
-    public struct GrabbableItemInitialData : IItemInitialData {
+    public struct GrabbableItemInitialData : IPreparable {
         public GrabbableItem grabbable;
         public IItem item;
         public Vector3 initialPosition;
@@ -97,15 +82,13 @@ namespace Items
             this.initialPosition = initialPosition;
         }
 
-        public void RestoreInitialState(ItemManager itemManager) {
-            itemManager.RestoreInitialState(this);
+        public void Prepare() {
+            grabbable.gameObject.SetActive(true);
+            grabbable.transform.position = initialPosition;
+            grabbable.Set(item);
         }
     }
 
-    public interface IItemParameters
-    {
-
-
-    }
+    
    
 }
