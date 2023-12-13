@@ -105,7 +105,19 @@ MonoBehaviour:
     m_ActionId: 0f334947-6e12-4b95-92e4-84e6ba4e4726
     m_ActionName: CharacterSelector/SelectButton[/XInputControllerWindows/leftStick/right,/XInputControllerWindows1/leftStick/right]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2346344199793894824}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 396c2f8f-b8f6-4560-9d3d-665a5cd62007
     m_ActionName: CharacterSelector/ClickButton[/XInputControllerWindows/buttonSouth,/XInputControllerWindows1/buttonSouth]
   - m_PersistentCalls:
@@ -157,7 +169,7 @@ MonoBehaviour:
     m_ActionId: 956c4fe8-5092-4600-b0b3-0362f3f4f5d4
     m_ActionName: CharacterSelector/SelectButtonUp[/XInputControllerWindows/leftStick/up,/XInputControllerWindows1/leftStick/up]
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: Controller
   m_DefaultActionMap: CharacterSelector
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -226,3 +238,4 @@ MonoBehaviour:
     score: 0
     charPrefabSystem: {fileID: 0}
   allCharacters: {fileID: 0}
+  switchCooldown: 0.25

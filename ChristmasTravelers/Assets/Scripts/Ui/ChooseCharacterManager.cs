@@ -97,7 +97,6 @@ public class ChooseCharacterManager : MonoBehaviour
             CharacterComponent component = characterUi.GetComponent<CharacterComponent>();
             matrice[currentRow][currentCol] = component;
             component.charPrefab = ch;
-            component.position = new Tuple<int, int>(currentRow,currentCol);
             currentCol++;
         }
 
@@ -108,7 +107,7 @@ public class ChooseCharacterManager : MonoBehaviour
             {  
                 matrice[i][j].right = (j + 1 == maxColumns || matrice[i][j+1] == null) ? matrice[i][0] : matrice[i][j + 1];
                 if (j == 0) {
-                    int last = nbRow -1 ;
+                    int last = maxColumns -1 ;
                     while (matrice[i][last] == null){
                          last--;
                     }
@@ -157,6 +156,14 @@ public class ChooseCharacterManager : MonoBehaviour
         pc.transform.parent = playerContainer;
 
         playersPool.Add(newPlayer, poolGO);
+    }
+
+
+    public void OnButtonClicked(Player player,Character character)
+    {
+        playersPool.TryGetValue(player, out GameObject pool);
+        GameObject charUI = Instantiate(characterUiBig, pool.transform);
+        charUI.GetComponentInChildren<TextMeshProUGUI>().text = character.name;
     }
 
 }

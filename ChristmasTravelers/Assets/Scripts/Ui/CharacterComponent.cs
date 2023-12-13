@@ -7,18 +7,17 @@ using UnityEngine.UI;
 public class CharacterComponent : MonoBehaviour
 {
 
-    public GameObject charPrefab{get; set;}
-    public Tuple<int,int> position{get; set;}
+    public GameObject charPrefab;
 
-    public CharacterComponent right;
+    // Start is called before the first frame update
+
     public CharacterComponent left;
+    public CharacterComponent right;
     public CharacterComponent up;
     public CharacterComponent down;
 
-    // Start is called before the first frame update
     void Start()
     {
-
     }
 
     // Update is called once per frame
@@ -34,7 +33,6 @@ public class CharacterComponent : MonoBehaviour
     public void OnDeselect(){
         GetComponent<Image>().color = Color.white;
     }
-
 
     
 }

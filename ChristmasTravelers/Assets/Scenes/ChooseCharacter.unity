@@ -485,7 +485,7 @@ MonoBehaviour:
   maxColumns: 4
   couleurs:
   - {r: 0, g: 1, b: 0.8818593, a: 1}
-  - {r: 1, g: 0.16531092, b: 0, a: 0}
+  - {r: 1, g: 0.16531092, b: 0, a: 1}
 --- !u!4 &745030573
 Transform:
   m_ObjectHideFlags: 0
