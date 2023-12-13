@@ -88,7 +88,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.8818593, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -112,10 +112,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player:
     spawn: {fileID: 0}
-    name: 
-    color: {r: 0, g: 0, b: 0, a: 0}
+    name: Player0
+    color: {r: 0, g: 1, b: 0.8818593, a: 1}
     score: 0
+    charPrefabSystem: {fileID: 0}
   grabRadius: 3
+  <FOV>k__BackingField: 0
 --- !u!114 &3451438070945045697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,15 +328,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37ddf01586f8da549b21f09a91a322c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action:
-    m_Name: Action
-    m_Type: 1
-    m_ExpectedControlType: Button
-    m_Id: d4807975-9a7f-4b8a-bb61-d4e0f8a21b45
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
 --- !u!114 &6208526159675140355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -432,6 +425,12 @@ MonoBehaviour:
   <lifeLength>k__BackingField: 5
   projectile: {fileID: 1775989977048839268, guid: 9d68bcea2a01c8c46b9f6b0b6d9130c8, type: 3}
   cooldown: 0.2
+  aimTriggerTreshold: 0
+  aimAssist:
+    useAimAssist: 0
+    aimAssistAngle: 0
+    aimAssistDamping: 0
+    aimAssistRange: 0
   amplitude: 1
   offset: 0.2
   sigma: 1

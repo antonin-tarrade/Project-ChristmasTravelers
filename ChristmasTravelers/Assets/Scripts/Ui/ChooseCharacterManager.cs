@@ -144,6 +144,7 @@ public class ChooseCharacterManager : MonoBehaviour
             
         };
 
+        newPlayer.Init();
         gameManager.players.Add(newPlayer);
         Transform pool = allPlayersPool.Find("UnsetPool");
         GameObject poolGO = pool.gameObject;
@@ -159,11 +160,17 @@ public class ChooseCharacterManager : MonoBehaviour
     }
 
 
-    public void OnButtonClicked(Player player,Character character)
+    public void OnCharacterAdded(Player player,Character character)
     {
         playersPool.TryGetValue(player, out GameObject pool);
         GameObject charUI = Instantiate(characterUiBig, pool.transform);
         charUI.GetComponentInChildren<TextMeshProUGUI>().text = character.name;
+    }
+
+    public void OnCharacterDeleted(Player player)
+    {
+        playersPool.TryGetValue(player, out GameObject pool);
+        Destroy(pool.transform.GetChild(pool.transform.childCount - 1).gameObject);
     }
 
 }

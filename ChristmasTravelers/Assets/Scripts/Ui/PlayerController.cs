@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
 
     private float lastSwitchTime;
     [SerializeField] private float switchCooldown;
+
+    private bool buttonEnabled = true;
+    [SerializeField]  private float clickCooldown;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,11 +34,38 @@ public class PlayerController : MonoBehaviour
     }
 
     public void OnButtonClicked() {
+        if (selectedButton == null || !buttonEnabled)
+        {
+            return;
+        }
+
+        StartCoroutine(ButtonCooldown());
+
         Character ch = selectedButton.charPrefab.GetComponent<Character>();
-        Debug.Log(player.name);
         player.AddCharacter(ch);
-        ChooseCharacterManager.instance.OnButtonClicked(player, ch);
+        ChooseCharacterManager.instance.OnCharacterAdded(player, ch);
     }
+
+    IEnumerator ButtonCooldown()
+    {
+        buttonEnabled = false;
+        yield return new WaitForSeconds(clickCooldown);
+
+        buttonEnabled = true;
+    }
+    
+    public void RemoveLastAddedChar()
+    {
+        if (player.characters.Count == 0 || !buttonEnabled)
+        {
+            return;
+        }
+        StartCoroutine(ButtonCooldown());
+        player.characters.RemoveAt(player.characters.Count - 1);
+        ChooseCharacterManager.instance.OnCharacterDeleted(player);
+    }
+
+
 
     // Gauche = 1, Droite = 2, Haut = 3, Bas = 4
     public void SwitchButton(int direction){
