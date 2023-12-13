@@ -1,15 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Resources;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Android;
-using UnityEngine.InputSystem.UI;
-using UnityEngine.InputSystem.XInput;
 using UnityEngine.UI;
 
 public class ChooseCharacterManager : MonoBehaviour
@@ -91,6 +84,7 @@ public class ChooseCharacterManager : MonoBehaviour
         int currentCol = 0;
         int currentRow = 0;
         foreach (GameObject ch in allCharacters) {
+
             GameObject characterUi = Instantiate(characterUiMini,allCharactersPool.transform);
 
             characterUi.name = ch.name;
@@ -105,8 +99,6 @@ public class ChooseCharacterManager : MonoBehaviour
             component.charPrefab = ch;
             component.position = new Tuple<int, int>(currentRow,currentCol);
             currentCol++;
-
-
         }
 
         int total = 0;
@@ -114,10 +106,18 @@ public class ChooseCharacterManager : MonoBehaviour
         {
             for (int j = 0; j < maxColumns && total < allCharacters.Length; j++)
             {  
-                matrice[i][j].right = (j + 1 == maxColumns) ? matrice[i][0] : matrice[i][j + 1];
-                matrice[i][j].left = (j == 0) ? matrice[i][maxColumns - 1] : matrice[i][j - 1];
-                matrice[i][j].up = (i == 0) ? matrice[nbRow - 1][j] : matrice[i - 1][j];
-                matrice[i][j].down = (i + 1 == nbRow) ? matrice[0][j] : matrice[i +1 ][j];
+                matrice[i][j].right = (j + 1 == maxColumns || matrice[i][j+1] == null) ? matrice[i][0] : matrice[i][j + 1];
+                if (j == 0) {
+                    int last = nbRow -1 ;
+                    while (matrice[i][last] == null){
+                         last--;
+                    }
+                    matrice[i][j].left = matrice[i][last];
+                } else {
+                    matrice[i][j].left = matrice[i][j - 1];
+                }
+                matrice[i][j].up = (i == 0) ? ((matrice[nbRow -1][j] == null) ? matrice[nbRow-1][0] : matrice[nbRow - 1][j]) : matrice[i - 1][j]; 
+                matrice[i][j].down = (i + 1 == nbRow) ? matrice[0][j] :  ((matrice[i + 1][j] == null) ? matrice[i+1][0]: matrice[i + 1][j]);
                 total++;
             }
         }

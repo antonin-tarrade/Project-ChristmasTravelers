@@ -367,6 +367,17 @@
                 },
                 {
                     "name": "",
+                    "id": "3030d9c9-9f1e-4918-b191-0618805965bf",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "SelectButtonRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "d8dec963-8cbe-4c7c-93e5-adc9c6db6c9a",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
@@ -389,11 +400,33 @@
                 },
                 {
                     "name": "",
+                    "id": "be650a69-49ec-4479-bcb7-bd7923b1c473",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "SelectButtonLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "1dcbd155-dbe8-4d4e-b239-bdf5efecdf96",
                     "path": "<Gamepad>/leftStick/down",
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
+                    "action": "SelectButtonDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8f222059-2c84-4fae-97e9-15f3c3740d11",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
                     "action": "SelectButtonDown",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -408,6 +441,17 @@
                     "action": "SelectButtonUp",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f7c99048-368d-4a22-b5f0-4f5b7d236d56",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "SelectButtonUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
@@ -419,6 +463,17 @@
             "devices": [
                 {
                     "devicePath": "<Gamepad>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Keyboard",
+            "bindingGroup": "Keyboard",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
                     "isOptional": false,
                     "isOR": false
                 }

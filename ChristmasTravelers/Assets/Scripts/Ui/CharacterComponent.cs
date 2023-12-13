@@ -18,10 +18,7 @@ public class CharacterComponent : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        right = null;
-        left = null;
-        up = null;
-        down = null;
+
     }
 
     // Update is called once per frame

@@ -53,8 +53,6 @@ public class PlayerController : MonoBehaviour
                 break;
         }
 
-        Debug.Log(button);
-
         selectedButton = button;
 
         selectedButton.OnSelect(player);

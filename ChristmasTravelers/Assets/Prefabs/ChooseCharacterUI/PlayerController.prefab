@@ -157,7 +157,7 @@ MonoBehaviour:
     m_ActionId: 956c4fe8-5092-4600-b0b3-0362f3f4f5d4
     m_ActionName: CharacterSelector/SelectButtonUp[/XInputControllerWindows/leftStick/up,/XInputControllerWindows1/leftStick/up]
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Controller
+  m_DefaultControlScheme: 
   m_DefaultActionMap: CharacterSelector
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
