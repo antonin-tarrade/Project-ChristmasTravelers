@@ -9,6 +9,7 @@ public class Character : MonoBehaviour {
 
 	[Header("Gameplay parameters")]
     public float grabRadius;
+    [field : SerializeField] public int FOV { get; private set; }
 
     private void Awake () {
 		replay = GetComponent<Replay> ();
