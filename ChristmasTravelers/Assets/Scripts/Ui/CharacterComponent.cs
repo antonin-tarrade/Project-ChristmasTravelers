@@ -11,10 +11,10 @@ public class CharacterComponent : MonoBehaviour
 
     // Start is called before the first frame update
 
-    public CharacterComponent left;
-    public CharacterComponent right;
-    public CharacterComponent up;
-    public CharacterComponent down;
+    public CharacterComponent left {get; set;}
+    public CharacterComponent right { get; set; }
+    public CharacterComponent up { get; set; }
+    public CharacterComponent down { get; set; }
 
     void Start()
     {
@@ -23,15 +23,7 @@ public class CharacterComponent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
 
-    public void OnSelect(Player player){
-        GetComponent<Image>().color = player.color;
-    }
-
-    public void OnDeselect(){
-        GetComponent<Image>().color = Color.white;
     }
 
     

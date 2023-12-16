@@ -18,7 +18,7 @@ public class ChooseCharacterManager : MonoBehaviour
     [SerializeField] private GameObject characterUiMini;
     [SerializeField] private GameObject characterUiBig;
     [SerializeField] private GameObject playerPool;
-    [SerializeField] private Transform playerContainer;
+    [SerializeField] private RectTransform playerContainer;
 
     private Transform allCharactersPool;
     private Transform allPlayersPool;
@@ -135,13 +135,17 @@ public class ChooseCharacterManager : MonoBehaviour
 
     public void OnPlayerJoined (){
 
+        // Si possible trouver une autre maniere de recuperer le playerController (Spawn par l'inputManager)
         PlayerController pc = GameObject.Find("PlayerController(Clone)").GetComponent<PlayerController>();
+
+        int playerNumber = gameManager.players.Count;
 
         Player newPlayer = new Player
         {
-            name = "Player" + gameManager.players.Count,
-            color = couleurs[gameManager.players.Count]
-            
+            name = "Player " + (playerNumber + 1),
+            color = couleurs[playerNumber],
+            number = playerNumber + 1
+
         };
 
         newPlayer.Init();
@@ -149,12 +153,13 @@ public class ChooseCharacterManager : MonoBehaviour
         Transform pool = allPlayersPool.Find("UnsetPool");
         GameObject poolGO = pool.gameObject;
         poolGO.name = newPlayer.name + "Pool";
-        poolGO.GetComponent<TextMeshProUGUI>().text = newPlayer.name;
-
+        TextMeshProUGUI tmp = poolGO.GetComponent<TextMeshProUGUI>();
+        tmp.text = newPlayer.name;
+        tmp.color = newPlayer.color;
         pc.player = newPlayer;
-        pc. name = newPlayer.name;
+        pc.name = newPlayer.name;
 
-        pc.transform.parent = playerContainer;
+        pc.transform.SetParent(playerContainer, false);
 
         playersPool.Add(newPlayer, poolGO);
     }
@@ -165,6 +170,7 @@ public class ChooseCharacterManager : MonoBehaviour
         playersPool.TryGetValue(player, out GameObject pool);
         GameObject charUI = Instantiate(characterUiBig, pool.transform);
         charUI.GetComponentInChildren<TextMeshProUGUI>().text = character.name;
+        charUI.GetComponent<Image>().color = player.color;
     }
 
     public void OnCharacterDeleted(Player player)

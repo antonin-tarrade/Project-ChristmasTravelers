@@ -1,36 +1,71 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
+using UnityEngine.Rendering;
+using UnityEngine.U2D;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     public Player player;
 
-    public Transform allCharacters;
+    [SerializeField] private Transform allCharacters;
 
     private CharacterComponent selectedButton;
 
+    [SerializeField] private GameObject genericSelector;
+    public GameObject selector { get; private set; }
+
+    // Input fields
     private float lastSwitchTime;
     [SerializeField] private float switchCooldown;
 
     private bool buttonEnabled = true;
     [SerializeField]  private float clickCooldown;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
         allCharacters = GameObject.Find("AllCharactersPool").transform;
-        selectedButton = allCharacters.GetChild(0).GetComponent<CharacterComponent>();
-        selectedButton.OnSelect(player);
+
+        InitSelector();
+        InitSelectedButton();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+
+    private void InitSelector()
+    {
+        selector = Instantiate(genericSelector, transform);
+        TextMeshProUGUI tmp = selector.GetComponentInChildren<TextMeshProUGUI>();
+        tmp.text = "P" + player.number;
+        tmp.color = player.color;
+
+        RectTransform corners = selector.transform.GetChild(0) as RectTransform;
+        foreach (RectTransform corner in corners)
+        {
+            foreach(RectTransform cornerPart in corner)
+            {
+                cornerPart.GetComponent<Image>().color = player.color;
+            }
+        }
+    }
+
+    private void InitSelectedButton()
+    {
+        selectedButton = allCharacters.GetChild(0).GetComponent<CharacterComponent>();
+        GoToSelectedButton(selectedButton.transform.position);
     }
 
     public void OnButtonClicked() {
@@ -78,8 +113,6 @@ public class PlayerController : MonoBehaviour
             return; 
         }
 
-        selectedButton.OnDeselect();
-
         CharacterComponent button = null;
 
         switch (direction) {
@@ -99,13 +132,15 @@ public class PlayerController : MonoBehaviour
 
         selectedButton = button;
 
-        selectedButton.OnSelect(player);
-
+        GoToSelectedButton(selectedButton.transform.position);
         lastSwitchTime = currentTime;
     }
 
 
-
+    private void GoToSelectedButton(Vector3 buttonPosition)
+    {
+        selector.transform.position = buttonPosition;
+    }
 
  
 }

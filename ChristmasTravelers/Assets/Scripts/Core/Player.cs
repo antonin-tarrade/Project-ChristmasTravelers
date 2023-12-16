@@ -11,6 +11,8 @@ public class Player : IPreparable
 
 	public string name; // debug
 
+	public int number;
+
 	public Color color;
 
 	public int score;
