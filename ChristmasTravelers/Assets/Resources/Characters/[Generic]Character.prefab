@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 7023744199319898029}
   - component: {fileID: 3088008994050532119}
   m_Layer: 10
-  m_Name: Character
+  m_Name: '[Generic]Character'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0.16531092, b: 0, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.8818593, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -109,8 +109,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player:
     spawn: {fileID: 0}
-    name: Player1
-    color: {r: 1, g: 0.16531092, b: 0, a: 1}
+    name: Player 1
+    number: 1
+    color: {r: 0, g: 1, b: 0.8818593, a: 1}
     score: 0
     charPrefabSystem: {fileID: 0}
   grabRadius: 3
@@ -232,6 +233,30 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 36d9e607-9313-472c-8a0f-754e018cfb35
     m_ActionName: Player1/Next Item[/Keyboard/l]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0f334947-6e12-4b95-92e4-84e6ba4e4726
+    m_ActionName: CharacterSelector/SelectButtonRight[/XInputControllerWindows/leftStick/right,/XInputControllerWindows1/leftStick/right,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 05dc7f9f-19a6-4279-9cf8-00249c9af09b
+    m_ActionName: CharacterSelector/SelectButtonLeft[/XInputControllerWindows/leftStick/left,/XInputControllerWindows1/leftStick/left,/Keyboard/leftArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 45554166-8c9d-4fe3-8fea-c92ddbe346bd
+    m_ActionName: CharacterSelector/SelectButtonDown[/XInputControllerWindows/leftStick/down,/XInputControllerWindows1/leftStick/down,/Keyboard/downArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 956c4fe8-5092-4600-b0b3-0362f3f4f5d4
+    m_ActionName: CharacterSelector/SelectButtonUp[/XInputControllerWindows/leftStick/up,/XInputControllerWindows1/leftStick/up,/Keyboard/upArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 396c2f8f-b8f6-4560-9d3d-665a5cd62007
+    m_ActionName: CharacterSelector/AddCharacter[/XInputControllerWindows/buttonSouth,/XInputControllerWindows1/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0688fbfd-7deb-4ee1-b6bd-624407a8b0e1
+    m_ActionName: CharacterSelector/DeletedCharacter[/XInputControllerWindows/buttonWest,/XInputControllerWindows1/buttonWest]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player1

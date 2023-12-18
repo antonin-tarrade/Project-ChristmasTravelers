@@ -16,16 +16,18 @@ public class GameManager : MonoBehaviour {
 
     public RoundHandler roundHandler;
     public static readonly int defaultFOV = 15;
-    [SerializeField] private CinemachineVirtualCamera virtualCamera;
+    
+    public CinemachineVirtualCamera virtualCamera;
 
-
+    public GameMode gameMode;
     [field : SerializeField] public GameData gameData {  get; private set; }
 
 	// Playing players
 	[field: SerializeField] public List<Player> players { get; private set; }
-    private int currentPlayerIndex;
-    private Player currentPlayer;
 
+    private int currentPlayerIndex;
+
+    private Player currentPlayer;
 
     private List<IPreparable> preparables;
 

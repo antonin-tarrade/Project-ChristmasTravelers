@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -48,7 +49,7 @@ public class ChooseCharacterManager : MonoBehaviour
 
 
 
-        allCharacters = Resources.LoadAll<GameObject>("Characters");
+        allCharacters = (GameObject[]) Resources.LoadAll<GameObject>("Characters").Where(ch => !ch.name.StartsWith('[')).ToArray();
         allCharactersPool = canvas.Find("AllCharactersPool");
         allPlayersPool = canvas.Find("AllPlayersPool");
 
