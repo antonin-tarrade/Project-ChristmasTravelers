@@ -8,6 +8,7 @@ using UnityEngine.InputSystem.UI;
 using UnityEngine.Rendering;
 using UnityEngine.U2D;
 using UnityEngine.UI;
+using static UnityEngine.InputSystem.InputAction;
 
 public class PlayerController : MonoBehaviour
 {
@@ -69,7 +70,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void OnButtonClicked() {
-        if (selectedButton == null || !buttonEnabled)
+        if (selectedButton == null || !buttonEnabled )
         {
             return;
         }
@@ -142,5 +143,5 @@ public class PlayerController : MonoBehaviour
         selector.transform.position = buttonPosition;
     }
 
- 
+
 }

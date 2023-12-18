@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -138,8 +136,8 @@ public class ChooseCharacterManager : MonoBehaviour
         // Si possible trouver une autre maniere de recuperer le playerController (Spawn par l'inputManager)
         PlayerController pc = GameObject.Find("PlayerController(Clone)").GetComponent<PlayerController>();
 
+        // Instanciate the player
         int playerNumber = gameManager.players.Count;
-
         Player newPlayer = new Player
         {
             name = "Player " + (playerNumber + 1),
@@ -147,18 +145,20 @@ public class ChooseCharacterManager : MonoBehaviour
             number = playerNumber + 1
 
         };
-
         newPlayer.Init();
         gameManager.players.Add(newPlayer);
+
+        // Player Pool
         Transform pool = allPlayersPool.Find("UnsetPool");
         GameObject poolGO = pool.gameObject;
         poolGO.name = newPlayer.name + "Pool";
         TextMeshProUGUI tmp = poolGO.GetComponent<TextMeshProUGUI>();
         tmp.text = newPlayer.name;
         tmp.color = newPlayer.color;
+
+        // Player Controller
         pc.player = newPlayer;
         pc.name = newPlayer.name;
-
         pc.transform.SetParent(playerContainer, false);
 
         playersPool.Add(newPlayer, poolGO);
