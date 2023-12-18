@@ -28,12 +28,14 @@ public class GameManager : MonoBehaviour {
 
 
     private List<IPreparable> preparables;
+    private List<ISpawnable> spawnables;
 
 	private void Awake () {
 		instance = this;
         roundHandler = new RoundHandler(virtualCamera);
         currentPlayerIndex = 0;
         preparables = new List<IPreparable>();
+        spawnables = new List<ISpawnable>();
 	}
 
     private void Start()
@@ -54,6 +56,11 @@ public class GameManager : MonoBehaviour {
         preparables.Add(p);
     }
 
+    public void Register(ISpawnable s)
+    {
+        spawnables.Add(s);
+    }
+
     public void SwitchTo(int i) {
         currentPlayer = players[i];
     }
@@ -71,6 +78,11 @@ public class GameManager : MonoBehaviour {
         {
             p.Prepare();
         }
+        foreach (ISpawnable s in spawnables)
+        {
+            Destroy(s.gameObject);
+        }
+        spawnables.Clear();
         currentPlayerIndex = (currentPlayerIndex + 1) % players.Count;
         SwitchTo(currentPlayerIndex);
         Character c = SpawnCharacter(currentPlayer);
