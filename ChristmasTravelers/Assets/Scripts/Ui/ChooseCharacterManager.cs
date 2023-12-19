@@ -24,7 +24,10 @@ public class ChooseCharacterManager : MonoBehaviour
 
     private Dictionary<Player, GameObject> playersPool;
 
-    [SerializeField] private int nbOfPlayers;
+    private int nbOfPlayers;
+
+    private int charPerPlayer;
+
     [SerializeField] private int maxColumns;
 
     [Header("Debug")]
@@ -39,24 +42,23 @@ public class ChooseCharacterManager : MonoBehaviour
             instance = this;
         }
 
-
     }
     // Start is called before the first frame update
     void Start()
     {
+
+        gameManager = GameManager.instance;
+
+        nbOfPlayers = gameManager.gameMode.NbOfPlayers;
+        charPerPlayer = gameManager.gameMode.CharPerPlayer;
         
         playersPool = new Dictionary<Player, GameObject>();
 
-
-
-        allCharacters = (GameObject[]) Resources.LoadAll<GameObject>("Characters").Where(ch => !ch.name.StartsWith('[')).ToArray();
+        allCharacters = Resources.LoadAll<GameObject>("Characters").Where(ch => !ch.name.StartsWith('[')).ToArray();
         allCharactersPool = canvas.Find("AllCharactersPool");
         allPlayersPool = canvas.Find("AllPlayersPool");
 
         InitPlayerPool();
-
-        gameManager = GameManager.instance;
-
         InitCharacterPool();
     }
 
@@ -128,7 +130,16 @@ public class ChooseCharacterManager : MonoBehaviour
             GameObject pool = Instantiate(playerPool,allPlayersPool.transform);
             pool.name = "UnsetPool";
             pool.transform.SetParent(allPlayersPool);
+            for (int j = 0; j<charPerPlayer; j++){
+                GameObject placeHOlder = Instantiate(characterUiBig, pool.transform);
+                InitCharPlaceHolder(placeHOlder);
+            }
         }
+    }
+
+    private void InitCharPlaceHolder(GameObject placeHolder){
+        placeHolder.GetComponent<Image>().color = new Color(0.5f,0.5f,0.5f,0.5f);
+        placeHolder.GetComponentInChildren<TextMeshProUGUI>().text = "Choose a Character";
     }
 
 
@@ -169,7 +180,7 @@ public class ChooseCharacterManager : MonoBehaviour
     public void OnCharacterAdded(Player player,Character character)
     {
         playersPool.TryGetValue(player, out GameObject pool);
-        GameObject charUI = Instantiate(characterUiBig, pool.transform);
+        Transform charUI = pool.transform.GetChild(player.characters.Count);
         charUI.GetComponentInChildren<TextMeshProUGUI>().text = character.name;
         charUI.GetComponent<Image>().color = player.color;
     }
@@ -177,7 +188,7 @@ public class ChooseCharacterManager : MonoBehaviour
     public void OnCharacterDeleted(Player player)
     {
         playersPool.TryGetValue(player, out GameObject pool);
-        Destroy(pool.transform.GetChild(pool.transform.childCount - 1).gameObject);
+        InitCharPlaceHolder(pool.transform.GetChild(player.characters.Count - 1).gameObject);
     }
 
 }

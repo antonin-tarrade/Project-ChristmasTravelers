@@ -61,7 +61,7 @@ MonoBehaviour:
   m_CellSize: {x: 250, y: 350}
   m_Spacing: {x: 5, y: 5}
   m_Constraint: 1
-  m_ConstraintCount: 2
+  m_ConstraintCount: 3
 --- !u!222 &2237245586765453369
 CanvasRenderer:
   m_ObjectHideFlags: 0

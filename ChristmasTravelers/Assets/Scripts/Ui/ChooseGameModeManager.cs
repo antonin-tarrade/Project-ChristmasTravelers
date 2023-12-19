@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ChooseGameModeManager : MonoBehaviour
 {
@@ -25,5 +26,10 @@ public class ChooseGameModeManager : MonoBehaviour
         {
           GameObject gameMode = Instantiate(mode, gameModePool);
         }
+    }
+
+
+    public void ChooseCharacter(){
+        SceneManager.LoadScene("ChooseCharacter");
     }
 }

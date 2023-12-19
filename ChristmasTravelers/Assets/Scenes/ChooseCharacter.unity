@@ -399,7 +399,6 @@ MonoBehaviour:
   characterUiBig: {fileID: 7234250020812408566, guid: d1e59564625224543bc73dd556a73b1a, type: 3}
   playerPool: {fileID: 1721033871290738214, guid: c047a9fc0c38d45668119dce888e8994, type: 3}
   playerContainer: {fileID: 1741537760}
-  nbOfPlayers: 2
   maxColumns: 4
   couleurs:
   - {r: 0, g: 1, b: 0.8818593, a: 1}
@@ -466,6 +465,14 @@ MonoBehaviour:
       - m_Name: 
         m_Id: 266fad94-3f46-43d1-9490-8ad0506a8317
         m_Path: <Gamepad>/start
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Join
+        m_Flags: 0
+      - m_Name: 
+        m_Id: 43a0f908-81e1-435f-bb0e-289898f614d9
+        m_Path: <Keyboard>/space
         m_Interactions: 
         m_Processors: 
         m_Groups: 

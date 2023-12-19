@@ -282,3 +282,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   modeName: Capture The Flag [1v1]
   nbOfPlayers: 2
+  charPerPlayer: 3

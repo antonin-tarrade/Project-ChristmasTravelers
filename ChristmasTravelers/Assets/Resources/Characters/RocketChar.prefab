@@ -212,7 +212,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player:
     spawn: {fileID: 0}
-    name: Player0
+    name: Player 1
+    number: 1
     color: {r: 0, g: 1, b: 0.8818593, a: 1}
     score: 0
     charPrefabSystem: {fileID: 0}

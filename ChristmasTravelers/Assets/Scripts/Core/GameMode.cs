@@ -12,6 +12,9 @@ public class GameMode : MonoBehaviour
     [SerializeField] private int nbOfPlayers;
     public int NbOfPlayers { get => nbOfPlayers; protected set => _ = nbOfPlayers; }
 
+    [SerializeField] private int charPerPlayer;
+    public int CharPerPlayer { get => charPerPlayer; protected set => _ = charPerPlayer; }
+
     private GameManager gameManager;
 
 
@@ -28,6 +31,8 @@ public class GameMode : MonoBehaviour
     {
         gameManager.gameMode = this;
     }
+
 }
+
 
 

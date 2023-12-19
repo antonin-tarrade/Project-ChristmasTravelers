@@ -1,14 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.UI;
-using UnityEngine.Rendering;
-using UnityEngine.U2D;
 using UnityEngine.UI;
-using static UnityEngine.InputSystem.InputAction;
 
 public class PlayerController : MonoBehaviour
 {
@@ -28,11 +21,14 @@ public class PlayerController : MonoBehaviour
     private bool buttonEnabled = true;
     [SerializeField]  private float clickCooldown;
 
+    private GameManager gameManager;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameManager.instance;
+
         allCharacters = GameObject.Find("AllCharactersPool").transform;
 
         InitSelector();
@@ -70,7 +66,9 @@ public class PlayerController : MonoBehaviour
     }
 
     public void OnButtonClicked() {
-        if (selectedButton == null || !buttonEnabled )
+        bool isFull = player.characters.Count >= gameManager.gameMode.CharPerPlayer;
+
+        if (selectedButton == null || !buttonEnabled || isFull)
         {
             return;
         }
@@ -78,8 +76,8 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(ButtonCooldown());
 
         Character ch = selectedButton.charPrefab.GetComponent<Character>();
-        player.AddCharacter(ch);
         ChooseCharacterManager.instance.OnCharacterAdded(player, ch);
+        player.AddCharacter(ch);
     }
 
     IEnumerator ButtonCooldown()
@@ -97,8 +95,8 @@ public class PlayerController : MonoBehaviour
             return;
         }
         StartCoroutine(ButtonCooldown());
-        player.characters.RemoveAt(player.characters.Count - 1);
         ChooseCharacterManager.instance.OnCharacterDeleted(player);
+        player.characters.RemoveAt(player.characters.Count - 1);
     }
 
 
