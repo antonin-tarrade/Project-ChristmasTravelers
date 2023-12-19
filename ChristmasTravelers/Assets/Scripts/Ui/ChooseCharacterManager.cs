@@ -127,12 +127,15 @@ public class ChooseCharacterManager : MonoBehaviour
 
     private void InitPlayerPool(){
         for (int i = 0; i< nbOfPlayers; i++){
-            GameObject pool = Instantiate(playerPool,allPlayersPool.transform);
-            pool.name = "UnsetPool";
-            pool.transform.SetParent(allPlayersPool);
+            GameObject pPool = Instantiate(playerPool,allPlayersPool.transform);
+            pPool.name = "UnsetPool";
+            pPool.transform.SetParent(allPlayersPool);
+
+
+            Transform pool = pPool.transform.GetChild(1);
             for (int j = 0; j<charPerPlayer; j++){
-                GameObject placeHOlder = Instantiate(characterUiBig, pool.transform);
-                InitCharPlaceHolder(placeHOlder);
+                GameObject placeHolder = Instantiate(characterUiBig, pool.transform);
+                InitCharPlaceHolder(placeHolder);
             }
         }
     }
@@ -162,25 +165,33 @@ public class ChooseCharacterManager : MonoBehaviour
 
         // Player Pool
         Transform pool = allPlayersPool.Find("UnsetPool");
-        GameObject poolGO = pool.gameObject;
-        poolGO.name = newPlayer.name + "Pool";
-        TextMeshProUGUI tmp = poolGO.GetComponent<TextMeshProUGUI>();
-        tmp.text = newPlayer.name;
-        tmp.color = newPlayer.color;
+        UpdatePlayerPool(pool, newPlayer);
 
         // Player Controller
         pc.player = newPlayer;
         pc.name = newPlayer.name;
         pc.transform.SetParent(playerContainer, false);
 
-        playersPool.Add(newPlayer, poolGO);
+        playersPool.Add(newPlayer, pool.gameObject);
+    }
+
+
+    private void UpdatePlayerPool(Transform pool, Player player)
+    {
+        pool.name = player.name + "Pool";
+        TextMeshProUGUI tmp = pool.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        tmp.text = player.name;
+        tmp.color = player.color;
+        TextMeshProUGUI readyText = pool.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
+        readyText.text = "Not Ready";
+        readyText.color = Color.red;
     }
 
 
     public void OnCharacterAdded(Player player,Character character)
     {
         playersPool.TryGetValue(player, out GameObject pool);
-        Transform charUI = pool.transform.GetChild(player.characters.Count);
+        Transform charUI = pool.transform.GetChild(1).GetChild(player.characters.Count);
         charUI.GetComponentInChildren<TextMeshProUGUI>().text = character.name;
         charUI.GetComponent<Image>().color = player.color;
     }
@@ -188,7 +199,7 @@ public class ChooseCharacterManager : MonoBehaviour
     public void OnCharacterDeleted(Player player)
     {
         playersPool.TryGetValue(player, out GameObject pool);
-        InitCharPlaceHolder(pool.transform.GetChild(player.characters.Count - 1).gameObject);
+        InitCharPlaceHolder(pool.transform.GetChild(1).GetChild(player.characters.Count - 1).gameObject);
     }
 
 }

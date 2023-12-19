@@ -66,6 +66,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void OnButtonClicked() {
+
         bool isFull = player.characters.Count >= gameManager.gameMode.CharPerPlayer;
 
         if (selectedButton == null || !buttonEnabled || isFull)
