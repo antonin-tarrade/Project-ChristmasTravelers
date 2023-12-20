@@ -23,9 +23,11 @@ public class ChooseCharacterManager : MonoBehaviour
     private Transform allCharactersPool;
     private Transform allPlayersPool;
 
-    private Dictionary<Player, GameObject> playersPool;
+    private Dictionary<Player, PlayerPoolUI> playersPool;
 
-    private int nbOfPlayers;
+    private int nbOfPlayersRequired;
+    private int currentNbOfPlayers;
+
 
     private int charPerPlayer;
 
@@ -35,9 +37,6 @@ public class ChooseCharacterManager : MonoBehaviour
     [SerializeField]private Color[] couleurs; //debug
 
     public static CharacterComponent[][] matrice{get; private set;}
-
-    private bool[] playersCanBeReady;
-    private bool[] playersReady;
     
     private void Awake()
     {
@@ -53,13 +52,11 @@ public class ChooseCharacterManager : MonoBehaviour
 
         gameManager = GameManager.instance;
 
-        nbOfPlayers = gameManager.gameMode.NbOfPlayers;
+        nbOfPlayersRequired = gameManager.gameMode.NbOfPlayers;
+        currentNbOfPlayers = 0;
         charPerPlayer = gameManager.gameMode.CharPerPlayer;
 
-        playersCanBeReady = new bool[nbOfPlayers];
-        playersReady = new bool[nbOfPlayers];
-
-        playersPool = new Dictionary<Player, GameObject>();
+        playersPool = new Dictionary<Player, PlayerPoolUI>();
 
         allCharacters = Resources.LoadAll<GameObject>("Characters").Where(ch => !ch.name.StartsWith('[')).ToArray();
         allCharactersPool = canvas.Find("AllCharactersPool");
@@ -133,7 +130,8 @@ public class ChooseCharacterManager : MonoBehaviour
 
 
     private void InitPlayerPool(){
-        for (int i = 0; i< nbOfPlayers; i++){
+
+        for (int i = 0; i< nbOfPlayersRequired; i++){
             GameObject pPool = Instantiate(playerPool,allPlayersPool.transform);
             pPool.name = "UnsetPool";
             pPool.transform.SetParent(allPlayersPool);
@@ -159,6 +157,7 @@ public class ChooseCharacterManager : MonoBehaviour
         PlayerController pc = GameObject.Find("PlayerController(Clone)").GetComponent<PlayerController>();
 
         // Instanciate the player
+        currentNbOfPlayers++;
         int playerNumber = gameManager.players.Count;
         Player newPlayer = new Player
         {
@@ -171,20 +170,24 @@ public class ChooseCharacterManager : MonoBehaviour
         gameManager.players.Add(newPlayer);
 
         // Player Pool
-        Transform pool = allPlayersPool.Find("UnsetPool");
-        UpdatePlayerPool(pool, newPlayer);
+        GameObject pool = allPlayersPool.Find("UnsetPool").gameObject;
+        PlayerPoolUI playerPool = CreatePlayerPool(pool, newPlayer);
 
         // Player Controller
         pc.player = newPlayer;
         pc.name = newPlayer.name;
         pc.transform.SetParent(playerContainer, false);
 
-        playersPool.Add(newPlayer, pool.gameObject);
+        playersPool.Add(newPlayer, playerPool);
     }
 
 
-    private void UpdatePlayerPool(Transform pool, Player player)
+    // /!\ Need to add OnPlayerLeft Event /!\ 
+
+
+    private PlayerPoolUI CreatePlayerPool(GameObject pool, Player player)
     {
+
         pool.name = player.name + "Pool";
         TextMeshProUGUI tmp = pool.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         tmp.text = player.name;
@@ -192,42 +195,123 @@ public class ChooseCharacterManager : MonoBehaviour
         TextMeshProUGUI readyText = pool.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
         readyText.text = "Not Ready";
         readyText.color = Color.red;
+
+        return  new PlayerPoolUI(pool);
     }
 
 
     public void OnCharacterAdded(Player player,Character character)
     {
-        playersPool.TryGetValue(player, out GameObject pool);
-        Transform charUI = pool.transform.GetChild(1).GetChild(player.characters.Count);
+        playersPool.TryGetValue(player, out PlayerPoolUI pool);
+        Transform charUI = pool.characterPool.transform.GetChild(player.characters.Count);
         charUI.GetComponentInChildren<TextMeshProUGUI>().text = character.name;
         charUI.GetComponent<Image>().color = player.color;
 
         if (player.characters.Count == gameManager.gameMode.CharPerPlayer - 1) {
-            pool.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text += "\n press start";
-            playersCanBeReady[player.number-1] = true;
+            pool.state = PlayerPoolUI.PlayerState.CanBeReady;
+            pool.UpdateReadyText();
         }
 
     }
 
     public void OnCharacterDeleted(Player player)
     {
-        playersPool.TryGetValue(player, out GameObject pool);
-        InitCharPlaceHolder(pool.transform.GetChild(1).GetChild(player.characters.Count - 1).gameObject);
+        playersPool.TryGetValue(player, out PlayerPoolUI pool);
+        InitCharPlaceHolder(pool.characterPool.transform.GetChild(player.characters.Count - 1).gameObject);
+
+        pool.state = PlayerPoolUI.PlayerState.Unset;
+        pool.UpdateReadyText();
     }
 
     public void OnReady(Player player){
-        playersReady[player.number - 1 ] = playersCanBeReady[player.number - 1];
-        if (IsEveryPlayerReady()) {
-            SceneManager.LoadScene(gameManager.gameMode.Scene);
+        playersPool.TryGetValue(player,out PlayerPoolUI pool);
+        switch (pool.state)
+        {
+            case PlayerPoolUI.PlayerState.CanBeReady:
+                pool.state = PlayerPoolUI.PlayerState.Ready;
+                break;
+            case PlayerPoolUI.PlayerState.Ready:
+                pool.state = PlayerPoolUI.PlayerState.CanBeReady;
+                break;
+            case PlayerPoolUI.PlayerState.Unset:
+                return;
         }
+
+        pool.UpdateReadyText();
+
+        if (IsEveryPlayerReady() && currentNbOfPlayers == nbOfPlayersRequired)
+        {
+            SceneManager.LoadScene(gameManager.gameMode.Scene);
+        };
+
     }
 
     private bool IsEveryPlayerReady(){
-        bool isEveryoneRdy = true;
-        foreach (bool b in playersReady){
-            isEveryoneRdy = isEveryoneRdy || b;
+        List<PlayerPoolUI> allPlayerPools = new List<PlayerPoolUI>(playersPool.Values);
+        foreach (PlayerPoolUI pool in allPlayerPools)
+        {
+            if (pool.state != PlayerPoolUI.PlayerState.Ready) return false;
         }
-        return isEveryoneRdy;
+        return true;    
+    }
+
+
+
+
+    private class PlayerPoolUI
+    {
+        public GameObject playerPool;
+
+        public GameObject characterPool;
+
+        public TextMeshProUGUI playerName;
+
+        public TextMeshProUGUI ready;
+
+        public TextMeshProUGUI pressStart;
+
+        public enum PlayerState { Unset, CanBeReady, Ready} 
+
+        public PlayerState state;
+
+
+        public PlayerPoolUI (GameObject playerPool)
+        {
+            this.playerPool = playerPool;
+            playerName = playerPool.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+            characterPool = playerPool.transform.GetChild(1).gameObject;
+            ready = playerPool.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
+            pressStart = playerPool.transform.GetChild(3).GetComponent<TextMeshProUGUI>();
+            state = PlayerState.Unset;
+        }
+
+
+        public void UpdateReadyText() { 
+        
+            switch (state)
+            {
+                case PlayerState.Unset:
+                    ready.text = "Not Ready";
+                    ready.color = Color.red;
+                    pressStart.text = "";
+                    break;
+                case PlayerState.CanBeReady:
+                    ready.text = "Not Ready";
+                    ready.color = Color.red;
+                    pressStart.text = "press Start";
+                    break;
+                case PlayerState.Ready:
+                    ready.text = "Ready";
+                    ready.color= Color.green;
+                    pressStart.text = "";
+                    break;
+            }
+        
+        }
+
+
+
+
     }
 
 }

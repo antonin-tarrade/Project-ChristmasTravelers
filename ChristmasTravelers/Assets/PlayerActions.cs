@@ -382,6 +382,15 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Ready"",
+                    ""type"": ""Button"",
+                    ""id"": ""d8e39de3-1ae5-48b0-a1e0-1b01c10efe14"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -516,6 +525,28 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""action"": ""DeletedCharacter"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e61ace35-515b-4385-93e7-fcc9a5f2888b"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Ready"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3cf9433d-e67f-4776-b984-60a376dff4f0"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Ready"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -562,6 +593,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         m_CharacterSelector_SelectButtonUp = m_CharacterSelector.FindAction("SelectButtonUp", throwIfNotFound: true);
         m_CharacterSelector_AddCharacter = m_CharacterSelector.FindAction("AddCharacter", throwIfNotFound: true);
         m_CharacterSelector_DeletedCharacter = m_CharacterSelector.FindAction("DeletedCharacter", throwIfNotFound: true);
+        m_CharacterSelector_Ready = m_CharacterSelector.FindAction("Ready", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -723,6 +755,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_CharacterSelector_SelectButtonUp;
     private readonly InputAction m_CharacterSelector_AddCharacter;
     private readonly InputAction m_CharacterSelector_DeletedCharacter;
+    private readonly InputAction m_CharacterSelector_Ready;
     public struct CharacterSelectorActions
     {
         private @PlayerActions m_Wrapper;
@@ -733,6 +766,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         public InputAction @SelectButtonUp => m_Wrapper.m_CharacterSelector_SelectButtonUp;
         public InputAction @AddCharacter => m_Wrapper.m_CharacterSelector_AddCharacter;
         public InputAction @DeletedCharacter => m_Wrapper.m_CharacterSelector_DeletedCharacter;
+        public InputAction @Ready => m_Wrapper.m_CharacterSelector_Ready;
         public InputActionMap Get() { return m_Wrapper.m_CharacterSelector; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -760,6 +794,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @DeletedCharacter.started += instance.OnDeletedCharacter;
             @DeletedCharacter.performed += instance.OnDeletedCharacter;
             @DeletedCharacter.canceled += instance.OnDeletedCharacter;
+            @Ready.started += instance.OnReady;
+            @Ready.performed += instance.OnReady;
+            @Ready.canceled += instance.OnReady;
         }
 
         private void UnregisterCallbacks(ICharacterSelectorActions instance)
@@ -782,6 +819,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @DeletedCharacter.started -= instance.OnDeletedCharacter;
             @DeletedCharacter.performed -= instance.OnDeletedCharacter;
             @DeletedCharacter.canceled -= instance.OnDeletedCharacter;
+            @Ready.started -= instance.OnReady;
+            @Ready.performed -= instance.OnReady;
+            @Ready.canceled -= instance.OnReady;
         }
 
         public void RemoveCallbacks(ICharacterSelectorActions instance)
@@ -835,5 +875,6 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         void OnSelectButtonUp(InputAction.CallbackContext context);
         void OnAddCharacter(InputAction.CallbackContext context);
         void OnDeletedCharacter(InputAction.CallbackContext context);
+        void OnReady(InputAction.CallbackContext context);
     }
 }

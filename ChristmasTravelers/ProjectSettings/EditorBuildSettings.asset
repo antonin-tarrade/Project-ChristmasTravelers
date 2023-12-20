@@ -11,10 +11,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
-  - enabled: 0
-    path: Assets/Scenes/GreyBox.unity
-    guid: c3783180b695440b1a8bcc68ce431d9d
+  - enabled: 1
+    path: Assets/Scenes/ChooseGameMode.unity
+    guid: 50017bac8af0c13498f1458d183e2be4
   - enabled: 1
     path: Assets/Scenes/ChooseCharacter.unity
     guid: 20c584e201c9f46e7a62e8cf50943dd0
+  - enabled: 1
+    path: Assets/Scenes/GreyBox.unity
+    guid: c3783180b695440b1a8bcc68ce431d9d
   m_configObjects: {}

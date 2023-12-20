@@ -146,4 +146,10 @@ public class PlayerController : MonoBehaviour
     }
 
 
+    public void OnReady()
+    {
+        chooseCharacterManager.OnReady(player);
+    }
+
+
 }
