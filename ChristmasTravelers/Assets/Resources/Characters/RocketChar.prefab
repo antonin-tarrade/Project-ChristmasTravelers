@@ -215,7 +215,9 @@ MonoBehaviour:
     name: 
     color: {r: 0, g: 0, b: 0, a: 0}
     score: 0
+    charPrefabSystem: {fileID: 0}
   grabRadius: 3
+  <FOV>k__BackingField: 10
 --- !u!114 &3451438070945045697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -440,7 +442,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemsData:
   - {fileID: 11400000, guid: 8f87a3ab0aea142e1b14bf64c9308c51, type: 2}
-  - {fileID: 11400000, guid: 8f87a3ab0aea142e1b14bf64c9308c51, type: 2}
+  - {fileID: 11400000, guid: 6801fc22145099f4badad0134ad99a71, type: 2}
   itemsNames: []
   itemSelected: 
 --- !u!114 &6824296113648132383
@@ -523,6 +525,12 @@ MonoBehaviour:
   <lifeLength>k__BackingField: 10
   projectile: {fileID: -2066974494560321891, guid: 6e2baea29d70f104db622c7702197add, type: 3}
   cooldown: 1
+  aimTriggerTreshold: 0
+  aimAssist:
+    useAimAssist: 0
+    aimAssistAngle: 0
+    aimAssistDamping: 0
+    aimAssistRange: 0
   directDamage: 1
   indirectDamage: 0.5
   explosionRadius: 3
