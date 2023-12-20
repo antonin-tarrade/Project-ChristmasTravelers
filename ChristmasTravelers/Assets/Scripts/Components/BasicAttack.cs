@@ -28,7 +28,7 @@ public class BasicAttack : MonoBehaviour, IAttack
     {
         lastTimeShoot = Time.time;
         Projectile proj = InitProj(shootDirection);
-        foreach (Character character in GetComponent<Character>().player.characters)
+        foreach (Character character in GetComponent<Character>().player.characterInstances)
         {
             Physics2D.IgnoreCollision(proj.GetComponent<Collider2D>(), character.GetComponent<Collider2D>());
         }

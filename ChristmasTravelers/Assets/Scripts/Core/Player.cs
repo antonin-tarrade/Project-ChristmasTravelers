@@ -7,48 +7,60 @@ using UnityEngine;
 public class Player : IPreparable
 {
 
-	public Transform spawn;
+	public Vector3 spawn;
 
 	public string name; // debug
+
+	public int number;
 
 	public Color color;
 
 	public int score;
 
-	public List<Character> characters { get; private set; }
-
-	public Character charPrefabSystem;
+	public List<Character> characterPrefabs { get; private set; }
+	public List<Character> characterInstances { get; private set; }
+	private int currentChar;
 
 	public List<Collider2D> toAvoid;
 
 	public void Init()
 	{
-		characters = new List<Character>();
 		toAvoid = new List<Collider2D>();
+		characterPrefabs = new List<Character>();
+		characterInstances = new List<Character>();
 		score = 0;
+		currentChar = 0;
 		GameManager.instance.Register(this);
 	}
 
 	public void Prepare()
 	{
 		score = 0;
-		foreach (Character character in characters)
+		foreach (Character character in characterInstances)
 		{
-			character.Prepare();
+			//character.Prepare();
 		}
 		toAvoid.Clear();
 	}
 
 
-	public void AddCharacter(Character character)
+	public void AddCharacterInstance(Character character)
 	{
-		characters.Add(character);
+		characterInstances.Add(character);
 		character.GetComponent<SpriteRenderer>().color = this.color;
 		character.player = this;
 	}
 
-	public Character ChooseCharacter() {
-		return charPrefabSystem;
+		public void AddCharacterPrefab(Character character)
+	{
+		characterPrefabs.Add(character);
+		character.player = this;
+	}
+
+	public Character ChooseCharacter() {	
+		Character character = characterPrefabs[currentChar];
+		currentChar++;
+		return character;
 	}
 
 

@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
+    //Debug
     public Character[] DEBUG;
 
 	public static GameManager instance;
@@ -16,26 +18,34 @@ public class GameManager : MonoBehaviour {
 
     public RoundHandler roundHandler;
     public static readonly int defaultFOV = 15;
-    [SerializeField] private CinemachineVirtualCamera virtualCamera;
+    
+    public CinemachineVirtualCamera virtualCamera;
 
-
+    public GameModeData gameMode;
     [field : SerializeField] public GameData gameData {  get; private set; }
 
 	// Playing players
 	[field: SerializeField] public List<Player> players { get; private set; }
-    private int currentPlayerIndex;
-    private Player currentPlayer;
 
+    private int currentPlayerIndex;
+
+    private Player currentPlayer;
 
     private List<IPreparable> preparables;
     private List<GameObject> spawnables;
 
+    private bool isPlaying;
+
 	private void Awake () {
+
+        DontDestroyOnLoad(gameObject);
 		instance = this;
-        roundHandler = new RoundHandler(virtualCamera);
         currentPlayerIndex = 0;
         preparables = new List<IPreparable>();
         spawnables = new List<GameObject>();
+
+        isPlaying = false;
+        
 	}
 
     private void Start()
@@ -48,7 +58,6 @@ public class GameManager : MonoBehaviour {
     }
 
     private void Update() {
-        DEBUG = roundHandler.inactiveCharacters.ToArray<Character>();
     }
 
     public void Register(IPreparable p)
@@ -67,13 +76,15 @@ public class GameManager : MonoBehaviour {
 
     public Character SpawnCharacter(Player p) {
         Character c = Instantiate(p.ChooseCharacter());
-        p.AddCharacter(c);
+        p.AddCharacterInstance(c);
         roundHandler.Add(c);
         return c;
     }
 
     public void StartTurn()
     {
+        if (isPlaying) return;
+        isPlaying = true;
         foreach (IPreparable p in preparables)
         {
             p.Prepare();
@@ -102,6 +113,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public void EndTurn() {
+        if (!isPlaying) return;
         OnTurnEnd?.Invoke();
         roundHandler.EndTurn();
 
@@ -109,6 +121,7 @@ public class GameManager : MonoBehaviour {
         timerEnd += StartTurn;
         StartCoroutine(Timer(3));
         Debug.Log("END");
+        isPlaying = false;
     }
 
 
@@ -124,6 +137,37 @@ public class GameManager : MonoBehaviour {
             yield return null;
         }
         timerEnd?.Invoke();
+    }
+    public void Play()
+    {
+        SceneManager.LoadScene(gameMode.scene.name);
+    }
+
+
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (gameMode != null && scene.name == gameMode.scene.name)
+        {
+            if (isPlaying) return;
+            virtualCamera = GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>();
+            roundHandler = new RoundHandler(virtualCamera);
+            for (int i = 0; i < gameMode.nbOfPlayers; i ++)
+            {
+                players[i].spawn = gameMode.spawns[i];
+            }
+            StartTurn();
+        }
+    }
+
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
 }

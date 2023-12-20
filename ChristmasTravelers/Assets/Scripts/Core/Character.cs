@@ -17,6 +17,6 @@ public class Character : MonoBehaviour {
 	}
 
 	public void Prepare(){
-		transform.position = player.spawn.transform.position;
+		transform.position = player.spawn;
 	}
 }
