@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameMode : MonoBehaviour
@@ -14,6 +15,11 @@ public class GameMode : MonoBehaviour
 
     [SerializeField] private int charPerPlayer;
     public int CharPerPlayer { get => charPerPlayer; protected set => _ = charPerPlayer; }
+
+
+    [SerializeField] private string scene;
+    public string Scene { get => scene; private set => _ = scene; }
+
 
     private GameManager gameManager;
 

@@ -22,12 +22,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField]  private float clickCooldown;
 
     private GameManager gameManager;
+    private ChooseCharacterManager chooseCharacterManager;
 
 
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameManager.instance;
+        chooseCharacterManager = ChooseCharacterManager.instance;
 
         allCharacters = GameObject.Find("AllCharactersPool").transform;
 
@@ -65,6 +67,7 @@ public class PlayerController : MonoBehaviour
         GoToSelectedButton(selectedButton.transform.position);
     }
 
+
     public void OnButtonClicked() {
 
         bool isFull = player.characters.Count >= gameManager.gameMode.CharPerPlayer;
@@ -77,7 +80,7 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(ButtonCooldown());
 
         Character ch = selectedButton.charPrefab.GetComponent<Character>();
-        ChooseCharacterManager.instance.OnCharacterAdded(player, ch);
+        chooseCharacterManager.OnCharacterAdded(player, ch);
         player.AddCharacter(ch);
     }
 
@@ -96,7 +99,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
         StartCoroutine(ButtonCooldown());
-        ChooseCharacterManager.instance.OnCharacterDeleted(player);
+        chooseCharacterManager.OnCharacterDeleted(player);
         player.characters.RemoveAt(player.characters.Count - 1);
     }
 

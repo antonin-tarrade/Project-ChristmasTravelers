@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ChooseCharacterManager : MonoBehaviour
@@ -11,7 +13,6 @@ public class ChooseCharacterManager : MonoBehaviour
 
     private GameObject[] allCharacters;
     private GameManager gameManager;
-
 
     [SerializeField] private Transform canvas;
     [SerializeField] private GameObject characterUiMini;
@@ -34,6 +35,9 @@ public class ChooseCharacterManager : MonoBehaviour
     [SerializeField]private Color[] couleurs; //debug
 
     public static CharacterComponent[][] matrice{get; private set;}
+
+    private bool[] playersCanBeReady;
+    private bool[] playersReady;
     
     private void Awake()
     {
@@ -51,7 +55,10 @@ public class ChooseCharacterManager : MonoBehaviour
 
         nbOfPlayers = gameManager.gameMode.NbOfPlayers;
         charPerPlayer = gameManager.gameMode.CharPerPlayer;
-        
+
+        playersCanBeReady = new bool[nbOfPlayers];
+        playersReady = new bool[nbOfPlayers];
+
         playersPool = new Dictionary<Player, GameObject>();
 
         allCharacters = Resources.LoadAll<GameObject>("Characters").Where(ch => !ch.name.StartsWith('[')).ToArray();
@@ -59,7 +66,7 @@ public class ChooseCharacterManager : MonoBehaviour
         allPlayersPool = canvas.Find("AllPlayersPool");
 
         InitPlayerPool();
-        InitCharacterPool();
+        InitCharacterPool();    
     }
 
     // Update is called once per frame
@@ -194,12 +201,33 @@ public class ChooseCharacterManager : MonoBehaviour
         Transform charUI = pool.transform.GetChild(1).GetChild(player.characters.Count);
         charUI.GetComponentInChildren<TextMeshProUGUI>().text = character.name;
         charUI.GetComponent<Image>().color = player.color;
+
+        if (player.characters.Count == gameManager.gameMode.CharPerPlayer - 1) {
+            pool.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text += "\n press start";
+            playersCanBeReady[player.number-1] = true;
+        }
+
     }
 
     public void OnCharacterDeleted(Player player)
     {
         playersPool.TryGetValue(player, out GameObject pool);
         InitCharPlaceHolder(pool.transform.GetChild(1).GetChild(player.characters.Count - 1).gameObject);
+    }
+
+    public void OnReady(Player player){
+        playersReady[player.number - 1 ] = playersCanBeReady[player.number - 1];
+        if (IsEveryPlayerReady()) {
+            SceneManager.LoadScene(gameManager.gameMode.Scene);
+        }
+    }
+
+    private bool IsEveryPlayerReady(){
+        bool isEveryoneRdy = true;
+        foreach (bool b in playersReady){
+            isEveryoneRdy = isEveryoneRdy || b;
+        }
+        return isEveryoneRdy;
     }
 
 }
