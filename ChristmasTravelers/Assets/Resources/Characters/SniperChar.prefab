@@ -118,9 +118,9 @@ MonoBehaviour:
     number: 1
     color: {r: 0, g: 1, b: 0.8818593, a: 1}
     score: 0
-    charPrefabSystem: {fileID: 0}
+    <characterPrefabs>k__BackingField: []
   grabRadius: 3
-  <FOV>k__BackingField: 0
+  <FOV>k__BackingField: 10
 --- !u!114 &3451438070945045697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,6 +274,30 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 8bee7192-8eae-44f3-9489-5a059ba89901
     m_ActionName: Player1/ShootDirection[/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0f334947-6e12-4b95-92e4-84e6ba4e4726
+    m_ActionName: CharacterSelector/SelectButtonRight[/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 05dc7f9f-19a6-4279-9cf8-00249c9af09b
+    m_ActionName: CharacterSelector/SelectButtonLeft[/Keyboard/leftArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 45554166-8c9d-4fe3-8fea-c92ddbe346bd
+    m_ActionName: CharacterSelector/SelectButtonDown[/Keyboard/downArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 956c4fe8-5092-4600-b0b3-0362f3f4f5d4
+    m_ActionName: CharacterSelector/SelectButtonUp[/Keyboard/upArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 396c2f8f-b8f6-4560-9d3d-665a5cd62007
+    m_ActionName: CharacterSelector/AddCharacter[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0688fbfd-7deb-4ee1-b6bd-624407a8b0e1
+    m_ActionName: CharacterSelector/DeletedCharacter[/Keyboard/backspace]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player1

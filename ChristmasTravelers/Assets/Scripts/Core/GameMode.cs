@@ -7,18 +7,13 @@ using UnityEngine.UI;
 
 public class GameMode : MonoBehaviour
 {
-    [SerializeField] private string modeName;
-    public string ModeName { get => modeName; protected set => _ = modeName; }
+    [field : SerializeField] public string modeName {get; private set;}
 
-    [SerializeField] private int nbOfPlayers;
-    public int NbOfPlayers { get => nbOfPlayers; protected set => _ = nbOfPlayers; }
+    [field : SerializeField] public int nbOfPlayers {get; private set;}
 
-    [SerializeField] private int charPerPlayer;
-    public int CharPerPlayer { get => charPerPlayer; protected set => _ = charPerPlayer; }
+    [field : SerializeField] public int charPerPlayer {get; private set;}
 
-
-    [SerializeField] private string scene;
-    public string Scene { get => scene; private set => _ = scene; }
+    [field : SerializeField] public string scene { get ; private set; }
 
 
     private GameManager gameManager;

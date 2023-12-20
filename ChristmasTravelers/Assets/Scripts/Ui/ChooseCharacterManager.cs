@@ -52,9 +52,9 @@ public class ChooseCharacterManager : MonoBehaviour
 
         gameManager = GameManager.instance;
 
-        nbOfPlayersRequired = gameManager.gameMode.NbOfPlayers;
+        nbOfPlayersRequired = gameManager.gameMode.nbOfPlayers;
         currentNbOfPlayers = 0;
-        charPerPlayer = gameManager.gameMode.CharPerPlayer;
+        charPerPlayer = gameManager.gameMode.charPerPlayer;
 
         playersPool = new Dictionary<Player, PlayerPoolUI>();
 
@@ -203,11 +203,11 @@ public class ChooseCharacterManager : MonoBehaviour
     public void OnCharacterAdded(Player player,Character character)
     {
         playersPool.TryGetValue(player, out PlayerPoolUI pool);
-        Transform charUI = pool.characterPool.transform.GetChild(player.characters.Count);
+        Transform charUI = pool.characterPool.transform.GetChild(player.characterPrefabs.Count);
         charUI.GetComponentInChildren<TextMeshProUGUI>().text = character.name;
         charUI.GetComponent<Image>().color = player.color;
 
-        if (player.characters.Count == gameManager.gameMode.CharPerPlayer - 1) {
+        if (player.characterPrefabs.Count == gameManager.gameMode.charPerPlayer - 1) {
             pool.state = PlayerPoolUI.PlayerState.CanBeReady;
             pool.UpdateReadyText();
         }
@@ -217,7 +217,7 @@ public class ChooseCharacterManager : MonoBehaviour
     public void OnCharacterDeleted(Player player)
     {
         playersPool.TryGetValue(player, out PlayerPoolUI pool);
-        InitCharPlaceHolder(pool.characterPool.transform.GetChild(player.characters.Count - 1).gameObject);
+        InitCharPlaceHolder(pool.characterPool.transform.GetChild(player.characterPrefabs.Count - 1).gameObject);
 
         pool.state = PlayerPoolUI.PlayerState.Unset;
         pool.UpdateReadyText();
@@ -241,7 +241,7 @@ public class ChooseCharacterManager : MonoBehaviour
 
         if (IsEveryPlayerReady() && currentNbOfPlayers == nbOfPlayersRequired)
         {
-            SceneManager.LoadScene(gameManager.gameMode.Scene);
+            SceneManager.LoadScene(gameManager.gameMode.scene);
         };
 
     }

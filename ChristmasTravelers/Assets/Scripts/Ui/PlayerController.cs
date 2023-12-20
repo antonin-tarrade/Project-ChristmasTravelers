@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
 
@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnButtonClicked() {
 
-        bool isFull = player.characters.Count >= gameManager.gameMode.CharPerPlayer;
+        bool isFull = player.characterPrefabs.Count >= gameManager.gameMode.charPerPlayer;
 
         if (selectedButton == null || !buttonEnabled || isFull)
         {
@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
 
         Character ch = selectedButton.charPrefab.GetComponent<Character>();
         chooseCharacterManager.OnCharacterAdded(player, ch);
-        player.AddCharacter(ch);
+        player.AddCharacterPrefab(ch);
     }
 
     IEnumerator ButtonCooldown()
@@ -94,13 +94,13 @@ public class PlayerController : MonoBehaviour
     
     public void RemoveLastAddedChar()
     {
-        if (player.characters.Count == 0 || !buttonEnabled)
+        if (player.characterPrefabs.Count == 0 || !buttonEnabled)
         {
             return;
         }
         StartCoroutine(ButtonCooldown());
         chooseCharacterManager.OnCharacterDeleted(player);
-        player.characters.RemoveAt(player.characters.Count - 1);
+        player.characterPrefabs.RemoveAt(player.characterPrefabs.Count - 1);
     }
 
 

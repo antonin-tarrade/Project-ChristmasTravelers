@@ -655,7 +655,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1986719883}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GreyBoxManager, Assembly-CSharp
         m_MethodName: ChangePlayer
         m_Mode: 1
@@ -1060,7 +1060,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1986719880}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: EndTurn
         m_Mode: 1
@@ -4219,7 +4219,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1986719880}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: StartTurn
         m_Mode: 1
@@ -4269,79 +4269,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1978780270}
   m_CullTransparentMesh: 1
---- !u!1 &1986719878
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1986719882}
-  - component: {fileID: 1986719880}
-  - component: {fileID: 1986719883}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1986719880
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1986719878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ea05b05a85d8344d864ee605c953bea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DEBUG: []
-  virtualCamera: {fileID: 445016704}
-  <gameData>k__BackingField: {fileID: 11400000, guid: a14dff6fa6dde13459d9220f7b741331, type: 2}
-  <players>k__BackingField:
-  - spawn: {fileID: 1409588422}
-    name: Cregut
-    color: {r: 0, g: 0.9505658, b: 1, a: 1}
-    score: 0
-    charPrefabSystem: {fileID: 7858320245909833396, guid: 87de95f3fd2032247ba2422a6de4bad4, type: 3}
-  - spawn: {fileID: 472426439}
-    name: PDL
-    color: {r: 0.9607843, g: 0.13333334, b: 0.28627452, a: 1}
-    score: 0
-    charPrefabSystem: {fileID: 7858320245909833396, guid: 222b6f40c813b8d4c9f0e4e3fb96bb78, type: 3}
---- !u!4 &1986719882
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1986719878}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1986719883
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1986719878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa918045e19ef4826b8da24ce365a935, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  colorBlue: {r: 0, g: 0.9490196, b: 1, a: 1}
-  colorRed: {r: 0.9607843, g: 0.13333334, b: 0.28627452, a: 1}
 --- !u!1001 &2111989389
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4417,5 +4344,4 @@ SceneRoots:
   - {fileID: 472426439}
   - {fileID: 1470989405}
   - {fileID: 1384997561}
-  - {fileID: 1986719882}
   - {fileID: 953987896}

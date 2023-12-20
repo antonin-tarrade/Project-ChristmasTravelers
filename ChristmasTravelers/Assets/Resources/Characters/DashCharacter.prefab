@@ -116,9 +116,9 @@ MonoBehaviour:
     number: 1
     color: {r: 0, g: 1, b: 0.8818593, a: 1}
     score: 0
-    charPrefabSystem: {fileID: 0}
+    <characterPrefabs>k__BackingField: []
   grabRadius: 3
-  <FOV>k__BackingField: 0
+  <FOV>k__BackingField: 10
 --- !u!114 &3451438070945045697
 MonoBehaviour:
   m_ObjectHideFlags: 0

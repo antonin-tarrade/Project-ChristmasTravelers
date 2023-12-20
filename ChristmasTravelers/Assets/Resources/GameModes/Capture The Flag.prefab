@@ -280,7 +280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a16c5206efb65f4db6eca24ae7bd9fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  modeName: Capture The Flag [1v1]
-  nbOfPlayers: 2
-  charPerPlayer: 3
-  scene: Greybox
+  <modeName>k__BackingField: '[1V1] Capture The Flag'
+  <nbOfPlayers>k__BackingField: 2
+  <charPerPlayer>k__BackingField: 3
+  <scene>k__BackingField: GreyBox

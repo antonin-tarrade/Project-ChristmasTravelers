@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour {
 
     public Character SpawnCharacter(Player p) {
         Character c = Instantiate(p.ChooseCharacter());
-        p.AddCharacter(c);
+        p.AddCharacterInstance(c);
         roundHandler.Add(c);
         return c;
     }

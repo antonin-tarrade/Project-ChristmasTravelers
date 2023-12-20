@@ -17,36 +17,46 @@ public class Player : IPreparable
 
 	public int score;
 
-	public List<Character> characters { get; private set; }
-
-	public Character charPrefabSystem;
+	[field : SerializeField] public List<Character> characterPrefabs { get; private set; }
+	public List<Character> characterInstances { get; private set; }
+	private int currentChar;
 
 	public void Init()
 	{
-		characters = new List<Character>();
+		characterPrefabs = new List<Character>();
+		characterInstances = new List<Character>();
 		score = 0;
+		currentChar = 0;
 		GameManager.instance.Register(this);
 	}
 
 	public void Prepare()
 	{
 		score = 0;
-		foreach (Character character in characters)
+		foreach (Character character in characterInstances)
 		{
 			character.Prepare();
 		}
 	}
 
 
-	public void AddCharacter(Character character)
+	public void AddCharacterInstance(Character character)
 	{
-		characters.Add(character);
+		characterInstances.Add(character);
 		character.GetComponent<SpriteRenderer>().color = this.color;
 		character.player = this;
 	}
 
-	public Character ChooseCharacter() {
-		return charPrefabSystem;
+		public void AddCharacterPrefab(Character character)
+	{
+		characterPrefabs.Add(character);
+		character.player = this;
+	}
+
+	public Character ChooseCharacter() {	
+		Character character = characterPrefabs[currentChar];
+		currentChar++;
+		return character;
 	}
 
 
