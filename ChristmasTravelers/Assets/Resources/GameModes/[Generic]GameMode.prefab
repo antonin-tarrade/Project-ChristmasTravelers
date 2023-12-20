@@ -146,7 +146,6 @@ GameObject:
   - component: {fileID: 7633616909664628641}
   - component: {fileID: 3814573544653027248}
   - component: {fileID: 4849811479873963703}
-  - component: {fileID: -1330526606648780369}
   m_Layer: 5
   m_Name: '[Generic]GameMode'
   m_TagString: Untagged
@@ -256,7 +255,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -1330526606648780369}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameMode, Assembly-CSharp
         m_MethodName: SelectGameMode
         m_Mode: 1
@@ -268,18 +267,3 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &-1330526606648780369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5795051594163156890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a16c5206efb65f4db6eca24ae7bd9fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  modeName: 
-  nbOfPlayers: 0
-  charPerPlayer: 0

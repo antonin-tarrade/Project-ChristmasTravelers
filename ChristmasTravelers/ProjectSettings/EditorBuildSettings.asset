@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GreyBox.unity
     guid: c3783180b695440b1a8bcc68ce431d9d
+  - enabled: 1
+    path: Assets/Scenes/CaptureTheFlag.unity
+    guid: 0d59f70b1eb30534982c77214ca529f6
   m_configObjects: {}

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -9,13 +10,14 @@ public class ChooseGameModeManager : MonoBehaviour
 {
 
     [SerializeField] private RectTransform gameModePool;
-    private GameObject[] allModes;
+    [SerializeField] private Button button;
+    private GameModeData[] allModes;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        allModes = Resources.LoadAll<GameObject>("GameModes").Where(mode => !mode.name.StartsWith('[')).ToArray();
+        allModes = Resources.LoadAll<GameModeData>("GameModes").Where(mode => !mode.name.StartsWith('[')).ToArray();
         InitGameModePool();
 
     }
@@ -23,13 +25,19 @@ public class ChooseGameModeManager : MonoBehaviour
 
     private void InitGameModePool()
     {
-        foreach (GameObject mode in allModes)
+        foreach (GameModeData mode in allModes)
         {
-          GameObject gameMode = Instantiate(mode, gameModePool);
+            AddButtonFor(mode);
         }
-
         gameModePool.GetChild(0).gameObject.GetComponent<Button>().Select();
     }
+
+    public void AddButtonFor(GameModeData gameModeData)
+    {
+        Button buttonInstance = Instantiate(button, gameModePool);
+        buttonInstance.GetComponentInChildren<TextMeshProUGUI>().text = gameModeData.gameModeName;
+        buttonInstance.onClick.AddListener(() => GameManager.instance.gameMode =  gameModeData);
+    } 
 
 
     public void ChooseCharacter(){

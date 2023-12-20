@@ -2,6 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.InputSystem.InputAction;
 
 public class PlayerController : MonoBehaviour
 {
@@ -146,9 +147,10 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    public void OnReady()
+    public void OnReady(CallbackContext context)
     {
-        chooseCharacterManager.OnReady(player);
+
+        if (context.started) chooseCharacterManager.OnReady(player);
     }
 
 

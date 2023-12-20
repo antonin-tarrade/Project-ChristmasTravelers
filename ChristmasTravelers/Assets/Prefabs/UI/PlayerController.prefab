@@ -193,7 +193,7 @@ MonoBehaviour:
       - m_Target: {fileID: 2346344199793894824}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: OnReady
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -268,12 +268,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player:
-    spawn: {fileID: 0}
+    spawn: {x: 0, y: 0, z: 0}
     name: 
     number: 0
     color: {r: 0, g: 0, b: 0, a: 0}
     score: 0
-    charPrefabSystem: {fileID: 0}
   allCharacters: {fileID: 0}
   genericSelector: {fileID: 1796390233950489991, guid: 676d32f066a21ab41870564181236443, type: 3}
   switchCooldown: 0.25

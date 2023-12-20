@@ -7,7 +7,7 @@ using UnityEngine;
 public class Player : IPreparable
 {
 
-	public Transform spawn;
+	public Vector3 spawn;
 
 	public string name; // debug
 
@@ -17,7 +17,7 @@ public class Player : IPreparable
 
 	public int score;
 
-	[field : SerializeField] public List<Character> characterPrefabs { get; private set; }
+	public List<Character> characterPrefabs { get; private set; }
 	public List<Character> characterInstances { get; private set; }
 	private int currentChar;
 
@@ -35,7 +35,7 @@ public class Player : IPreparable
 		score = 0;
 		foreach (Character character in characterInstances)
 		{
-			character.Prepare();
+			//character.Prepare();
 		}
 	}
 

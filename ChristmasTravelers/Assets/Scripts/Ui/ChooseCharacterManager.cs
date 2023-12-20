@@ -44,11 +44,12 @@ public class ChooseCharacterManager : MonoBehaviour
         {
             instance = this;
         }
-
     }
     // Start is called before the first frame update
     void Start()
     {
+
+        
 
         gameManager = GameManager.instance;
 
@@ -241,7 +242,7 @@ public class ChooseCharacterManager : MonoBehaviour
 
         if (IsEveryPlayerReady() && currentNbOfPlayers == nbOfPlayersRequired)
         {
-            SceneManager.LoadScene(gameManager.gameMode.scene);
+            gameManager.Play(); 
         };
 
     }
