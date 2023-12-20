@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
+    //Debug
     public Character[] DEBUG;
 
 	public static GameManager instance;
