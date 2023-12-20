@@ -324,9 +324,257 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""CharacterSelector"",
+            ""id"": ""51429c8a-26e2-4999-be3b-62785d964e33"",
+            ""actions"": [
+                {
+                    ""name"": ""SelectButtonRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""0f334947-6e12-4b95-92e4-84e6ba4e4726"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectButtonLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""05dc7f9f-19a6-4279-9cf8-00249c9af09b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectButtonDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""45554166-8c9d-4fe3-8fea-c92ddbe346bd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectButtonUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""956c4fe8-5092-4600-b0b3-0362f3f4f5d4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AddCharacter"",
+                    ""type"": ""Button"",
+                    ""id"": ""396c2f8f-b8f6-4560-9d3d-665a5cd62007"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DeletedCharacter"",
+                    ""type"": ""Button"",
+                    ""id"": ""0688fbfd-7deb-4ee1-b6bd-624407a8b0e1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Ready"",
+                    ""type"": ""Button"",
+                    ""id"": ""d8e39de3-1ae5-48b0-a1e0-1b01c10efe14"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""862ccd7a-0511-42c4-83f4-49988033f80c"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""SelectButtonRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3030d9c9-9f1e-4918-b191-0618805965bf"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""SelectButtonRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d8dec963-8cbe-4c7c-93e5-adc9c6db6c9a"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""AddCharacter"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""698043a2-52d2-43cc-a9ac-0256953aebc4"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""AddCharacter"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0b9e76bf-dd19-441c-94ef-7088b2e305c8"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""SelectButtonLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""be650a69-49ec-4479-bcb7-bd7923b1c473"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""SelectButtonLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1dcbd155-dbe8-4d4e-b239-bdf5efecdf96"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""SelectButtonDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8f222059-2c84-4fae-97e9-15f3c3740d11"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""SelectButtonDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0c0d40d3-e62c-4bd9-b397-ffa19c574f08"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""SelectButtonUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f7c99048-368d-4a22-b5f0-4f5b7d236d56"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""SelectButtonUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""86bbaf7b-5c50-401a-a9bb-ab11b14b836e"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""DeletedCharacter"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""314c75c0-fc4e-4989-8664-966780d9e607"",
+                    ""path"": ""<Keyboard>/backspace"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DeletedCharacter"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e61ace35-515b-4385-93e7-fcc9a5f2888b"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Ready"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3cf9433d-e67f-4776-b984-60a376dff4f0"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Ready"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
-    ""controlSchemes"": []
+    ""controlSchemes"": [
+        {
+            ""name"": ""Controller"",
+            ""bindingGroup"": ""Controller"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Keyboard"",
+            ""bindingGroup"": ""Keyboard"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        }
+    ]
 }");
         // Player1
         m_Player1 = asset.FindActionMap("Player1", throwIfNotFound: true);
@@ -337,6 +585,15 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         m_Player1_UseItem = m_Player1.FindAction("UseItem", throwIfNotFound: true);
         m_Player1_PreviousItem = m_Player1.FindAction("Previous Item", throwIfNotFound: true);
         m_Player1_NextItem = m_Player1.FindAction("Next Item", throwIfNotFound: true);
+        // CharacterSelector
+        m_CharacterSelector = asset.FindActionMap("CharacterSelector", throwIfNotFound: true);
+        m_CharacterSelector_SelectButtonRight = m_CharacterSelector.FindAction("SelectButtonRight", throwIfNotFound: true);
+        m_CharacterSelector_SelectButtonLeft = m_CharacterSelector.FindAction("SelectButtonLeft", throwIfNotFound: true);
+        m_CharacterSelector_SelectButtonDown = m_CharacterSelector.FindAction("SelectButtonDown", throwIfNotFound: true);
+        m_CharacterSelector_SelectButtonUp = m_CharacterSelector.FindAction("SelectButtonUp", throwIfNotFound: true);
+        m_CharacterSelector_AddCharacter = m_CharacterSelector.FindAction("AddCharacter", throwIfNotFound: true);
+        m_CharacterSelector_DeletedCharacter = m_CharacterSelector.FindAction("DeletedCharacter", throwIfNotFound: true);
+        m_CharacterSelector_Ready = m_CharacterSelector.FindAction("Ready", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -488,6 +745,118 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         }
     }
     public Player1Actions @Player1 => new Player1Actions(this);
+
+    // CharacterSelector
+    private readonly InputActionMap m_CharacterSelector;
+    private List<ICharacterSelectorActions> m_CharacterSelectorActionsCallbackInterfaces = new List<ICharacterSelectorActions>();
+    private readonly InputAction m_CharacterSelector_SelectButtonRight;
+    private readonly InputAction m_CharacterSelector_SelectButtonLeft;
+    private readonly InputAction m_CharacterSelector_SelectButtonDown;
+    private readonly InputAction m_CharacterSelector_SelectButtonUp;
+    private readonly InputAction m_CharacterSelector_AddCharacter;
+    private readonly InputAction m_CharacterSelector_DeletedCharacter;
+    private readonly InputAction m_CharacterSelector_Ready;
+    public struct CharacterSelectorActions
+    {
+        private @PlayerActions m_Wrapper;
+        public CharacterSelectorActions(@PlayerActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @SelectButtonRight => m_Wrapper.m_CharacterSelector_SelectButtonRight;
+        public InputAction @SelectButtonLeft => m_Wrapper.m_CharacterSelector_SelectButtonLeft;
+        public InputAction @SelectButtonDown => m_Wrapper.m_CharacterSelector_SelectButtonDown;
+        public InputAction @SelectButtonUp => m_Wrapper.m_CharacterSelector_SelectButtonUp;
+        public InputAction @AddCharacter => m_Wrapper.m_CharacterSelector_AddCharacter;
+        public InputAction @DeletedCharacter => m_Wrapper.m_CharacterSelector_DeletedCharacter;
+        public InputAction @Ready => m_Wrapper.m_CharacterSelector_Ready;
+        public InputActionMap Get() { return m_Wrapper.m_CharacterSelector; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CharacterSelectorActions set) { return set.Get(); }
+        public void AddCallbacks(ICharacterSelectorActions instance)
+        {
+            if (instance == null || m_Wrapper.m_CharacterSelectorActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_CharacterSelectorActionsCallbackInterfaces.Add(instance);
+            @SelectButtonRight.started += instance.OnSelectButtonRight;
+            @SelectButtonRight.performed += instance.OnSelectButtonRight;
+            @SelectButtonRight.canceled += instance.OnSelectButtonRight;
+            @SelectButtonLeft.started += instance.OnSelectButtonLeft;
+            @SelectButtonLeft.performed += instance.OnSelectButtonLeft;
+            @SelectButtonLeft.canceled += instance.OnSelectButtonLeft;
+            @SelectButtonDown.started += instance.OnSelectButtonDown;
+            @SelectButtonDown.performed += instance.OnSelectButtonDown;
+            @SelectButtonDown.canceled += instance.OnSelectButtonDown;
+            @SelectButtonUp.started += instance.OnSelectButtonUp;
+            @SelectButtonUp.performed += instance.OnSelectButtonUp;
+            @SelectButtonUp.canceled += instance.OnSelectButtonUp;
+            @AddCharacter.started += instance.OnAddCharacter;
+            @AddCharacter.performed += instance.OnAddCharacter;
+            @AddCharacter.canceled += instance.OnAddCharacter;
+            @DeletedCharacter.started += instance.OnDeletedCharacter;
+            @DeletedCharacter.performed += instance.OnDeletedCharacter;
+            @DeletedCharacter.canceled += instance.OnDeletedCharacter;
+            @Ready.started += instance.OnReady;
+            @Ready.performed += instance.OnReady;
+            @Ready.canceled += instance.OnReady;
+        }
+
+        private void UnregisterCallbacks(ICharacterSelectorActions instance)
+        {
+            @SelectButtonRight.started -= instance.OnSelectButtonRight;
+            @SelectButtonRight.performed -= instance.OnSelectButtonRight;
+            @SelectButtonRight.canceled -= instance.OnSelectButtonRight;
+            @SelectButtonLeft.started -= instance.OnSelectButtonLeft;
+            @SelectButtonLeft.performed -= instance.OnSelectButtonLeft;
+            @SelectButtonLeft.canceled -= instance.OnSelectButtonLeft;
+            @SelectButtonDown.started -= instance.OnSelectButtonDown;
+            @SelectButtonDown.performed -= instance.OnSelectButtonDown;
+            @SelectButtonDown.canceled -= instance.OnSelectButtonDown;
+            @SelectButtonUp.started -= instance.OnSelectButtonUp;
+            @SelectButtonUp.performed -= instance.OnSelectButtonUp;
+            @SelectButtonUp.canceled -= instance.OnSelectButtonUp;
+            @AddCharacter.started -= instance.OnAddCharacter;
+            @AddCharacter.performed -= instance.OnAddCharacter;
+            @AddCharacter.canceled -= instance.OnAddCharacter;
+            @DeletedCharacter.started -= instance.OnDeletedCharacter;
+            @DeletedCharacter.performed -= instance.OnDeletedCharacter;
+            @DeletedCharacter.canceled -= instance.OnDeletedCharacter;
+            @Ready.started -= instance.OnReady;
+            @Ready.performed -= instance.OnReady;
+            @Ready.canceled -= instance.OnReady;
+        }
+
+        public void RemoveCallbacks(ICharacterSelectorActions instance)
+        {
+            if (m_Wrapper.m_CharacterSelectorActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ICharacterSelectorActions instance)
+        {
+            foreach (var item in m_Wrapper.m_CharacterSelectorActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_CharacterSelectorActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public CharacterSelectorActions @CharacterSelector => new CharacterSelectorActions(this);
+    private int m_ControllerSchemeIndex = -1;
+    public InputControlScheme ControllerScheme
+    {
+        get
+        {
+            if (m_ControllerSchemeIndex == -1) m_ControllerSchemeIndex = asset.FindControlSchemeIndex("Controller");
+            return asset.controlSchemes[m_ControllerSchemeIndex];
+        }
+    }
+    private int m_KeyboardSchemeIndex = -1;
+    public InputControlScheme KeyboardScheme
+    {
+        get
+        {
+            if (m_KeyboardSchemeIndex == -1) m_KeyboardSchemeIndex = asset.FindControlSchemeIndex("Keyboard");
+            return asset.controlSchemes[m_KeyboardSchemeIndex];
+        }
+    }
     public interface IPlayer1Actions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -497,5 +866,15 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         void OnUseItem(InputAction.CallbackContext context);
         void OnPreviousItem(InputAction.CallbackContext context);
         void OnNextItem(InputAction.CallbackContext context);
+    }
+    public interface ICharacterSelectorActions
+    {
+        void OnSelectButtonRight(InputAction.CallbackContext context);
+        void OnSelectButtonLeft(InputAction.CallbackContext context);
+        void OnSelectButtonDown(InputAction.CallbackContext context);
+        void OnSelectButtonUp(InputAction.CallbackContext context);
+        void OnAddCharacter(InputAction.CallbackContext context);
+        void OnDeletedCharacter(InputAction.CallbackContext context);
+        void OnReady(InputAction.CallbackContext context);
     }
 }

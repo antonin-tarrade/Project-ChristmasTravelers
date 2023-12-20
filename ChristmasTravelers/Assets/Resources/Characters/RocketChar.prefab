@@ -188,7 +188,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.8818593, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -212,10 +212,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player:
     spawn: {fileID: 0}
-    name: 
-    color: {r: 0, g: 0, b: 0, a: 0}
+    name: Player 1
+    number: 1
+    color: {r: 0, g: 1, b: 0.8818593, a: 1}
     score: 0
+    <characterPrefabs>k__BackingField: []
   grabRadius: 3
+  <FOV>k__BackingField: 10
 --- !u!114 &3451438070945045697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -369,6 +372,30 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 8bee7192-8eae-44f3-9489-5a059ba89901
     m_ActionName: Player1/ShootDirection[/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0f334947-6e12-4b95-92e4-84e6ba4e4726
+    m_ActionName: CharacterSelector/SelectButtonRight[/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 05dc7f9f-19a6-4279-9cf8-00249c9af09b
+    m_ActionName: CharacterSelector/SelectButtonLeft[/Keyboard/leftArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 45554166-8c9d-4fe3-8fea-c92ddbe346bd
+    m_ActionName: CharacterSelector/SelectButtonDown[/Keyboard/downArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 956c4fe8-5092-4600-b0b3-0362f3f4f5d4
+    m_ActionName: CharacterSelector/SelectButtonUp[/Keyboard/upArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 396c2f8f-b8f6-4560-9d3d-665a5cd62007
+    m_ActionName: CharacterSelector/AddCharacter[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0688fbfd-7deb-4ee1-b6bd-624407a8b0e1
+    m_ActionName: CharacterSelector/DeletedCharacter[/Keyboard/backspace]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player1
@@ -523,6 +550,12 @@ MonoBehaviour:
   <lifeLength>k__BackingField: 10
   projectile: {fileID: -2066974494560321891, guid: 6e2baea29d70f104db622c7702197add, type: 3}
   cooldown: 1
+  aimTriggerTreshold: 0
+  aimAssist:
+    useAimAssist: 0
+    aimAssistAngle: 0
+    aimAssistDamping: 0
+    aimAssistRange: 0
   directDamage: 1
   indirectDamage: 0.5
   explosionRadius: 3
