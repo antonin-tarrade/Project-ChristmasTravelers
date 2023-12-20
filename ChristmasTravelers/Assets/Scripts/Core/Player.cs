@@ -19,9 +19,12 @@ public class Player : IPreparable
 
 	public Character charPrefabSystem;
 
+	public List<Collider2D> toAvoid;
+
 	public void Init()
 	{
 		characters = new List<Character>();
+		toAvoid = new List<Collider2D>();
 		score = 0;
 		GameManager.instance.Register(this);
 	}
@@ -33,6 +36,7 @@ public class Player : IPreparable
 		{
 			character.Prepare();
 		}
+		toAvoid.Clear();
 	}
 
 

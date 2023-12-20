@@ -18,6 +18,7 @@ public class Shield : MonoBehaviour, ISpawnable, IDamageable
 
     public void Set(Character c, Vector3 position, Vector3 direction)
     {
+        c.player.toAvoid.Add(GetComponent<Collider2D>());
         transform.position = position + spawnOffset * direction.normalized;
         SetDirection(direction);
     }

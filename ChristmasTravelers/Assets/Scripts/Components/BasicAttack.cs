@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal.Internal;
+using UnityEngine.TextCore.Text;
 
 public class BasicAttack : MonoBehaviour, IAttack
 {
@@ -31,6 +32,10 @@ public class BasicAttack : MonoBehaviour, IAttack
         {
             Physics2D.IgnoreCollision(proj.GetComponent<Collider2D>(), character.GetComponent<Collider2D>());
         }
+        foreach (Collider2D collider in GetComponent<Character>().player.toAvoid)
+        {
+            Physics2D.IgnoreCollision(proj.GetComponent<Collider2D>(), collider);
+        } 
         proj.Shoot(shootDirection, spd, lifeLength);
     }
 

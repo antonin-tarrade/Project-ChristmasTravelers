@@ -50,12 +50,12 @@ public class SpawnerItem : Item
         if (o.TryGetComponent<ISpawnable>(out ISpawnable spawnable))
         {
             spawnable.Set(inventory.GetComponent<Character>(), param.position, param.direction);
-            GameManager.instance.Register(spawnable);
         }
         else
         {
             o.transform.position = param.position;
         }
+        GameManager.instance.ScheduleDestroy(o);
     }
 }
 
