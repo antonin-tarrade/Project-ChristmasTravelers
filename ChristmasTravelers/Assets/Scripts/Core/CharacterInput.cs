@@ -23,6 +23,7 @@ public class CharacterInput : SimpleInput
         character = GetComponent<Character>();
         inventory = GetComponent<Inventory>();
         attack = GetComponent<IAttack>();
+        isActive = true;
     }
 
     public void Grab(CallbackContext context)
