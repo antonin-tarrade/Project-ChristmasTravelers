@@ -122,6 +122,7 @@ GameObject:
   - component: {fileID: 2038903105383702377}
   - component: {fileID: 4337684085674946287}
   - component: {fileID: -2484819665270863370}
+  - component: {fileID: 1934250515657949926}
   m_Layer: 0
   m_Name: MinigunChar
   m_TagString: Untagged
@@ -216,6 +217,7 @@ MonoBehaviour:
     color: {r: 0, g: 0, b: 0, a: 0}
     score: 0
     charPrefabSystem: {fileID: 0}
+    toAvoid: []
   grabRadius: 3
   <FOV>k__BackingField: 15
 --- !u!114 &3451438070945045697
@@ -230,6 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f26b2ebe0153f745aa29e910738a9dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
   speed: 20
 --- !u!114 &6020620316253342707
 MonoBehaviour:
@@ -416,6 +419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1a4f671f4fb200418af1b95c5602a39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
 --- !u!114 &-5915344857319613970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -428,6 +432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37ddf01586f8da549b21f09a91a322c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
 --- !u!114 &6208526159675140355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -537,6 +542,33 @@ MonoBehaviour:
   mu: 0
   sprayAngle: 45
   accuracy: 2
+--- !u!50 &1934250515657949926
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3055416447674701499}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1001 &8517441078833226306
 PrefabInstance:
   m_ObjectHideFlags: 0

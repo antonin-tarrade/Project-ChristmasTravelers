@@ -4492,7 +4492,7 @@ MonoBehaviour:
     name: PDL
     color: {r: 0.9607843, g: 0.13333334, b: 0.28627452, a: 1}
     score: 0
-    charPrefabSystem: {fileID: 7858320245909833396, guid: 749cc70fcbf1a4a6caaf2faead45d388, type: 3}
+    charPrefabSystem: {fileID: 7858320245909833396, guid: 6523cd21d2c2f2d4ba2b54f1553301cf, type: 3}
     toAvoid: []
 --- !u!4 &1986719882
 Transform:
