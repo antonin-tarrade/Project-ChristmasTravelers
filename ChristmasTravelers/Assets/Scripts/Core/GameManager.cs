@@ -94,11 +94,36 @@ public class GameManager : MonoBehaviour {
             p.score = 0;
         }
         roundHandler.StartTurn();
+
+        timerEnd = null;
+        timerEnd += EndTurn;
+        StartCoroutine(Timer(10));
+        Debug.Log("START");
     }
 
     public void EndTurn() {
         OnTurnEnd?.Invoke();
         roundHandler.EndTurn();
+
+        timerEnd = null;
+        timerEnd += StartTurn;
+        StartCoroutine(Timer(3));
+        Debug.Log("END");
+    }
+
+
+
+    private Action timerEnd;
+
+    private IEnumerator Timer(float time)
+    {
+        float t = 0;
+        while (t < time)
+        {
+            t += Time.deltaTime;
+            yield return null;
+        }
+        timerEnd?.Invoke();
     }
 
 }

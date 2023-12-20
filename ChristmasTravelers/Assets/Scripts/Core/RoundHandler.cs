@@ -1,6 +1,7 @@
 using Cinemachine;
 using Records;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,7 +14,7 @@ public class RoundHandler  {
 	private CinemachineVirtualCamera camera;
 	private bool isActive;
 
-	public RoundHandler(CinemachineVirtualCamera camera) {
+    public RoundHandler(CinemachineVirtualCamera camera) {
 		activeCharacter = null;
 		inactiveCharacters = new HashSet<Character>();
 		this.camera = camera;
