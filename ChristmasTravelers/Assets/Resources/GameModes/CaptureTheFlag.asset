@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameModeName: CTF
   scene: {fileID: 102900000, guid: 0d59f70b1eb30534982c77214ca529f6, type: 3}
+  sceneName: CaptureTheFlag
   nbOfPlayers: 2
   charPerPlayer: 3
   spawns:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
-  roundDuration: 15
+  roundDuration: 20

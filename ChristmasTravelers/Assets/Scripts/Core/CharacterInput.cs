@@ -65,6 +65,11 @@ public class CharacterInput : SimpleInput
         if (context.started) inventory.NextItem();
     }
 
+    public void PreviousItem(CallbackContext context)
+    {
+        if (context.started) inventory.PreviousItem();
+    }
+
 
 
     private void Update()

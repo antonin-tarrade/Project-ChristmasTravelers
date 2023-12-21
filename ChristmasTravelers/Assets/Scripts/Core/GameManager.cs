@@ -108,7 +108,7 @@ public class GameManager : MonoBehaviour {
 
         timerEnd = null;
         timerEnd += EndTurn;
-        StartCoroutine(Timer(10));
+        StartCoroutine(Timer(gameMode.roundDuration));
         Debug.Log("START");
     }
 
@@ -119,7 +119,7 @@ public class GameManager : MonoBehaviour {
 
         timerEnd = null;
         timerEnd += StartTurn;
-        StartCoroutine(Timer(3));
+        StartCoroutine(Timer(1));
         Debug.Log("END");
         isPlaying = false;
     }
@@ -140,13 +140,13 @@ public class GameManager : MonoBehaviour {
     }
     public void Play()
     {
-        SceneManager.LoadScene(gameMode.scene.name);
+        SceneManager.LoadScene(gameMode.sceneName);
     }
 
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (gameMode != null && scene.name == gameMode.scene.name)
+        if (gameMode != null && scene.name == gameMode.sceneName)
         {
             if (isPlaying) return;
             virtualCamera = GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>();
