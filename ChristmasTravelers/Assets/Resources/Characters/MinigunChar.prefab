@@ -402,7 +402,7 @@ MonoBehaviour:
     m_ActionId: d8e39de3-1ae5-48b0-a1e0-1b01c10efe14
     m_ActionName: CharacterSelector/Ready[/XInputControllerWindows/start,/XInputControllerWindows1/start,/Keyboard/r]
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: Controller
   m_DefaultActionMap: Player1
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}

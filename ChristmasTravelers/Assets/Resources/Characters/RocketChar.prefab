@@ -217,6 +217,7 @@ MonoBehaviour:
     color: {r: 1, g: 0.16531092, b: 0, a: 1}
     score: 0
     toAvoid: []
+    controller: {fileID: 0}
   grabRadius: 3
   <FOV>k__BackingField: 10
 --- !u!114 &3451438070945045697
@@ -341,7 +342,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: -5915344857319613970}
         m_TargetAssemblyTypeName: CharacterInput, Assembly-CSharp
-        m_MethodName: UseItem
+        m_MethodName: NextItem
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -402,7 +403,7 @@ MonoBehaviour:
     m_ActionId: d8e39de3-1ae5-48b0-a1e0-1b01c10efe14
     m_ActionName: CharacterSelector/Ready[/XInputControllerWindows/start,/XInputControllerWindows1/start,/Keyboard/r]
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: Controller
   m_DefaultActionMap: Player1
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}

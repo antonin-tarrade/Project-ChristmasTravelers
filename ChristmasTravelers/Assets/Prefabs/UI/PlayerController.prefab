@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7222870095971982172}
   - component: {fileID: 5349563086240086453}
   - component: {fileID: 2346344199793894824}
+  - component: {fileID: -334193322769113898}
   m_Layer: 0
   m_Name: PlayerController
   m_TagString: Untagged
@@ -65,15 +66,51 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -334193322769113898}
+        m_TargetAssemblyTypeName: CharacterController, Assembly-CSharp
+        m_MethodName: Move
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 785657b8-6f38-4702-8f71-a6ab8f38bcfd
     m_ActionName: Player1/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/XInputControllerWindows/leftStick,/XInputControllerWindows1/leftStick]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -334193322769113898}
+        m_TargetAssemblyTypeName: CharacterController, Assembly-CSharp
+        m_MethodName: Grab
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 59e267b1-b80d-4bea-9e0f-fa2feca923cd
     m_ActionName: Player1/Grab[/Keyboard/e,/XInputControllerWindows/buttonSouth,/XInputControllerWindows1/buttonSouth]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -334193322769113898}
+        m_TargetAssemblyTypeName: CharacterController, Assembly-CSharp
+        m_MethodName: Shoot
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: dee79333-1a8d-4c32-a6e6-7745dcb2a933
     m_ActionName: Player1/Shoot[/Keyboard/space,/XInputControllerWindows/rightTrigger,/XInputControllerWindows1/rightTrigger]
   - m_PersistentCalls:
@@ -81,15 +118,51 @@ MonoBehaviour:
     m_ActionId: 8bee7192-8eae-44f3-9489-5a059ba89901
     m_ActionName: Player1/ShootDirection[/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow,/XInputControllerWindows/rightStick,/XInputControllerWindows1/rightStick]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -334193322769113898}
+        m_TargetAssemblyTypeName: CharacterController, Assembly-CSharp
+        m_MethodName: UseItem
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: f227c6ed-ab67-4e17-ae46-2f655ffb53ef
     m_ActionName: Player1/UseItem[/Keyboard/k,/XInputControllerWindows/buttonWest,/XInputControllerWindows1/buttonWest]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -334193322769113898}
+        m_TargetAssemblyTypeName: CharacterController, Assembly-CSharp
+        m_MethodName: PreviousItem
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 79ad8d02-5178-4b94-9d98-0c6d0a8ca5a7
     m_ActionName: Player1/Previous Item[/Keyboard/j,/XInputControllerWindows/leftShoulder,/XInputControllerWindows1/leftShoulder]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -334193322769113898}
+        m_TargetAssemblyTypeName: CharacterController, Assembly-CSharp
+        m_MethodName: NextItem
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 36d9e607-9313-472c-8a0f-754e018cfb35
     m_ActionName: Player1/Next Item[/XInputControllerWindows/rightShoulder,/XInputControllerWindows1/rightShoulder]
   - m_PersistentCalls:
@@ -273,7 +346,21 @@ MonoBehaviour:
     number: 0
     color: {r: 0, g: 0, b: 0, a: 0}
     score: 0
+    toAvoid: []
+    controller: {fileID: 0}
   allCharacters: {fileID: 0}
   genericSelector: {fileID: 1796390233950489991, guid: 676d32f066a21ab41870564181236443, type: 3}
   switchCooldown: 0.25
   clickCooldown: 0.3
+--- !u!114 &-334193322769113898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920055529936148154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ec27fbf1850aff4180d0621e9a2dc78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

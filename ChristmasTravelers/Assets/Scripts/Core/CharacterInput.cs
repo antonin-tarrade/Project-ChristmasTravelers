@@ -9,21 +9,23 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class CharacterInput : SimpleInput
 {
-    private InputAction shootAction;
     private InputAction aimAction;
-    private PlayerInput playerInput;
     private Character character;
     private IAttack attack;
     private Inventory inventory;
 
     private void Awake()
     {
-        shootAction = GetComponent<PlayerInput>().actions["Shoot"];
-        aimAction = GetComponent<PlayerInput>().actions["ShootDirection"];
         character = GetComponent<Character>();
         inventory = GetComponent<Inventory>();
         attack = GetComponent<IAttack>();
         isActive = true;
+    }
+
+    public void Set(PlayerInput playerInput)
+    {
+        Debug.Log("SET");
+        aimAction = playerInput.actions["ShootDirection"];
     }
 
     public void Grab(CallbackContext context)
@@ -69,8 +71,6 @@ public class CharacterInput : SimpleInput
     {
         if (context.started) inventory.PreviousItem();
     }
-
-
 
     private void Update()
     {

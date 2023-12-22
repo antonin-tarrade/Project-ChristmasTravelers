@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
@@ -97,6 +98,7 @@ public class GameManager : MonoBehaviour {
         currentPlayerIndex = (currentPlayerIndex + 1) % players.Count;
         SwitchTo(currentPlayerIndex);
         Character c = SpawnCharacter(currentPlayer);
+        currentPlayer.controller.GetComponent<CharacterController>().Set(c.GetComponent<CharacterInput>());
         roundHandler.SwitchTo(c);
         virtualCamera.m_Lens.OrthographicSize = c.FOV;
         OnTurnStart?.Invoke();
@@ -169,5 +171,7 @@ public class GameManager : MonoBehaviour {
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
+
+
 
 }
