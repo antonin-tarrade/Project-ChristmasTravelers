@@ -7,7 +7,10 @@ using UnityEngine;
 public class GameModeData : ScriptableObject
 {
     public string gameModeName;
+#if UNITY_EDITOR
     public SceneAsset scene;
+#endif
+    public string sceneName;
     public int nbOfPlayers;
     public int charPerPlayer;
     public Vector3[] spawns;
@@ -20,5 +23,8 @@ public class GameModeData : ScriptableObject
         {
             spawns = new Vector3[nbOfPlayers];
         }
+#if UNITY_EDITOR
+        sceneName = scene.name;
+#endif
     }
 }

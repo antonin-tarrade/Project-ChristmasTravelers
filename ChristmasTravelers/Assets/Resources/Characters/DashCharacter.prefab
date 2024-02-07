@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 2038903105383702377}
   - component: {fileID: 4337684085674946287}
   - component: {fileID: -5810070801397888999}
+  - component: {fileID: 7041575814744939584}
   m_Layer: 0
   m_Name: DashCharacter
   m_TagString: Untagged
@@ -111,12 +112,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player:
-    spawn: {fileID: 0}
+    spawn: {x: 0, y: 0, z: 0}
     name: Player 1
     number: 1
     color: {r: 0, g: 1, b: 0.8818593, a: 1}
     score: 0
-    <characterPrefabs>k__BackingField: []
+    toAvoid: []
   grabRadius: 3
   <FOV>k__BackingField: 10
 --- !u!114 &3451438070945045697
@@ -131,6 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f26b2ebe0153f745aa29e910738a9dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
   speed: 20
 --- !u!114 &6020620316253342707
 MonoBehaviour:
@@ -296,8 +298,12 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 0688fbfd-7deb-4ee1-b6bd-624407a8b0e1
     m_ActionName: CharacterSelector/DeletedCharacter[/Keyboard/backspace]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d8e39de3-1ae5-48b0-a1e0-1b01c10efe14
+    m_ActionName: CharacterSelector/Ready[/XInputControllerWindows/start,/XInputControllerWindows1/start,/Keyboard/r]
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: Controller
   m_DefaultActionMap: Player1
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -341,6 +347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1a4f671f4fb200418af1b95c5602a39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
 --- !u!114 &-5915344857319613970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -353,6 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37ddf01586f8da549b21f09a91a322c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
 --- !u!114 &6208526159675140355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -462,6 +470,33 @@ MonoBehaviour:
   mu: 0
   sprayAngle: 30
   accuracy: 5
+--- !u!50 &7041575814744939584
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3055416447674701499}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
 --- !u!1001 &8517441078833226306
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fdcecf60bb5e43dcbfde2cbaaebb170, type: 3}
-  m_Name: DashItem
+  m_Script: {fileID: 11500000, guid: c8503ee706e82bd4893bfe30c25ba154, type: 3}
+  m_Name: MineSpawner
   m_EditorClassIdentifier: 
-  consumeOnUse: 0
-  dashSpeed: 10
-  dashDistance: 10
+  consumeOnUse: 1
+  obj: {fileID: 3107859313759622267, guid: 2943fa9d62336e444b667253c0748488, type: 3}

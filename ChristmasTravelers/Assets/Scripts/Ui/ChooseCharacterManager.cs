@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -37,6 +38,8 @@ public class ChooseCharacterManager : MonoBehaviour
     [SerializeField]private Color[] couleurs; //debug
 
     public static CharacterComponent[][] matrice{get; private set;}
+
+    public InputActionAsset inputActions;
     
     private void Awake()
     {
@@ -48,8 +51,6 @@ public class ChooseCharacterManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        
 
         gameManager = GameManager.instance;
 
@@ -64,7 +65,9 @@ public class ChooseCharacterManager : MonoBehaviour
         allPlayersPool = canvas.Find("AllPlayersPool");
 
         InitPlayerPool();
-        InitCharacterPool();    
+        InitCharacterPool();
+
+        DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame
@@ -156,6 +159,7 @@ public class ChooseCharacterManager : MonoBehaviour
 
         // Si possible trouver une autre maniere de recuperer le playerController (Spawn par l'inputManager)
         PlayerController pc = GameObject.Find("PlayerController(Clone)").GetComponent<PlayerController>();
+        
 
         // Instanciate the player
         currentNbOfPlayers++;
@@ -164,8 +168,8 @@ public class ChooseCharacterManager : MonoBehaviour
         {
             name = "Player " + (playerNumber + 1),
             color = couleurs[playerNumber],
-            number = playerNumber + 1
-
+            number = playerNumber + 1,
+            controller = pc
         };
         newPlayer.Init();
         gameManager.players.Add(newPlayer);
@@ -178,7 +182,6 @@ public class ChooseCharacterManager : MonoBehaviour
         pc.player = newPlayer;
         pc.name = newPlayer.name;
         pc.transform.SetParent(playerContainer, false);
-
         playersPool.Add(newPlayer, playerPool);
     }
 
@@ -242,6 +245,12 @@ public class ChooseCharacterManager : MonoBehaviour
 
         if (IsEveryPlayerReady() && currentNbOfPlayers == nbOfPlayersRequired)
         {
+            foreach (Player p in playersPool.Keys)
+            {
+                p.controller.transform.SetParent(null);
+                DontDestroyOnLoad(p.controller);
+                p.controller.GetComponent<PlayerInput>().currentActionMap = inputActions.actionMaps[0];
+            }
             gameManager.Play(); 
         };
 

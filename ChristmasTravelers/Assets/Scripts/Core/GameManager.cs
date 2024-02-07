@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
@@ -32,6 +33,7 @@ public class GameManager : MonoBehaviour {
     private Player currentPlayer;
 
     private List<IPreparable> preparables;
+    private List<GameObject> spawnables;
 
     private bool isPlaying;
 
@@ -41,6 +43,7 @@ public class GameManager : MonoBehaviour {
 		instance = this;
         currentPlayerIndex = 0;
         preparables = new List<IPreparable>();
+        spawnables = new List<GameObject>();
 
         isPlaying = false;
         
@@ -63,6 +66,11 @@ public class GameManager : MonoBehaviour {
         preparables.Add(p);
     }
 
+    public void ScheduleDestroy(GameObject s)
+    {
+        spawnables.Add(s);
+    }
+
     public void SwitchTo(int i) {
         currentPlayer = players[i];
     }
@@ -82,9 +90,15 @@ public class GameManager : MonoBehaviour {
         {
             p.Prepare();
         }
+        foreach (GameObject s in spawnables)
+        {
+            if (s != null) Destroy(s);
+        }
+        spawnables.Clear();
         currentPlayerIndex = (currentPlayerIndex + 1) % players.Count;
         SwitchTo(currentPlayerIndex);
         Character c = SpawnCharacter(currentPlayer);
+        currentPlayer.controller.GetComponent<CharacterController>().Set(c.GetComponent<CharacterInput>());
         roundHandler.SwitchTo(c);
         virtualCamera.m_Lens.OrthographicSize = c.FOV;
         OnTurnStart?.Invoke();
@@ -93,26 +107,48 @@ public class GameManager : MonoBehaviour {
             p.score = 0;
         }
         roundHandler.StartTurn();
+
+        timerEnd = null;
+        timerEnd += EndTurn;
+        StartCoroutine(Timer(gameMode.roundDuration));
+        Debug.Log("START");
     }
 
     public void EndTurn() {
         if (!isPlaying) return;
         OnTurnEnd?.Invoke();
         roundHandler.EndTurn();
+
+        timerEnd = null;
+        timerEnd += StartTurn;
+        StartCoroutine(Timer(1));
+        Debug.Log("END");
         isPlaying = false;
     }
 
 
 
+    private Action timerEnd;
+
+    private IEnumerator Timer(float time)
+    {
+        float t = 0;
+        while (t < time)
+        {
+            t += Time.deltaTime;
+            yield return null;
+        }
+        timerEnd?.Invoke();
+    }
     public void Play()
     {
-        SceneManager.LoadScene(gameMode.scene.name);
+        SceneManager.LoadScene(gameMode.sceneName);
     }
 
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (gameMode != null && scene.name == gameMode.scene.name)
+        if (gameMode != null && scene.name == gameMode.sceneName)
         {
             if (isPlaying) return;
             virtualCamera = GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>();
@@ -135,5 +171,7 @@ public class GameManager : MonoBehaviour {
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
+
+
 
 }

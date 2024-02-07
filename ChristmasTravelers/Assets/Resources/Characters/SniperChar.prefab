@@ -16,13 +16,13 @@ GameObject:
   - component: {fileID: 7883276308349016369}
   - component: {fileID: 5081516032494860440}
   - component: {fileID: 96745557990872990}
-  - component: {fileID: 8142559735669596891}
   - component: {fileID: -5915344857319613970}
   - component: {fileID: 6208526159675140355}
   - component: {fileID: 6824296113648132383}
   - component: {fileID: 2038903105383702377}
   - component: {fileID: 4337684085674946287}
   - component: {fileID: 4162907942871927962}
+  - component: {fileID: 1805048888963042755}
   m_Layer: 0
   m_Name: SniperChar
   m_TagString: Untagged
@@ -113,14 +113,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player:
-    spawn: {fileID: 0}
+    spawn: {x: 0, y: 0, z: 0}
     name: Player 1
     number: 1
     color: {r: 0, g: 1, b: 0.8818593, a: 1}
     score: 0
-    <characterPrefabs>k__BackingField: []
+    toAvoid: []
   grabRadius: 3
-  <FOV>k__BackingField: 10
+  <FOV>k__BackingField: 20
 --- !u!114 &3451438070945045697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,6 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f26b2ebe0153f745aa29e910738a9dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
   speed: 20
 --- !u!114 &6020620316253342707
 MonoBehaviour:
@@ -192,8 +193,8 @@ MonoBehaviour:
     m_ActionName: Player1/Movement[/Keyboard/z,/Keyboard/s,/Keyboard/q,/Keyboard/d]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8142559735669596891}
-        m_TargetAssemblyTypeName: InventoryInput, Assembly-CSharp
+      - m_Target: {fileID: -5915344857319613970}
+        m_TargetAssemblyTypeName: CharacterInput, Assembly-CSharp
         m_MethodName: Grab
         m_Mode: 0
         m_Arguments:
@@ -208,8 +209,8 @@ MonoBehaviour:
     m_ActionName: Player1/Grab[/Keyboard/e]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8142559735669596891}
-        m_TargetAssemblyTypeName: InventoryInput, Assembly-CSharp
+      - m_Target: {fileID: -5915344857319613970}
+        m_TargetAssemblyTypeName: CharacterInput, Assembly-CSharp
         m_MethodName: UseItem
         m_Mode: 0
         m_Arguments:
@@ -224,8 +225,8 @@ MonoBehaviour:
     m_ActionName: Player1/Dash[/Keyboard/k]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8142559735669596891}
-        m_TargetAssemblyTypeName: InventoryInput, Assembly-CSharp
+      - m_Target: {fileID: -5915344857319613970}
+        m_TargetAssemblyTypeName: CharacterInput, Assembly-CSharp
         m_MethodName: PreviousItem
         m_Mode: 0
         m_Arguments:
@@ -240,8 +241,8 @@ MonoBehaviour:
     m_ActionName: Player1/Previous Item[/Keyboard/j]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8142559735669596891}
-        m_TargetAssemblyTypeName: InventoryInput, Assembly-CSharp
+      - m_Target: {fileID: -5915344857319613970}
+        m_TargetAssemblyTypeName: CharacterInput, Assembly-CSharp
         m_MethodName: NextItem
         m_Mode: 0
         m_Arguments:
@@ -298,8 +299,12 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 0688fbfd-7deb-4ee1-b6bd-624407a8b0e1
     m_ActionName: CharacterSelector/DeletedCharacter[/Keyboard/backspace]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d8e39de3-1ae5-48b0-a1e0-1b01c10efe14
+    m_ActionName: CharacterSelector/Ready[/XInputControllerWindows/start,/XInputControllerWindows1/start,/Keyboard/r]
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: Controller
   m_DefaultActionMap: Player1
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -329,20 +334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recordData: {fileID: 11400000, guid: 2315e89d634bc0447a1bb9c183f07ff9, type: 2}
   recordables:
-  - {fileID: 8142559735669596891}
   - {fileID: -5915344857319613970}
---- !u!114 &8142559735669596891
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3055416447674701499}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1a4f671f4fb200418af1b95c5602a39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-5915344857319613970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -355,6 +347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37ddf01586f8da549b21f09a91a322c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
 --- !u!114 &6208526159675140355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -493,6 +486,33 @@ MonoBehaviour:
   impactParticlesPrefab: {fileID: 5003103186926527660, guid: ea4bfaca978e26c47b9e409bf4d06ec2, type: 3}
   chargeTime: 2
   range: 5
+--- !u!50 &1805048888963042755
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3055416447674701499}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &3791680575169544567
 GameObject:
   m_ObjectHideFlags: 0

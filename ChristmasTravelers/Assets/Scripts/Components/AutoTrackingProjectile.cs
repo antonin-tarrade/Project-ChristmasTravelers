@@ -24,8 +24,7 @@ public class AutoTrackingProjectile : Projectile
         foreach (Collider2D t in targets)
         {
             if (t.TryGetComponent<Character>(out Character target) 
-                && target.player != character.player 
-                && target.gameObject.layer == gameObject.layer)
+                && target.player != character.player)
             {
                 float dist = Vector3.Distance(transform.position, target.transform.position);
                 if (dist < closestDistance)

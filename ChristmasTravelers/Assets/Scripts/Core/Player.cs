@@ -2,6 +2,7 @@ using Items;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [Serializable]
 public class Player : IPreparable
@@ -9,7 +10,7 @@ public class Player : IPreparable
 
 	public Vector3 spawn;
 
-	public string name; // debug
+	public string name;
 
 	public int number;
 
@@ -21,8 +22,13 @@ public class Player : IPreparable
 	public List<Character> characterInstances { get; private set; }
 	private int currentChar;
 
+	public List<Collider2D> toAvoid;
+
+	public PlayerController controller;
+
 	public void Init()
 	{
+		toAvoid = new List<Collider2D>();
 		characterPrefabs = new List<Character>();
 		characterInstances = new List<Character>();
 		score = 0;
@@ -37,6 +43,7 @@ public class Player : IPreparable
 		{
 			//character.Prepare();
 		}
+		toAvoid.Clear();
 	}
 
 
