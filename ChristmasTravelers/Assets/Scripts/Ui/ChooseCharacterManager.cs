@@ -65,7 +65,9 @@ public class ChooseCharacterManager : MonoBehaviour
         allPlayersPool = canvas.Find("AllPlayersPool");
 
         InitPlayerPool();
-        InitCharacterPool();    
+        InitCharacterPool();
+
+        DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame
