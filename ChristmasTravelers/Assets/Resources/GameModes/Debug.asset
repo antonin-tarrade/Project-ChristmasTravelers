@@ -10,48 +10,46 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72d773ffabb0d2141aa681dbef2f47c8, type: 3}
-  m_Name: CaptureTheFlag
+  m_Name: Debug
   m_EditorClassIdentifier: 
-  gameModeName: CTF
+  gameModeName: Debug
   scene: {fileID: 102900000, guid: 0d59f70b1eb30534982c77214ca529f6, type: 3}
   sceneName: CaptureTheFlag
   nbOfPlayers: 2
-  charPerPlayer: 3
+  charPerPlayer: 2
   spawns:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
   roundDuration: 20
   players:
   - spawn: {x: 0, y: 0, z: 0}
-    name: Player 1
-    number: 1
-    color: {r: 0, g: 1, b: 0.8818593, a: 1}
+    name: Cregut
+    number: 0
+    color: {r: 0, g: 0.15949917, b: 1, a: 1}
     score: 0
     <characterPrefabs>k__BackingField:
-    - {fileID: 7858320245909833396, guid: 10c92f3fa6bf014458983830f7f7bc17, type: 3}
     - {fileID: 7858320245909833396, guid: 6523cd21d2c2f2d4ba2b54f1553301cf, type: 3}
-    - {fileID: 7858320245909833396, guid: 10c92f3fa6bf014458983830f7f7bc17, type: 3}
+    - {fileID: 7858320245909833396, guid: 935f00dd90a800041876ab156d96c556, type: 3}
     toAvoid: []
     controller: {fileID: 0}
     charController: {fileID: 0}
     inputInfo:
-      scheme: Controller
+      scheme: 
       index: 0
       splitScreenIndex: 0
   - spawn: {x: 0, y: 0, z: 0}
-    name: Player 2
-    number: 2
-    color: {r: 1, g: 0.16531092, b: 0, a: 1}
+    name: Pantel
+    number: 1
+    color: {r: 1, g: 0, b: 0, a: 1}
     score: 0
     <characterPrefabs>k__BackingField:
-    - {fileID: 7858320245909833396, guid: 6523cd21d2c2f2d4ba2b54f1553301cf, type: 3}
     - {fileID: 7858320245909833396, guid: 935f00dd90a800041876ab156d96c556, type: 3}
-    - {fileID: 7858320245909833396, guid: 935f00dd90a800041876ab156d96c556, type: 3}
+    - {fileID: 7858320245909833396, guid: 10c92f3fa6bf014458983830f7f7bc17, type: 3}
     toAvoid: []
     controller: {fileID: 0}
     charController: {fileID: 0}
     inputInfo:
-      scheme: Controller
-      index: 1
-      splitScreenIndex: 1
-  selected: 0
+      scheme: 
+      index: 0
+      splitScreenIndex: 0
+  selected: 1

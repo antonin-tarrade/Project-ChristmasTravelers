@@ -10,7 +10,7 @@ public class FlagZone : MonoBehaviour
 
     private void Start()
     {
-        player = GameManager.instance.players[playerIndex];
+        player = GameModeData.selectedMode.players[playerIndex];
         GetComponent<SpriteRenderer>().color = player.color;
     }
 

@@ -12,10 +12,9 @@ GameObject:
   - component: {fileID: 7406942460400433929}
   - component: {fileID: 7222870095971982172}
   - component: {fileID: 5349563086240086453}
-  - component: {fileID: 2346344199793894824}
   - component: {fileID: -334193322769113898}
   m_Layer: 0
-  m_Name: PlayerController
+  m_Name: CharacterController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,7 +166,7 @@ MonoBehaviour:
     m_ActionName: Player1/Next Item[/XInputControllerWindows/rightShoulder,/XInputControllerWindows1/rightShoulder]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2346344199793894824}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: SwitchButton
         m_Mode: 3
@@ -183,7 +182,7 @@ MonoBehaviour:
     m_ActionName: CharacterSelector/SelectButton[/XInputControllerWindows/leftStick/right,/XInputControllerWindows1/leftStick/right]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2346344199793894824}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: OnButtonClicked
         m_Mode: 1
@@ -199,7 +198,7 @@ MonoBehaviour:
     m_ActionName: CharacterSelector/ClickButton[/XInputControllerWindows/buttonSouth,/XInputControllerWindows1/buttonSouth]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2346344199793894824}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: SwitchButton
         m_Mode: 3
@@ -215,7 +214,7 @@ MonoBehaviour:
     m_ActionName: CharacterSelector/SelectButtonLeft[/XInputControllerWindows/leftStick/left,/XInputControllerWindows1/leftStick/left]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2346344199793894824}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: SwitchButton
         m_Mode: 3
@@ -231,7 +230,7 @@ MonoBehaviour:
     m_ActionName: CharacterSelector/SelectButtonDown[/XInputControllerWindows/leftStick/down,/XInputControllerWindows1/leftStick/down]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2346344199793894824}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: SwitchButton
         m_Mode: 3
@@ -247,7 +246,7 @@ MonoBehaviour:
     m_ActionName: CharacterSelector/SelectButtonUp[/XInputControllerWindows/leftStick/up,/XInputControllerWindows1/leftStick/up]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2346344199793894824}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: RemoveLastAddedChar
         m_Mode: 1
@@ -263,7 +262,7 @@ MonoBehaviour:
     m_ActionName: CharacterSelector/DeletedCharacter[/XInputControllerWindows/buttonWest,/XInputControllerWindows1/buttonWest]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2346344199793894824}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: OnReady
         m_Mode: 0
@@ -278,8 +277,8 @@ MonoBehaviour:
     m_ActionId: d8e39de3-1ae5-48b0-a1e0-1b01c10efe14
     m_ActionName: CharacterSelector/Ready[/XInputControllerWindows/start,/XInputControllerWindows1/start,/Keyboard/r]
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Keyboard
-  m_DefaultActionMap: CharacterSelector
+  m_DefaultControlScheme: Controller
+  m_DefaultActionMap: Player1
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &7222870095971982172
@@ -328,31 +327,6 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
---- !u!114 &2346344199793894824
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 920055529936148154}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d22ee12646fc1a4cb919ab5b1e49cc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player:
-    spawn: {x: 0, y: 0, z: 0}
-    name: 
-    number: 0
-    color: {r: 0, g: 0, b: 0, a: 0}
-    score: 0
-    toAvoid: []
-    controller: {fileID: 0}
-    charController: {fileID: 0}
-  allCharacters: {fileID: 0}
-  genericSelector: {fileID: 1796390233950489991, guid: 676d32f066a21ab41870564181236443, type: 3}
-  switchCooldown: 0.25
-  clickCooldown: 0.3
 --- !u!114 &-334193322769113898
 MonoBehaviour:
   m_ObjectHideFlags: 0
