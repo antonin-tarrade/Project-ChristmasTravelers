@@ -19,7 +19,8 @@ public class ChooseCharacterManager : MonoBehaviour
     [SerializeField] private GameObject characterUiMini;
     [SerializeField] private GameObject characterUiBig;
     [SerializeField] private GameObject playerPool;
-    [SerializeField] private RectTransform playerContainer;
+    [SerializeField] private RectTransform playerContainer; 
+    private PlayerInputManager PIM;
 
     private Transform allCharactersPool;
     private Transform allPlayersPool;
@@ -54,11 +55,14 @@ public class ChooseCharacterManager : MonoBehaviour
 
         gameManager = GameManager.instance;
 
-        nbOfPlayersRequired = gameManager.gameMode.nbOfPlayers;
+        nbOfPlayersRequired = GameModeData.selectedMode.nbOfPlayers;
         currentNbOfPlayers = 0;
-        charPerPlayer = gameManager.gameMode.charPerPlayer;
+        charPerPlayer = GameModeData.selectedMode.charPerPlayer;
 
         playersPool = new Dictionary<Player, PlayerPoolUI>();
+
+        PIM = GetComponent<PlayerInputManager>();
+        PIM.onPlayerJoined += OnPlayerJoined;
 
         allCharacters = Resources.LoadAll<GameObject>("Characters").Where(ch => !ch.name.StartsWith('[')).ToArray();
         allCharactersPool = canvas.Find("AllCharactersPool");
@@ -155,24 +159,27 @@ public class ChooseCharacterManager : MonoBehaviour
     }
 
 
-    public void OnPlayerJoined (){
+    public void OnPlayerJoined (PlayerInput playerInput){
+
+        Debug.Log("PLAYER JOINED");
 
         // Si possible trouver une autre maniere de recuperer le playerController (Spawn par l'inputManager)
-        PlayerController pc = GameObject.Find("PlayerController(Clone)").GetComponent<PlayerController>();
+        PlayerController pc = playerInput.GetComponent<PlayerController>();
         
 
         // Instanciate the player
         currentNbOfPlayers++;
-        int playerNumber = gameManager.players.Count;
+        int playerNumber = GameModeData.selectedMode.players.Count;
         Player newPlayer = new Player
         {
             name = "Player " + (playerNumber + 1),
             color = couleurs[playerNumber],
             number = playerNumber + 1,
-            controller = pc
+            controller = pc,
+            inputInfo = new PlayerInputInfo(playerInput.devices[0], playerInput.currentControlScheme, playerInput.playerIndex, playerInput.splitScreenIndex)
         };
-        newPlayer.Init();
-        gameManager.players.Add(newPlayer);
+        newPlayer.InitBeforeSelection();
+        GameModeData.selectedMode.players.Add(newPlayer);
 
         // Player Pool
         GameObject pool = allPlayersPool.Find("UnsetPool").gameObject;
@@ -183,6 +190,9 @@ public class ChooseCharacterManager : MonoBehaviour
         pc.name = newPlayer.name;
         pc.transform.SetParent(playerContainer, false);
         playersPool.Add(newPlayer, playerPool);
+
+        if (currentNbOfPlayers >= nbOfPlayersRequired)
+            GetComponent<PlayerInputManager>().enabled = false;
     }
 
 
@@ -211,7 +221,7 @@ public class ChooseCharacterManager : MonoBehaviour
         charUI.GetComponentInChildren<TextMeshProUGUI>().text = character.name;
         charUI.GetComponent<Image>().color = player.color;
 
-        if (player.characterPrefabs.Count == gameManager.gameMode.charPerPlayer - 1) {
+        if (player.characterPrefabs.Count == GameModeData.selectedMode.charPerPlayer - 1) {
             pool.state = PlayerPoolUI.PlayerState.CanBeReady;
             pool.UpdateReadyText();
         }
@@ -247,10 +257,9 @@ public class ChooseCharacterManager : MonoBehaviour
         {
             foreach (Player p in playersPool.Keys)
             {
-                p.controller.transform.SetParent(null);
-                DontDestroyOnLoad(p.controller);
                 p.controller.GetComponent<PlayerInput>().currentActionMap = inputActions.actionMaps[0];
             }
+            GameModeData.selectedMode.players = playersPool.Keys.ToList();
             gameManager.Play(); 
         };
 
@@ -319,9 +328,11 @@ public class ChooseCharacterManager : MonoBehaviour
         
         }
 
+    }
 
-
-
+    private void OnDestroy()
+    {
+        PIM.onPlayerJoined -= OnPlayerJoined;
     }
 
 }

@@ -5,12 +5,35 @@ using System.Linq;
 using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Utilities;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
+
+    // TEMP
+
+    public void temp()
+    {
+        ReadOnlyArray<InputDevice> devices = InputSystem.devices;
+        InputDevice device = devices[0];
+        PlayerInput pi;
+        InputSystem.onDeviceChange += OnDeviceChange;
+    }
+
+    public void OnDeviceChange(InputDevice device, InputDeviceChange change)
+    {
+        
+    }
+
+    // TEMP END
+
+
+
     //Debug
     public Character[] DEBUG;
+
+    [SerializeField] private CharController charControllerPrefab;
 
 	public static GameManager instance;
 
@@ -21,12 +44,8 @@ public class GameManager : MonoBehaviour {
     public static readonly int defaultFOV = 15;
     
     public CinemachineVirtualCamera virtualCamera;
-
-    public GameModeData gameMode;
     [field : SerializeField] public GameData gameData {  get; private set; }
-
-	// Playing players
-	[field: SerializeField] public List<Player> players { get; private set; }
+    private GameModeData gameMode;
 
     private int currentPlayerIndex;
 
@@ -51,14 +70,10 @@ public class GameManager : MonoBehaviour {
 
     private void Start()
     {
-        foreach (Player p in players)
-        {
-            p.Init();
-        }
-
     }
 
     private void Update() {
+        if (Input.GetKeyDown(KeyCode.P)) Play();
     }
 
     public void Register(IPreparable p)
@@ -72,7 +87,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public void SwitchTo(int i) {
-        currentPlayer = players[i];
+        currentPlayer = gameMode.players[i];
     }
 
     public Character SpawnCharacter(Player p) {
@@ -95,14 +110,14 @@ public class GameManager : MonoBehaviour {
             if (s != null) Destroy(s);
         }
         spawnables.Clear();
-        currentPlayerIndex = (currentPlayerIndex + 1) % players.Count;
+        
         SwitchTo(currentPlayerIndex);
         Character c = SpawnCharacter(currentPlayer);
-        currentPlayer.controller.GetComponent<CharacterController>().Set(c.GetComponent<CharacterInput>());
+        currentPlayer.charController.Set(c.GetComponent<CharacterInput>());
         roundHandler.SwitchTo(c);
         virtualCamera.m_Lens.OrthographicSize = c.FOV;
         OnTurnStart?.Invoke();
-        foreach (Player p in players)
+        foreach (Player p in gameMode.players)
         {
             p.score = 0;
         }
@@ -124,6 +139,7 @@ public class GameManager : MonoBehaviour {
         StartCoroutine(Timer(1));
         Debug.Log("END");
         isPlaying = false;
+        currentPlayerIndex = (currentPlayerIndex + 1) % gameMode.players.Count;
     }
 
 
@@ -141,7 +157,10 @@ public class GameManager : MonoBehaviour {
         timerEnd?.Invoke();
     }
     public void Play()
-    {
+    {  
+        gameMode = GameModeData.selectedMode;
+        foreach (Player p in gameMode.players)
+            p.InitBeforeGame();
         SceneManager.LoadScene(gameMode.sceneName);
     }
 
@@ -151,14 +170,35 @@ public class GameManager : MonoBehaviour {
         if (gameMode != null && scene.name == gameMode.sceneName)
         {
             if (isPlaying) return;
+            SpawnCharacterControllers();
             virtualCamera = GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>();
             roundHandler = new RoundHandler(virtualCamera);
             for (int i = 0; i < gameMode.nbOfPlayers; i ++)
             {
-                players[i].spawn = gameMode.spawns[i];
+                gameMode.players[i].spawn = gameMode.spawns[i];
             }
             StartTurn();
         }
+    }
+
+    public void SpawnCharacterControllers()
+    {
+        Dictionary<Player, PlayerInput> inputs = PlayerInputInfo.CreatePlayerInputs(charControllerPrefab.GetComponent<PlayerInput>(), gameMode.players.ToArray()); 
+        foreach (Player player in gameMode.players)
+        {
+            CharController controller = inputs[player].GetComponent<CharController>();
+            player.charController = controller;
+        }
+    }
+
+    public void OnDeviceLost(InputDevice device)
+    {
+        Debug.Log(device.name + "lost!");
+    }
+
+    public void OnDeviceRegained(InputDevice device)
+    {
+        Debug.Log(device.name + "regained!");
     }
 
 

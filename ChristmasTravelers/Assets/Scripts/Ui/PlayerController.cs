@@ -23,14 +23,12 @@ public class PlayerController : MonoBehaviour
     private bool buttonEnabled = true;
     [SerializeField]  private float clickCooldown;
 
-    private GameManager gameManager;
     private ChooseCharacterManager chooseCharacterManager;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = GameManager.instance;
         chooseCharacterManager = ChooseCharacterManager.instance;
 
         allCharacters = GameObject.Find("AllCharactersPool").transform;
@@ -72,7 +70,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnButtonClicked() {
 
-        bool isFull = player.characterPrefabs.Count >= gameManager.gameMode.charPerPlayer;
+        bool isFull = player.characterPrefabs.Count >= GameModeData.selectedMode.charPerPlayer;
 
         if (selectedButton == null || !buttonEnabled || isFull)
         {

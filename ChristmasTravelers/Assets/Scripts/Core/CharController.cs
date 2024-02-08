@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 using static UnityEngine.InputSystem.InputAction;
 
-public class CharacterController : MonoBehaviour
+public class CharController : MonoBehaviour
 {
     private CharacterInput input;
     private MovementInput movementInput;
