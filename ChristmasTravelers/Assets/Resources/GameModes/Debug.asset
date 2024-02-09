@@ -17,10 +17,11 @@ MonoBehaviour:
   sceneName: CaptureTheFlag
   nbOfPlayers: 2
   charPerPlayer: 2
+  roundsNumber: 0
   spawns:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
-  roundDuration: 20
+  roundDuration: 5
   players:
   - spawn: {x: 0, y: 0, z: 0}
     name: Cregut
@@ -34,9 +35,10 @@ MonoBehaviour:
     controller: {fileID: 0}
     charController: {fileID: 0}
     inputInfo:
-      scheme: 
+      scheme: Controller
       index: 0
-      splitScreenIndex: 0
+      splitScreenIndex: -1
+      deviceClass: 
   - spawn: {x: 0, y: 0, z: 0}
     name: Pantel
     number: 1
@@ -49,7 +51,13 @@ MonoBehaviour:
     controller: {fileID: 0}
     charController: {fileID: 0}
     inputInfo:
-      scheme: 
-      index: 0
-      splitScreenIndex: 0
+      scheme: Controller
+      index: 1
+      splitScreenIndex: -1
+      deviceClass: 
   selected: 1
+  overrideControllers: 1
+  allowedDevices:
+  - 
+  - Controller
+  - Keyboard
