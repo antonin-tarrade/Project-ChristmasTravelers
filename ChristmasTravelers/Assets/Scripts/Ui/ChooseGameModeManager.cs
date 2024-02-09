@@ -36,7 +36,7 @@ public class ChooseGameModeManager : MonoBehaviour
     {
         Button buttonInstance = Instantiate(button, gameModePool);
         buttonInstance.GetComponentInChildren<TextMeshProUGUI>().text = gameModeData.gameModeName;
-        buttonInstance.onClick.AddListener(() => GameModeData.selectedMode =  gameModeData);
+        buttonInstance.onClick.AddListener(() => gameModeData.Select());
     } 
 
 

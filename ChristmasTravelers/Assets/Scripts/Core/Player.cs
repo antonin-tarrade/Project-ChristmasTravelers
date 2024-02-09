@@ -40,7 +40,9 @@ public class Player : IPreparable
 	{
         score = 0;
         currentChar = 0;
-		characterInstances.Clear();
+		characterInstances = new();
+		Debug.Log(GameManager.instance);
+		Debug.Log(this);
         GameManager.instance.Register(this);
     }
 
@@ -81,8 +83,7 @@ public class PlayerInputInfo
 {
 	// Static methods to generate infos from scratch
 	private static int currentIndex;
-	private static String defaultScheme => "Controller";
-	private static String defaultClass => "Controller";
+	private static string defaultScheme => "Controller";
 	private static void Initialize()
 	{
 		currentIndex = 0;
@@ -90,9 +91,9 @@ public class PlayerInputInfo
 
 	private static PlayerInputInfo GetNewInfo()
 	{
-		Debug.Log("All devices size : " + InputSystem.devices.Count);
-		Debug.Log("All gamepads size : " + InputSystem.devices.Where(d => d.description.deviceClass == defaultClass).ToArray().Count());
-		return new PlayerInputInfo(InputSystem.devices.Where(d => d.description.deviceClass == defaultClass).ToArray()[currentIndex], defaultScheme, currentIndex, -1);
+		foreach (InputDevice device in InputSystem.devices)
+			Debug.Log(device.description.deviceClass);
+		return new PlayerInputInfo(InputSystem.devices.Where(d => GameModeData.selectedMode.allowedDevices.Contains(d.description.deviceClass)).ToArray()[currentIndex], defaultScheme, currentIndex, -1);
 	}
 
 	private static PlayerInput CreatePlayerInput(PlayerInput input, PlayerInputInfo info)
@@ -106,7 +107,7 @@ public class PlayerInputInfo
 	public static Dictionary<Player,PlayerInput> CreatePlayerInputs(PlayerInput input, Player[] players)
 	{
 		Dictionary<Player, PlayerInput> map = new();
-		if (players.Where(p => p.inputInfo != null).Count() == players.Count())
+		if (!GameModeData.selectedMode.overrideControllers)
 		{
 			foreach (Player p in players)
 				map.Add(p, CreatePlayerInput(input, p.inputInfo));
@@ -117,7 +118,8 @@ public class PlayerInputInfo
 			foreach (Player p in players)
 			{
 				PlayerInputInfo info = GetNewInfo();
-				p.inputInfo = info;
+                currentIndex++;
+                p.inputInfo = info;
 				map.Add(p, CreatePlayerInput(input, info));
 			}
 		}
@@ -125,15 +127,17 @@ public class PlayerInputInfo
 	}
 
 	public InputDevice device;
-	public String scheme;
+	public string scheme;
 	public int index;
 	public int splitScreenIndex;
+	public string deviceClass;
 
-	public PlayerInputInfo(InputDevice device, String scheme, int index, int splitScreenIndex)
+	public PlayerInputInfo(InputDevice device, string scheme, int index, int splitScreenIndex)
 	{
 		this.device = device;
 		this.scheme = scheme;
 		this.index = index;
 		this.splitScreenIndex = splitScreenIndex;
+		deviceClass = device.description.deviceClass;
 	}
 }

@@ -10,32 +10,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
-
-    // TEMP
-
-    public void temp()
-    {
-        ReadOnlyArray<InputDevice> devices = InputSystem.devices;
-        InputDevice device = devices[0];
-        PlayerInput pi;
-        InputSystem.onDeviceChange += OnDeviceChange;
-    }
-
-    public void OnDeviceChange(InputDevice device, InputDeviceChange change)
-    {
-        
-    }
-
-    // TEMP END
-
-
-
-    //Debug
-    public Character[] DEBUG;
-
     [SerializeField] private CharController charControllerPrefab;
 
-	public static GameManager instance;
+    public static GameManager instance;
 
     public event Action OnTurnStart;
     public event Action OnTurnEnd;
@@ -43,10 +20,11 @@ public class GameManager : MonoBehaviour {
     public RoundHandler roundHandler;
     public static readonly int defaultFOV = 15;
     
-    public CinemachineVirtualCamera virtualCamera;
+    [HideInInspector] public CinemachineVirtualCamera virtualCamera;
     [field : SerializeField] public GameData gameData {  get; private set; }
     private GameModeData gameMode;
 
+    private int nbRounds;
     private int currentPlayerIndex;
 
     private Player currentPlayer;
@@ -58,11 +36,15 @@ public class GameManager : MonoBehaviour {
 
 	private void Awake () {
 
-        DontDestroyOnLoad(gameObject);
-		instance = this;
-        currentPlayerIndex = 0;
-        preparables = new List<IPreparable>();
-        spawnables = new List<GameObject>();
+        if (instance != null)
+            Destroy(gameObject);
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+		
+        
 
         isPlaying = false;
         
@@ -97,9 +79,22 @@ public class GameManager : MonoBehaviour {
         return c;
     }
 
+    public void Play()
+    {
+        preparables = new();
+        spawnables = new();
+        gameMode = GameModeData.selectedMode;
+        foreach (Player p in gameMode.players)
+            p.InitBeforeGame();
+        currentPlayerIndex = 0;
+        nbRounds = 0;
+        SceneManager.LoadScene(gameMode.sceneName);
+    }
+
     public void StartTurn()
     {
         if (isPlaying) return;
+        nbRounds++;
         isPlaying = true;
         foreach (IPreparable p in preparables)
         {
@@ -134,12 +129,26 @@ public class GameManager : MonoBehaviour {
         OnTurnEnd?.Invoke();
         roundHandler.EndTurn();
 
+        if (nbRounds >= gameMode.roundsNumber * gameMode.nbOfPlayers)
+        {
+            EndGame();
+            return;
+        }
+
         timerEnd = null;
         timerEnd += StartTurn;
         StartCoroutine(Timer(1));
         Debug.Log("END");
         isPlaying = false;
         currentPlayerIndex = (currentPlayerIndex + 1) % gameMode.players.Count;
+        
+        
+
+    }
+
+    public void EndGame()
+    {
+        SceneManager.LoadScene("ChooseGameMode");
     }
 
 
@@ -156,13 +165,7 @@ public class GameManager : MonoBehaviour {
         }
         timerEnd?.Invoke();
     }
-    public void Play()
-    {  
-        gameMode = GameModeData.selectedMode;
-        foreach (Player p in gameMode.players)
-            p.InitBeforeGame();
-        SceneManager.LoadScene(gameMode.sceneName);
-    }
+    
 
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
