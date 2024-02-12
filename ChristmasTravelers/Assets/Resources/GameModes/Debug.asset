@@ -13,15 +13,14 @@ MonoBehaviour:
   m_Name: Debug
   m_EditorClassIdentifier: 
   gameModeName: Debug
-  scene: {fileID: 102900000, guid: 0d59f70b1eb30534982c77214ca529f6, type: 3}
-  sceneName: CaptureTheFlag
-  nbOfPlayers: 2
+  scene: {fileID: 102900000, guid: b69d77f25bcc04aa5bbe7d755a4bc01b, type: 3}
+  sceneName: Map
+  nbOfPlayers: 1
   charPerPlayer: 2
-  roundsNumber: 0
+  roundsNumber: 3
   spawns:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  roundDuration: 5
+  roundDuration: 40
   players:
   - spawn: {x: 0, y: 0, z: 0}
     name: Cregut
@@ -38,23 +37,7 @@ MonoBehaviour:
       scheme: Controller
       index: 0
       splitScreenIndex: -1
-      deviceClass: 
-  - spawn: {x: 0, y: 0, z: 0}
-    name: Pantel
-    number: 1
-    color: {r: 1, g: 0, b: 0, a: 1}
-    score: 0
-    <characterPrefabs>k__BackingField:
-    - {fileID: 7858320245909833396, guid: 935f00dd90a800041876ab156d96c556, type: 3}
-    - {fileID: 7858320245909833396, guid: 10c92f3fa6bf014458983830f7f7bc17, type: 3}
-    toAvoid: []
-    controller: {fileID: 0}
-    charController: {fileID: 0}
-    inputInfo:
-      scheme: Controller
-      index: 1
-      splitScreenIndex: -1
-      deviceClass: 
+      deviceClass: Keyboard
   selected: 1
   overrideControllers: 1
   allowedDevices:
