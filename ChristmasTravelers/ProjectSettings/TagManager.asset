@@ -40,6 +40,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+<<<<<<< HEAD
+=======
+  - name: BackGround
+    uniqueID: 2361266031
+    locked: 0
+>>>>>>> 5ca4a47 (new tilesheet + baseMap)
   - name: Default
     uniqueID: 0
     locked: 0

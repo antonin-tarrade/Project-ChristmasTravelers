@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Debug
   m_EditorClassIdentifier: 
   gameModeName: Debug
+<<<<<<< HEAD
   scene: {fileID: 102900000, guid: 0d59f70b1eb30534982c77214ca529f6, type: 3}
   sceneName: CaptureTheFlag
   nbOfPlayers: 2
@@ -31,6 +32,24 @@ MonoBehaviour:
     <characterPrefabs>k__BackingField:
     - {fileID: 7858320245909833396, guid: 6523cd21d2c2f2d4ba2b54f1553301cf, type: 3}
     - {fileID: 7858320245909833396, guid: 935f00dd90a800041876ab156d96c556, type: 3}
+=======
+  scene: {fileID: 102900000, guid: b69d77f25bcc04aa5bbe7d755a4bc01b, type: 3}
+  sceneName: Map
+  nbOfPlayers: 1
+  charPerPlayer: 2
+  roundsNumber: 2
+  spawns:
+  - {x: 0, y: 0, z: 0}
+  roundDuration: 15
+  players:
+  - spawn: {x: 0, y: 0, z: 0}
+    name: Pantel
+    number: 1
+    color: {r: 1, g: 0, b: 0, a: 1}
+    score: 0
+    <characterPrefabs>k__BackingField:
+    - {fileID: 7858320245909833396, guid: 2d447adb27f784456b1a229a7babbad5, type: 3}
+>>>>>>> 5ca4a47 (new tilesheet + baseMap)
     toAvoid: []
     controller: {fileID: 0}
     charController: {fileID: 0}
@@ -38,6 +57,7 @@ MonoBehaviour:
       scheme: Controller
       index: 0
       splitScreenIndex: -1
+<<<<<<< HEAD
       deviceClass: 
   - spawn: {x: 0, y: 0, z: 0}
     name: Pantel
@@ -55,6 +75,9 @@ MonoBehaviour:
       index: 1
       splitScreenIndex: -1
       deviceClass: 
+=======
+      deviceClass: Keyboard
+>>>>>>> 5ca4a47 (new tilesheet + baseMap)
   selected: 1
   overrideControllers: 1
   allowedDevices:
