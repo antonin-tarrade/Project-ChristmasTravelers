@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour {
 
     public void ScheduleDestroy(GameObject s)
     {
+        Debug.Log("Destroy scheduled : " + s.name);
         spawnables.Add(s);
     }
 
@@ -93,8 +94,6 @@ public class GameManager : MonoBehaviour {
         nbRounds++;
         isPlaying = true;
         
-        spawnables.Clear();
-        
         SwitchTo(currentPlayerIndex);
         Character c = SpawnCharacter(currentPlayer);
         currentPlayer.charController.Set(c.GetComponent<CharacterInput>());
@@ -107,10 +106,13 @@ public class GameManager : MonoBehaviour {
         {
             p.Prepare();
         }
+        Debug.Log("number of spawnables : " + spawnables.Count);
         foreach (GameObject s in spawnables)
         {
+            Debug.Log("Destroy : " + s.name);
             if (s != null) Destroy(s);
         }
+        spawnables.Clear();
         roundHandler.StartTurn();
 
         timerEnd = null;
