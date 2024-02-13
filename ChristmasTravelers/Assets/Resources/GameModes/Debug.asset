@@ -25,7 +25,7 @@ MonoBehaviour:
   - spawn: {x: 0, y: 0, z: 0}
     name: Cregut
     number: 0
-    color: {r: 0, g: 0.15949917, b: 1, a: 1}
+    color: {r: 0, g: 0.9502232, b: 1, a: 1}
     score: 0
     <characterPrefabs>k__BackingField:
     - {fileID: 7858320245909833396, guid: 6523cd21d2c2f2d4ba2b54f1553301cf, type: 3}
@@ -39,7 +39,7 @@ MonoBehaviour:
       splitScreenIndex: -1
       deviceClass: Keyboard
   selected: 1
-  overrideControllers: 1
+  overrideControllers: 0
   allowedDevices:
   - 
   - Controller
