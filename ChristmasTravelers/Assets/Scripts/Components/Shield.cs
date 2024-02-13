@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,16 +9,23 @@ public class Shield : MonoBehaviour, ISpawnable, IDamageable
 
     [SerializeField] private float health;
     [SerializeField] private float spawnOffset;
+    private Character character;
+
+    public Action OnDeath { get; set;}
 
     public void Damage(float dmg)
     {
         health -= dmg;
         if (health <= 0)
+        {
+            character.player.toAvoid.Remove(GetComponent<Collider2D>());
             Destroy(gameObject);
+        }
     }
 
     public void Set(Character c, Vector3 position, Vector3 direction)
     {
+        character = c;
         c.player.toAvoid.Add(GetComponent<Collider2D>());
         transform.position = position + spawnOffset * direction.normalized;
         SetDirection(direction);

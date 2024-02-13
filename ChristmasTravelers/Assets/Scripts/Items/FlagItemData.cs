@@ -12,7 +12,7 @@ public class FlagItem : Item
     }
     public override void OnUse(Inventory inventory, IItemParameters parameters)
     {
-        Debug.Log("USE FLAG");
+        Drop();
     }
 
     public override UseItemCommand GenerateCommand(Character character)
