@@ -13,16 +13,14 @@ MonoBehaviour:
   m_Name: Debug
   m_EditorClassIdentifier: 
   gameModeName: Debug
-  scene: {fileID: 102900000, guid: 0d59f70b1eb30534982c77214ca529f6, type: 3}
-  sceneName: CaptureTheFlag
+  scene: {fileID: 102900000, guid: b69d77f25bcc04aa5bbe7d755a4bc01b, type: 3}
+  sceneName: Map
   nbOfPlayers: 1
   charPerPlayer: 2
   roundsNumber: 2
-  spawns:
-  - {x: 0, y: 0, z: 0}
-  roundDuration: 15
+  roundDuration: 30
   players:
-  - spawn: {x: 0, y: 0, z: 0}
+  - spawn: {x: -39.5, y: 1.3562298, z: -10.161448}
     name: Cregut
     number: 0
     color: {r: 0, g: 0.15949917, b: 1, a: 1}
