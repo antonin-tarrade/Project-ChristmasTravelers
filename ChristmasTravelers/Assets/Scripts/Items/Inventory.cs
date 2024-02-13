@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour, IPreparable
+public class Inventory : MonoBehaviour, IPreparable, IItemContainer
 {
 
     // public event Action<ScriptableItem> OnItemAdded;
@@ -13,7 +13,7 @@ public class Inventory : MonoBehaviour, IPreparable
 
 
     [SerializeField] List<ScriptableItemData> itemsData;
-    private List<IItem> items;
+    public List<IItem> items { get; private set; }
     private List<IPreparable> initialData;
     //DEBUG
     public List<string> itemsNames;

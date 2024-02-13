@@ -1,4 +1,5 @@
 using BoardCommands;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,7 @@ public interface IAttack
 
 public interface IDamageable
 {
+    public Action OnDeath { get; set; }
     void Damage(float dmg);
     GameObject gameObject { get; }
 }

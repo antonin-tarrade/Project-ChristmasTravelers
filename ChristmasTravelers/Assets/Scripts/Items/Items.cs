@@ -17,13 +17,29 @@ namespace Items
 
     public interface IItem 
     {
+        Action<IItem> OnUseEvent { get; set; }
+        Action<IItem> OnDropEvent { get; set; }
+        IItemContainer container { get; set; }
         string GetName();
         void Use(Inventory inventory, IItemParameters parameters);
+        void Drop();
         UseItemCommand GenerateCommand(Character character);
+    }
+
+    public interface IItemContainer
+    {
+        GameObject gameObject { get;}
+        void Add(IItem item);
+        void Remove(IItem item);
+        bool Contains(IItem item);
     }
 
     public abstract class Item : IItem
     {
+        public Action<IItem> OnUseEvent { get; set; }
+        public Action<IItem> OnDropEvent { get; set; }
+        public IItemContainer container { get; set; }
+
         protected ScriptableItemData data;
         public abstract string GetName();
         public void Use(Inventory inventory, IItemParameters parameters)
@@ -31,6 +47,7 @@ namespace Items
             if (inventory.Contains(this))
             {
                 if (data.consumeOnUse) inventory.Remove(this);
+                OnUseEvent?.Invoke(this);
                 OnUse(inventory, parameters);
             }
         }
@@ -39,7 +56,11 @@ namespace Items
 
         public abstract UseItemCommand GenerateCommand(Character character);
 
-        public void Drop(Inventory inventory) { }
+        public void Drop()
+        {
+            container.Remove(this);
+            OnDropEvent?.Invoke(this);         
+        }
 
         public Item(ScriptableItemData data)
         {

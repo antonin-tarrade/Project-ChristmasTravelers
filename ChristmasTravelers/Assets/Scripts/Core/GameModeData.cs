@@ -17,7 +17,6 @@ public class GameModeData : ScriptableObject
     public int nbOfPlayers;
     public int charPerPlayer;
     public int roundsNumber;
-    public Vector3[] spawns;
     public float roundDuration;
     public List<Player> players;
 
@@ -37,10 +36,6 @@ public class GameModeData : ScriptableObject
 
     private void OnValidate()
     {
-        if (spawns.Length != nbOfPlayers)
-        {
-            spawns = new Vector3[nbOfPlayers];
-        }
         if (selected)
         {
             Select();
