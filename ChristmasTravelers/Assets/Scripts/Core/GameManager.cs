@@ -42,12 +42,8 @@ public class GameManager : MonoBehaviour {
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
-        }
-		
-        
-
-        isPlaying = false;
-        
+            isPlaying = false;
+        }  
 	}
 
     private void Start()
@@ -96,14 +92,7 @@ public class GameManager : MonoBehaviour {
         if (isPlaying) return;
         nbRounds++;
         isPlaying = true;
-        foreach (IPreparable p in preparables)
-        {
-            p.Prepare();
-        }
-        foreach (GameObject s in spawnables)
-        {
-            if (s != null) Destroy(s);
-        }
+        
         spawnables.Clear();
         
         SwitchTo(currentPlayerIndex);
@@ -112,9 +101,15 @@ public class GameManager : MonoBehaviour {
         roundHandler.SwitchTo(c);
         virtualCamera.m_Lens.OrthographicSize = c.FOV;
         OnTurnStart?.Invoke();
-        foreach (Player p in gameMode.players)
+
+
+        foreach (IPreparable p in preparables)
         {
-            p.score = 0;
+            p.Prepare();
+        }
+        foreach (GameObject s in spawnables)
+        {
+            if (s != null) Destroy(s);
         }
         roundHandler.StartTurn();
 
@@ -176,10 +171,6 @@ public class GameManager : MonoBehaviour {
             SpawnCharacterControllers();
             virtualCamera = GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>();
             roundHandler = new RoundHandler(virtualCamera);
-            for (int i = 0; i < gameMode.nbOfPlayers; i ++)
-            {
-                gameMode.players[i].spawn = gameMode.spawns[i];
-            }
             StartTurn();
         }
     }

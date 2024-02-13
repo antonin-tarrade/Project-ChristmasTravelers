@@ -17,7 +17,9 @@ public class Player : IPreparable
 
 	public Color color;
 
-	[HideInInspector] public int score;
+	public int index => GameModeData.selectedMode.players.IndexOf(this);
+
+	 public int score;
 
 	[field : SerializeField] public List<Character> characterPrefabs { get; private set; }
 	public List<Character> characterInstances { get; private set; }
@@ -49,10 +51,6 @@ public class Player : IPreparable
 	public void Prepare()
 	{
 		score = 0;
-		foreach (Character character in characterInstances)
-		{
-			//character.Prepare();
-		}
 		toAvoid.Clear();
 	}
 
@@ -64,10 +62,9 @@ public class Player : IPreparable
 		character.player = this;
 	}
 
-		public void AddCharacterPrefab(Character character)
+	public void AddCharacterPrefab(Character character)
 	{
 		characterPrefabs.Add(character);
-		character.player = this;
 	}
 
 	public Character ChooseCharacter() {	
@@ -91,8 +88,6 @@ public class PlayerInputInfo
 
 	private static PlayerInputInfo GetNewInfo()
 	{
-		foreach (InputDevice device in InputSystem.devices)
-			Debug.Log(device.description.deviceClass);
 		return new PlayerInputInfo(InputSystem.devices.Where(d => GameModeData.selectedMode.allowedDevices.Contains(d.description.deviceClass)).ToArray()[currentIndex], defaultScheme, currentIndex, -1);
 	}
 

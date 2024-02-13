@@ -1,0 +1,40 @@
+using Items;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using UnityEngine;
+
+public class PlayerSpawn : MonoBehaviour
+{
+
+    [Tooltip("The index of the player associated with this zone in the game manager player list")]
+    [SerializeField] private int playerIndex;
+    private Player player;
+
+    private void Start()
+    {
+        player = GameModeData.selectedMode.players[playerIndex];
+        player.spawn = transform.position;
+        GetComponent<SpriteRenderer>().color = player.color;
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent(out Inventory inv) && inv.GetComponent<Character>().player == player)
+        {
+            List<IItem> flags = new();
+            foreach (IItem item in inv.items.Where(i => i.GetName() == "Flag"))
+            {
+                flags.Add(item);
+            }
+            foreach (IItem flag in flags)
+            {
+                inv.GetComponent<Character>().player.score++;
+                flag.Drop();
+                flag.container.gameObject.transform.position = transform.position;
+            }
+        }
+    }
+}

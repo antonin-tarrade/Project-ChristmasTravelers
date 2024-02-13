@@ -9,6 +9,7 @@ public class CharacterHealth : MonoBehaviour, IDamageable
 
     [field : SerializeField] public float baseHealth { get; private set; }
     public float health { get; private set; }
+    public Action OnDeath { get; set; }
 
     private void Awake()
     {
@@ -39,6 +40,7 @@ public class CharacterHealth : MonoBehaviour, IDamageable
     {
         gameObject.layer = LayerMask.NameToLayer("Dead");
         GetComponent<SpriteRenderer>().material = GameManager.instance.gameData.DeadMaterial;
+        OnDeath?.Invoke();
     }
 
 
