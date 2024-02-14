@@ -24,39 +24,37 @@ public class Player : IPreparable
 	[field : SerializeField] public List<Character> characterPrefabs { get; private set; }
 	public List<Character> characterInstances { get; private set; }
 	private int currentChar;
-
-	[HideInInspector] public List<Collider2D> toAvoid;
+	public List<Collider2D> toAvoid { get; private set; }
 
 	[HideInInspector] public PlayerController controller;
 	[HideInInspector] public CharController charController;
 	public PlayerInputInfo inputInfo;
 
 	public void InitBeforeSelection()
-	{
-		toAvoid = new List<Collider2D>();
-		characterPrefabs = new List<Character>();
-		characterInstances = new List<Character>();
+	{	
+		characterPrefabs = new();
 	}
 
 	public void InitBeforeGame()
 	{
+        toAvoid = new();
         score = 0;
         currentChar = 0;
 		characterInstances = new();
-		Debug.Log(GameManager.instance);
-		Debug.Log(this);
         GameManager.instance.Register(this);
     }
 
 	public void Prepare()
 	{
+		toAvoid = new();
 		score = 0;
-		toAvoid.Clear();
 	}
 
 
 	public void AddCharacterInstance(Character character)
 	{
+		foreach (Collider2D collider in characterInstances.Select(c => c.GetComponent<Collider2D>()).Union(toAvoid))
+			Physics2D.IgnoreCollision(character.GetComponent<Collider2D>(), collider);
 		characterInstances.Add(character);
 		character.GetComponent<SpriteRenderer>().color = this.color;
 		character.player = this;
@@ -72,10 +70,9 @@ public class Player : IPreparable
 		currentChar++;
 		return character;
 	}
-
 }
-[Serializable]
 
+[Serializable]
 public class PlayerInputInfo
 {
 	// Static methods to generate infos from scratch
