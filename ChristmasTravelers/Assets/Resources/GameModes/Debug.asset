@@ -24,7 +24,7 @@ MonoBehaviour:
     name: Cregut
     number: 0
     color: {r: 0, g: 0.15949917, b: 1, a: 1}
-    score: 0
+    score: 1
     <characterPrefabs>k__BackingField:
     - {fileID: 7858320245909833396, guid: 6523cd21d2c2f2d4ba2b54f1553301cf, type: 3}
     - {fileID: 7858320245909833396, guid: 935f00dd90a800041876ab156d96c556, type: 3}
