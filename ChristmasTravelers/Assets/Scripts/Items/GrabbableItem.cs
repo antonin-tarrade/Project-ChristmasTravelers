@@ -10,7 +10,7 @@ public class GrabbableItem : MonoBehaviour, IGrabbable, IItemContainer
     [SerializeField] private ScriptableItemData itemData;
     private IItem item;
     private Vector3 initialPosition;
-    private bool activated;
+    public bool activated;
     private SpriteRenderer sr;
 
     private void Start() {

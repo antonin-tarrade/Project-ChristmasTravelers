@@ -10,13 +10,16 @@ public class PlayerSpawn : MonoBehaviour
 
     [Tooltip("The index of the player associated with this zone in the game manager player list")]
     [SerializeField] private int playerIndex;
+    [SerializeField, Range(0,1)] private float spriteAlpha;
     private Player player;
 
     private void Start()
     {
         player = GameModeData.selectedMode.players[playerIndex];
         player.spawn = transform.position;
-        GetComponent<SpriteRenderer>().color = player.color;
+        Color c = player.color;
+        c.a = spriteAlpha;
+        GetComponent<SpriteRenderer>().color = c;
     }
 
 
@@ -34,7 +37,9 @@ public class PlayerSpawn : MonoBehaviour
                 inv.GetComponent<Character>().player.score++;
                 flag.Drop();
                 flag.container.gameObject.transform.position = transform.position;
+                flag.container.gameObject.GetComponent<GrabbableItem>().activated = false;
             }
         }
     }
 }
+

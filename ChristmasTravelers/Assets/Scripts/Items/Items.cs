@@ -106,6 +106,7 @@ namespace Items
         public void Prepare() {
             grabbable.gameObject.SetActive(true);
             grabbable.transform.position = initialPosition;
+            grabbable.activated = true;
             grabbable.Set(item);
         }
     }
