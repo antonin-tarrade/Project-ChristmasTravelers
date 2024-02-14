@@ -15,7 +15,7 @@ MonoBehaviour:
   active: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0.1
+    m_Value: 0.01
 --- !u!114 &-4792625411681218657
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -31,7 +31,7 @@ MonoBehaviour:
   active: 1
   mode:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 2
   neutralHDRRangeReductionMode:
     m_OverrideState: 0
     m_Value: 2
@@ -71,34 +71,8 @@ MonoBehaviour:
   components:
   - {fileID: 4085332324809444993}
   - {fileID: 1122665529198596139}
-  - {fileID: 1032115907260059052}
   - {fileID: -5192534512495298651}
   - {fileID: -4792625411681218657}
---- !u!114 &1032115907260059052
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccf1aba9553839d41ae37dd52e9ebcce, type: 3}
-  m_Name: MotionBlur
-  m_EditorClassIdentifier: 
-  active: 1
-  mode:
-    m_OverrideState: 1
-    m_Value: 0
-  quality:
-    m_OverrideState: 1
-    m_Value: 0
-  intensity:
-    m_OverrideState: 1
-    m_Value: 0.557
-  clamp:
-    m_OverrideState: 1
-    m_Value: 0
 --- !u!114 &1122665529198596139
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -120,13 +94,13 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.319
+    m_Value: 0.237
   smoothness:
     m_OverrideState: 1
-    m_Value: 0.33
+    m_Value: 0.373
   rounded:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
 --- !u!114 &4085332324809444993
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -145,13 +119,13 @@ MonoBehaviour:
     m_Value: 1
   threshold:
     m_OverrideState: 1
-    m_Value: 0.9
+    m_Value: 1.05
   intensity:
     m_OverrideState: 1
-    m_Value: 15
+    m_Value: 10
   scatter:
     m_OverrideState: 1
-    m_Value: 0.227
+    m_Value: 0.372
   clamp:
     m_OverrideState: 1
     m_Value: 65472
@@ -168,9 +142,9 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 6
   dirtTexture:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: {fileID: 0}
     dimension: 1
   dirtIntensity:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 0

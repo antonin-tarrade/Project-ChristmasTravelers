@@ -138,8 +138,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 464095297956217195}
   - {fileID: 7549877870108511728}
@@ -215,10 +215,17 @@ MonoBehaviour:
     number: 2
     color: {r: 1, g: 0.16531092, b: 0, a: 1}
     score: 0
+    <characterPrefabs>k__BackingField: []
     toAvoid: []
     controller: {fileID: 0}
+    charController: {fileID: 0}
+    inputInfo:
+      scheme: 
+      index: 0
+      splitScreenIndex: 0
+      deviceClass: 
   grabRadius: 3
-  <FOV>k__BackingField: 15
+  <FOV>k__BackingField: 10
 --- !u!114 &3451438070945045697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,7 +239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 0
-  speed: 20
+  speed: 10
 --- !u!114 &6020620316253342707
 MonoBehaviour:
   m_ObjectHideFlags: 0
