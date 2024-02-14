@@ -39,7 +39,7 @@ public class GreyBoxManager : MonoBehaviour
     public void StartNextTurn()
     {
         if (isBlueSelected!= curentPlayerIsBlue || isFirstTurn){
-            gameManager.StartTurn();
+            //gameManager.StartTurn();
             
             if (isFirstTurn) {
                 isFirstTurn = false;
@@ -47,7 +47,7 @@ public class GreyBoxManager : MonoBehaviour
                 curentPlayerIsBlue = !curentPlayerIsBlue;
             }
         } else {
-            gameManager.StartTurn();
+            //gameManager.StartTurn();
         }
 
         
