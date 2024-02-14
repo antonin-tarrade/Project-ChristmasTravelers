@@ -54,4 +54,9 @@ public class CharacterHealth : MonoBehaviour, IDamageable
         yield return new WaitForSeconds(time);
         sr.color = GetComponent<Character>().player.color;
     }
+
+    private void OnDestroy()
+    {
+        GameManager.instance.OnTurnStart -= Init;
+    }
 }
