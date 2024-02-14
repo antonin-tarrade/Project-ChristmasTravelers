@@ -10,72 +10,42 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
-    [SerializeField] private CharController charControllerPrefab;
-
     public static GameManager instance;
 
+    // Events
     public event Action OnTurnStart;
     public event Action OnTurnEnd;
 
-    public RoundHandler roundHandler;
-    public static readonly int defaultFOV = 15;
-    
+
+    // Fields
+    [Header("Game global parameters")]
+    [SerializeField] private CharController charControllerPrefab;
+    [field: SerializeField] public GameData gameData { get; private set; }
+    private RoundHandler roundHandler;
     [HideInInspector] public CinemachineVirtualCamera virtualCamera;
-    [field : SerializeField] public GameData gameData {  get; private set; }
     private GameModeData gameMode;
 
-    private int nbRounds;
-    private int currentPlayerIndex;
 
+    // State fields
     private Player currentPlayer;
-
     private List<IPreparable> preparables;
     private List<GameObject> spawnables;
 
+
+    // State parameters
     private bool isPlaying;
+    private int nbRounds;
+    private int currentPlayerIndex;
 
-	private void Awake () {
 
-        if (instance != null)
-            Destroy(gameObject);
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-            isPlaying = false;
-        }  
-	}
 
-    private void Start()
-    {
-    }
 
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.P)) Play();
-    }
 
-    public void Register(IPreparable p)
-    {
-        preparables.Add(p);
-    }
+    // Public methods
 
-    public void ScheduleDestroy(GameObject s)
-    {
-        Debug.Log("Destroy scheduled : " + s.name);
-        spawnables.Add(s);
-    }
-
-    public void SwitchTo(int i) {
-        currentPlayer = gameMode.players[i];
-    }
-
-    public Character SpawnCharacter(Player p) {
-        Character c = Instantiate(p.ChooseCharacter());
-        p.AddCharacterInstance(c);
-        roundHandler.Add(c);
-        return c;
-    }
-
+    /// <summary>
+    /// Launches the game based on the selected game mode data
+    /// </summary>
     public void Play()
     {
         preparables = new();
@@ -87,8 +57,91 @@ public class GameManager : MonoBehaviour {
         nbRounds = 0;
         SceneManager.LoadScene(gameMode.sceneName);
     }
+    /// <summary>
+    /// Register an object to be called every round
+    /// </summary>
+    /// <param name="p">The object to be prepared every game</param>
+    public void Register(IPreparable p)
+    {
+        preparables.Add(p);
+    }
+    /// <summary>
+    /// Schedule the destruction of a gameobject upon round end
+    /// </summary>
+    /// <param name="s">The object to be destroyed</param>
+    public void ScheduleDestroy(GameObject s)
+    {
+        spawnables.Add(s);
+    }
 
-    public void StartTurn()
+
+
+
+
+
+
+
+
+
+
+
+
+    // Private methods
+
+
+
+    // MONOBEHAVIOUR
+    private void Awake()
+    {
+
+        if (instance != null)
+            Destroy(gameObject);
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+            isPlaying = false;
+        }
+    }
+
+    private void Update()
+    {
+        // Debug
+        if (Input.GetKeyDown(KeyCode.P)) Play();
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+
+
+
+
+
+
+
+    // GAME LOGIC
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (gameMode != null && scene.name == gameMode.sceneName)
+        {
+            if (isPlaying) return;
+            SpawnCharacterControllers();
+            virtualCamera = GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>();
+            roundHandler = new RoundHandler(virtualCamera);
+            Debug.Log("start");
+            StartTurn();
+        }
+    }
+
+    private void StartTurn()
     {
         if (isPlaying) return;
         nbRounds++;
@@ -106,10 +159,8 @@ public class GameManager : MonoBehaviour {
         {
             p.Prepare();
         }
-        Debug.Log("number of spawnables : " + spawnables.Count);
         foreach (GameObject s in spawnables)
         {
-            Debug.Log("Destroy : " + s.name);
             if (s != null) Destroy(s);
         }
         spawnables.Clear();
@@ -118,38 +169,66 @@ public class GameManager : MonoBehaviour {
         timerEnd = null;
         timerEnd += EndTurn;
         StartCoroutine(Timer(gameMode.roundDuration));
-        Debug.Log("START");
     }
 
-    public void EndTurn() {
+    private void EndTurn() {
         if (!isPlaying) return;
         OnTurnEnd?.Invoke();
         roundHandler.EndTurn();
+        timerEnd = null;
+        isPlaying = false;
 
         if (nbRounds >= gameMode.roundsNumber * gameMode.nbOfPlayers)
         {
             EndGame();
             return;
         }
-
-        timerEnd = null;
         timerEnd += StartTurn;
         StartCoroutine(Timer(1));
-        Debug.Log("END");
-        isPlaying = false;
         currentPlayerIndex = (currentPlayerIndex + 1) % gameMode.players.Count;
         
         
 
     }
 
-    public void EndGame()
+    private void EndGame()
     {
         SceneManager.LoadScene("ChooseGameMode");
     }
 
 
 
+
+
+
+
+    // STATE MANAGEMENT
+
+    private void SwitchTo(int i)
+    {
+        currentPlayer = gameMode.players[i];
+    }
+
+    private Character SpawnCharacter(Player p)
+    {
+        Character c = Instantiate(p.ChooseCharacter());
+        p.AddCharacterInstance(c);
+        roundHandler.Add(c);
+        return c;
+    }
+
+    public void SpawnCharacterControllers()
+    {
+        Dictionary<Player, PlayerInput> inputs = PlayerInputInfo.CreatePlayerInputs(charControllerPrefab.GetComponent<PlayerInput>(), gameMode.players.ToArray());
+        foreach (Player player in gameMode.players)
+        {
+            CharController controller = inputs[player].GetComponent<CharController>();
+            player.charController = controller;
+        }
+    }
+
+
+    // Utility
     private Action timerEnd;
 
     private IEnumerator Timer(float time)
@@ -162,52 +241,4 @@ public class GameManager : MonoBehaviour {
         }
         timerEnd?.Invoke();
     }
-    
-
-
-    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (gameMode != null && scene.name == gameMode.sceneName)
-        {
-            if (isPlaying) return;
-            SpawnCharacterControllers();
-            virtualCamera = GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>();
-            roundHandler = new RoundHandler(virtualCamera);
-            StartTurn();
-        }
-    }
-
-    public void SpawnCharacterControllers()
-    {
-        Dictionary<Player, PlayerInput> inputs = PlayerInputInfo.CreatePlayerInputs(charControllerPrefab.GetComponent<PlayerInput>(), gameMode.players.ToArray()); 
-        foreach (Player player in gameMode.players)
-        {
-            CharController controller = inputs[player].GetComponent<CharController>();
-            player.charController = controller;
-        }
-    }
-
-    public void OnDeviceLost(InputDevice device)
-    {
-        Debug.Log(device.name + "lost!");
-    }
-
-    public void OnDeviceRegained(InputDevice device)
-    {
-        Debug.Log(device.name + "regained!");
-    }
-
-
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-
-
 }
