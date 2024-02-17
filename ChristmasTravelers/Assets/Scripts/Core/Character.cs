@@ -6,7 +6,6 @@ public class Character : MonoBehaviour {
 	public Replay replay { get; private set; }
 	public IRecorder[] recorders { get; private set; }
 
-
 	[Header("Gameplay parameters")]
     public float grabRadius;
     [field : SerializeField] public int FOV { get; private set; }
