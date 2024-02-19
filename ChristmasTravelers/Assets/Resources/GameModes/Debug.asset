@@ -16,20 +16,20 @@ MonoBehaviour:
   scene: {fileID: 102900000, guid: b69d77f25bcc04aa5bbe7d755a4bc01b, type: 3}
   sceneName: Map
   nbOfPlayers: 1
-  charPerPlayer: 2
-  roundsNumber: 2
-  roundDuration: 30
+  charPerPlayer: 1
+  roundsNumber: 1
+  roundDuration: 120
   players:
   - spawn: {x: -39.5, y: 1.3562298, z: -10.161448}
     name: Cregut
     number: 0
     color: {r: 0, g: 0.15949917, b: 1, a: 1}
-    score: 2
+    score: 0
     <characterPrefabs>k__BackingField:
-    - {fileID: 7858320245909833396, guid: 6523cd21d2c2f2d4ba2b54f1553301cf, type: 3}
-    - {fileID: 7858320245909833396, guid: 935f00dd90a800041876ab156d96c556, type: 3}
-    toAvoid:
-    - {fileID: 0}
+    - {fileID: 7858320245909833396, guid: 2d447adb27f784456b1a229a7babbad5, type: 3}
+    - {fileID: 7858320245909833396, guid: 2d447adb27f784456b1a229a7babbad5, type: 3}
+    - {fileID: 7858320245909833396, guid: 2d447adb27f784456b1a229a7babbad5, type: 3}
+    toAvoid: []
     controller: {fileID: 0}
     charController: {fileID: 0}
     inputInfo:
@@ -37,7 +37,7 @@ MonoBehaviour:
       index: 0
       splitScreenIndex: -1
       deviceClass: Keyboard
-  selected: 0
+  selected: 1
   overrideControllers: 1
   allowedDevices:
   - Keyboard

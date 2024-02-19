@@ -122,6 +122,7 @@ GameObject:
   - component: {fileID: -330582620004607153}
   - component: {fileID: 6152402874312259449}
   - component: {fileID: -320330256400724240}
+  - component: {fileID: 8717289341076352862}
   m_Layer: 0
   m_Name: RocketChar Animation
   m_TagString: Untagged
@@ -227,6 +228,7 @@ MonoBehaviour:
       deviceClass: 
   grabRadius: 3
   <FOV>k__BackingField: 10
+  <chAnimator>k__BackingField: {fileID: 8717289341076352862}
 --- !u!114 &3451438070945045697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -451,6 +453,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8717289341076352862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3055416447674701499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a8540a4de13340848a6085cd38dea87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8517441078833226306
 PrefabInstance:
   m_ObjectHideFlags: 0

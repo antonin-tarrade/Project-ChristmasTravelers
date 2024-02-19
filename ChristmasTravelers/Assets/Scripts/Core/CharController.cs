@@ -21,7 +21,6 @@ public class CharController : MonoBehaviour
 
     public void Move(CallbackContext context)
     {
-        Debug.Log(gameObject.name);
         movementInput.Move(context);
     }
 
