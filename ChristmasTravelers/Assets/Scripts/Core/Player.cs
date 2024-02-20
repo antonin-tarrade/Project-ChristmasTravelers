@@ -17,6 +17,10 @@ public class Player : IPreparable
 
 	public Color color;
 
+	public enum Teams {ALIEN,HUMAN};
+
+	public Teams team;
+
 	public int index => GameModeData.selectedMode.players.IndexOf(this);
 
 	 public int score;
@@ -58,7 +62,7 @@ public class Player : IPreparable
 	public void AddCharacterInstance(Character character)
 	{
 		characterInstances.Add(character);
-		character.GetComponent<SpriteRenderer>().color = this.color;
+		// character.GetComponent<SpriteRenderer>().color = this.color;
 		character.player = this;
 	}
 

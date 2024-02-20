@@ -23,12 +23,12 @@ MonoBehaviour:
   - spawn: {x: -39.5, y: 1.3562298, z: -10.161448}
     name: Cregut
     number: 0
-    color: {r: 0, g: 0.15949917, b: 1, a: 1}
-    score: 0
+    color: {r: 0, g: 0.15949917, b: 1, a: 0.4627451}
+    score: 1
     <characterPrefabs>k__BackingField:
-    - {fileID: 7858320245909833396, guid: 2d447adb27f784456b1a229a7babbad5, type: 3}
-    - {fileID: 7858320245909833396, guid: 2d447adb27f784456b1a229a7babbad5, type: 3}
-    - {fileID: 7858320245909833396, guid: 2d447adb27f784456b1a229a7babbad5, type: 3}
+    - {fileID: 7858320245909833396, guid: 749cc70fcbf1a4a6caaf2faead45d388, type: 3}
+    - {fileID: 7858320245909833396, guid: 10c92f3fa6bf014458983830f7f7bc17, type: 3}
+    - {fileID: 7858320245909833396, guid: 935f00dd90a800041876ab156d96c556, type: 3}
     toAvoid: []
     controller: {fileID: 0}
     charController: {fileID: 0}

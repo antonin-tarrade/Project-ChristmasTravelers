@@ -6,6 +6,8 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Rendering;
 #endregion
+
+[RequireComponent(typeof(Animator))]
 public class CharacterAnimator : MonoBehaviour
 {
     #region Variables
