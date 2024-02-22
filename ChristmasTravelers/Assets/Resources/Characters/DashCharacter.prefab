@@ -91,7 +91,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1526757263, guid: 36520e214b1a5473dadd0a50394caef5, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 0, g: 1, b: 0.8818593, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,7 +99,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &7858320245909833396
@@ -122,7 +122,6 @@ MonoBehaviour:
     team: 0
     score: 0
     <characterPrefabs>k__BackingField: []
-    toAvoid: []
     controller: {fileID: 0}
     charController: {fileID: 0}
     inputInfo:
@@ -398,7 +397,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Library: []
-  m_SpriteLibraryAsset: {fileID: 7108339969198208228, guid: 4375c5b0dcc2243aea5dad756b5bc2cb, type: 3}
+  m_SpriteLibraryAsset: {fileID: 7108339969198208228, guid: c4938ec702e0341b5b4e57969167e80e, type: 3}
 --- !u!114 &6227386316142732951
 MonoBehaviour:
   m_ObjectHideFlags: 0
