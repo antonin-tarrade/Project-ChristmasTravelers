@@ -4,11 +4,43 @@ using UnityEngine;
 using Items;
 using BoardCommands;
 using UnityEditor;
+using System;
 
 public interface ISpawnable
 {
-    GameObject gameObject { get; }
     void Set(Character spawner, Vector3 position, Vector3 direction);
+    void Destroy();
+}
+
+/// <summary>
+/// Used to encapsulate a simple gameobject into a basic spawnable, 
+/// so that the game object does not need to implement ISpawnable
+/// </summary>
+public class SpawnableObject : ISpawnable
+{
+    private readonly GameObject gameObject;
+    private readonly Action<Character, Vector3, Vector3> setFunc;
+    public SpawnableObject(GameObject gameObject)
+    {
+        this.gameObject = gameObject;
+        setFunc = null;
+    }
+
+    public SpawnableObject(GameObject gameObject, Action<Character, Vector3, Vector3> setFunc)
+    {
+        this.gameObject = gameObject;
+        this.setFunc = setFunc;
+    }
+
+    public void Destroy()
+    {
+        GameObject.Destroy(gameObject);
+    }
+
+    public void Set(Character spawner, Vector3 position, Vector3 direction)
+    {
+        setFunc?.Invoke(spawner, position, direction);
+    }
 }
 
 [CreateAssetMenu(fileName = "SpawnerItem", menuName = "Scriptables/Items/Spawner")]
@@ -55,7 +87,7 @@ public class SpawnerItem : Item
         {
             o.transform.position = param.position;
         }
-        GameManager.instance.ScheduleDestroy(o);
+        GameManager.instance.ScheduleDestroy(new SpawnableObject(o));
     }
 }
 

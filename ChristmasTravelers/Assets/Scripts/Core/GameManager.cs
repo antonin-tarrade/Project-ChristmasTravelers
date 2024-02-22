@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour {
     // State fields
     private Player currentPlayer;
     private List<IPreparable> preparables;
-    private List<GameObject> spawnables;
+    private List<ISpawnable> spawnables;
 
 
     // State parameters
@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour {
     /// Schedule the destruction of a gameobject upon round end
     /// </summary>
     /// <param name="s">The object to be destroyed</param>
-    public void ScheduleDestroy(GameObject s)
+    public void ScheduleDestroy(ISpawnable s)
     {
         spawnables.Add(s);
     }
@@ -157,9 +157,9 @@ public class GameManager : MonoBehaviour {
         {
             p.Prepare();
         }
-        foreach (GameObject s in spawnables)
+        foreach (ISpawnable s in spawnables)
         {
-            if (s != null) Destroy(s);
+            s.Destroy();
         }
         spawnables.Clear();
         roundHandler.StartTurn();

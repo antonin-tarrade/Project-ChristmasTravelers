@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro.EditorUtilities;
 using UnityEditor;
 using UnityEngine;
@@ -64,4 +65,23 @@ public class GameModeData : ScriptableObject
             character.GetComponent<SpriteLibrary>().spriteLibraryAsset = skin;
         }
     }
+}
+
+
+public static class GameModeDataUtility
+{
+    /// <summary>
+    /// Returns all the colliders of the active characters of the currently selected game mode
+    /// </summary>
+    /// <returns></returns>
+    public static IEnumerable<Collider2D> AllCharactersColliders()
+        => GameModeData.selectedMode.AllCharactersColliders();
+
+    /// <summary>
+    /// Returns all the colliders of the active characters of a given game mode
+    /// </summary>
+    /// <param name="data">The game mode data</param>
+    /// <returns></returns>
+    public static IEnumerable<Collider2D> AllCharactersColliders(this GameModeData data)
+        => data.players.SelectMany(p => p.characterInstances.Select(c => c.GetComponent<Collider2D>()));
 }
