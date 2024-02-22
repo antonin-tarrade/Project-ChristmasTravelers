@@ -2,6 +2,7 @@ using Records;
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(CharacterAnimator))]
 public class Character : MonoBehaviour {
 	public Player player;
 	public Replay replay { get; private set; }

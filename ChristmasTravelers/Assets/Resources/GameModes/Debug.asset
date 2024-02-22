@@ -24,6 +24,7 @@ MonoBehaviour:
     name: Cregut
     number: 0
     color: {r: 0, g: 0.15949917, b: 1, a: 0.4627451}
+    team: 1
     score: 1
     <characterPrefabs>k__BackingField:
     - {fileID: 7858320245909833396, guid: 749cc70fcbf1a4a6caaf2faead45d388, type: 3}
@@ -37,7 +38,12 @@ MonoBehaviour:
       index: 0
       splitScreenIndex: -1
       deviceClass: Keyboard
-  selected: 1
+  teams:
+    keys: 0000000001000000
+    values:
+    - {fileID: 7108339969198208228, guid: c06e92ac7c7de4f0a80fe7be3b9847a6, type: 3}
+    - {fileID: 7108339969198208228, guid: c4938ec702e0341b5b4e57969167e80e, type: 3}
+  selected: 0
   overrideControllers: 1
   allowedDevices:
   - Keyboard

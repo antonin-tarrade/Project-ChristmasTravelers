@@ -5,9 +5,12 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.U2D.Animation;
 #endregion
 
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(SpriteLibrary))]
+[RequireComponent(typeof(SpriteResolver))]
 public class CharacterAnimator : MonoBehaviour
 {
     #region Variables

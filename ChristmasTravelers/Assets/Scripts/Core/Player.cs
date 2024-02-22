@@ -17,9 +17,7 @@ public class Player : IPreparable
 
 	public Color color;
 
-	public enum Teams {ALIEN,HUMAN};
-
-	public Teams team;
+	public GameModeData.Teams team;
 
 	public int index => GameModeData.selectedMode.players.IndexOf(this);
 
