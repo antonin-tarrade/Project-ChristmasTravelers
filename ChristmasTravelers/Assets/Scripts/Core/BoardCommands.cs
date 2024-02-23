@@ -20,18 +20,19 @@ namespace BoardCommands
     {
         public GameObject obj;
         public Vector3 movement;
-        private Rigidbody2D body;
+        private Character character;
 
         public MoveBoardCommand(GameObject obj, Vector3 movement)
         {
             this.obj = obj;
             this.movement = movement;
-            body = obj.GetComponent<Rigidbody2D>();
+            character = obj.GetComponent<Character>();
         }
+        
 
         public void Execute()
         {
-            body.position += new Vector2(movement.x, movement.y);
+            character.UpdatePosition(movement);
         }
     }
 

@@ -1,10 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro.EditorUtilities;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.Serialization;
+using UnityEngine.U2D.Animation;
 
 [CreateAssetMenu(fileName = "GameModeData", menuName = "Scriptables/GameModeData")]
 public class GameModeData : ScriptableObject
@@ -21,6 +24,12 @@ public class GameModeData : ScriptableObject
     public float roundDuration;
     public List<Player> players;
 
+    public enum Teams{Human,Alien};
+
+    public UDictionary<Teams,SpriteLibraryAsset> teams;
+
+
+
     
     public void Select()
     {
@@ -35,15 +44,26 @@ public class GameModeData : ScriptableObject
     public List<string> allowedDevices;
 
 
+
     private void OnValidate()
     {
         if (selected)
         {
             Select();
+            foreach (Player player in players){
+                SelectSkin(player);
+            }
         }
 #if UNITY_EDITOR
         sceneName = scene.name;
 #endif
+    }
+
+    private void SelectSkin(Player player){
+        foreach (Character character in player.characterPrefabs){
+            teams.TryGetValue(player.team, out SpriteLibraryAsset skin);
+            character.GetComponent<SpriteLibrary>().spriteLibraryAsset = skin;
+        }
     }
 }
 

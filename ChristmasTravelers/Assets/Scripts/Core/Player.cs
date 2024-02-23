@@ -17,6 +17,8 @@ public class Player : IPreparable
 
 	public Color color;
 
+	public GameModeData.Teams team;
+
 	public int index => GameModeData.selectedMode.players.IndexOf(this);
 
 	 public int score;
@@ -56,7 +58,7 @@ public class Player : IPreparable
 		foreach (Collider2D collider in characterInstances.Select(c => c.GetComponent<Collider2D>()).Union(toAvoid))
 			Physics2D.IgnoreCollision(character.GetComponent<Collider2D>(), collider);
 		characterInstances.Add(character);
-		character.GetComponent<SpriteRenderer>().color = this.color;
+		// character.GetComponent<SpriteRenderer>().color = this.color;
 		character.player = this;
 	}
 
