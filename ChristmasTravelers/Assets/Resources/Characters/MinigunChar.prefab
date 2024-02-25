@@ -142,7 +142,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 464095297956217195}
@@ -229,7 +229,7 @@ MonoBehaviour:
       splitScreenIndex: 0
       deviceClass: 
   grabRadius: 3
-  <FOV>k__BackingField: 10
+  <FOV>k__BackingField: 5
   <chAnimator>k__BackingField: {fileID: -8359907365343933164}
 --- !u!114 &3451438070945045697
 MonoBehaviour:
@@ -482,7 +482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Library: []
-  m_SpriteLibraryAsset: {fileID: 7108339969198208228, guid: c06e92ac7c7de4f0a80fe7be3b9847a6, type: 3}
+  m_SpriteLibraryAsset: {fileID: 7108339969198208228, guid: c4938ec702e0341b5b4e57969167e80e, type: 3}
 --- !u!114 &3194704065442866572
 MonoBehaviour:
   m_ObjectHideFlags: 0

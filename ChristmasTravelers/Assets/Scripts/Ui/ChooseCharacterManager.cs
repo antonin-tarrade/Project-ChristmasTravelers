@@ -74,13 +74,6 @@ public class ChooseCharacterManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
     private void InitCharacterPool(){
 
         GridLayoutGroup grid = allCharactersPool.GetComponent<GridLayoutGroup>();
@@ -161,9 +154,6 @@ public class ChooseCharacterManager : MonoBehaviour
 
     public void OnPlayerJoined (PlayerInput playerInput){
 
-        Debug.Log("PLAYER JOINED");
-
-        // Si possible trouver une autre maniere de recuperer le playerController (Spawn par l'inputManager)
         PlayerController pc = playerInput.GetComponent<PlayerController>();
         
 
@@ -176,7 +166,9 @@ public class ChooseCharacterManager : MonoBehaviour
             color = couleurs[playerNumber],
             number = playerNumber + 1,
             controller = pc,
-            inputInfo = new PlayerInputInfo(playerInput.devices[0], playerInput.currentControlScheme, playerInput.playerIndex, playerInput.splitScreenIndex)
+            inputInfo = new PlayerInputInfo(playerInput.devices[0], playerInput.currentControlScheme, playerInput.playerIndex, playerInput.splitScreenIndex),
+            team = (GameModeData.Teams) (playerNumber % Enum.GetNames(typeof(GameModeData.Teams)).Length-1)
+            
         };
         newPlayer.InitBeforeSelection();
         GameModeData.selectedMode.players.Add(newPlayer);
