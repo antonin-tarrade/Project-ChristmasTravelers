@@ -167,7 +167,7 @@ public class ChooseCharacterManager : MonoBehaviour
             number = playerNumber + 1,
             controller = pc,
             inputInfo = new PlayerInputInfo(playerInput.devices[0], playerInput.currentControlScheme, playerInput.playerIndex, playerInput.splitScreenIndex),
-            team = (GameModeData.Teams) (playerNumber % Enum.GetNames(typeof(GameModeData.Teams)).Length-1)
+            team = (GameModeData.Teams) ((playerNumber +1) % Enum.GetNames(typeof(GameModeData.Teams)).Length)
             
         };
         newPlayer.InitBeforeSelection();
