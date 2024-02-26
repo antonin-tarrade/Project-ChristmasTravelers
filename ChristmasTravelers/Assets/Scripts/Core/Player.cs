@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static GameModeData;
+using UnityEngine.U2D.Animation;
 
 [Serializable]
 public class Player : IPreparable
@@ -52,13 +54,21 @@ public class Player : IPreparable
 		score = 0;
 	}
 
+    private void SelectSkin(Character character)
+    {
+        
+        GameModeData.selectedMode.teams.TryGetValue(team, out SpriteLibraryAsset skin);
+        character.GetComponent<SpriteLibrary>().spriteLibraryAsset = skin;
 
-	public void AddCharacterInstance(Character character)
+    }
+
+
+    public void AddCharacterInstance(Character character)
 	{
 		foreach (Collider2D collider in characterInstances.Select(c => c.GetComponent<Collider2D>()).Union(toAvoid))
 			Physics2D.IgnoreCollision(character.GetComponent<Collider2D>(), collider);
 		characterInstances.Add(character);
-		// character.GetComponent<SpriteRenderer>().color = this.color;
+		SelectSkin(character);
 		character.player = this;
 	}
 

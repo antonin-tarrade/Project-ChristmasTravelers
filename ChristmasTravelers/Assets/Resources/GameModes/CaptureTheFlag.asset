@@ -17,11 +17,12 @@ MonoBehaviour:
   sceneName: CaptureTheFlag
   nbOfPlayers: 2
   charPerPlayer: 3
-  spawns:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
+  roundsNumber: 0
   roundDuration: 20
   players: []
-  selected: 0
+  teams:
+    keys: 
+    values: []
+  selected: 1
   overrideControllers: 0
   allowedDevices: []

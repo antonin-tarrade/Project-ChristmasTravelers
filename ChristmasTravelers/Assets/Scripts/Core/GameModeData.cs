@@ -28,9 +28,6 @@ public class GameModeData : ScriptableObject
 
     public UDictionary<Teams,SpriteLibraryAsset> teams;
 
-
-
-    
     public void Select()
     {
         if (selectedMode && selectedMode != this) selectedMode.selected = false;
@@ -50,21 +47,12 @@ public class GameModeData : ScriptableObject
         if (selected)
         {
             Select();
-            foreach (Player player in players){
-                SelectSkin(player);
-            }
         }
 #if UNITY_EDITOR
         sceneName = scene.name;
 #endif
     }
 
-    private void SelectSkin(Player player){
-        foreach (Character character in player.characterPrefabs){
-            teams.TryGetValue(player.team, out SpriteLibraryAsset skin);
-            character.GetComponent<SpriteLibrary>().spriteLibraryAsset = skin;
-        }
-    }
 }
 
 
