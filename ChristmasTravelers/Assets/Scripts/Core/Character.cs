@@ -24,8 +24,6 @@ public class Character : MonoBehaviour {
 	}
 
 	public void Prepare(){
-		Debug.Log(player.spawn);
-		Debug.Log(player.name);
 		transform.position = player.spawn;
 	}
 

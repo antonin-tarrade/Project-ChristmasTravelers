@@ -97,7 +97,8 @@ public class PlayerInputInfo
 
 	private static PlayerInputInfo GetNewInfo()
 	{
-		return new PlayerInputInfo(InputSystem.devices.Where(d => GameModeData.selectedMode.allowedDevices.Contains(d.description.deviceClass)).ToArray()[currentIndex], defaultScheme, currentIndex, -1);
+		int index = (GameModeData.selectedMode.uniqueController)? GameModeData.selectedMode.uniqueControllerIndex : currentIndex;
+		return new PlayerInputInfo(InputSystem.devices.Where(d => GameModeData.selectedMode.allowedDevices.Contains(d.description.deviceClass)).ToArray()[index], defaultScheme, currentIndex, -1);
 	}
 
 	private static PlayerInput CreatePlayerInput(PlayerInput input, PlayerInputInfo info)
@@ -110,6 +111,7 @@ public class PlayerInputInfo
 
 	public static Dictionary<Player,PlayerInput> CreatePlayerInputs(PlayerInput input, Player[] players)
 	{
+		Initialize();
 		Dictionary<Player, PlayerInput> map = new();
 		if (!GameModeData.selectedMode.overrideControllers)
 		{

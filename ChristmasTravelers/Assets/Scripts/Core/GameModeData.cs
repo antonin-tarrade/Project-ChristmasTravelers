@@ -38,6 +38,8 @@ public class GameModeData : ScriptableObject
     [Header("DEBUG")]
     public bool selected = false;
     public bool overrideControllers;
+    public bool uniqueController;
+    public int uniqueControllerIndex;
     public List<string> allowedDevices;
 
 
@@ -51,6 +53,7 @@ public class GameModeData : ScriptableObject
 #if UNITY_EDITOR
         sceneName = scene.name;
 #endif
+        nbOfPlayers = players.Count;
     }
 
 }

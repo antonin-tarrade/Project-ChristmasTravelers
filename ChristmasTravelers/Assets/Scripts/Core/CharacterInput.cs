@@ -24,7 +24,6 @@ public class CharacterInput : SimpleInput
 
     public void Set(PlayerInput playerInput)
     {
-        Debug.Log("SET");
         aimAction = playerInput.actions["ShootDirection"];
     }
 
