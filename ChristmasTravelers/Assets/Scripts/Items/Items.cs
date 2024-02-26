@@ -75,42 +75,7 @@ namespace Items
         public bool consumeOnUse;
     }
 
-    public struct InventoryItemInitialData : IPreparable
-    {
-        public Inventory inventory;
-        public IItem item;
-
-        public InventoryItemInitialData(Inventory inventory, IItem item)
-        {
-            this.inventory = inventory;
-            this.item = item;
-        }
-
-        public void Prepare()
-        {
-            inventory.Add(item);
-        }
-    }
-
-    public struct GrabbableItemInitialData : IPreparable {
-        public GrabbableItem grabbable;
-        public IItem item;
-        public Vector3 initialPosition;
-
-        public GrabbableItemInitialData(GrabbableItem grabbable, IItem item, Vector3 initialPosition){
-            this.grabbable = grabbable;
-            this.item = item;
-            this.initialPosition = initialPosition;
-        }
-
-        public void Prepare() {
-            grabbable.gameObject.SetActive(true);
-            grabbable.transform.position = initialPosition;
-            grabbable.activated = true;
-            grabbable.Set(item);
-        }
-    }
-
     
+
    
 }

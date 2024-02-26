@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour {
     // Events
     public event Action OnTurnStart;
     public event Action OnTurnEnd;
+    public event Action<Character> OnCharacterSpawned;
+    public event Action<Character> OnCharacterControlled;
 
 
     // Fields
@@ -55,6 +57,10 @@ public class GameManager : MonoBehaviour {
             p.InitBeforeGame();
         currentPlayerIndex = 0;
         nbRounds = 0;
+        OnTurnStart = null;
+        OnTurnEnd = null;
+        OnCharacterControlled = null;
+        OnCharacterSpawned = null;
         SceneManager.LoadScene(gameMode.sceneName);
     }
     /// <summary>
@@ -136,7 +142,6 @@ public class GameManager : MonoBehaviour {
             SpawnCharacterControllers();
             virtualCamera = GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>();
             roundHandler = new RoundHandler(virtualCamera);
-            Debug.Log("start");
             StartTurn();
         }
     }
@@ -149,9 +154,7 @@ public class GameManager : MonoBehaviour {
         
         SwitchTo(currentPlayerIndex);
         Character c = SpawnCharacter(currentPlayer);
-        currentPlayer.charController.Set(c.GetComponent<CharacterInput>());
-        roundHandler.SwitchTo(c);
-        virtualCamera.m_Lens.OrthographicSize = c.FOV;
+        ControlCharacter(c);
         OnTurnStart?.Invoke();
 
 
@@ -209,11 +212,20 @@ public class GameManager : MonoBehaviour {
         currentPlayer = gameMode.players[i];
     }
 
+    private void ControlCharacter(Character c)
+    {
+        currentPlayer.charController.Set(c.GetComponent<CharacterInput>());
+        roundHandler.SwitchTo(c);
+        virtualCamera.m_Lens.OrthographicSize = c.FOV;
+        OnCharacterControlled?.Invoke(c);
+    }
+
     private Character SpawnCharacter(Player p)
     {
         Character c = Instantiate(p.ChooseCharacter());
         p.AddCharacterInstance(c);
         roundHandler.Add(c);
+        OnCharacterSpawned?.Invoke(c);
         return c;
     }
 

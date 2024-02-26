@@ -110,3 +110,20 @@ public class Inventory : MonoBehaviour, IPreparable, IItemContainer
 
 
 }
+
+public struct InventoryItemInitialData : IPreparable
+{
+    public Inventory inventory;
+    public IItem item;
+
+    public InventoryItemInitialData(Inventory inventory, IItem item)
+    {
+        this.inventory = inventory;
+        this.item = item;
+    }
+
+    public void Prepare()
+    {
+        inventory.Add(item);
+    }
+}

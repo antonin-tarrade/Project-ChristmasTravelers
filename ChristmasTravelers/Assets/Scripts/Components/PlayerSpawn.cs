@@ -13,13 +13,18 @@ public class PlayerSpawn : MonoBehaviour
     [SerializeField, Range(0,1)] private float spriteAlpha;
     private Player player;
 
-    private void Start()
+    private void Awake()
     {
         player = GameModeData.selectedMode.players[playerIndex];
         player.spawn = transform.position;
         Color c = player.color;
         c.a = spriteAlpha;
         GetComponent<SpriteRenderer>().color = c;
+    }
+
+    private void Start()
+    {
+       
     }
 
 

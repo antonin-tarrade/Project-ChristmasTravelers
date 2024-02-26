@@ -13,21 +13,27 @@ public class GrabbableItem : MonoBehaviour, IGrabbable, IItemContainer
     public bool activated;
     private SpriteRenderer sr;
 
-    private void Start() {
-        initialPosition = transform.position;
-        Set(itemData.GetInstance());
-        GameManager.instance.Register(new GrabbableItemInitialData(this, item, initialPosition));
+    private void Awake()
+    {
         sr = GetComponent<SpriteRenderer>();
+        initialPosition = transform.position;
         activated = true;
+    }
+
+    private void Start() {
+        Set(itemData.GetInstance());
+        GameManager.instance.Register(new GrabbableItemInitialData(this, item, initialPosition));   
     }
 
 
     public void Set(IItem item){
         if (this.item != null)
-            item.OnDropEvent -= OnItemDropped;
+            this.item.OnDropEvent -= OnItemDropped;
         this.item = item;
         item.OnDropEvent += OnItemDropped;
         item.container = this;
+        sr.enabled = true;
+        activated = true;
     }
 
     public void OnItemDropped(IItem item)
@@ -58,10 +64,35 @@ public class GrabbableItem : MonoBehaviour, IGrabbable, IItemContainer
 
     public void Remove(IItem item)
     {
-        item = null;
+        if (this.item != null && this.item == item)
+        {
+            this.item.OnDropEvent -= OnItemDropped;
+            this.item = null;
+        }
     }
 
     public void SetGameObject(GameObject gameObject)
     { 
+    }
+}
+
+public struct GrabbableItemInitialData : IPreparable
+{
+    public GrabbableItem grabbable;
+    public IItem item;
+    public Vector3 initialPosition;
+
+    public GrabbableItemInitialData(GrabbableItem grabbable, IItem item, Vector3 initialPosition)
+    {
+        this.grabbable = grabbable;
+        this.item = item;
+        this.initialPosition = initialPosition;
+    }
+
+    public void Prepare()
+    {
+        grabbable.transform.position = initialPosition;
+        grabbable.activated = true;
+        grabbable.Set(item);
     }
 }
