@@ -15,19 +15,20 @@ MonoBehaviour:
   gameModeName: Debug
   scene: {fileID: 102900000, guid: b69d77f25bcc04aa5bbe7d755a4bc01b, type: 3}
   sceneName: Map
-  nbOfPlayers: 2
-  charPerPlayer: 2
+  nbOfPlayers: 1
+  charPerPlayer: 1
   roundsNumber: 2
-  roundDuration: 20
+  roundDuration: 40
   players:
   - spawn: {x: -39.5, y: 1.3562298, z: -10.161448}
-    name: Cregut
-    number: 0
-    color: {r: 0, g: 0.15949917, b: 1, a: 1}
-    score: 0
+    name: Player 1
+    number: 1
+    color: {r: 1, g: 1, b: 1, a: 1}
+    team: 0
+    score: 1
     <characterPrefabs>k__BackingField:
     - {fileID: 7858320245909833396, guid: 6523cd21d2c2f2d4ba2b54f1553301cf, type: 3}
-    - {fileID: 7858320245909833396, guid: 935f00dd90a800041876ab156d96c556, type: 3}
+    - {fileID: 7858320245909833396, guid: 6523cd21d2c2f2d4ba2b54f1553301cf, type: 3}
     controller: {fileID: 0}
     charController: {fileID: 0}
     inputInfo:
@@ -35,24 +36,12 @@ MonoBehaviour:
       index: 0
       splitScreenIndex: -1
       deviceClass: Keyboard
-  - spawn: {x: 40, y: 0.1, z: -10.161448}
-    name: Pantel
-    number: 0
-    color: {r: 1, g: 0.039973482, b: 0, a: 1}
-    score: 0
-    <characterPrefabs>k__BackingField:
-    - {fileID: 7858320245909833396, guid: 6523cd21d2c2f2d4ba2b54f1553301cf, type: 3}
-    - {fileID: 7858320245909833396, guid: 935f00dd90a800041876ab156d96c556, type: 3}
-    controller: {fileID: 0}
-    charController: {fileID: 0}
-    inputInfo:
-      scheme: Controller
-      index: 1
-      splitScreenIndex: -1
-      deviceClass: Keyboard
+  teams:
+    keys: 0100000000000000
+    values:
+    - {fileID: 7108339969198208228, guid: c06e92ac7c7de4f0a80fe7be3b9847a6, type: 3}
+    - {fileID: 7108339969198208228, guid: c4938ec702e0341b5b4e57969167e80e, type: 3}
   selected: 1
   overrideControllers: 1
-  uniqueController: 1
-  uniqueControllerIndex: 0
   allowedDevices:
   - Keyboard

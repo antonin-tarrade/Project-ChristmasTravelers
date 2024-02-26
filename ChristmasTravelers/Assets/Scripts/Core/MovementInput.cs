@@ -14,6 +14,7 @@ public class MovementInput : SimpleInput
     private InputAction input;
     private bool move;
 
+
     public void Move(InputAction.CallbackContext context){
         if (context.started || context.performed)
         {
@@ -35,6 +36,6 @@ public class MovementInput : SimpleInput
 
     private void Update() {
         if (move) movement = input.ReadValue<Vector2>();
-        if (movement.magnitude > 0) RequestCommand((new MoveBoardCommand(gameObject, speed * movement))); 
+        RequestCommand(new MoveBoardCommand(gameObject, speed * movement));
     }
 }

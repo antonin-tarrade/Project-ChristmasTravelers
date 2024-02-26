@@ -1,10 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro.EditorUtilities;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.Serialization;
+using UnityEngine.U2D.Animation;
 
 [CreateAssetMenu(fileName = "GameModeData", menuName = "Scriptables/GameModeData")]
 public class GameModeData : ScriptableObject
@@ -21,7 +24,10 @@ public class GameModeData : ScriptableObject
     public float roundDuration;
     public List<Player> players;
 
-    
+    public enum Teams{Human,Alien};
+
+    public UDictionary<Teams,SpriteLibraryAsset> teams;
+
     public void Select()
     {
         if (selectedMode && selectedMode != this) selectedMode.selected = false;
@@ -37,6 +43,7 @@ public class GameModeData : ScriptableObject
     public List<string> allowedDevices;
 
 
+
     private void OnValidate()
     {
         if (selected)
@@ -48,6 +55,7 @@ public class GameModeData : ScriptableObject
 #endif
         nbOfPlayers = players.Count;
     }
+
 }
 
 

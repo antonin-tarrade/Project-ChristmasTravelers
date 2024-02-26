@@ -14386,7 +14386,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  spriteAlpha: 0.252
 --- !u!4 &1219126199
 Transform:
   m_ObjectHideFlags: 0
