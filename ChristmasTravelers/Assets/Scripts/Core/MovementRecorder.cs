@@ -37,7 +37,6 @@ public class MovementRecorder : SimpleRecorder
 
         if ((time - lastUpdateTime) > recordData.recordFrequency)
         {
-            moveCommand.movement = ((float)recordData.recordFrequency) * moveCommand.movement;
             commandList.Add(new TimedBoardCommand(time, moveCommand));
             moveCommand.Execute();
             lastUpdateTime = time;

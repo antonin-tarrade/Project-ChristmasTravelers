@@ -228,7 +228,7 @@ MonoBehaviour:
       index: 0
       splitScreenIndex: 0
       deviceClass: 
-  grabRadius: 3
+  grabRadius: 5
   <FOV>k__BackingField: 10
   <chAnimator>k__BackingField: {fileID: -8963154640325587369}
 --- !u!114 &3451438070945045697
@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 0
-  speed: 20
+  speed: 10
 --- !u!114 &6020620316253342707
 MonoBehaviour:
   m_ObjectHideFlags: 0

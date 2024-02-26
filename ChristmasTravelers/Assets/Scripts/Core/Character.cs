@@ -28,12 +28,9 @@ public class Character : MonoBehaviour {
 	}
 
 
-    public void UpdatePosition(Vector3 movement)
+    public void UpdatePosition(Vector2 position)
     {
-        body.position += new Vector2(movement.x,movement.y);
-		chAnimator.NotifyMovement(movement);
-  
-
-        
+        chAnimator.NotifyMovement(position - body.position);
+        body.position = position;		
     }
 }

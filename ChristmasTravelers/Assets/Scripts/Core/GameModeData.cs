@@ -53,7 +53,6 @@ public class GameModeData : ScriptableObject
 #if UNITY_EDITOR
         sceneName = scene.name;
 #endif
-        nbOfPlayers = players.Count;
     }
 
 }
