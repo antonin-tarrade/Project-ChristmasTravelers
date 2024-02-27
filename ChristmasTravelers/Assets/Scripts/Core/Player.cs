@@ -70,6 +70,7 @@ public class Player : IPreparable
 			Physics2D.IgnoreCollision(character.GetComponent<Collider2D>(), collider);
 		characterInstances.Add(character);
 		character.player = this;
+		SelectSkin(character);
 	}
 
 	public void AddCharacterPrefab(Character character)
