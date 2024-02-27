@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.U2D;
 using UnityEngine.UI;
 
 public class ChooseCharacterManager : MonoBehaviour
@@ -167,7 +168,7 @@ public class ChooseCharacterManager : MonoBehaviour
             number = playerNumber + 1,
             controller = pc,
             inputInfo = new PlayerInputInfo(playerInput.devices[0], playerInput.currentControlScheme, playerInput.playerIndex, playerInput.splitScreenIndex),
-            team = (GameModeData.Teams) ((playerNumber +1) % Enum.GetNames(typeof(GameModeData.Teams)).Length)
+            team = (GameModeData.Teams) ((playerNumber) % Enum.GetNames(typeof(GameModeData.Teams)).Length)
             
         };
         newPlayer.InitBeforeSelection();
@@ -209,9 +210,19 @@ public class ChooseCharacterManager : MonoBehaviour
     public void OnCharacterAdded(Player player,Character character)
     {
         playersPool.TryGetValue(player, out PlayerPoolUI pool);
+
+        player.SelectSkin(character);
+
         Transform charUI = pool.characterPool.transform.GetChild(player.characterPrefabs.Count);
         charUI.GetComponentInChildren<TextMeshProUGUI>().text = character.name;
+
+
+        GameObject img = charUI.Find("Image").gameObject;
+        img.SetActive(true);
+        img.GetComponent<Image>().sprite = character.GetDisplaySprite("big");
+
         charUI.GetComponent<Image>().color = player.color;
+
 
         if (player.characterPrefabs.Count == GameModeData.selectedMode.charPerPlayer - 1) {
             pool.state = PlayerPoolUI.PlayerState.CanBeReady;

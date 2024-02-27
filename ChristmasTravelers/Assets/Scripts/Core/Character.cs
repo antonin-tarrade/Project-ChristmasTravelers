@@ -1,6 +1,7 @@
 using Records;
 using System;
 using UnityEngine;
+using UnityEngine.U2D.Animation;
 
 [RequireComponent(typeof(CharacterAnimator))]
 public class Character : MonoBehaviour {
@@ -32,8 +33,19 @@ public class Character : MonoBehaviour {
     {
         body.position += new Vector2(movement.x,movement.y);
 		chAnimator.NotifyMovement(movement);
-  
-
-        
     }
+
+	public Sprite GetDisplaySprite(string option)
+	{
+		Sprite sprite = GetComponent<SpriteLibrary>().spriteLibraryAsset.GetSprite("UI", option.ToLower());
+		if (!sprite)
+		{
+			Debug.LogError("Cannot find sprite for category : UI and label " + option + " in current sprite library");
+			return null;
+		}
+		else
+		{
+			return sprite;
+		}
+	}
 }

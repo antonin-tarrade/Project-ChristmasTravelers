@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using static GameModeData;
 using UnityEngine.U2D.Animation;
+using System.Diagnostics;
 
 [Serializable]
 public class Player : IPreparable
@@ -54,7 +55,7 @@ public class Player : IPreparable
 		score = 0;
 	}
 
-    private void SelectSkin(Character character)
+    public void SelectSkin(Character character)
     {
         
         GameModeData.selectedMode.teams.TryGetValue(team, out SpriteLibraryAsset skin);
@@ -68,7 +69,6 @@ public class Player : IPreparable
 		foreach (Collider2D collider in characterInstances.Select(c => c.GetComponent<Collider2D>()).Union(toAvoid))
 			Physics2D.IgnoreCollision(character.GetComponent<Collider2D>(), collider);
 		characterInstances.Add(character);
-		SelectSkin(character);
 		character.player = this;
 	}
 
