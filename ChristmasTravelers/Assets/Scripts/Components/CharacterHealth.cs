@@ -9,11 +9,13 @@ public class CharacterHealth : MonoBehaviour, IDamageable
 
     [field : SerializeField] public float baseHealth { get; private set; }
     public float health { get; private set; }
+
+    private HealthBar healthBar;
     public Action OnDeath { get; set; }
 
     private void Awake()
     {
-
+        healthBar = GetComponentInChildren<HealthBar>();
     }
 
     private void Start()
@@ -25,15 +27,18 @@ public class CharacterHealth : MonoBehaviour, IDamageable
     public void Damage(float dmg)
     {
         health -= dmg;
+        GetComponent<Character>().healthBar.Change(-dmg);
         if (health <= 0) Death();
         else StartCoroutine(DamageFeedBack());
     }
 
     private void Init()
     {
+        
         gameObject.layer = LayerMask.NameToLayer("Alive");
         GetComponent<SpriteRenderer>().material = GameManager.instance.gameData.LivingMaterial;
         health = baseHealth;
+        healthBar.InitBar(baseHealth);
     }
 
     private void Death()
@@ -52,7 +57,8 @@ public class CharacterHealth : MonoBehaviour, IDamageable
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         sr.color = color;
         yield return new WaitForSeconds(time);
-        // sr.color = GetComponent<Character>().player.color;
+        sr.color = GetComponent<Character>().player.team.teamColor;
+        
     }
 
     private void OnDestroy()

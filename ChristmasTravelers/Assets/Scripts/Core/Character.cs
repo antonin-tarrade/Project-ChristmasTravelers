@@ -15,6 +15,7 @@ public class Character : MonoBehaviour {
 
     [field: SerializeField] public CharacterAnimator chAnimator{ get; private set; }
 
+    [field: SerializeField]  public HealthBar healthBar { get; private set; }
 
     private Rigidbody2D body;
 
@@ -22,6 +23,7 @@ public class Character : MonoBehaviour {
 		replay = GetComponent<Replay> ();
 		recorders = GetComponents<IRecorder> ();
 		body = GetComponent<Rigidbody2D> ();
+		healthBar.gameObject.GetComponent<Canvas>().worldCamera = Camera.main;
 	}
 
 	public void Prepare(){
