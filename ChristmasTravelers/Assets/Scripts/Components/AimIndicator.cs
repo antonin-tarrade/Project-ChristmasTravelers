@@ -17,7 +17,7 @@ public class AimIndicator : MonoBehaviour
     {
         characterAttack = character.GetComponent<IAttack>();
         characterTransform = character.transform;
-        GetComponent<SpriteRenderer>().color = character.GetComponent<Character>().player.color;
+        GetComponent<SpriteRenderer>().color = character.GetComponent<Character>().player.team.teamColor;
     }
 
     // Update is called once per frame

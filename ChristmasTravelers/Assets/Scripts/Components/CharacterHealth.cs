@@ -52,7 +52,7 @@ public class CharacterHealth : MonoBehaviour, IDamageable
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         sr.color = color;
         yield return new WaitForSeconds(time);
-        sr.color = GetComponent<Character>().player.color;
+        // sr.color = GetComponent<Character>().player.color;
     }
 
     private void OnDestroy()

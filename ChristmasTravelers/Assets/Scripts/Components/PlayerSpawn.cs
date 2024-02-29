@@ -17,7 +17,7 @@ public class PlayerSpawn : MonoBehaviour
     {
         player = GameModeData.selectedMode.players[playerIndex];
         player.spawn = transform.position;
-        Color c = player.color;
+        Color c = player.team.teamColor;
         c.a = spriteAlpha;
         GetComponent<SpriteRenderer>().color = c;
     }

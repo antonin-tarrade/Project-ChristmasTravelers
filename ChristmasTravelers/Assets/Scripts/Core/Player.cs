@@ -18,9 +18,7 @@ public class Player : IPreparable
 
 	public int number;
 
-	public Color color;
-
-	public GameModeData.Teams team;
+	public Team team;
 
 	public int index => GameModeData.selectedMode.players.IndexOf(this);
 
@@ -57,10 +55,7 @@ public class Player : IPreparable
 
     public void SelectSkin(Character character)
     {
-        
-        GameModeData.selectedMode.teams.TryGetValue(team, out SpriteLibraryAsset skin);
-        character.GetComponent<SpriteLibrary>().spriteLibraryAsset = skin;
-
+        character.GetComponent<SpriteLibrary>().spriteLibraryAsset = team.spriteLibrary;
     }
 
 

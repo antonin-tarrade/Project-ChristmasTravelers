@@ -164,11 +164,10 @@ public class ChooseCharacterManager : MonoBehaviour
         Player newPlayer = new Player
         {
             name = "Player " + (playerNumber + 1),
-            color = couleurs[playerNumber],
             number = playerNumber + 1,
             controller = pc,
             inputInfo = new PlayerInputInfo(playerInput.devices[0], playerInput.currentControlScheme, playerInput.playerIndex, playerInput.splitScreenIndex),
-            team = (GameModeData.Teams) ((playerNumber) % Enum.GetNames(typeof(GameModeData.Teams)).Length)
+            team =  GameModeData.selectedMode.teams[playerNumber % GameModeData.selectedMode.teams.Count]
             
         };
         newPlayer.InitBeforeSelection();
@@ -198,7 +197,7 @@ public class ChooseCharacterManager : MonoBehaviour
         pool.name = player.name + "Pool";
         TextMeshProUGUI tmp = pool.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         tmp.text = player.name;
-        tmp.color = player.color;
+        tmp.color = player.team.teamColor;
         TextMeshProUGUI readyText = pool.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
         readyText.text = "Not Ready";
         readyText.color = Color.red;
@@ -221,7 +220,7 @@ public class ChooseCharacterManager : MonoBehaviour
         img.SetActive(true);
         img.GetComponent<Image>().sprite = character.GetDisplaySprite("big");
 
-        charUI.GetComponent<Image>().color = player.color;
+        charUI.GetComponent<Image>().color = player.team.teamColor;
 
 
         if (player.characterPrefabs.Count == GameModeData.selectedMode.charPerPlayer - 1) {

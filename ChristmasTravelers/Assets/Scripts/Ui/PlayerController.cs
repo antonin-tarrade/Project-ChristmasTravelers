@@ -49,14 +49,14 @@ public class PlayerController : MonoBehaviour
         selector = Instantiate(genericSelector, transform);
         TextMeshProUGUI tmp = selector.GetComponentInChildren<TextMeshProUGUI>();
         tmp.text = "P" + player.number;
-        tmp.color = player.color;
+        tmp.color = player.team.teamColor;
 
         RectTransform corners = selector.transform.GetChild(0) as RectTransform;
         foreach (RectTransform corner in corners)
         {
             foreach(RectTransform cornerPart in corner)
             {
-                cornerPart.GetComponent<Image>().color = player.color;
+                cornerPart.GetComponent<Image>().color = player.team.teamColor;
             }
         }
     }
