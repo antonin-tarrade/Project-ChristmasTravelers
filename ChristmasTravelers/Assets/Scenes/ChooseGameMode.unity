@@ -999,11 +999,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ea05b05a85d8344d864ee605c953bea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DEBUG: []
   charControllerPrefab: {fileID: -334193322769113898, guid: 5188f5a15c38cc04a807e5b4b1f974bd, type: 3}
-  virtualCamera: {fileID: 0}
   <gameData>k__BackingField: {fileID: 11400000, guid: a14dff6fa6dde13459d9220f7b741331, type: 2}
-  <players>k__BackingField: []
+  virtualCamera: {fileID: 0}
 --- !u!4 &1875485978
 Transform:
   m_ObjectHideFlags: 0

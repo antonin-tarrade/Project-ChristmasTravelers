@@ -1,6 +1,7 @@
 using Records;
 using System;
 using UnityEngine;
+using UnityEngine.U2D.Animation;
 
 [RequireComponent(typeof(CharacterAnimator))]
 public class Character : MonoBehaviour {
@@ -14,6 +15,7 @@ public class Character : MonoBehaviour {
 
     [field: SerializeField] public CharacterAnimator chAnimator{ get; private set; }
 
+    [field: SerializeField]  public HealthBar healthBar { get; private set; }
 
     private Rigidbody2D body;
 
@@ -21,6 +23,7 @@ public class Character : MonoBehaviour {
 		replay = GetComponent<Replay> ();
 		recorders = GetComponents<IRecorder> ();
 		body = GetComponent<Rigidbody2D> ();
+		healthBar.gameObject.GetComponent<Canvas>().worldCamera = Camera.main;
 	}
 
 	public void Prepare(){
@@ -32,8 +35,19 @@ public class Character : MonoBehaviour {
     {
         body.position += new Vector2(movement.x,movement.y);
 		chAnimator.NotifyMovement(movement);
-  
-
-        
     }
+
+	public Sprite GetDisplaySprite(string option)
+	{
+		Sprite sprite = GetComponent<SpriteLibrary>().spriteLibraryAsset.GetSprite("UI", option.ToLower());
+		if (!sprite)
+		{
+			Debug.LogError("Cannot find sprite for category : UI and label " + option + " in current sprite library");
+			return null;
+		}
+		else
+		{
+			return sprite;
+		}
+	}
 }

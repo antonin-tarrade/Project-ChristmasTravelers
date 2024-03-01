@@ -24,9 +24,7 @@ public class GameModeData : ScriptableObject
     public float roundDuration;
     public List<Player> players;
 
-    public enum Teams{Human,Alien};
-
-    public UDictionary<Teams,SpriteLibraryAsset> teams;
+    public List<Team> teams;
 
     public void Select()
     {
@@ -53,7 +51,6 @@ public class GameModeData : ScriptableObject
 #if UNITY_EDITOR
         sceneName = scene.name;
 #endif
-        nbOfPlayers = players.Count;
     }
 
 }

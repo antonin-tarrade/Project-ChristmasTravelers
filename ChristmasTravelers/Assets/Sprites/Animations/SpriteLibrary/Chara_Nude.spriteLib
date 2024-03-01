@@ -125,6 +125,22 @@ MonoBehaviour:
       m_SpriteOverride: {fileID: 44815976, guid: 36520e214b1a5473dadd0a50394caef5, type: 3}
     m_FromMain: 0
     m_EntryOverrideCount: 16
+  - m_Name: UI
+    m_Hash: 152388314
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: big
+      m_Hash: 335274569
+      m_Sprite: {fileID: -698722760, guid: 36520e214b1a5473dadd0a50394caef5, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -698722760, guid: 36520e214b1a5473dadd0a50394caef5, type: 3}
+    - m_Name: small
+      m_Hash: 893774355
+      m_Sprite: {fileID: -698722760, guid: 36520e214b1a5473dadd0a50394caef5, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -698722760, guid: 36520e214b1a5473dadd0a50394caef5, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 2
   m_PrimaryLibraryGUID: 
-  m_ModificationHash: 638440419676992560
+  m_ModificationHash: 638446204148902457
   m_Version: 1

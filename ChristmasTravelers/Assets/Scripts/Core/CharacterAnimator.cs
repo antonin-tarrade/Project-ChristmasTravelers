@@ -52,8 +52,6 @@ public class CharacterAnimator : MonoBehaviour
             
         } else {
             animator.SetBool("idle", false);
-            /*Debug.Log(adjustedMovement);*/
-            Debug.Log(direction);
             switch (direction)
             {
                 case Direction.RIGHT:
