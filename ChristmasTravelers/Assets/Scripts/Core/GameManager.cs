@@ -197,7 +197,7 @@ public class GameManager : MonoBehaviour {
 
     private void EndGame()
     {
-        SceneManager.LoadScene("ChooseGameMode");
+        ResultsScreenManager.ShowResults();
     }
 
 
