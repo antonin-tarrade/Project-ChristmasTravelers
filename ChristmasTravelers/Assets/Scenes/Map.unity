@@ -322,7 +322,7 @@ GameObject:
   - component: {fileID: 547975094}
   - component: {fileID: 547975093}
   - component: {fileID: 547975092}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Walls (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87420,6 +87420,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cfec87315e14497c987534626bbcd99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDrop:
+    m_PersistentCalls:
+      m_Calls: []
   itemData: {fileID: 11400000, guid: 061a18e423b354c489082ddddd0174fc, type: 2}
   activated: 0
 --- !u!4 &1673298422
@@ -87705,6 +87711,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cfec87315e14497c987534626bbcd99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnDrop:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   itemData: {fileID: 11400000, guid: 061a18e423b354c489082ddddd0174fc, type: 2}
   activated: 0
 --- !u!4 &1879551110
@@ -88072,6 +88108,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cfec87315e14497c987534626bbcd99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDrop:
+    m_PersistentCalls:
+      m_Calls: []
   itemData: {fileID: 11400000, guid: 061a18e423b354c489082ddddd0174fc, type: 2}
   activated: 0
 --- !u!4 &2095328185

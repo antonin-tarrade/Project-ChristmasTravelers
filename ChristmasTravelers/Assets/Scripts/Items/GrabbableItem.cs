@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Items;
 using UnityEngine.TextCore.Text;
+using UnityEngine.Events;
 
 public class GrabbableItem : MonoBehaviour, IGrabbable, IItemContainer
 {
+    public UnityEvent OnGrab;
+    public UnityEvent OnDrop;
 
     [SerializeField] private ScriptableItemData itemData;
     private IItem item;
@@ -42,6 +45,9 @@ public class GrabbableItem : MonoBehaviour, IGrabbable, IItemContainer
         activated = true;
         transform.position = item.container.gameObject.transform.position;
         item.container = this;
+
+        OnDrop.Invoke();
+        transform.SetParent(null);
     }
 
     public void AcceptCollect(Character character)
@@ -53,6 +59,9 @@ public class GrabbableItem : MonoBehaviour, IGrabbable, IItemContainer
         item.container = inv;
         sr.enabled = false;
         activated = false;
+
+        OnGrab.Invoke();
+        transform.SetParent(character.transform);
     }
 
     public bool Contains(IItem item) => this.item == item;
@@ -93,6 +102,7 @@ public struct GrabbableItemInitialData : IPreparable
     {
         grabbable.transform.position = initialPosition;
         grabbable.activated = true;
+        grabbable.transform.SetParent(null);
         grabbable.Set(item);
     }
 }
