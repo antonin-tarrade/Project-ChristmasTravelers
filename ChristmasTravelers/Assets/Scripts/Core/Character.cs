@@ -29,6 +29,7 @@ public class Character : MonoBehaviour {
 
 	public void Prepare(){
 		transform.position = player.spawn;
+		chAnimator.NotifyFlagDrop(this); //Initialize to default sprite library
 	}
 
 

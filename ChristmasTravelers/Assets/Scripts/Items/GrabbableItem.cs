@@ -45,9 +45,9 @@ public class GrabbableItem : MonoBehaviour, IGrabbable, IItemContainer
         activated = true;
         transform.position = item.container.gameObject.transform.position;
 
-         if (item is FlagItem){
+         /*if (item is FlagItem){
             item.container.gameObject.GetComponent<Character>().OnFlagDropped();
-        }
+         }*/
         item.container = this;
 
         OnDrop.Invoke();
@@ -67,10 +67,6 @@ public class GrabbableItem : MonoBehaviour, IGrabbable, IItemContainer
         activated = false;
         OnGrab.Invoke();
         transform.SetParent(character.transform);
-
-        if (item is FlagItem){
-            character.OnFlagGrabbed();
-        }
     }
 
     public bool Contains(IItem item) => this.item == item;

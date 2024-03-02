@@ -18,17 +18,17 @@ MonoBehaviour:
   nbOfPlayers: 2
   charPerPlayer: 3
   roundsNumber: 6
-  roundDuration: 20
+  roundDuration: 15
   players:
   - spawn: {x: -39.5, y: 1.3562298, z: -10.161448}
     name: Player 1
     number: 1
     team: {fileID: 11400000, guid: 48b84546499914606ba4569a0b3149da, type: 2}
-    score: 1
+    score: 0
     <characterPrefabs>k__BackingField:
-    - {fileID: 7858320245909833396, guid: 6523cd21d2c2f2d4ba2b54f1553301cf, type: 3}
-    - {fileID: 7858320245909833396, guid: 935f00dd90a800041876ab156d96c556, type: 3}
-    - {fileID: 7858320245909833396, guid: 10c92f3fa6bf014458983830f7f7bc17, type: 3}
+    - {fileID: 7858320245909833396, guid: 749cc70fcbf1a4a6caaf2faead45d388, type: 3}
+    - {fileID: 7858320245909833396, guid: 749cc70fcbf1a4a6caaf2faead45d388, type: 3}
+    - {fileID: 7858320245909833396, guid: 749cc70fcbf1a4a6caaf2faead45d388, type: 3}
     controller: {fileID: 0}
     charController: {fileID: 0}
     inputInfo:
@@ -43,8 +43,8 @@ MonoBehaviour:
     score: 0
     <characterPrefabs>k__BackingField:
     - {fileID: 7858320245909833396, guid: 749cc70fcbf1a4a6caaf2faead45d388, type: 3}
-    - {fileID: 7858320245909833396, guid: 10c92f3fa6bf014458983830f7f7bc17, type: 3}
-    - {fileID: 7858320245909833396, guid: 935f00dd90a800041876ab156d96c556, type: 3}
+    - {fileID: 7858320245909833396, guid: 749cc70fcbf1a4a6caaf2faead45d388, type: 3}
+    - {fileID: 7858320245909833396, guid: 749cc70fcbf1a4a6caaf2faead45d388, type: 3}
     controller: {fileID: 0}
     charController: {fileID: 0}
     inputInfo:
@@ -55,7 +55,7 @@ MonoBehaviour:
   teams:
   - {fileID: 11400000, guid: 48b84546499914606ba4569a0b3149da, type: 2}
   - {fileID: 11400000, guid: d8de853571ada460893ee50e1a45bf46, type: 2}
-  selected: 0
+  selected: 1
   overrideControllers: 0
   uniqueController: 0
   uniqueControllerIndex: 0

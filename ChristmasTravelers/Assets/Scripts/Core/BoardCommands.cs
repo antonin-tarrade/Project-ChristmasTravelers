@@ -66,7 +66,6 @@ namespace BoardCommands
                 }
             }
             closestItem?.AcceptCollect(character);
-            
         }
     }
 
