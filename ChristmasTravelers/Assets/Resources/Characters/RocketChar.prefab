@@ -243,7 +243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 0
-  speed: 20
+  speed: 10
 --- !u!114 &6020620316253342707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -391,6 +391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec5821393bc6ca34684839ecfd053857, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  atkSFX: {fileID: 8300000, guid: c27272aa08d055c479c7e6428bfd41b6, type: 3}
   <atk>k__BackingField: 3
   <spd>k__BackingField: 5
   <lifeLength>k__BackingField: 10

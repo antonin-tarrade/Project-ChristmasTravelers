@@ -228,7 +228,7 @@ MonoBehaviour:
       splitScreenIndex: 0
       deviceClass: 
   grabRadius: 3
-  <FOV>k__BackingField: 5
+  <FOV>k__BackingField: 8
   <chAnimator>k__BackingField: {fileID: -8359907365343933164}
 --- !u!114 &3451438070945045697
 MonoBehaviour:
@@ -391,6 +391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eb453bf5a353b0479f4a8ce5e9d764e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  atkSFX: {fileID: 8300000, guid: c27272aa08d055c479c7e6428bfd41b6, type: 3}
   <atk>k__BackingField: 1
   <spd>k__BackingField: 50
   <lifeLength>k__BackingField: 10
@@ -402,11 +403,11 @@ MonoBehaviour:
     aimAssistAngle: 0
     aimAssistDamping: 0
     aimAssistRange: 0
-  amplitude: 1
+  amplitude: 0.2
   offset: 0.2
   sigma: 1
   mu: 0
-  sprayAngle: 45
+  sprayAngle: 20
   accuracy: 2
 --- !u!50 &1934250515657949926
 Rigidbody2D:
