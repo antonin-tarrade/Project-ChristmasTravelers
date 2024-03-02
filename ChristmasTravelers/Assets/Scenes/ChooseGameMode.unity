@@ -680,11 +680,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 486a1b926c726e44ca0b280ce7b11b9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterDeathSFX: {fileID: 0}
-  characterDamageSFX: {fileID: 8300000, guid: 7691765cc30f2aa47af47aebdb5cb23c, type: 3}
-  itemCollectedSFX: {fileID: 8300000, guid: 0dbcc91a20eb2084da68684b6cea5233, type: 3}
-  itemDeliveredSFX: {fileID: 8300000, guid: c0ce2effdf85dd64598199b7ffae0caf, type: 3}
-  explosionSFX: {fileID: 8300000, guid: 3e39e912b75741a4698cbc85efa0e886, type: 3}
+  characterDeathSFX:
+    clip: {fileID: 0}
+    volume: 0
+  characterDamageSFX:
+    clip: {fileID: 8300000, guid: 7691765cc30f2aa47af47aebdb5cb23c, type: 3}
+    volume: 1
+  itemCollectedSFX:
+    clip: {fileID: 8300000, guid: 0dbcc91a20eb2084da68684b6cea5233, type: 3}
+    volume: 1
+  itemDeliveredSFX:
+    clip: {fileID: 8300000, guid: c0ce2effdf85dd64598199b7ffae0caf, type: 3}
+    volume: 1
+  explosionSFX:
+    clip: {fileID: 8300000, guid: 3e39e912b75741a4698cbc85efa0e886, type: 3}
+    volume: 1
 --- !u!4 &1110256063
 Transform:
   m_ObjectHideFlags: 0

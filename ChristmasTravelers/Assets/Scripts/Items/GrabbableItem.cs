@@ -48,10 +48,7 @@ public class GrabbableItem : MonoBehaviour, IGrabbable, IItemContainer
             item.container.gameObject.GetComponent<Character>().OnFlagDropped();
          }*/
         item.container = this;
-
-        OnDrop.Invoke();
         transform.SetParent(null);
-
        
     }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,13 +6,14 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+
     public static AudioManager instance;
 
-    [SerializeField] private AudioClip characterDeathSFX;
-    [SerializeField] private AudioClip characterDamageSFX;
-    [SerializeField] private AudioClip itemCollectedSFX;
-    [SerializeField] private AudioClip itemDeliveredSFX;
-    [SerializeField] private AudioClip explosionSFX;
+    [SerializeField] private VolumeSFX characterDeathSFX;
+    [SerializeField] private VolumeSFX characterDamageSFX;
+    [SerializeField] private VolumeSFX itemCollectedSFX;
+    [SerializeField] private VolumeSFX itemDeliveredSFX;
+    [SerializeField] private VolumeSFX explosionSFX;
 
     private GameManager gameManager;
 
@@ -42,21 +44,30 @@ public class AudioManager : MonoBehaviour
 
 }
 
+[Serializable]
+public class VolumeSFX
+{
+    [field: SerializeField] private AudioClip clip;
+    [field: SerializeField, Range(0, 1)] private float volume;
+
+    public static implicit operator AudioClip(VolumeSFX sfx) => sfx.clip;
+}
+
 
 
 public static class AudioSourceExtensions
 {
-    public static void PlayAtPoint(this AudioClip clip, Vector3 point)
+    public static void PlayAtPoint(this VolumeSFX clip, Vector3 point)
     {
         AudioSource.PlayClipAtPoint(clip, point);
     }
 
-    public static void PlayAtPoint(this AudioClip clip, Transform t)
+    public static void PlayAtPoint(this VolumeSFX clip, Transform t)
     {
         clip.PlayAtPoint(t.position);
     }
 
-    public static void PlayAtPoint(this AudioClip clip, MonoBehaviour mb)
+    public static void PlayAtPoint(this VolumeSFX clip, MonoBehaviour mb)
     {
         clip.PlayAtPoint(mb.transform);
     }

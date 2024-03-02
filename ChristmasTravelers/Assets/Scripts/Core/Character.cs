@@ -33,7 +33,7 @@ public class Character : MonoBehaviour {
 	}
 
 
-    public void UpdatePosition(Vector2 position)
+    public void UpdatePosition(Vector2 movement)
     {
         body.position += new Vector2(movement.x,movement.y);
 		chAnimator.NotifyMovement(movement);
