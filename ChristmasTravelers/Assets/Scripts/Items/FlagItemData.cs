@@ -14,7 +14,6 @@ public class FlagItem : Item
     {
         Drop();
     }
-
     public override UseItemCommand GenerateCommand(Character character)
     {
         return new UseItemCommand(character, this, null);

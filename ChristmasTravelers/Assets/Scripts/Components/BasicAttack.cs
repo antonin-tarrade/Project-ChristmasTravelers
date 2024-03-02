@@ -50,7 +50,7 @@ public class BasicAttack : MonoBehaviour, IAttack
         proj.transform.position += direction.normalized;
         proj.OnHit += OnHit;
         if (gameObject.layer == LayerMask.NameToLayer("Dead")) proj.gameObject.layer = gameObject.layer;
-        proj.GetComponent<SpriteRenderer>().color = GetComponent<Character>().player.color;
+        proj.GetComponent<SpriteRenderer>().color = GetComponent<Character>().player.team.teamColor;
         //if (gameObject.layer == LayerMask.NameToLayer("Dead")) proj.GetComponent<SpriteRenderer>().material = GameManager.instance.gameData.DeadMaterial;
         return proj;
     }

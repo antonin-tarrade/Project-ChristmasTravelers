@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Cinemachine;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
@@ -23,6 +24,8 @@ public class GameManager : MonoBehaviour {
     // Fields
     [Header("Game global parameters")]
     [SerializeField] private CharController charControllerPrefab;
+    [SerializeField] private TextMeshProUGUI timerUI;
+
     [field: SerializeField] public GameData gameData { get; private set; }
     private RoundHandler roundHandler;
     [HideInInspector] public CinemachineVirtualCamera virtualCamera;
@@ -249,6 +252,7 @@ public class GameManager : MonoBehaviour {
         while (t < time)
         {
             t += Time.deltaTime;
+            /*timerUI.text = ((int)gameMode.roundDuration - t).ToString();*/
             yield return null;
         }
         timerEnd?.Invoke();

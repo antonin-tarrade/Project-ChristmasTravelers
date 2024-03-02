@@ -16,19 +16,19 @@ MonoBehaviour:
   scene: {fileID: 102900000, guid: b69d77f25bcc04aa5bbe7d755a4bc01b, type: 3}
   sceneName: Map
   nbOfPlayers: 2
-  charPerPlayer: 2
-  roundsNumber: 3
-  roundDuration: 20
+  charPerPlayer: 3
+  roundsNumber: 6
+  roundDuration: 15
   players:
   - spawn: {x: -39.5, y: 1.3562298, z: -10.161448}
     name: Player 1
     number: 1
-    color: {r: 0, g: 1, b: 0.8818593, a: 1}
-    team: 1
-    score: 1
+    team: {fileID: 11400000, guid: 48b84546499914606ba4569a0b3149da, type: 2}
+    score: 0
     <characterPrefabs>k__BackingField:
-    - {fileID: 7858320245909833396, guid: 935f00dd90a800041876ab156d96c556, type: 3}
-    - {fileID: 7858320245909833396, guid: 10c92f3fa6bf014458983830f7f7bc17, type: 3}
+    - {fileID: 7858320245909833396, guid: 749cc70fcbf1a4a6caaf2faead45d388, type: 3}
+    - {fileID: 7858320245909833396, guid: 749cc70fcbf1a4a6caaf2faead45d388, type: 3}
+    - {fileID: 7858320245909833396, guid: 749cc70fcbf1a4a6caaf2faead45d388, type: 3}
     controller: {fileID: 0}
     charController: {fileID: 0}
     inputInfo:
@@ -39,12 +39,12 @@ MonoBehaviour:
   - spawn: {x: 40, y: 0.1, z: -10.161448}
     name: Player 2
     number: 2
-    color: {r: 1, g: 0.16531092, b: 0, a: 1}
-    team: 0
+    team: {fileID: 11400000, guid: d8de853571ada460893ee50e1a45bf46, type: 2}
     score: 0
     <characterPrefabs>k__BackingField:
-    - {fileID: 7858320245909833396, guid: 6523cd21d2c2f2d4ba2b54f1553301cf, type: 3}
-    - {fileID: 7858320245909833396, guid: 935f00dd90a800041876ab156d96c556, type: 3}
+    - {fileID: 7858320245909833396, guid: 749cc70fcbf1a4a6caaf2faead45d388, type: 3}
+    - {fileID: 7858320245909833396, guid: 749cc70fcbf1a4a6caaf2faead45d388, type: 3}
+    - {fileID: 7858320245909833396, guid: 749cc70fcbf1a4a6caaf2faead45d388, type: 3}
     controller: {fileID: 0}
     charController: {fileID: 0}
     inputInfo:
@@ -53,10 +53,8 @@ MonoBehaviour:
       splitScreenIndex: 1
       deviceClass: 
   teams:
-    keys: 0000000001000000
-    values:
-    - {fileID: 7108339969198208228, guid: c4938ec702e0341b5b4e57969167e80e, type: 3}
-    - {fileID: 7108339969198208228, guid: c06e92ac7c7de4f0a80fe7be3b9847a6, type: 3}
+  - {fileID: 11400000, guid: 48b84546499914606ba4569a0b3149da, type: 2}
+  - {fileID: 11400000, guid: d8de853571ada460893ee50e1a45bf46, type: 2}
   selected: 1
   overrideControllers: 0
   uniqueController: 0
