@@ -17,7 +17,7 @@ public class ResultsScreenManager : MonoBehaviour
     private ResultsScreen subScreen;
 
     [SerializeField] private Button closeButton;
-    PlayerActions actions;
+    public PlayerActions actions { get; private set; }
 
     public static void ShowResults()
     {
@@ -31,32 +31,26 @@ public class ResultsScreenManager : MonoBehaviour
 
     private void Start()
     {
-        subScreen = Instantiate(Resources.LoadAll<ResultsScreen>("UI").Where(s => s.IsCompatible(GameModeData.selectedMode.type)).ToArray()[0]);
-        subScreen.OnScreenExit += OnSubScreenLeft;
-
         actions = new();
         actions.Enable();
-        actions.UIScreen.OnCursorMovement.started += (CallbackContext context) => OnSubScreenEntered();
-
+        subScreen = ResultsScreen.LoadFrom(this);
         closeButton.Select();
     }
 
-    private void Update()
-    {
-        
-    }
+    
 
-    private void OnSubScreenEntered()
+    public void OnScreenEntered()
     {
-        actions.Disable();
-        EventSystem.current.SetSelectedGameObject(null);
-        subScreen.OnScreenEntered();
-    }
-
-    private void OnSubScreenLeft()
-    {
+        Debug.Log("ENTER");
         closeButton.Select();
         actions.Enable();      
+    }
+
+    public void OnScreenLeft()
+    {
+        Debug.Log("LEFT");
+        actions.Disable();
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void OnClose()

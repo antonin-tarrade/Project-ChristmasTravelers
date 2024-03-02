@@ -12,7 +12,7 @@ using UnityEngine.U2D.Animation;
 [CreateAssetMenu(fileName = "GameModeData", menuName = "Scriptables/GameModeData")]
 public class GameModeData : ScriptableObject
 {
-    public enum Type { CTF }
+    public enum Type { NULL, CTF }
     public Type type;
     public static GameModeData selectedMode { get; private set; }
     public string gameModeName;
