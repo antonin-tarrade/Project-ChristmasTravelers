@@ -44,10 +44,16 @@ public class GrabbableItem : MonoBehaviour, IGrabbable, IItemContainer
         sr.enabled = true;
         activated = true;
         transform.position = item.container.gameObject.transform.position;
+
+         /*if (item is FlagItem){
+            item.container.gameObject.GetComponent<Character>().OnFlagDropped();
+         }*/
         item.container = this;
 
         OnDrop.Invoke();
         transform.SetParent(null);
+
+       
     }
 
     public void AcceptCollect(Character character)
@@ -59,7 +65,6 @@ public class GrabbableItem : MonoBehaviour, IGrabbable, IItemContainer
         item.container = inv;
         sr.enabled = false;
         activated = false;
-
         OnGrab.Invoke();
         transform.SetParent(character.transform);
     }
@@ -80,9 +85,7 @@ public class GrabbableItem : MonoBehaviour, IGrabbable, IItemContainer
         }
     }
 
-    public void SetGameObject(GameObject gameObject)
-    { 
-    }
+
 }
 
 public struct GrabbableItemInitialData : IPreparable

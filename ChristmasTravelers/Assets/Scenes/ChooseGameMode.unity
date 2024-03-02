@@ -1000,6 +1000,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charControllerPrefab: {fileID: -334193322769113898, guid: 5188f5a15c38cc04a807e5b4b1f974bd, type: 3}
+  timerUI: {fileID: 0}
   <gameData>k__BackingField: {fileID: 11400000, guid: a14dff6fa6dde13459d9220f7b741331, type: 2}
   virtualCamera: {fileID: 0}
 --- !u!4 &1875485978

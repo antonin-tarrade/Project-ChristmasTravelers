@@ -57,7 +57,7 @@ public class CharacterHealth : MonoBehaviour, IDamageable
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         sr.color = color;
         yield return new WaitForSeconds(time);
-        sr.color = GetComponent<Character>().player.team.teamColor;
+        sr.color = Color.white;
         
     }
 

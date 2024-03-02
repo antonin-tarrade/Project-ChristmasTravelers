@@ -5,6 +5,7 @@ using UnityEngine.U2D.Animation;
 
 [RequireComponent(typeof(CharacterAnimator))]
 public class Character : MonoBehaviour {
+
 	public Player player;
 	public Replay replay { get; private set; }
 	public IRecorder[] recorders { get; private set; }
@@ -28,6 +29,7 @@ public class Character : MonoBehaviour {
 
 	public void Prepare(){
 		transform.position = player.spawn;
+		chAnimator.NotifyFlagDrop(this); //Initialize to default sprite library
 	}
 
 
@@ -36,6 +38,17 @@ public class Character : MonoBehaviour {
         body.position += new Vector2(movement.x,movement.y);
 		chAnimator.NotifyMovement(movement);
     }
+
+
+	public void OnFlagGrabbed(){
+		chAnimator.NotifyFlagGrabbed(this);
+		Debug.Log("A toi l'animator");
+	}
+
+	public void OnFlagDropped(){
+		chAnimator.NotifyFlagDrop(this);
+	}
+
 
 	public Sprite GetDisplaySprite(string option)
 	{

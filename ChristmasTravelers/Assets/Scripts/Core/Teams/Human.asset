@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7793757f36f0478fbf40166abf5f31c, type: 3}
-  m_Name: Alien
+  m_Name: Human
   m_EditorClassIdentifier: 
-  teamName: Alien
-  spriteLibrary: {fileID: 7108339969198208228, guid: c06e92ac7c7de4f0a80fe7be3b9847a6, type: 3}
-  chikenSpriteLibrary: {fileID: 7108339969198208228, guid: c06e92ac7c7de4f0a80fe7be3b9847a6, type: 3}
-  teamColor: {r: 0.12357235, g: 1, b: 0, a: 1}
+  teamName: Human
+  spriteLibrary: {fileID: 7108339969198208228, guid: c4938ec702e0341b5b4e57969167e80e, type: 3}
+  chikenSpriteLibrary: {fileID: 7108339969198208228, guid: da9f0920bc13d46b5b4a8042b30a9833, type: 3}
+  teamColor: {r: 0.8584906, g: 0.8584906, b: 0.8584906, a: 1}
