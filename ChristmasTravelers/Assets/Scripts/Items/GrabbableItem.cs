@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Items;
 using UnityEngine.TextCore.Text;
+using System;
 
 public class GrabbableItem : MonoBehaviour, IGrabbable, IItemContainer
 {
+    public static event Action<GrabbableItem> OnItemGrabbed;
 
     [SerializeField] private ScriptableItemData itemData;
     private IItem item;
@@ -53,6 +55,7 @@ public class GrabbableItem : MonoBehaviour, IGrabbable, IItemContainer
         item.container = inv;
         sr.enabled = false;
         activated = false;
+        OnItemGrabbed?.Invoke(this);
     }
 
     public bool Contains(IItem item) => this.item == item;

@@ -307,6 +307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eb453bf5a353b0479f4a8ce5e9d764e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  atkSFX: {fileID: 8300000, guid: c27272aa08d055c479c7e6428bfd41b6, type: 3}
   <atk>k__BackingField: 1
   <spd>k__BackingField: 20
   <lifeLength>k__BackingField: 5

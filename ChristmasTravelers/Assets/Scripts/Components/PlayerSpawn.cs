@@ -1,4 +1,5 @@
 using Items;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,6 +8,7 @@ using UnityEngine;
 
 public class PlayerSpawn : MonoBehaviour
 {
+    public static event Action<PlayerSpawn> OnFlagCollected;
 
     [Tooltip("The index of the player associated with this zone in the game manager player list")]
     [SerializeField] private int playerIndex;
@@ -39,6 +41,7 @@ public class PlayerSpawn : MonoBehaviour
             }
             foreach (IItem flag in flags)
             {
+                OnFlagCollected?.Invoke(this);
                 inv.GetComponent<Character>().player.score++;
                 flag.Drop();
                 flag.container.gameObject.transform.position = transform.position;

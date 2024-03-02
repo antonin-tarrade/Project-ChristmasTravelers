@@ -13,10 +13,12 @@ public class Shield : MonoBehaviour, ISpawnable, IDamageable
     [SerializeField] private float spawnOffset;
     private Character character;
 
-    public Action OnDeath { get; set;}
+    public event Action OnDeath;
+    public event Action OnDamage;
 
     public void Damage(float dmg)
     {
+        OnDamage?.Invoke();
         health -= dmg;
         if (health <= 0)
         {
@@ -37,6 +39,7 @@ public class Shield : MonoBehaviour, ISpawnable, IDamageable
 
     public void Destroy()
     {
+        OnDeath?.Invoke();
         character.player.toAvoid.Remove(GetComponent<Collider2D>());
         Destroy(gameObject);
     }

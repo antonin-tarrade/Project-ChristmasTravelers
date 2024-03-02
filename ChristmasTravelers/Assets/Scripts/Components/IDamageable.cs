@@ -16,7 +16,8 @@ public interface IAttack
 
 public interface IDamageable
 {
-    public Action OnDeath { get; set; }
+    event Action OnDeath;
+    event Action OnDamage;
     void Damage(float dmg);
     GameObject gameObject { get; }
 }

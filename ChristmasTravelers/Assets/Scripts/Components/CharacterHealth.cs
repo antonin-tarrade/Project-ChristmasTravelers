@@ -9,7 +9,8 @@ public class CharacterHealth : MonoBehaviour, IDamageable
 
     [field : SerializeField] public float baseHealth { get; private set; }
     public float health { get; private set; }
-    public Action OnDeath { get; set; }
+    public event Action OnDeath;
+    public event Action OnDamage;
 
     private void Awake()
     {
@@ -24,6 +25,7 @@ public class CharacterHealth : MonoBehaviour, IDamageable
 
     public void Damage(float dmg)
     {
+        OnDamage?.Invoke();
         health -= dmg;
         if (health <= 0) Death();
         else StartCoroutine(DamageFeedBack());
