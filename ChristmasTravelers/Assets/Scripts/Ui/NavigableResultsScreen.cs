@@ -60,4 +60,10 @@ public abstract class NavigableResultsScreen : ResultsScreen
         ignoreNextInput = true;
         actions.Disable();
     }
+
+
+    private void OnDestroy()
+    {
+        actions.Dispose();
+    }
 }

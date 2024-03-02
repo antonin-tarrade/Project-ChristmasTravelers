@@ -10,7 +10,7 @@ public class NavigableCTFResultsScreen : NavigableResultsScreen
     [SerializeField] private Button showResultsButton;
     public override void Display(Player[] rankedPlayers)
     {
-        text.text = "Winner is " + rankedPlayers[0];
+        text.text = "Winner is " + rankedPlayers[0].name;
     }
 
     protected override void OnCursorMovement(Vector2 m)
@@ -23,4 +23,5 @@ public class NavigableCTFResultsScreen : NavigableResultsScreen
         base.OnScreenEntered();
         showResultsButton.Select();
     }
+
 }

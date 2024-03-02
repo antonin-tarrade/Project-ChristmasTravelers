@@ -49,6 +49,6 @@ public abstract class ResultsScreen : MonoBehaviour
             (CallbackContext context) => mainScreen.OnScreenEntered();
     }
 
-    
+
 
 }

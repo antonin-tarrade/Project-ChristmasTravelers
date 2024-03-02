@@ -55,7 +55,7 @@ public class GrabbableItem : MonoBehaviour, IGrabbable, IItemContainer
         if (!activated) return;
         Inventory inv = character.GetComponent<Inventory>();
         inv.Add(item);
-        inv.GetComponent<IDamageable>().OnDeath += () => item?.Drop();
+        inv.GetComponent<IDamageable>().OnDeath += () => item.Drop();
         item.container = inv;
         sr.enabled = false;
         activated = false;
@@ -73,11 +73,7 @@ public class GrabbableItem : MonoBehaviour, IGrabbable, IItemContainer
 
     public void Remove(IItem item)
     {
-        if (this.item != null && this.item == item)
-        {
-            this.item.OnDropEvent -= OnItemDropped;
-            this.item = null;
-        }
+
     }
 
     public void SetGameObject(GameObject gameObject)
