@@ -306,10 +306,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -1000,6 +1000,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charControllerPrefab: {fileID: -334193322769113898, guid: 5188f5a15c38cc04a807e5b4b1f974bd, type: 3}
+  timerUI: {fileID: 0}
   <gameData>k__BackingField: {fileID: 11400000, guid: a14dff6fa6dde13459d9220f7b741331, type: 2}
   virtualCamera: {fileID: 0}
 --- !u!4 &1875485978

@@ -10,7 +10,7 @@ public class Team : ScriptableObject
 {
     public string teamName;
     public SpriteLibraryAsset spriteLibrary;
-    public SpriteLibraryAsset chikenSpriteLibrary;
+    public SpriteLibraryAsset chickenSpriteLibrary;
     public Color teamColor;
 
     private void OnValidate() {
