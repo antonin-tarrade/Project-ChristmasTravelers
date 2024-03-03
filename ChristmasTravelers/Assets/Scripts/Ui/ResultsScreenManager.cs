@@ -59,7 +59,7 @@ public class ResultsScreenManager : MonoBehaviour
 
     public void SwitchToMainMenu()
     {
-        SceneManager.LoadScene("ChooseGameMode");
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void OnQuit()

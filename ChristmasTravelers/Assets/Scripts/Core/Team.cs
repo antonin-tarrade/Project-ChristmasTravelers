@@ -10,11 +10,6 @@ using UnityEngine.U2D.Animation;
 public class Team : ScriptableObject
 {
     public string teamName;
-<<<<<<< HEAD
-    public SpriteLibraryAsset spriteLibrary;
-    public SpriteLibraryAsset chickenSpriteLibrary;
-=======
->>>>>>> main
     public Color teamColor;
     public enum Characters {Sniper,Minigun,Rocket};
 
