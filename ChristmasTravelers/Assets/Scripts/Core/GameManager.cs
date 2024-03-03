@@ -131,10 +131,6 @@ public class GameManager : MonoBehaviour {
 
 
 
-
-
-
-
     // GAME LOGIC
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
@@ -157,6 +153,7 @@ public class GameManager : MonoBehaviour {
         
         SwitchTo(currentPlayerIndex);
         Character c = SpawnCharacter(currentPlayer);
+        IngameUIManager.instance.OnCharacterChanged(currentPlayer, c);
         ControlCharacter(c);
         OnTurnStart?.Invoke();
 

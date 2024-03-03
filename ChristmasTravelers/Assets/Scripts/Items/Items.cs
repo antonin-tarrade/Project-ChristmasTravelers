@@ -20,6 +20,7 @@ namespace Items
         Action<IItem> OnUseEvent { get; set; }
         Action<IItem> OnDropEvent { get; set; }
         IItemContainer container { get; set; }
+        Sprite sprite { get; set; }
         string GetName();
         void Use(Inventory inventory, IItemParameters parameters);
         void Drop();
@@ -39,6 +40,8 @@ namespace Items
         public Action<IItem> OnUseEvent { get; set; }
         public Action<IItem> OnDropEvent { get; set; }
         public IItemContainer container { get; set; }
+
+        public Sprite sprite { get; set; }
 
         protected ScriptableItemData data;
         public abstract string GetName();

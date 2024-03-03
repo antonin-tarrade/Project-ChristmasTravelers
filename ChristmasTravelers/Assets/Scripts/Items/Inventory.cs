@@ -97,6 +97,7 @@ public class Inventory : MonoBehaviour, IPreparable, IItemContainer
         if (items.Count == 0) return;
         currentItemIndex++;
         if (currentItemIndex >= items.Count) currentItemIndex = 0;
+        IngameUIManager.instance.OnItemChanged(items[currentItemIndex]);
     }
 
     public void PreviousItem()
@@ -105,6 +106,7 @@ public class Inventory : MonoBehaviour, IPreparable, IItemContainer
 
         currentItemIndex--;
         if (currentItemIndex < 0) currentItemIndex = items.Count - 1;
+        IngameUIManager.instance.OnItemChanged(items[currentItemIndex]);
     }
 
     public bool Contains(IItem item)

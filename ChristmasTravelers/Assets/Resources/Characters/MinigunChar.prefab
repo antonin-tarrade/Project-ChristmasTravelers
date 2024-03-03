@@ -229,7 +229,7 @@ MonoBehaviour:
       index: 0
       splitScreenIndex: 0
       deviceClass: 
-  team: {fileID: 11400000, guid: 4d080043909cfd148b8a394137e09d7f, type: 2}
+  team: {fileID: 11400000, guid: 549f1fe2b2dbf75418d83b8b9645e304, type: 2}
   grabRadius: 3
   <FOV>k__BackingField: 8
   <chAnimator>k__BackingField: {fileID: -8359907365343933164}
@@ -486,7 +486,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Library: []
-  m_SpriteLibraryAsset: {fileID: 0}
+  m_SpriteLibraryAsset: {fileID: 7108339969198208228, guid: a5cb172bf8e934a4aa61339e7a458bdd, type: 3}
 --- !u!114 &3194704065442866572
 MonoBehaviour:
   m_ObjectHideFlags: 0
