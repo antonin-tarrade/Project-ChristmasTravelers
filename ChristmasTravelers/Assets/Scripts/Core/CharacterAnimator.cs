@@ -106,13 +106,13 @@ public class CharacterAnimator : MonoBehaviour
 
     public void NotifyFlagGrabbed(Character character)
     {
-        spriteLibrary.spriteLibraryAsset = character.player.team.chikenSpriteLibrary;
-        
+        spriteLibrary.spriteLibraryAsset = character.GetChickenSpriteLibrary();
     }
 
     public void NotifyFlagDrop(Character character)
     {
-        spriteLibrary.spriteLibraryAsset = character.player.team.spriteLibrary;
+        spriteLibrary.spriteLibraryAsset = character.GetSpriteLibrary();
+
 
     }
 

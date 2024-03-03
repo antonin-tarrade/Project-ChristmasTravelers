@@ -1,3 +1,4 @@
+using AYellowpaper.SerializedCollections;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -9,11 +10,11 @@ using UnityEngine.U2D.Animation;
 public class Team : ScriptableObject
 {
     public string teamName;
-    public SpriteLibraryAsset spriteLibrary;
-    public SpriteLibraryAsset chikenSpriteLibrary;
     public Color teamColor;
+    public enum Characters {Sniper,Minigun,Rocket};
 
-    private void OnValidate() {
-        teamName = Path.GetFileNameWithoutExtension( AssetDatabase.GetAssetPath(this));
-    }
+    [SerializedDictionary("Type of Character", "Sprite Libraries")]
+    public SerializedDictionary<Characters, CharacterLibrary> libraries;
+
 }
+

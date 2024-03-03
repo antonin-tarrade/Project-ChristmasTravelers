@@ -92,7 +92,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -318599472, guid: 77fd68a84a499c24dae0222dba262035, type: 3}
+  m_Sprite: {fileID: -207052102, guid: f74ee70cb4ab77a4897293de70ec9d9b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -115,6 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aabf16d3400d3c841933055370ad3dca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <type>k__BackingField: 0
   player:
     spawn: {x: 0, y: 0, z: 0}
     name: Player 1
@@ -129,6 +130,7 @@ MonoBehaviour:
       index: 0
       splitScreenIndex: 0
       deviceClass: 
+  team: {fileID: 11400000, guid: 4d080043909cfd148b8a394137e09d7f, type: 2}
   grabRadius: 3
   <FOV>k__BackingField: 5
   <chAnimator>k__BackingField: {fileID: 4277139159340675692}
@@ -398,7 +400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Library: []
-  m_SpriteLibraryAsset: {fileID: 7108339969198208228, guid: c4938ec702e0341b5b4e57969167e80e, type: 3}
+  m_SpriteLibraryAsset: {fileID: 7108339969198208228, guid: ce4859bc7e4a3814d87cc3b4f2b3b8ca, type: 3}
 --- !u!114 &6227386316142732951
 MonoBehaviour:
   m_ObjectHideFlags: 0
