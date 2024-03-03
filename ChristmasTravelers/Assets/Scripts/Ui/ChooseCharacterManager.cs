@@ -73,7 +73,6 @@ public class ChooseCharacterManager : MonoBehaviour
         InitPlayerPool();
         InitCharacterPool();
 
-        DontDestroyOnLoad(gameObject);
     }
 
     private void InitCharacterPool(){
