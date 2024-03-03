@@ -13,6 +13,18 @@ MonoBehaviour:
   m_Name: Alien
   m_EditorClassIdentifier: 
   teamName: Alien
-  spriteLibrary: {fileID: 7108339969198208228, guid: c06e92ac7c7de4f0a80fe7be3b9847a6, type: 3}
-  chikenSpriteLibrary: {fileID: 7108339969198208228, guid: c3f4bf5700d5a4bcab7e70b8b2406d15, type: 3}
-  teamColor: {r: 0.12357235, g: 1, b: 0, a: 1}
+  teamColor: {r: 0.084601074, g: 0.6509434, b: 0.033775367, a: 1}
+  libraries:
+    _serializedList:
+    - Key: 0
+      Value:
+        spriteLibrary: {fileID: 7108339969198208228, guid: ce4859bc7e4a3814d87cc3b4f2b3b8ca, type: 3}
+        chickenSpriteLibrary: {fileID: 7108339969198208228, guid: f37dd9780caefee43886c27b48f10eb5, type: 3}
+    - Key: 1
+      Value:
+        spriteLibrary: {fileID: 7108339969198208228, guid: 971f1607af1767943a6b0f01b1e5db6f, type: 3}
+        chickenSpriteLibrary: {fileID: 7108339969198208228, guid: 7c1d4f7247a429c4e80b74a3801d019a, type: 3}
+    - Key: 2
+      Value:
+        spriteLibrary: {fileID: 7108339969198208228, guid: 9e31808f5dd90e8498f6516c87e1b694, type: 3}
+        chickenSpriteLibrary: {fileID: 7108339969198208228, guid: b57dc6102e2607343b714423a45f0d51, type: 3}

@@ -48,7 +48,6 @@ public class UDictionary
         SerializedProperty values;
 
         public bool IsAligned => keys.arraySize == values.arraySize;
-
         ReorderableList list;
 
         GUIContent label;
