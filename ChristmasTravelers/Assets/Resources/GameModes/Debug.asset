@@ -25,11 +25,7 @@ MonoBehaviour:
     name: Player 1
     number: 1
     team: {fileID: 11400000, guid: 48b84546499914606ba4569a0b3149da, type: 2}
-<<<<<<< HEAD
     score: 1
-=======
-    score: 0
->>>>>>> main
     <characterPrefabs>k__BackingField:
     - {fileID: 7858320245909833396, guid: 749cc70fcbf1a4a6caaf2faead45d388, type: 3}
     - {fileID: 7858320245909833396, guid: 749cc70fcbf1a4a6caaf2faead45d388, type: 3}
@@ -42,11 +38,7 @@ MonoBehaviour:
       deviceClass: Keyboard
   - spawn: {x: 40, y: 0.1, z: -10.161448}
     name: Player 2
-<<<<<<< HEAD
-    number: 2
-=======
     number: 1
->>>>>>> main
     team: {fileID: 11400000, guid: d8de853571ada460893ee50e1a45bf46, type: 2}
     score: 0
     <characterPrefabs>k__BackingField:
@@ -63,11 +55,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 48b84546499914606ba4569a0b3149da, type: 2}
   - {fileID: 11400000, guid: d8de853571ada460893ee50e1a45bf46, type: 2}
   selected: 0
-<<<<<<< HEAD
-  overrideControllers: 1
-=======
   overrideControllers: 0
->>>>>>> main
   uniqueController: 1
   uniqueControllerIndex: 0
   allowedDevices:
