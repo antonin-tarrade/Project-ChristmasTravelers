@@ -9,9 +9,10 @@ public class CharacterHealth : MonoBehaviour, IDamageable
 
     [field : SerializeField] public float baseHealth { get; private set; }
     public float health { get; private set; }
+    public event Action OnDeath;
+    public event Action OnDamage;
 
     private HealthBar healthBar;
-    public Action OnDeath { get; set; }
 
     private void Awake()
     {
@@ -26,6 +27,7 @@ public class CharacterHealth : MonoBehaviour, IDamageable
 
     public void Damage(float dmg)
     {
+        OnDamage?.Invoke();
         health -= dmg;
         GetComponent<Character>().healthBar.Change(-dmg);
         if (health <= 0) Death();
@@ -57,7 +59,7 @@ public class CharacterHealth : MonoBehaviour, IDamageable
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         sr.color = color;
         yield return new WaitForSeconds(time);
-        sr.color = GetComponent<Character>().player.team.teamColor;
+        sr.color = Color.white;
         
     }
 

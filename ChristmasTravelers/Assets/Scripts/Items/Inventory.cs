@@ -47,14 +47,14 @@ public class Inventory : MonoBehaviour, IPreparable, IItemContainer
     {
         // Debug degueulasse
         itemSelected = GetCurrentItem()?.GetName();
-        if (items.Count != itemsNames.Count)
+        /*if (items.Count != itemsNames.Count)
         {
             itemsNames.Clear();
             foreach (IItem item in items)
             {
                 itemsNames.Add(item.GetName());
             }
-        }
+        }*/
         // FIN
     }
 
@@ -75,11 +75,19 @@ public class Inventory : MonoBehaviour, IPreparable, IItemContainer
     public void Add(IItem item)
     {
         items.Add(item);
+        if (item is FlagItem)
+        {
+           GetComponent<Character>().OnFlagGrabbed();
+        }
     }
 
     public void Remove(IItem item)
     {
         items.Remove(item);
+        if (item is FlagItem)
+        {
+            GetComponent<Character>().OnFlagDropped();
+        }
         if (items.Count == 0) currentItemIndex = 0;
         else currentItemIndex = Mathf.Min(currentItemIndex, items.Count - 1);
     }

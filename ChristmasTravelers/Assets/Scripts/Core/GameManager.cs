@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour {
     public static GameManager instance;
 
     // Events
+    public event Action OnGameStart;
     public event Action OnTurnStart;
     public event Action OnTurnEnd;
     public event Action<Character> OnCharacterSpawned;
@@ -140,6 +141,7 @@ public class GameManager : MonoBehaviour {
         if (gameMode != null && scene.name == gameMode.sceneName)
         {
             if (isPlaying) return;
+            OnGameStart?.Invoke();
             SpawnCharacterControllers();
             virtualCamera = GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>();
             roundHandler = new RoundHandler(virtualCamera);

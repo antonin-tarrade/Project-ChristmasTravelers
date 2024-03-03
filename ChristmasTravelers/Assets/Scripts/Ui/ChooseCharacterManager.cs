@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.TextCore.Text;
 using UnityEngine.U2D;
 using UnityEngine.UI;
 
@@ -94,7 +95,8 @@ public class ChooseCharacterManager : MonoBehaviour
             GameObject characterUi = Instantiate(characterUiMini,allCharactersPool.transform);
 
             characterUi.name = ch.name;
-            characterUi.GetComponentInChildren<TextMeshProUGUI>().text = ch.name;
+            characterUi.transform.Find("Image").GetComponent<Image>().sprite = ch.GetComponent<Character>().GetDisplaySprite("small");
+            characterUi.GetComponentInChildren<TextMeshProUGUI>().text = ch.GetComponent<Character>().type.ToString();
             characterUi.transform.SetParent(allCharactersPool);
             if (currentCol >= maxColumns){
                 currentCol = 0;
@@ -209,14 +211,17 @@ public class ChooseCharacterManager : MonoBehaviour
     {
         playersPool.TryGetValue(player, out PlayerPoolUI pool);
 
+        character.team = player.team;
+
         player.SelectSkin(character);
 
         Transform charUI = pool.characterPool.transform.GetChild(player.characterPrefabs.Count);
-        charUI.GetComponentInChildren<TextMeshProUGUI>().text = character.name;
+        charUI.GetComponentInChildren<TextMeshProUGUI>().text = character.type.ToString();
 
 
         GameObject img = charUI.Find("Image").gameObject;
         img.SetActive(true);
+
         img.GetComponent<Image>().sprite = character.GetDisplaySprite("big");
 
         charUI.GetComponent<Image>().color = player.team.teamColor;
@@ -318,7 +323,7 @@ public class ChooseCharacterManager : MonoBehaviour
                 case PlayerState.CanBeReady:
                     ready.text = "Not Ready";
                     ready.color = Color.red;
-                    pressStart.text = "press Start";
+                    pressStart.text = "Press Start";
                     break;
                 case PlayerState.Ready:
                     ready.text = "Ready";
