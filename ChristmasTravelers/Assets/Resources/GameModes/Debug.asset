@@ -24,11 +24,10 @@ MonoBehaviour:
   - spawn: {x: -39.5, y: 1.3562298, z: -10.161448}
     name: Player 1
     number: 1
-    team: {fileID: 11400000, guid: 48b84546499914606ba4569a0b3149da, type: 2}
+    team: {fileID: 11400000, guid: 4d080043909cfd148b8a394137e09d7f, type: 2}
     score: 0
     <characterPrefabs>k__BackingField:
-    - {fileID: 7858320245909833396, guid: 749cc70fcbf1a4a6caaf2faead45d388, type: 3}
-    - {fileID: 7858320245909833396, guid: 749cc70fcbf1a4a6caaf2faead45d388, type: 3}
+    - {fileID: 7858320245909833396, guid: 6523cd21d2c2f2d4ba2b54f1553301cf, type: 3}
     controller: {fileID: 0}
     charController: {fileID: 0}
     inputInfo:
@@ -39,11 +38,10 @@ MonoBehaviour:
   - spawn: {x: 40, y: 0.1, z: -10.161448}
     name: Player 2
     number: 1
-    team: {fileID: 11400000, guid: d8de853571ada460893ee50e1a45bf46, type: 2}
+    team: {fileID: 11400000, guid: 549f1fe2b2dbf75418d83b8b9645e304, type: 2}
     score: 0
     <characterPrefabs>k__BackingField:
-    - {fileID: 7858320245909833396, guid: 749cc70fcbf1a4a6caaf2faead45d388, type: 3}
-    - {fileID: 7858320245909833396, guid: 749cc70fcbf1a4a6caaf2faead45d388, type: 3}
+    - {fileID: 7858320245909833396, guid: 6523cd21d2c2f2d4ba2b54f1553301cf, type: 3}
     controller: {fileID: 0}
     charController: {fileID: 0}
     inputInfo:
@@ -52,10 +50,10 @@ MonoBehaviour:
       splitScreenIndex: -1
       deviceClass: Keyboard
   teams:
-  - {fileID: 11400000, guid: 48b84546499914606ba4569a0b3149da, type: 2}
-  - {fileID: 11400000, guid: d8de853571ada460893ee50e1a45bf46, type: 2}
-  selected: 0
-  overrideControllers: 0
+  - {fileID: 11400000, guid: 4d080043909cfd148b8a394137e09d7f, type: 2}
+  - {fileID: 11400000, guid: 549f1fe2b2dbf75418d83b8b9645e304, type: 2}
+  selected: 1
+  overrideControllers: 1
   uniqueController: 1
   uniqueControllerIndex: 0
   allowedDevices:
