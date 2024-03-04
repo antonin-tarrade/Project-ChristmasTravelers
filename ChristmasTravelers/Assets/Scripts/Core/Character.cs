@@ -24,16 +24,20 @@ public class Character : MonoBehaviour {
 
     [field: SerializeField]  public HealthBar healthBar { get; private set; }
 
+	public bool isLinked;
+
+	private IngameUIManager UI;
 
     private Rigidbody2D body;
 
 
-
     private void Awake () {
+		isLinked = false;
 		replay = GetComponent<Replay> ();
 		recorders = GetComponents<IRecorder> ();
 		body = GetComponent<Rigidbody2D> ();
 		healthBar.gameObject.GetComponent<Canvas>().worldCamera = Camera.main;
+		UI = IngameUIManager.instance;
 	}
 
 	public void Prepare(){
@@ -75,7 +79,15 @@ public class Character : MonoBehaviour {
 		}
 	}
 
+	public void NotifyDamage(float dmg){
+		healthBar.Change(-dmg);
+		if (isLinked) UI.NotifyDamage(dmg);
+	}
 
+	public void InitHealthBars(float baseHealth){
+		healthBar.InitBar(baseHealth);
+		if (isLinked) UI.InitHealthBar(baseHealth);
+	}
 
 	public SpriteLibraryAsset GetSpriteLibrary()
 	{

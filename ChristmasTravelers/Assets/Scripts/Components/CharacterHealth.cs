@@ -12,11 +12,11 @@ public class CharacterHealth : MonoBehaviour, IDamageable
     public event Action OnDeath;
     public event Action OnDamage;
 
-    private HealthBar healthBar;
+    private Character character;
 
     private void Awake()
     {
-        healthBar = GetComponentInChildren<HealthBar>();
+        character = GetComponent<Character>();
     }
 
     private void Start()
@@ -29,10 +29,14 @@ public class CharacterHealth : MonoBehaviour, IDamageable
     {
         OnDamage?.Invoke();
         health -= dmg;
-        GetComponent<Character>().healthBar.Change(-dmg);
+        character.NotifyDamage(dmg);
         if (health <= 0) Death();
         else StartCoroutine(DamageFeedBack());
     }
+
+
+
+
 
     private void Init()
     {
@@ -40,7 +44,7 @@ public class CharacterHealth : MonoBehaviour, IDamageable
         gameObject.layer = LayerMask.NameToLayer("Alive");
         GetComponent<SpriteRenderer>().material = GameManager.instance.gameData.LivingMaterial;
         health = baseHealth;
-        healthBar.InitBar(baseHealth);
+        character.InitHealthBars(baseHealth);
     }
 
     private void Death()
