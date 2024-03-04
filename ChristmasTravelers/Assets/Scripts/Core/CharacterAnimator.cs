@@ -98,7 +98,7 @@ public class CharacterAnimator : MonoBehaviour
 
     private Vector3 AdjustMovement(Vector2 movement)
     {
-
+        if (Mathf.Abs(movement.x - movement.y) < 0.1f) return new Vector2(movement.x, 0f);
         Vector2 adjustedMovement = (Math.Abs(movement.x) > Math.Abs(movement.y) ) ? new Vector2(movement.x,0f) : new Vector2(0f,movement.y);
         return adjustedMovement;
 
