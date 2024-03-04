@@ -50,11 +50,11 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("ProjectileNonCollidable"))
         {
-            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), collision);
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), collision.collider);
             return;
         }
         OnHit?.Invoke(collision.gameObject);

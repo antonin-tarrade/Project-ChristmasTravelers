@@ -36,6 +36,6 @@ public class MovementInput : SimpleInput
 
     private void Update() {
         if (move) movement = input.ReadValue<Vector2>();
-        RequestCommand(new MoveBoardCommand(gameObject, speed * Time.deltaTime * movement));
+        RequestCommand(new MoveBoardCommand(GetComponent<Character>(), speed * Time.deltaTime * movement));
     }
 }

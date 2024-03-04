@@ -19,21 +19,19 @@ namespace BoardCommands
 
     public class MoveBoardCommand : IBoardCommand
     {
-        public GameObject obj;
         private Character character;
-        private Vector3 movement;
+        private Vector3 position;
 
-        public MoveBoardCommand(GameObject obj, Vector3 movement)
+        public MoveBoardCommand(Character character, Vector3 movement)
         {
-            this.obj = obj;
-            character = obj.GetComponent<Character>();
-            this.movement = movement;
+            this.character = character;
+            this.position = character.GetComponent<Rigidbody2D>().position.ToVector3() + movement;
         }
         
 
         public void Execute()
         {
-            character.UpdatePosition(movement);
+            character.UpdatePosition(position);
         }
     }
 
