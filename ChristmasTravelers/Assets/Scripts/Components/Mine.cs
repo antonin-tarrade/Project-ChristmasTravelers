@@ -56,7 +56,7 @@ public class Mine : MonoBehaviour, IDamageable, ISpawnable
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<Character>(out Character c) && c.player != spawner.player)
+        if (collision.TryGetComponent<Character>(out Character c) && c.player != spawner.player && c.gameObject.layer != LayerMask.NameToLayer("Dead"))
         {
             Explode();
         }

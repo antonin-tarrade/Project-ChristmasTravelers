@@ -43,7 +43,8 @@ public class SniperAttack : BasicAttack
         Destroy(smokeParticles.gameObject, 5);
         Vector3 offset = shootDirection.normalized;
         RaycastHit2D hit = Physics2D.Raycast(transform.position + offset, shootDirection * range);
-        if (hit.collider.TryGetComponent<IDamageable>(out IDamageable damageable) && damageable.gameObject.layer == LayerMask.NameToLayer("Alive"))
+        if (hit.collider.TryGetComponent<IDamageable>(out IDamageable damageable) && damageable.gameObject.layer != LayerMask.NameToLayer("Dead")
+            && hit.collider.TryGetComponent<Character>(out Character character) && character.player != GetComponent<Character>().player)
         {
             damageable.Damage(atk);
             ParticleSystem hitParticules = Instantiate(impactParticlesPrefab, damageable.gameObject.transform.position, Quaternion.identity);

@@ -62,7 +62,7 @@ public class Player : IPreparable
 
     public void AddCharacterInstance(Character character)
 	{
-		foreach (Collider2D collider in characterInstances.Select(c => c.GetComponent<Collider2D>()).Union(toAvoid))
+		foreach (Collider2D collider in toAvoid)
 			Physics2D.IgnoreCollision(character.GetComponent<Collider2D>(), collider);
 		characterInstances.Add(character);
 		character.player = this;

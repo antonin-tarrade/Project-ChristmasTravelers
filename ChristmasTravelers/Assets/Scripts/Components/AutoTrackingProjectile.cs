@@ -16,6 +16,7 @@ public class AutoTrackingProjectile : Projectile
 
     private Character FindClosestTarget()
     {
+        if (gameObject.layer == LayerMask.NameToLayer("Dead")) return null;
         Character closestTarget = null;
         float closestDistance = float.MaxValue;
 
