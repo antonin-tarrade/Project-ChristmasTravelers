@@ -549,100 +549,6 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
-        },
-        {
-            ""name"": ""UIScreen"",
-            ""id"": ""7d30720e-67f4-479e-b4f1-84b351dac8e3"",
-            ""actions"": [
-                {
-                    ""name"": ""OnCursorMovement"",
-                    ""type"": ""Value"",
-                    ""id"": ""0f568955-a203-44e3-8b25-1822dc6e182a"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": ""Keyboard"",
-                    ""id"": ""f12f4017-3580-46f2-a800-ec93dd40303c"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""OnCursorMovement"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""59c24003-e0b5-4665-93c3-e25901d4e106"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""OnCursorMovement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""dd8edb5d-372e-48eb-adbf-3cbb609b623b"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""OnCursorMovement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""b5144e9d-5d16-43e0-a00d-3347f0a429f5"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""OnCursorMovement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""50e5b661-28e0-4d57-b834-db6a266f8bd9"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""OnCursorMovement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""0ac50dfb-dd76-4e5c-a9e5-f49a77147d9a"",
-                    ""path"": ""<Gamepad>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""OnCursorMovement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""3c5628bf-96e1-4fc5-b480-f6b46721ce1d"",
-                    ""path"": ""<Gamepad>/dpad"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""OnCursorMovement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
         }
     ],
     ""controlSchemes"": [
@@ -688,9 +594,6 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         m_CharacterSelector_AddCharacter = m_CharacterSelector.FindAction("AddCharacter", throwIfNotFound: true);
         m_CharacterSelector_DeletedCharacter = m_CharacterSelector.FindAction("DeletedCharacter", throwIfNotFound: true);
         m_CharacterSelector_Ready = m_CharacterSelector.FindAction("Ready", throwIfNotFound: true);
-        // UIScreen
-        m_UIScreen = asset.FindActionMap("UIScreen", throwIfNotFound: true);
-        m_UIScreen_OnCursorMovement = m_UIScreen.FindAction("OnCursorMovement", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -936,52 +839,6 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         }
     }
     public CharacterSelectorActions @CharacterSelector => new CharacterSelectorActions(this);
-
-    // UIScreen
-    private readonly InputActionMap m_UIScreen;
-    private List<IUIScreenActions> m_UIScreenActionsCallbackInterfaces = new List<IUIScreenActions>();
-    private readonly InputAction m_UIScreen_OnCursorMovement;
-    public struct UIScreenActions
-    {
-        private @PlayerActions m_Wrapper;
-        public UIScreenActions(@PlayerActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @OnCursorMovement => m_Wrapper.m_UIScreen_OnCursorMovement;
-        public InputActionMap Get() { return m_Wrapper.m_UIScreen; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(UIScreenActions set) { return set.Get(); }
-        public void AddCallbacks(IUIScreenActions instance)
-        {
-            if (instance == null || m_Wrapper.m_UIScreenActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_UIScreenActionsCallbackInterfaces.Add(instance);
-            @OnCursorMovement.started += instance.OnOnCursorMovement;
-            @OnCursorMovement.performed += instance.OnOnCursorMovement;
-            @OnCursorMovement.canceled += instance.OnOnCursorMovement;
-        }
-
-        private void UnregisterCallbacks(IUIScreenActions instance)
-        {
-            @OnCursorMovement.started -= instance.OnOnCursorMovement;
-            @OnCursorMovement.performed -= instance.OnOnCursorMovement;
-            @OnCursorMovement.canceled -= instance.OnOnCursorMovement;
-        }
-
-        public void RemoveCallbacks(IUIScreenActions instance)
-        {
-            if (m_Wrapper.m_UIScreenActionsCallbackInterfaces.Remove(instance))
-                UnregisterCallbacks(instance);
-        }
-
-        public void SetCallbacks(IUIScreenActions instance)
-        {
-            foreach (var item in m_Wrapper.m_UIScreenActionsCallbackInterfaces)
-                UnregisterCallbacks(item);
-            m_Wrapper.m_UIScreenActionsCallbackInterfaces.Clear();
-            AddCallbacks(instance);
-        }
-    }
-    public UIScreenActions @UIScreen => new UIScreenActions(this);
     private int m_ControllerSchemeIndex = -1;
     public InputControlScheme ControllerScheme
     {
@@ -1019,9 +876,5 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         void OnAddCharacter(InputAction.CallbackContext context);
         void OnDeletedCharacter(InputAction.CallbackContext context);
         void OnReady(InputAction.CallbackContext context);
-    }
-    public interface IUIScreenActions
-    {
-        void OnOnCursorMovement(InputAction.CallbackContext context);
     }
 }

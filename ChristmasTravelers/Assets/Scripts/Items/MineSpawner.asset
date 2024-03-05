@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8503ee706e82bd4893bfe30c25ba154, type: 3}
   m_Name: MineSpawner
   m_EditorClassIdentifier: 
+  sprite: {fileID: 1259285865, guid: 35688db6530901f449ad609edc19d9a1, type: 3}
   consumeOnUse: 1
   obj: {fileID: 3107859313759622267, guid: 2943fa9d62336e444b667253c0748488, type: 3}

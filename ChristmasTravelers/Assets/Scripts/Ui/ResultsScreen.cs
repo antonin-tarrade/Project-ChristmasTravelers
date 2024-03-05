@@ -45,8 +45,6 @@ public abstract class ResultsScreen : MonoBehaviour
     protected virtual void AssociateTo(ResultsScreenManager mainScreen)
     {
         this.mainScreen = mainScreen;
-        mainScreen.actions.UIScreen.OnCursorMovement.started +=
-            (CallbackContext context) => mainScreen.OnScreenEntered();
     }
 
 

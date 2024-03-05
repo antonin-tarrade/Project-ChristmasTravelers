@@ -131,10 +131,6 @@ public class GameManager : MonoBehaviour {
 
 
 
-
-
-
-
     // GAME LOGIC
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
@@ -157,6 +153,7 @@ public class GameManager : MonoBehaviour {
         
         SwitchTo(currentPlayerIndex);
         Character c = SpawnCharacter(currentPlayer);
+        IngameUIManager.instance.OnCharacterChanged(currentPlayer, c);
         ControlCharacter(c);
         OnTurnStart?.Invoke();
 
@@ -192,9 +189,7 @@ public class GameManager : MonoBehaviour {
         timerEnd += StartTurn;
         StartCoroutine(Timer(1));
         currentPlayerIndex = (currentPlayerIndex + 1) % gameMode.players.Count;
-        
-        
-
+    
     }
 
     private void EndGame()
@@ -254,7 +249,7 @@ public class GameManager : MonoBehaviour {
         while (t < time)
         {
             t += Time.deltaTime;
-            /*timerUI.text = ((int)gameMode.roundDuration - t).ToString();*/
+            IngameUIManager.instance.Timer.text = ((int) (gameMode.roundDuration - t)).ToString();
             yield return null;
         }
         timerEnd?.Invoke();

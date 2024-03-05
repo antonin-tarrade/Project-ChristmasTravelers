@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fdcecf60bb5e43dcbfde2cbaaebb170, type: 3}
   m_Name: DashItem
   m_EditorClassIdentifier: 
-  consumeOnUse: 0
+  sprite: {fileID: 352666424, guid: 35688db6530901f449ad609edc19d9a1, type: 3}
+  consumeOnUse: 1
   dashSpeed: 10
   dashDistance: 10

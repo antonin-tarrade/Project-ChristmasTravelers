@@ -149,6 +149,7 @@ public class ChooseCharacterManager : MonoBehaviour
     }
 
     private void InitCharPlaceHolder(GameObject placeHolder){
+        placeHolder.transform.Find("Image").gameObject.SetActive(false);;
         placeHolder.GetComponent<Image>().color = new Color(0.5f,0.5f,0.5f,0.5f);
         placeHolder.GetComponentInChildren<TextMeshProUGUI>().text = "Choose a Character";
     }
