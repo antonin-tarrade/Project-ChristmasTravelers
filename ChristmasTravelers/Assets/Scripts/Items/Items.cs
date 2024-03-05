@@ -39,8 +39,7 @@ namespace Items
         public Action<IItem> OnUseEvent { get; set; }
         public Action<IItem> OnDropEvent { get; set; }
         public IItemContainer container { get; set; }
-
-        protected ScriptableItemData data;
+        public ScriptableItemData data {get; protected set;}
         public abstract string GetName();
         public void Use(Inventory inventory, IItemParameters parameters)
         {
@@ -72,6 +71,7 @@ namespace Items
     public abstract class ScriptableItemData : ScriptableObject
     {
         public abstract IItem GetInstance();
+        public Sprite sprite;
         public bool consumeOnUse;
     }
 

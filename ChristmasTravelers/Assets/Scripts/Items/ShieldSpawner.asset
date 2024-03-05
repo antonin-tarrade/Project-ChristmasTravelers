@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8503ee706e82bd4893bfe30c25ba154, type: 3}
   m_Name: ShieldSpawner
   m_EditorClassIdentifier: 
+  sprite: {fileID: -92953513, guid: 35688db6530901f449ad609edc19d9a1, type: 3}
   consumeOnUse: 1
   obj: {fileID: 8810418643006272614, guid: 2f9fd312d2507a94b96f4b021f691c49, type: 3}

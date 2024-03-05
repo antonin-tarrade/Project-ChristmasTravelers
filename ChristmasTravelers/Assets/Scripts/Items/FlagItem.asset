@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d6944f655cf420794fc9d493add10b, type: 3}
   m_Name: FlagItem
   m_EditorClassIdentifier: 
+  sprite: {fileID: 2113469724, guid: d0ced011253bb458ea2bda1928ed74ea, type: 3}
   consumeOnUse: 1

@@ -14272,6 +14272,7 @@ GameObject:
   - component: {fileID: 1369973371}
   - component: {fileID: 1369973370}
   - component: {fileID: 1369973369}
+  - component: {fileID: 1369973373}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -14308,10 +14309,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -14363,6 +14364,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1369973373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369973368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b12bc3028abe75f49b3c0aa38a91a5fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <UIPrefab>k__BackingField: {fileID: 8197507673203042541, guid: 5a7719765fc8df94d9a07ccfa8272205, type: 3}
+  <NoObject>k__BackingField: {fileID: 0}
+  <Timer>k__BackingField: {fileID: 736598811}
 --- !u!1 &1559780715
 GameObject:
   m_ObjectHideFlags: 0
@@ -87420,12 +87436,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cfec87315e14497c987534626bbcd99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnGrab:
-    m_PersistentCalls:
-      m_Calls: []
-  OnDrop:
-    m_PersistentCalls:
-      m_Calls: []
   itemData: {fileID: 11400000, guid: 061a18e423b354c489082ddddd0174fc, type: 2}
   activated: 0
 --- !u!4 &1673298422
@@ -87711,36 +87721,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cfec87315e14497c987534626bbcd99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnGrab:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnDrop:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   itemData: {fileID: 11400000, guid: 061a18e423b354c489082ddddd0174fc, type: 2}
   activated: 0
 --- !u!4 &1879551110
@@ -88108,12 +88088,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cfec87315e14497c987534626bbcd99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnGrab:
-    m_PersistentCalls:
-      m_Calls: []
-  OnDrop:
-    m_PersistentCalls:
-      m_Calls: []
   itemData: {fileID: 11400000, guid: 061a18e423b354c489082ddddd0174fc, type: 2}
   activated: 0
 --- !u!4 &2095328185

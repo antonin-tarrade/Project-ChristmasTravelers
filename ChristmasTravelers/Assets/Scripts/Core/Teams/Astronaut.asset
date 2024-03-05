@@ -18,13 +18,13 @@ MonoBehaviour:
     _serializedList:
     - Key: 0
       Value:
-        spriteLibrary: {fileID: 7108339969198208228, guid: f8f757950c7b6e348aef7c6ffad02e84, type: 3}
-        chickenSpriteLibrary: {fileID: 7108339969198208228, guid: b6f4324a71c98324e8407427f9135425, type: 3}
+        spriteLibrary: {fileID: 7108339969198208228, guid: 8b1e6a8b5a87f4d29bfb67844aade5d5, type: 3}
+        chickenSpriteLibrary: {fileID: 7108339969198208228, guid: 8a6ed005c729649c9816d54eba1787d3, type: 3}
     - Key: 1
       Value:
-        spriteLibrary: {fileID: 7108339969198208228, guid: a5cb172bf8e934a4aa61339e7a458bdd, type: 3}
-        chickenSpriteLibrary: {fileID: 7108339969198208228, guid: 52b4fd1646d957240b467a4b996f6dbd, type: 3}
+        spriteLibrary: {fileID: 7108339969198208228, guid: 9eea71e49eb8147f0b70ae73c9a166b5, type: 3}
+        chickenSpriteLibrary: {fileID: 7108339969198208228, guid: 521ce4284daf4499c8d93662a29d8fa9, type: 3}
     - Key: 2
       Value:
-        spriteLibrary: {fileID: 7108339969198208228, guid: 84b37deb4c2498142911d5c548333dd7, type: 3}
-        chickenSpriteLibrary: {fileID: 7108339969198208228, guid: fedbc8fd61d91d34c999dff94460de41, type: 3}
+        spriteLibrary: {fileID: 7108339969198208228, guid: c6189f1285d9746fc9461686079facd0, type: 3}
+        chickenSpriteLibrary: {fileID: 7108339969198208228, guid: a27a642d743d04bc4bffb6a138d2ac1f, type: 3}
