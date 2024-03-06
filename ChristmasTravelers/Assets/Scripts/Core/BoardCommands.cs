@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
 namespace BoardCommands
@@ -18,21 +19,19 @@ namespace BoardCommands
 
     public class MoveBoardCommand : IBoardCommand
     {
-        public GameObject obj;
-        public Vector3 movement;
         private Character character;
+        private Vector3 position;
 
-        public MoveBoardCommand(GameObject obj, Vector3 movement)
+        public MoveBoardCommand(Character character, Vector3 movement)
         {
-            this.obj = obj;
-            this.movement = movement;
-            character = obj.GetComponent<Character>();
+            this.character = character;
+            this.position = character.GetComponent<Rigidbody2D>().position.ToVector3() + movement;
         }
         
 
         public void Execute()
         {
-            character.UpdatePosition(movement);
+            character.UpdatePosition(position);
         }
     }
 

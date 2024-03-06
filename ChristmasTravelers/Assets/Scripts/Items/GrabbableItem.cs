@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Items;
 using UnityEngine.TextCore.Text;
+using System;
 
 public class GrabbableItem : MonoBehaviour, IGrabbable, IItemContainer
 {
+    public static event Action<GrabbableItem> OnItemGrabbed;
 
     [SerializeField] private ScriptableItemData itemData;
     private IItem item;
@@ -41,7 +43,13 @@ public class GrabbableItem : MonoBehaviour, IGrabbable, IItemContainer
         sr.enabled = true;
         activated = true;
         transform.position = item.container.gameObject.transform.position;
+
+         /*if (item is FlagItem){
+            item.container.gameObject.GetComponent<Character>().OnFlagDropped();
+         }*/
         item.container = this;
+        transform.SetParent(null);
+       
     }
 
     public void AcceptCollect(Character character)
@@ -49,10 +57,12 @@ public class GrabbableItem : MonoBehaviour, IGrabbable, IItemContainer
         if (!activated) return;
         Inventory inv = character.GetComponent<Inventory>();
         inv.Add(item);
-        inv.GetComponent<IDamageable>().OnDeath += () => item?.Drop();
+        inv.GetComponent<IDamageable>().OnDeath += () => item.Drop();
         item.container = inv;
         sr.enabled = false;
         activated = false;
+        transform.SetParent(character.transform);
+        OnItemGrabbed?.Invoke(this);
     }
 
     public bool Contains(IItem item) => this.item == item;
@@ -64,16 +74,10 @@ public class GrabbableItem : MonoBehaviour, IGrabbable, IItemContainer
 
     public void Remove(IItem item)
     {
-        if (this.item != null && this.item == item)
-        {
-            this.item.OnDropEvent -= OnItemDropped;
-            this.item = null;
-        }
+
     }
 
-    public void SetGameObject(GameObject gameObject)
-    { 
-    }
+
 }
 
 public struct GrabbableItemInitialData : IPreparable
@@ -93,6 +97,7 @@ public struct GrabbableItemInitialData : IPreparable
     {
         grabbable.transform.position = initialPosition;
         grabbable.activated = true;
+        grabbable.transform.SetParent(null);
         grabbable.Set(item);
     }
 }

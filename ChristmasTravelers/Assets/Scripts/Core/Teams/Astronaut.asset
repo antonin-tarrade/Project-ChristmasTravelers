@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7793757f36f0478fbf40166abf5f31c, type: 3}
+  m_Name: Astronaut
+  m_EditorClassIdentifier: 
+  teamName: Astronaut
+  teamColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
+  libraries:
+    _serializedList:
+    - Key: 0
+      Value:
+        spriteLibrary: {fileID: 7108339969198208228, guid: 8b1e6a8b5a87f4d29bfb67844aade5d5, type: 3}
+        chickenSpriteLibrary: {fileID: 7108339969198208228, guid: 8a6ed005c729649c9816d54eba1787d3, type: 3}
+    - Key: 1
+      Value:
+        spriteLibrary: {fileID: 7108339969198208228, guid: 9eea71e49eb8147f0b70ae73c9a166b5, type: 3}
+        chickenSpriteLibrary: {fileID: 7108339969198208228, guid: 521ce4284daf4499c8d93662a29d8fa9, type: 3}
+    - Key: 2
+      Value:
+        spriteLibrary: {fileID: 7108339969198208228, guid: c6189f1285d9746fc9461686079facd0, type: 3}
+        chickenSpriteLibrary: {fileID: 7108339969198208228, guid: a27a642d743d04bc4bffb6a138d2ac1f, type: 3}

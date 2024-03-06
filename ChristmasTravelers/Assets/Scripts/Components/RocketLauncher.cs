@@ -1,10 +1,12 @@
 using BoardCommands;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Roquette : BasicAttack
 {
+    public static event Action<Vector3> OnExplosion;
     [SerializeField, Range(0, 1)] float directDamage;
     [SerializeField, Range(0, 1)] float indirectDamage;
     [SerializeField] private float explosionRadius;
@@ -27,6 +29,8 @@ public class Roquette : BasicAttack
 
     public virtual void Explode(Projectile proj)
     {
+        OnExplosion?.Invoke(proj.transform.position);
+
         if (proj.gameObject.layer == LayerMask.NameToLayer("Dead")) return;
 
         ParticleSystem effect = GameObject.Instantiate(explosionEffect);

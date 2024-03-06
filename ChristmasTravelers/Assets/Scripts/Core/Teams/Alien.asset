@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7793757f36f0478fbf40166abf5f31c, type: 3}
+  m_Name: Alien
+  m_EditorClassIdentifier: 
+  teamName: Alien
+  teamColor: {r: 0.084601074, g: 0.6509434, b: 0.033775367, a: 1}
+  libraries:
+    _serializedList:
+    - Key: 0
+      Value:
+        spriteLibrary: {fileID: 7108339969198208228, guid: 8ec4e6197e8a747518d7a6ef3e046e32, type: 3}
+        chickenSpriteLibrary: {fileID: 7108339969198208228, guid: 7ec161d6146a746bc8df1cd569c8345d, type: 3}
+    - Key: 1
+      Value:
+        spriteLibrary: {fileID: 7108339969198208228, guid: 3d40c0a2d679b4c4bb6ae7f42fc421da, type: 3}
+        chickenSpriteLibrary: {fileID: 7108339969198208228, guid: ed9a1d0892cff4dacac0286dfb3fd780, type: 3}
+    - Key: 2
+      Value:
+        spriteLibrary: {fileID: 7108339969198208228, guid: 87d39ec77c9cb449db37a3b44415cce9, type: 3}
+        chickenSpriteLibrary: {fileID: 7108339969198208228, guid: 6913fa979c0ac4137ae527e271c96ec8, type: 3}

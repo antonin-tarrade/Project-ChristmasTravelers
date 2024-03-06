@@ -15,16 +15,18 @@ public class CharacterAnimator : MonoBehaviour
     private Animator animator;
     private enum Direction {DOWN,UP,LEFT,RIGHT,IDLE};
     private Direction precDirection;
+    private SpriteLibrary spriteLibrary;
 
     #endregion
 
 
     #region MonoBehaviour
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         animator = GetComponent<Animator>();
         precDirection = Direction.DOWN;
+        spriteLibrary = GetComponent<SpriteLibrary>();
     }
     #endregion
 
@@ -38,10 +40,7 @@ public class CharacterAnimator : MonoBehaviour
 
         Vector2 adjustedMovement = AdjustMovement(movement);
 
-        
-
         Direction direction = GetDirection(adjustedMovement);
-
 
         if (direction == precDirection) return;
         precDirection = direction;
@@ -99,10 +98,21 @@ public class CharacterAnimator : MonoBehaviour
 
     private Vector3 AdjustMovement(Vector2 movement)
     {
-
-
+        if (Mathf.Abs(movement.x - movement.y) < 0.1f) return new Vector2(movement.x, 0f);
         Vector2 adjustedMovement = (Math.Abs(movement.x) > Math.Abs(movement.y) ) ? new Vector2(movement.x,0f) : new Vector2(0f,movement.y);
         return adjustedMovement;
+
+    }
+
+    public void NotifyFlagGrabbed(Character character)
+    {
+        spriteLibrary.spriteLibraryAsset = character.GetChickenSpriteLibrary();
+    }
+
+    public void NotifyFlagDrop(Character character)
+    {
+        spriteLibrary.spriteLibraryAsset = character.GetSpriteLibrary();
+
 
     }
 

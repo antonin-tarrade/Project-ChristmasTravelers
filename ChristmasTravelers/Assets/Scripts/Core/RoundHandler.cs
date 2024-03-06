@@ -46,6 +46,8 @@ public class RoundHandler  {
 
 		// Current character returns to position
 		activeCharacter.Prepare();
+        IngameUIManager.instance.Link(activeCharacter);
+
 
 		// Starts recordings
 		foreach (IRecorder recorder in activeCharacter.recorders) {
@@ -65,6 +67,7 @@ public class RoundHandler  {
 	public void EndTurn () {
 		
 		if (!isActive) return;
+        IngameUIManager.instance.Unlink(activeCharacter);
 		isActive = false;
 
 		// Stops and saves recordings

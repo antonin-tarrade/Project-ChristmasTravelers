@@ -1,4 +1,5 @@
 using BoardCommands;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ using UnityEngine.TextCore.Text;
 
 public class BasicAttack : MonoBehaviour, IAttack
 {
+    [SerializeField] private AudioClip atkSFX;
     [field: SerializeField] public float atk { get; private set; }
     [field: SerializeField] public float spd { get; private set; }
     [field: SerializeField] public float lifeLength { get; private set; }
@@ -37,6 +39,7 @@ public class BasicAttack : MonoBehaviour, IAttack
             Physics2D.IgnoreCollision(proj.GetComponent<Collider2D>(), collider);
         } 
         proj.Shoot(shootDirection, spd, lifeLength);
+        AudioSource.PlayClipAtPoint(atkSFX, transform.position);
     }
 
     public virtual Projectile InitProj(Vector3 direction)
@@ -46,9 +49,10 @@ public class BasicAttack : MonoBehaviour, IAttack
         proj.SetCharacter(GetComponent<Character>());
         proj.transform.position += direction.normalized;
         proj.OnHit += OnHit;
-        if (gameObject.layer == LayerMask.NameToLayer("Dead")) proj.gameObject.layer = gameObject.layer;
+        proj.gameObject.layer = gameObject.layer;
         proj.GetComponent<SpriteRenderer>().color = GetComponent<Character>().player.team.teamColor;
         //if (gameObject.layer == LayerMask.NameToLayer("Dead")) proj.GetComponent<SpriteRenderer>().material = GameManager.instance.gameData.DeadMaterial;
+        GameManager.instance.ScheduleDestroy(new SpawnableObject(proj.gameObject));
         return proj;
     }
 

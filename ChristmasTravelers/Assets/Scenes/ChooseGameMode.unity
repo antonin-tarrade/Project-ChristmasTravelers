@@ -306,10 +306,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -651,6 +651,65 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &1110256061
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1110256063}
+  - component: {fileID: 1110256062}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1110256062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1110256061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 486a1b926c726e44ca0b280ce7b11b9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterDeathSFX:
+    clip: {fileID: 0}
+    volume: 0
+  characterDamageSFX:
+    clip: {fileID: 8300000, guid: 7691765cc30f2aa47af47aebdb5cb23c, type: 3}
+    volume: 1
+  itemCollectedSFX:
+    clip: {fileID: 8300000, guid: 0dbcc91a20eb2084da68684b6cea5233, type: 3}
+    volume: 1
+  itemDeliveredSFX:
+    clip: {fileID: 8300000, guid: c0ce2effdf85dd64598199b7ffae0caf, type: 3}
+    volume: 1
+  explosionSFX:
+    clip: {fileID: 8300000, guid: 3e39e912b75741a4698cbc85efa0e886, type: 3}
+    volume: 1
+--- !u!4 &1110256063
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1110256061}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.8277855, y: 2.1221387, z: 0.5332475}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1167115897
 GameObject:
   m_ObjectHideFlags: 0
@@ -1000,6 +1059,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charControllerPrefab: {fileID: -334193322769113898, guid: 5188f5a15c38cc04a807e5b4b1f974bd, type: 3}
+  timerUI: {fileID: 0}
   <gameData>k__BackingField: {fileID: 11400000, guid: a14dff6fa6dde13459d9220f7b741331, type: 2}
   virtualCamera: {fileID: 0}
 --- !u!4 &1875485978
@@ -1026,3 +1086,4 @@ SceneRoots:
   - {fileID: 440171556}
   - {fileID: 733577475}
   - {fileID: 1298342977}
+  - {fileID: 1110256063}

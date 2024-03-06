@@ -322,7 +322,7 @@ GameObject:
   - component: {fileID: 547975094}
   - component: {fileID: 547975093}
   - component: {fileID: 547975092}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Walls (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14105,7 +14105,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 247
+    m_Bits: 1271
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -14272,6 +14272,7 @@ GameObject:
   - component: {fileID: 1369973371}
   - component: {fileID: 1369973370}
   - component: {fileID: 1369973369}
+  - component: {fileID: 1369973373}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -14308,10 +14309,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -14363,6 +14364,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1369973373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369973368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b12bc3028abe75f49b3c0aa38a91a5fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <UIPrefab>k__BackingField: {fileID: 8197507673203042541, guid: 5a7719765fc8df94d9a07ccfa8272205, type: 3}
+  <NoObject>k__BackingField: {fileID: 0}
+  <Timer>k__BackingField: {fileID: 736598811}
 --- !u!1 &1559780715
 GameObject:
   m_ObjectHideFlags: 0
@@ -14375,7 +14391,7 @@ GameObject:
   - component: {fileID: 1559780718}
   - component: {fileID: 1559780717}
   - component: {fileID: 1559780719}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94209,7 +94225,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.65625, y: 0.65625}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -94259,7 +94275,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 6400497f83463430ebd64a9e23beb154, type: 3}
+  m_Sprite: {fileID: 2113469724, guid: d0ced011253bb458ea2bda1928ed74ea, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -94544,7 +94560,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 6400497f83463430ebd64a9e23beb154, type: 3}
+  m_Sprite: {fileID: 2113469724, guid: d0ced011253bb458ea2bda1928ed74ea, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -94621,7 +94637,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.65625, y: 0.65625}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -94861,7 +94877,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.65625, y: 0.65625}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -94911,7 +94927,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 6400497f83463430ebd64a9e23beb154, type: 3}
+  m_Sprite: {fileID: 2113469724, guid: d0ced011253bb458ea2bda1928ed74ea, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

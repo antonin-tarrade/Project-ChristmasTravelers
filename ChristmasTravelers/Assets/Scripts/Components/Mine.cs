@@ -11,10 +11,12 @@ public class Mine : MonoBehaviour, IDamageable, ISpawnable
     [SerializeField] private float explosionRadius;
     private Character spawner;
 
-    public Action OnDeath { get; set; }
+    public event Action OnDeath;
+    public event Action OnDamage;
 
     public void Damage(float dmg)
     {
+        OnDamage?.Invoke();
         Explode();
     }
 
@@ -22,6 +24,7 @@ public class Mine : MonoBehaviour, IDamageable, ISpawnable
 
     public void Explode()
     {
+        OnDeath?.Invoke();
         Collider2D[] casualties = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
         foreach (Collider2D c in casualties)
         {
@@ -53,7 +56,7 @@ public class Mine : MonoBehaviour, IDamageable, ISpawnable
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<Character>(out Character c) && c.player != spawner.player)
+        if (collision.TryGetComponent<Character>(out Character c) && c.player != spawner.player && c.gameObject.layer != LayerMask.NameToLayer("Dead"))
         {
             Explode();
         }

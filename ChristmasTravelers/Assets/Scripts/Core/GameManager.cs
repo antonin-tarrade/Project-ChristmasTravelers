@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour {
     public static GameManager instance;
 
     // Events
+    public event Action OnGameStart;
     public event Action OnTurnStart;
     public event Action OnTurnEnd;
     public event Action<Character> OnCharacterSpawned;
@@ -130,16 +131,13 @@ public class GameManager : MonoBehaviour {
 
 
 
-
-
-
-
     // GAME LOGIC
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (gameMode != null && scene.name == gameMode.sceneName)
         {
             if (isPlaying) return;
+            OnGameStart?.Invoke();
             SpawnCharacterControllers();
             virtualCamera = GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>();
             roundHandler = new RoundHandler(virtualCamera);
@@ -155,6 +153,7 @@ public class GameManager : MonoBehaviour {
         
         SwitchTo(currentPlayerIndex);
         Character c = SpawnCharacter(currentPlayer);
+        IngameUIManager.instance.OnCharacterChanged(currentPlayer, c);
         ControlCharacter(c);
         OnTurnStart?.Invoke();
 
@@ -190,14 +189,12 @@ public class GameManager : MonoBehaviour {
         timerEnd += StartTurn;
         StartCoroutine(Timer(1));
         currentPlayerIndex = (currentPlayerIndex + 1) % gameMode.players.Count;
-        
-        
-
+    
     }
 
     private void EndGame()
     {
-        SceneManager.LoadScene("ChooseGameMode");
+        ResultsScreenManager.ShowResults();
     }
 
 
@@ -227,6 +224,8 @@ public class GameManager : MonoBehaviour {
         p.AddCharacterInstance(c);
         roundHandler.Add(c);
         OnCharacterSpawned?.Invoke(c);
+        foreach (Collider2D collider in gameMode.AllCharactersColliders())
+            Physics2D.IgnoreCollision(c.GetComponent<Collider2D>(), collider);
         return c;
     }
 
@@ -250,7 +249,7 @@ public class GameManager : MonoBehaviour {
         while (t < time)
         {
             t += Time.deltaTime;
-            /*timerUI.text = ((int)gameMode.roundDuration - t).ToString();*/
+            IngameUIManager.instance.Timer.text = ((int) (gameMode.roundDuration - t)).ToString();
             yield return null;
         }
         timerEnd?.Invoke();

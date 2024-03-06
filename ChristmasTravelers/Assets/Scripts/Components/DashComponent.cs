@@ -6,12 +6,14 @@ using System.Runtime.CompilerServices;
 using System;
 using UnityEngine.Events;
 using static UnityEngine.ParticleSystem;
+using System.Linq;
 
 public class DashComponent : MonoBehaviour
 {
 
     [SerializeField] private ParticleSystem particles;
     private EmissionModule emission;
+    [SerializeField] private float raycastDistanceThreshold;
 
     private void Start()
     {
@@ -36,8 +38,21 @@ public class DashComponent : MonoBehaviour
             speed += acceleration * 60 * Time.deltaTime;
             dist += speed * Time.deltaTime;
             //transform.position += speed * Time.deltaTime * direction;
-            //body.position += dist * new Vector2(direction.x, direction.y);
+            //body.position += dist * (Vector2)direction;
             body.velocity = speed * direction;
+            RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, 100 * body.velocity)
+                .Where(h => h.collider.gameObject.layer == LayerMask.NameToLayer("Map")).ToArray();
+            bool shouldBreak = false; ;
+            foreach (RaycastHit2D hit in hits )
+            {
+                if (hit.distance < raycastDistanceThreshold)
+                {
+                    StopAllCoroutines();
+                    shouldBreak = true;
+                    break;
+                }
+            }
+            if (shouldBreak) break;
             yield return null;
         }
         body.velocity = Vector2.zero;
