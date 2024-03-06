@@ -133,9 +133,10 @@ MonoBehaviour:
       deviceClass: 
   team: {fileID: 11400000, guid: 4d080043909cfd148b8a394137e09d7f, type: 2}
   grabRadius: 3
-  <FOV>k__BackingField: 7
+  <FOV>k__BackingField: 10
   <chAnimator>k__BackingField: {fileID: 8720272020824814806}
   <healthBar>k__BackingField: {fileID: 5451401500526202220}
+  isLinked: 0
 --- !u!114 &3451438070945045697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,6 +223,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8f87a3ab0aea142e1b14bf64c9308c51, type: 2}
   itemsNames: []
   itemSelected: 
+  isLinked: 0
 --- !u!114 &6824296113648132383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,7 +301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   atkSFX: {fileID: 8300000, guid: c27272aa08d055c479c7e6428bfd41b6, type: 3}
-  <atk>k__BackingField: 1
+  <atk>k__BackingField: 10
   <spd>k__BackingField: 20
   <lifeLength>k__BackingField: 5
   projectile: {fileID: 1775989977048839268, guid: 9d68bcea2a01c8c46b9f6b0b6d9130c8, type: 3}

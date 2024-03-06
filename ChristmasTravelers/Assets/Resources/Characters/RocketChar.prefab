@@ -231,9 +231,10 @@ MonoBehaviour:
       deviceClass: 
   team: {fileID: 11400000, guid: 4d080043909cfd148b8a394137e09d7f, type: 2}
   grabRadius: 3
-  <FOV>k__BackingField: 5
+  <FOV>k__BackingField: 8
   <chAnimator>k__BackingField: {fileID: -8963154640325587369}
   <healthBar>k__BackingField: {fileID: 3781821434250252850}
+  isLinked: 0
 --- !u!114 &3451438070945045697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,7 +248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 0
-  speed: 10
+  speed: 20
 --- !u!114 &6020620316253342707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -320,6 +321,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6801fc22145099f4badad0134ad99a71, type: 2}
   itemsNames: []
   itemSelected: 
+  isLinked: 0
 --- !u!114 &6824296113648132383
 MonoBehaviour:
   m_ObjectHideFlags: 0

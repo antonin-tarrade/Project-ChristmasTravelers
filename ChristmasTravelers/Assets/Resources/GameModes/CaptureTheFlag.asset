@@ -19,11 +19,11 @@ MonoBehaviour:
   nbOfPlayers: 2
   charPerPlayer: 3
   roundsNumber: 3
-  roundDuration: 15
+  roundDuration: 50
   players:
   - spawn: {x: -39.5, y: 1.3562298, z: -10.161448}
-    name: Player 1
-    number: 1
+    name: Poulpi
+    number: 0
     team: {fileID: 11400000, guid: 4d080043909cfd148b8a394137e09d7f, type: 2}
     score: 0
     <characterPrefabs>k__BackingField:
@@ -38,14 +38,14 @@ MonoBehaviour:
       splitScreenIndex: -1
       deviceClass: Keyboard
   - spawn: {x: 40, y: 0.1, z: -10.161448}
-    name: Player 2
-    number: 2
+    name: Popo
+    number: 0
     team: {fileID: 11400000, guid: 549f1fe2b2dbf75418d83b8b9645e304, type: 2}
-    score: 0
+    score: 1
     <characterPrefabs>k__BackingField:
-    - {fileID: 7858320245909833396, guid: 935f00dd90a800041876ab156d96c556, type: 3}
-    - {fileID: 7858320245909833396, guid: 6523cd21d2c2f2d4ba2b54f1553301cf, type: 3}
     - {fileID: 7858320245909833396, guid: 10c92f3fa6bf014458983830f7f7bc17, type: 3}
+    - {fileID: 7858320245909833396, guid: 6523cd21d2c2f2d4ba2b54f1553301cf, type: 3}
+    - {fileID: 7858320245909833396, guid: 935f00dd90a800041876ab156d96c556, type: 3}
     controller: {fileID: 0}
     charController: {fileID: 0}
     inputInfo:
