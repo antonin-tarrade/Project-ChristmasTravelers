@@ -224,6 +224,8 @@ public class GameManager : MonoBehaviour {
         p.AddCharacterInstance(c);
         roundHandler.Add(c);
         OnCharacterSpawned?.Invoke(c);
+        foreach (Collider2D collider in gameMode.AllCharactersColliders())
+            Physics2D.IgnoreCollision(c.GetComponent<Collider2D>(), collider);
         return c;
     }
 

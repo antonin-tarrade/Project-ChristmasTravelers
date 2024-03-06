@@ -49,7 +49,7 @@ public class HealthBar : MonoBehaviour
     private IEnumerator AdjustBarWidth(float amount)
     {
         RectTransform suddenChangeBar = amount >= 0 ? bottomBar : topBar;
-        RectTransform slowChangeBar = amount >= 0 ? topBar : bottomBar; 
+        RectTransform slowChangeBar = amount >= 0 ? topBar : bottomBar;
         suddenChangeBar.SetWidth(TargetWidth);
         while (Mathf.Abs(suddenChangeBar.rect.width - slowChangeBar.rect.width) > 0.01f)
         {

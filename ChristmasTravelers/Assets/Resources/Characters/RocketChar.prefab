@@ -333,6 +333,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particles: {fileID: 7693865230969466175}
+  raycastDistanceThreshold: 2
 --- !u!58 &2038903105383702377
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -484,7 +485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Library: []
-  m_SpriteLibraryAsset: {fileID: 7108339969198208228, guid: c4938ec702e0341b5b4e57969167e80e, type: 3}
+  m_SpriteLibraryAsset: {fileID: 0}
 --- !u!114 &3194704065442866572
 MonoBehaviour:
   m_ObjectHideFlags: 0
